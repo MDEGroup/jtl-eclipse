@@ -1,0 +1,3 @@
+ instructions.install = \
+    chmod(targetDir:@artifact,targetFile:lib/dlv.x86-64-linux-elf-static.bin,permissions:755);
+    chmod(targetDir:@artifact,targetFile:lib/dlv.i386-apple-darwin.bin,permissions:755);

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated JTL -->
+      <package
+            uri="http:///emof.ecore"
+            class="JTL.emof.EmofPackage"
+            genModel="metamodel/JTL.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated JTL -->
+      <package
+            uri="http:///jtl.ecore"
+            class="JTL.JTL.JTLPackage"
+            genModel="metamodel/JTL.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated JTL -->
+      <package
+            uri="http:///essentialocl.ecore"
+            class="JTL.essentialocl.EssentialoclPackage"
+            genModel="metamodel/JTL.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated JTL -->
+      <package
+            uri="http:///template.ecore"
+            class="JTL.template.TemplatePackage"
+            genModel="metamodel/JTL.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated JTL -->
+      <package
+            uri="http:///imperativeocl.ecore"
+            class="JTL.imperativeocl.ImperativeoclPackage"
+            genModel="metamodel/JTL.genmodel"/>
+   </extension>
+</plugin>

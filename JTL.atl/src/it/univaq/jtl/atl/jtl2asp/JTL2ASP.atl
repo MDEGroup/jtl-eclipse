@@ -1,0 +1,1297 @@
+------------------------------------------------------------------------------------------------------
+--Using the following rules and helpers, an ASP model is created from a JTL model
+----------------------------------------------------------------------------------------------------
+
+module JTLtoASP; 
+create OUT: ASP from IN: JTL;
+
+-------------------------------------------------------------------------------------------------------------------
+----------------------*******************HELPERS*********************----------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
+
+--- The following helpers store metanode, metaprop, metaedge and literals to be used to avoid element duplication in the target model
+helper def: metanodes:  Map (String, ASP!Metanode) = Map {};  
+helper def: metaprops:  Map (String, ASP!Metaprop) = Map {}; 
+helper def: metaedges:  Map (String, ASP!Metaedge) = Map {}; 
+helper def: literals: Map (String, ASP!Literal) = Map {};
+
+--- The following helpers represents ids for nodes, props, edges, constraints and transformations. They are incremented everytime a related element is created.
+helper def: nodeId: Integer = 0; 		---This variable is a counter for the creation of node ids
+helper def: propId: Integer = 0; 		---This helper is a counter for the creation of prop ids
+helper def: edgeId: Integer = 0; 		---This helper is a counter for the creation of edge ids
+helper def: constraintId: Integer = 0; 	---This helper is a counter for the creation of contraints ids
+helper def: transformationRoot: ASP!Transformation = ASP!Transformation;
+
+
+--- This helper identifies the category of the predicate in input and returns the element that must be bounded within the new relation.
+helper def: findElement(s: JTL!Predicate): ASP!Element=
+if not s.conditionExpression.isObjectTemplateExp() 
+	then s.getMetapropFromPredicate()
+	else s.getMetaedgeFromPredicate()
+endif;
+
+---This helper returns a boolean value which indicates if the type JTL!AssignExp has a 
+---varExpression as type of the attribute value 
+helper context JTL!NamedElement def: isVarExp(): Boolean=
+	if self.oclIsUndefined() or self.oclIsTypeOf(JTL!OperationCallExp) then false
+	else if  self.value.first().oclIsTypeOf(JTL!VariableExp) then true
+		else false
+		endif
+	endif;
+
+---This helper returns a boolean value which indicates if the type JTL!AssignExp has a 
+---BooleanLiteralExp as type of the attribute value 
+helper context JTL!NamedElement def: isBoolLitExp(): Boolean=
+	if self.oclIsUndefined() or self.oclIsTypeOf(JTL!OperationCallExp) then false
+	else 
+		if self.value.first().oclIsTypeOf(JTL!BooleanLiteralExp) then true
+		else false
+		endif
+	endif;
+
+---This helper returns a boolean value which indicates if the type JTL!AssignExp has a 
+---ObjectTemplateExp as type of the attribute value (representing edge)
+helper context JTL!NamedElement def: isObjectTemplateExp(): Boolean =
+	if self.oclIsUndefined() or self.oclIsTypeOf(JTL!OperationCallExp) then false
+	else if self.value.first().oclIsTypeOf(JTL!ObjectTemplateExp)
+		then true
+		else false
+		endif
+	endif;
+
+---This helper is used to link each terminal (inside a constraints) with the corresponding element 
+helper context JTL!Predicate def: getElement() : String = 
+	if self.conditionExpression.isObjectTemplateExp() then thisModule.resolveTemp(self, 'edge')
+	else  thisModule.resolveTemp(self, 'prop')
+	endif;
+
+---This helper is used to link each terminal (inside a constraints) with the corresponding element (propx, edgex)
+helper context JTL!Predicate def: getElementX() : String = 
+	if self.conditionExpression.isObjectTemplateExp() then thisModule.resolveTemp(self, 'edgex')
+	else  thisModule.resolveTemp(self, 'propx')
+	endif;
+
+--- This helper calls a lazy rule to create a metamodel literal, in case the literal was not created previously
+helper context JTL!Pattern def: getLiteralMetamodel(): ASP!Literal = 
+	if thisModule.literals->get(self.domain.name).oclIsUndefined() 
+		then thisModule.JTLPattern2ASPLiteral_MM(self)
+		else thisModule.literals.get(self.domain.name)
+	endif; --Metamodel literal doubles check
+
+--- This helper calls a lazy rule to create a metaclass literal, in case the literal was not created previously
+helper context JTL!Pattern def: getLiteralMetaclass(): ASP!Literal =
+	if thisModule.literals.get(self.templateExpression.referredClass).oclIsUndefined() 
+		then thisModule.JTLPattern2ASPLiteral_MC(self)
+		else thisModule.literals.get(self.templateExpression.referredClass)
+	endif;
+
+--- This helper calls lazy rule to create a metaprop literal, in case the literal was not created previously
+helper context JTL!Predicate def: getLiteralMetaprop(): ASP!Literal =
+	if thisModule.literals->get(self.conditionExpression.left.name).oclIsUndefined() 
+		then thisModule.JTLPredicate2ASPLiteral_MPNAME(self)
+		else thisModule.literals.get(self.conditionExpression.left.name)
+	endif;
+
+--- This helper calls lazy rule to create a metaedgename literal, in case the literal was not created previously
+helper context JTL!Predicate def: getLiteralMetaedgeName(): ASP!Literal =
+	if thisModule.literals->get('MENAME_' + self.conditionExpression.left.name).oclIsUndefined() 
+		then thisModule.JTLPredicate2ASPLiteral_MENAME(self)
+		else thisModule.literals.get('MENAME_' + self.conditionExpression.left.name)
+	endif;
+
+--- This helper calls lazy rule to create a metanode literal as the target node of an edge, in case the literal was not created previously
+helper context JTL!Predicate def: getLiteralMetanodeTarget(): ASP!Literal =
+	if thisModule.literals->get(self.conditionExpression.value.first().referredClass.toString()).oclIsUndefined() 
+		then thisModule.JTLPredicate2ASPLiteral_MET(self)
+		else thisModule.literals.get(self.conditionExpression.value.first().referredClass.toString())
+	endif;
+
+--- This helper calls lazy rule to create a variable literal ID, in case the literal was not created previously
+helper def: getLiteralIDVariable(): ASP!Literal =
+	if thisModule.literals->get('ID').oclIsUndefined()
+		then thisModule.var_ID()
+		else thisModule.literals.get('ID')
+	endif;
+
+--- This helper calls lazy rule to create a variable literal IDx, in case the literal was not created previously
+helper def: getLiteralIDtraceVariable(): ASP!Literal =
+	if thisModule.literals->get('IDx').oclIsUndefined()
+		then thisModule.var_IDtrace()
+		else thisModule.literals.get('IDx')
+	endif;
+
+--- This helper calls lazy rule to create a variable literal IDp, in case the literal was not created previously
+helper def: getLiteralIDpropVariable(): ASP!Literal =
+	if thisModule.literals->get('IDp').oclIsUndefined()
+		then thisModule.var_IDprop()
+		else thisModule.literals.get('IDp')
+	endif;
+
+--- This helper calls lazy rule to create a variable literal IDpx, in case the literal was not created previously
+helper def: getLiteralIDproptraceVariable(): ASP!Literal =
+	if thisModule.literals->get('IDpx').oclIsUndefined()
+		then thisModule.var_IDproptrace()
+		else thisModule.literals.get('IDpx')
+	endif;
+
+--- This helper calls lazy rule to create a variable literal Value, in case the literal was not created previously
+helper def: getLiteralValueVariable(): ASP!Literal =
+	if thisModule.literals->get('Value').oclIsUndefined()
+		then thisModule.var_Value()
+		else thisModule.literals.get('Value')
+	endif;
+
+--- This helper calls lazy rule to create a variable literal IDe, in case the literal was not created previously
+helper def: getLiteralIDedgeVariable(): ASP!Literal =
+	if thisModule.literals->get('IDe').oclIsUndefined()
+		then thisModule.var_IDedge()
+		else thisModule.literals.get('IDe')
+	endif;
+
+--- This helper calls lazy rule to create a variable literal IDex, in case the literal was not created previously
+helper def: getLiteralIDedgetraceVariable(): ASP!Literal =
+	if thisModule.literals->get('IDex').oclIsUndefined()
+		then thisModule.var_IDedgetrace()
+		else thisModule.literals.get('IDex')
+	endif;
+
+--- This helper calls lazy rule to create a variable literal IDT, in case the literal was not created previously
+helper def: getLiteralIDedgetargetVariable(): ASP!Literal =
+	if thisModule.literals->get('IDT').oclIsUndefined()
+		then thisModule.var_IDedgetarget()
+		else thisModule.literals.get('IDT')
+	endif;
+
+--- This helper calls lazy rule to create a variable literal IDTx, in case the literal was not created previously
+helper def: getLiteralIDedgetracetargetVariable(): ASP!Literal =
+	if thisModule.literals->get('IDTx').oclIsUndefined()
+		then thisModule.var_IDedgetracetarget()
+		else thisModule.literals.get('IDTx')
+	endif;
+
+---This helper checks if the map of metanodes created contains a metanode with the key equal to 's'
+---If the metanode already exists then the helper returns the element in the map of metanodes, otherwise it creates a new metanode from a pattern calling the 
+---called rule newMetanodeFromPattern()
+---This helper is used for avoiding duplicates of same metanodes
+helper context JTL!Pattern def: getMetanodeFromPattern(): ASP!Metanode =
+if 	not thisModule.metanodes->get(self.getPatternMetanodeKey())->oclIsUndefined()
+	then  thisModule.metanodes->get(self.getPatternMetanodeKey())
+	else  thisModule.Pattern2Metanode(self)
+endif;
+
+---This helper checks if the map of metanodes created contains a metanode with the key equal to 's'
+---If the metanode already exists then the helper returns the element in the map of metanodes, otherwise it creates a new metanode from a predicate calling the 
+---called rule newMetanodeFromPredicate()
+---This helper is used for avoiding duplicates of same metanodes
+helper context JTL!Predicate def: getMetanodeFromPredicate(): ASP!Metanode =
+if 	not thisModule.metanodes->get(self.getPredicateMetanodeKey())->oclIsUndefined()
+	then  thisModule.metanodes->get(self.getPredicateMetanodeKey())
+	else  thisModule.Predicate2Metanode(self)
+endif;
+
+---This helper checks if the map of metaprops created contains a metaprop with the key equal to 's'
+---If the metaprop already exists then the helper returns the element in the map of metaprops, otherwise it creates a new metaprop from a predicate calling the 
+---called rule newMeteapropFromPattern()
+---This helper is used for avoiding duplicates of same metaprops
+helper context JTL!Predicate def: getMetapropFromPredicate(): ASP!Metaprop =
+if 	not thisModule.metaprops->get(self.getMetapropKey())->oclIsUndefined()
+	then  thisModule.metaprops->get(self.getMetapropKey())
+	else  thisModule.Predicate2Metaprop(self)
+endif;
+
+---This helper checks if the map of metaedges created contains a metaedge with the key equal to 's'
+---If the metaedge already exists then the helper returns the element in the map of metaedges, otherwise it creates a new metaedge from a predicate calling the 
+---called rule newMetaedgeFromPattern()
+---This helper is used for avoiding duplicates of same metanodes
+helper context JTL!Predicate def: getMetaedgeFromPredicate() : ASP!Metaedge =
+	if not thisModule.metaedges->get(self.getMetaedgeKey()) -> oclIsUndefined() 
+		then thisModule.metaedges->get(self.getMetaedgeKey())
+		else thisModule.Predicate2Metaedge(self)
+	endif;
+	
+
+--- returns the key to be used in the map to store the metanode
+helper context JTL!Pattern def: getPatternMetanodeKey(): String =
+	self.domain.name + '!' + self.templateExpression.referredClass;
+
+--- returns the key to be used in the map to store the metanode
+--- the predicate passed to this helper should have always an ObjectTemplateExpr as value, otherwise error
+helper context JTL!Predicate def: getPredicateMetanodeKey(): String =
+	if self.conditionExpression.isObjectTemplateExp() 
+		then self.pattern.domain.name + '!' + self.conditionExpression.value->first().referredClass.toString()
+		else '' 
+	endif;
+
+--- returns the key to be used in the map to store the metaprop
+--- the predicate passed to this helper should have always an VariableExpr or BooleanExpr as value, otherwise error
+helper context JTL!Predicate def: getMetapropKey(): String = 
+	if not self.conditionExpression.isObjectTemplateExp() 
+		then self.pattern.getPatternMetanodeKey() + '.' + self.conditionExpression.left.name
+		else ''
+	endif;
+
+--- returns the key to be used in the map to store the metaedge
+--- the predicate passed to this helper should have always an ObjectTemplateExpr as value, otherwise error
+helper context JTL!Predicate def: getMetaedgeKey(): String = 
+	if self.conditionExpression.isObjectTemplateExp() 
+		then self.pattern.getPatternMetanodeKey() + '.' + self.conditionExpression.left.name + ':' + self.conditionExpression.value->first().referredClass
+		else ''
+	endif;
+
+--- maps the metaclass type ('Metanode', 'Metaprop', 'Metaedge') to the pattern type ('node', 'prop', 'edge')
+helper def: patternType: Map (ASP!Function, String) = Map {(ASP!Metanode, 'node'), (ASP!Metaprop, 'prop'), (ASP!Metaedge, 'edge')};
+
+--- Check if the OperationCallExp of the Predicate matches a JTL!Relation and its arguments types
+helper context JTL!Predicate def: OpCallExpMatchesRelation(r : JTL!Relation): Boolean =
+	not self.conditionExpression.oclIsUndefined() and				-- not undefined
+	self.conditionExpression.oclIsTypeOf(JTL!OperationCallExp) and	-- and of type OperationCallExp
+	self.conditionExpression.referredOperation = r and				-- matching Relation
+	-- match operation(p1, p2) with correct types (ObjectTemplateExp.referredClass)
+	(self.conditionExpression.argument->at(1).referredClass = r.domain->at(1).pattern.templateExpression.referredClass and
+	  self.conditionExpression.argument->at(2).referredClass = r.domain->at(2).pattern.templateExpression.referredClass);
+--	or
+	
+	
+--	-- match operation(p2, p1) with correct types (ObjectTemplateExp.referredClass)
+--	 (self.conditionExpression.argument->at(2).referredClass = r.domain->at(2).pattern.templateExpression.referredClass and
+--	  self.conditionExpression.argument->at(1).referredClass = r.domain->at(1).pattern.templateExpression.referredClass));
+
+--- Check if a Predicate matches one of the parameters (metaclasses) of an OperationCallExp
+helper context JTL!Predicate def: predMatchesOpCallParams(p : JTL!Predicate): Boolean =
+	not p.conditionExpression.oclIsUndefined() and									-- OperationCallExp not undefined
+	not p.conditionExpression.argument.oclIsUndefined() and							-- arguments not undefined
+	not p.conditionExpression.argument->at(1).oclIsUndefined() and					-- first argument not undefined
+	not p.conditionExpression.argument->at(2).oclIsUndefined() and					-- second argument not undefined
+	p.conditionExpression.argument->at(1).oclIsTypeOf(JTL!ObjectTemplateExp) and	-- first argument is ObjectTemplateExp
+	p.conditionExpression.argument->at(2).oclIsTypeOf(JTL!ObjectTemplateExp) and	-- second argument is ObjectTemplateExp
+	self.conditionExpression.isObjectTemplateExp() and								-- not undefined and of type OperationCallExp
+	-- match one of the two parameters metaclasses
+	(self.conditionExpression.value.first().name = p.conditionExpression.argument->at(1).name or
+	 self.conditionExpression.value.first().name = p.conditionExpression.argument->at(2).name);
+
+--- Find the Predicates with an assignment with value of type ObjectTemplateExp
+helper context JTL!Relation def: getPredicatesWithObjTemExp(): Sequence(JTL!Predicate) =
+    self.domain
+	  ->collect(a|a.pattern)																-- in all the patterns
+	  ->collect(a|a.predicate)->flatten()													-- look for predicates
+	  ->select(a|a.conditionExpression.oclIsTypeOf(JTL!AssignExp))							-- check if they contain an assignment
+	  ->select(a|a.conditionExpression.value.first().oclIsTypeOf(JTL!ObjectTemplateExp));	-- and if the value is of type ObjectTemplateExp
+
+-------------------------------------------------------------------------------------------------------------------
+----------------------*******************RULES*********************------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
+
+---This rule transforms the object JTL!Transformation in the corresponding object, plus creates contraints that are constituent of the transformation in asp
+---ASP!Transformation
+rule JTLTransformation2ASPTransformation {
+	from
+		s: JTL!Transformation 
+	to
+		t: ASP!Transformation (
+			name <- s.name, --Set the transformation name
+			relations <- s.relation	  
+		)
+		do{		
+			thisModule.transformationRoot<-t;
+		}
+}
+
+--- this rule generates a ASP!Relation for every JTL!Relation, and initializes left and right patterns
+--- While creating left and right patterns it also generates the metaelements in ASP needed to fill the feature element of left and right pattern
+--- It also calls called rules to generate the needed contraints for this relation (contraint type 1, and contstraint type 2)
+rule JTLRelation2ASPRelation {
+		from 
+				s : JTL!Relation (s.isTopLevel = true)
+		using {
+				pattern_set: Sequence(JTL!Pattern) = s.domain->collect(a|a.pattern);	--set of patterns
+				pattern_1: JTL!Pattern = pattern_set->at(1); 	-- first pattern
+				pattern_2: JTL!Pattern = pattern_set->at(2);	-- second pattern
+				pattern_when: JTL!Pattern = s.when;	
+				pattern_where: JTL!Pattern = s.where;
+				predicate_set: Sequence(JTL!Predicate) = s.domain->collect(a|a.pattern)->collect(a|a.predicate);
+				predicate_1:Sequence(JTL!Predicate) = predicate_set->at(1);
+				predicate_2:Sequence(JTL!Predicate) = predicate_set->at(2);
+				predicate_when:Sequence(JTL!Predicate) = if not s.when.oclIsUndefined() then s.when.predicate else OclUndefined endif;
+				predicate_where: Sequence(JTL!Predicate) = if not s.where.oclIsUndefined() then s.where.predicate else OclUndefined endif;
+				relations: Sequence(JTL!Relation) = s.transformation.relation;
+		}
+		to 
+			-- Base case: JTL!Pattern to JTL!Pattern relation
+			-- will generate an ASP!Relation 'relation_node'
+			t: ASP!Relation ( 
+				id <- s.name,				--relation id equal to relation name
+				name <- s.name,				--Relation name
+				type <- 'bidirectional',	--relation type
+				patterns<-leftPattern,
+				-- patterns<-predicate_1->collect(p | thisModule.JTLPredicate2LeftPattern(p)),
+				patterns<-rightPattern
+				-- patterns<-predicate_2->collect(p | thisModule.JTLPredicate2RightPattern(p))
+			),
+			
+			leftPattern: ASP!LeftPattern(  
+				name<- pattern_1.templateExpression.referredClass,
+				element <- pattern_1.getMetanodeFromPattern(), -- generate matanode if not exists
+				type <- 'node'
+			),
+			
+			rightPattern: ASP!RightPattern( 
+				name<- pattern_2.templateExpression.referredClass,
+				element<- pattern_2.getMetanodeFromPattern(), -- generate metanode if not exists
+				type <- 'node'
+			)
+			do {
+				-- Generate constraints for the base case (JTL!Pattern to JTL!Pattern)
+				thisModule.newPattern2PatternConstraints(s.transformation, pattern_1, pattern_2); -- domain 1 to domain 2
+				thisModule.newPattern2PatternConstraints(s.transformation, pattern_2, pattern_1); -- domain 2 to domain 1
+				
+				-- Relations and contraints generation besides the base case:
+
+				-- For every predicate in the first domain look for VariableExp with value
+				-- matching a VariableExp value in a predicate in the second domain
+				for (p1 in predicate_1) {
+					if (p1.conditionExpression.isVarExp()) {
+						for (p2 in predicate_2) {
+							if (p2.conditionExpression.isVarExp()) {
+								if (p1.conditionExpression.value.first().name = p2.conditionExpression.value.first().name) {
+									thisModule.newPred2PredRelation(p1, p2, s.name);                     	-- relation_prop
+									thisModule.newPred2PredContraintsProp2Prop(s.transformation, p1, p2);	-- domain 1 to domain 2
+									thisModule.newPred2PredContraintsProp2Prop(s.transformation, p2, p1);	-- domain 2 to domain 1
+								}
+							}
+						}
+					}
+				}
+				
+				-- When the 'when' clause is set
+				if (not predicate_when.oclIsUndefined()) {
+					
+					-- Look for Predicates of type OperationCallExp in the 'when' clause
+					for (p in predicate_when) {
+						
+						-- Look for Relations matching those Predicates in the entire Transformation
+						for (r in relations) {
+							if (p.OpCallExpMatchesRelation(r)) {
+								--r->debug('Relation:');
+								
+								-- Look for Predicates in domain 1 matching one of the OperationCallExp parameters
+								for (p1 in predicate_1) {
+									if (p1.predMatchesOpCallParams(p)) {
+										
+										-- Look for Predicates in domain 2 matching one of the OperationCallExp parameters
+										for (p2 in predicate_2) {
+											if (p2.predMatchesOpCallParams(p)) {
+												--p1.conditionExpression.value.first().name->debug('p1:');
+												--p2.conditionExpression.value.first().name->debug('p2:');
+												-- Related Predicates found, create a new Relation and constraints
+												thisModule.newPred2PredRelation(p1, p2, s.name);						-- relation_edge
+												thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p1, p2);	-- domain 1 to domain 2
+												thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p2, p1);	-- domain 2 to domain 1
+											}	
+										}	
+									}
+								}
+							}
+						}
+					}
+				}
+				
+				-- When the 'when' clause is set
+				if (not predicate_where.oclIsUndefined()) {
+				    
+				    -- Look for Predicates of type OperationCallExp in the 'when' clause
+					for (p in predicate_where) {
+					    for (r in relations) {
+					    	r->debug('Relation:');
+					    	r.domain
+					    		->collect(a|a.pattern) 
+					    		->collect(a|a.predicate)->flatten()
+					    		->select(a|a.conditionExpression.oclIsTypeOf(JTL!AssignExp))
+					    		->select(a|a.conditionExpression.value.first().oclIsTypeOf(JTL!ObjectTemplateExp))
+					    		->debug('ObjTemExp:');
+					    }					    
+					}
+				}
+				
+				-- Constraints generation:
+				
+				
+			-- the following imperative section creates RELATIONS and CONSTRAINTS by using called rules and the variables in the 
+			-- using section of this rule
+			
+			-- create relation_set for first domain with predicate of the second domain
+			--for (p in predicate_2){
+			--	if not p.oclIsUndefined() then							
+			--		thisModule.newRelation(pattern_1,p)
+			--	else false
+			--		endif;
+			--}		
+			-- create relation_set for second domain with predicate of the first domain
+			--for (p in predicate_1){
+			--	if not p.oclIsUndefined() then							
+			--		thisModule.newRelation(pattern_2,p)
+			--	else false
+			--	endif;
+			--}
+			
+			--TWO TYPES OF CONSTRAINTS are created
+			-- type1: constraints of the type: 	domain_1, NOT domain_2, and predicates of first domain
+			--			  						domain_2, NOT domain_1, and predicates of second domain
+			-- type2: constraints of the type: 	domain_1, domain_2, not predicate_1.1
+			--									domain_1, domain_2, not predicate_1.2
+			--									domain_1, domain_2, not predicate_1.3
+			--									domain_1, domain_2, not predicate_2.1
+			--									domain_1, domain_2, not predicate_2.2
+			--									domain_1, domain_2, not predicate_2.3
+
+			--create constraints constraint_type1 #1
+			--thisModule.newConstraints_type_1(s.transformation, pattern_1,pattern_2);
+
+			--create constraints constraint_type1 #2
+			--thisModule.newConstraints_type_1(s.transformation, pattern_2,pattern_1); 
+
+			--create constraints type_2  --> domain 1
+			--for (p in predicate_1){
+			--	if not p.oclIsUndefined() then		
+			--		thisModule.newConstraints_type_2(s.transformation, pattern_1, pattern_2, p)
+			--		else false
+			--		endif;
+			--}	
+			--create constraints type_2  --> domain 2
+			--for (p in predicate_2){
+			--	if not p.oclIsUndefined() then		
+			--		thisModule.newConstraints_type_2(s.transformation, pattern_1,pattern_2, p)
+			--		else false
+			--		endif;
+			--}
+			
+			}
+}			
+
+--- For each Object Template within Pattern but outside Predicate create the following literals:
+--- literal for metamodel, literal for metaclass, literal for nodename and set a new metanode and node
+rule JTLPattern2ASPNode{
+	from
+		s: JTL!Pattern (not s.templateExpression.oclIsUndefined())
+	to		
+		--literal_NID: ASP!Literal ( 
+				-- name <- 'node' + thisModule.nodeId + '_' + s.domain.name + '_' + s.templateExpression.referredClass,
+				--name <- 'ID',
+				--transformation <- thisModule.transformationRoot
+				--),
+
+		--literal_NIDtrace: ASP!Literal ( 
+				-- name <- 'node' + thisModule.nodeId + '_' + s.domain.name + '_' + s.templateExpression.referredClass + '_trace',
+				--name <- 'IDx',
+				--transformation <- thisModule.transformationRoot
+				--),
+				
+		node: ASP!Node(
+			name <- 'node' + thisModule.nodeId + ':' + s.domain.name + '!' + s.templateExpression.referredClass,
+			literals <- s.getLiteralMetamodel(),
+			literals <- thisModule.getLiteralIDVariable(),
+			literals <- thisModule.getLiteralIDtraceVariable(),
+			literals <- s.getLiteralMetaclass(),
+			transformation <- thisModule.transformationRoot
+		),
+		nodex: ASP!Node(
+			name <- 'nodex' + thisModule.nodeId + ':' + s.domain.name + '!' + s.templateExpression.referredClass,
+			literals <- s.getLiteralMetamodel(),
+			literals <- thisModule.getLiteralIDVariable(),
+			literals <- thisModule.getLiteralIDtraceVariable(),
+			literals <- s.getLiteralMetaclass(),
+			isNodex <- true,
+			transformation <- thisModule.transformationRoot
+		)
+		
+		do{
+			--update global variable sets
+			thisModule.nodeId <- thisModule.nodeId + 1;
+			s.getMetanodeFromPattern(); --create metaclass
+		}
+}
+
+--- For each predicate with AssignExpression with attribute value of type VariableExpr create metaprop e prop
+--- and relative literals
+rule JTLPredicateVarExp2ASPProp {
+	from
+		s:JTL!Predicate (s.conditionExpression.isVarExp()) -- only predicates with assignExp as expression
+	using {
+		exp : JTL!AssignExp	= s.conditionExpression;	--exp is a variable of type JTL!AssignExp initialized to s.conditionExpression
+	}
+	to
+		-- literal_PID: ASP!Literal(
+		--	name <-  'prop' + thisModule.propId + '_' + s.pattern.getLiteralMetamodel().name + '_' 
+		--			+ s.pattern.getLiteralMetaclass().name + '_' 
+		--			+ s.getLiteralMetaprop().name,
+		--	transformation <- thisModule.transformationRoot
+		--),
+		literal_VALUE:ASP!Literal(
+			name <- exp.value.first().name,
+			transformation <- thisModule.transformationRoot
+		),
+		prop: ASP!Prop ( -- left value of the expression
+				-- name <- literal_PID.name + '=' + literal_VALUE.name,
+				name <-  'prop' + thisModule.propId + ':' + s.pattern.getLiteralMetamodel().name + '!' 
+					--+ s.pattern.getLiteralMetaclass().name + '.' 
+					+ s.pattern.templateExpression.referredClass + '.' 
+					+ s.getLiteralMetaprop().name + '=' + literal_VALUE.name,
+				literals <- s.pattern.getLiteralMetamodel(),
+				-- literals <- literal_PID,
+				literals <- thisModule.getLiteralIDpropVariable(),
+				literals <- thisModule.getLiteralIDproptraceVariable(),
+				literals <- thisModule.getLiteralIDVariable(),
+				literals <- thisModule.getLiteralIDtraceVariable(),
+				--literals <- s.pattern.getLiteralMetaclass(),
+				literals <- s.getLiteralMetaprop(),
+				-- literals <- literal_VALUE,
+				literals <- thisModule.getLiteralValueVariable(),
+				transformation <- thisModule.transformationRoot
+		),
+		propx: ASP!Prop ( -- left value of the expression
+				name <-  'propx' + thisModule.propId + ':' + s.pattern.getLiteralMetamodel().name + '!' 
+					+ s.pattern.templateExpression.referredClass + '.' 
+					+ s.getLiteralMetaprop().name + '=' + literal_VALUE.name,
+				literals <- s.pattern.getLiteralMetamodel(),
+				literals <- thisModule.getLiteralIDpropVariable(),
+				literals <- thisModule.getLiteralIDproptraceVariable(),
+				literals <- thisModule.getLiteralIDVariable(),
+				literals <- thisModule.getLiteralIDtraceVariable(),
+				literals <- s.getLiteralMetaprop(),
+				-- literals <- literal_VALUE,
+				literals <- thisModule.getLiteralValueVariable(),
+				isPropx <- true,
+				transformation <- thisModule.transformationRoot
+		)
+		do{
+			thisModule.propId <- thisModule.propId + 1;
+			s.getMetapropFromPredicate(); --create metaprop
+		}
+}
+
+--- For each predicate with AssignExpression with attribute value of type BooleanLitExp create metaprop e prop
+--- and relative literals
+rule JTLPredicateBoolExp2ASPProp {
+	from
+		s:JTL!Predicate (s.conditionExpression.isBoolLitExp()) -- only predicates with assignExp as expression
+	using {
+		exp : JTL!AssignExp	= s.conditionExpression;			
+	}
+	to
+		literal_PID: ASP!Literal(
+			name <- 'prop' + thisModule.propId + '_' 
+				+ s.pattern.getLiteralMetamodel().name + '_' 
+				+ s.pattern.getLiteralMetaclass().name + '_' 
+				+ s.getLiteralMetaprop().name,
+			transformation <- thisModule.transformationRoot
+		),
+		literal_VALUE:ASP!Literal(
+			name <- exp.value.first().booleanSymbol.toString(),
+			transformation <- thisModule.transformationRoot
+		),
+		prop: ASP!Prop ( -- left value of the expression
+				name <- literal_PID.name + '=' + literal_VALUE.name,
+				literals <- s.pattern.getLiteralMetamodel(),
+				literals <- literal_PID,
+				literals <- s.pattern.getLiteralMetaclass(),
+				literals <- s.getLiteralMetaprop(),
+				literals <- literal_VALUE,
+				transformation <- thisModule.transformationRoot
+		)
+		do{
+			thisModule.propId <- thisModule.propId + 1;
+			s.getMetapropFromPredicate(); --create metaprop
+		}
+}
+
+--- This rule creates a metaedge and a edge when a JTL!Predicate contains an AssignExpr with value of type ObjectTemplateExpr
+--- and relative literals
+rule JTLPredicateObjectTemplate2ASPEdge{
+	from
+		s: JTL!Predicate (s.conditionExpression.isObjectTemplateExp() )
+	using{
+		exp : JTL!AssignExp	= s.conditionExpression;	
+	}
+	to
+		
+		--literal_NID: ASP!Literal ( 
+			-- name <- 'node' + thisModule.nodeId + '_' 
+			--	+ s.pattern.getLiteralMetamodel().name + '_' 
+			--	+ s.getLiteralMetanodeTarget().name,
+			--name <- 'ID',
+			--transformation <- thisModule.transformationRoot
+		--),
+
+		--literal_NIDtrace: ASP!Literal ( 
+			-- name <- 'node' + thisModule.nodeId + '_' 
+			--	+ s.pattern.getLiteralMetamodel().name + '_' 
+			--	+ s.getLiteralMetanodeTarget().name + '_trace',
+			--name <- 'IDx',
+			--transformation <- thisModule.transformationRoot
+		--),
+				
+		node: ASP!Node(
+			--name <- literal_NID.name,
+			name <- 'node' + thisModule.nodeId + '_' 
+				+ s.pattern.getLiteralMetamodel().name + '_' 
+				+ s.getLiteralMetanodeTarget().name,
+			literals <- s.pattern.getLiteralMetamodel(),
+			literals <- thisModule.getLiteralIDedgetargetVariable(),
+			literals <- thisModule.getLiteralIDedgetracetargetVariable(),
+			literals <- s.getLiteralMetanodeTarget(),
+			transformation <- thisModule.transformationRoot
+		),
+		nodex: ASP!Node(
+			--name <- literal_NID.name,
+			name <- 'nodex' + thisModule.nodeId + '_' 
+				+ s.pattern.getLiteralMetamodel().name + '_' 
+				+ s.getLiteralMetanodeTarget().name,
+			literals <- s.pattern.getLiteralMetamodel(),
+			literals <- thisModule.getLiteralIDedgetargetVariable(),
+			literals <- thisModule.getLiteralIDedgetracetargetVariable(),
+			literals <- s.getLiteralMetanodeTarget(),
+			isNodex <- true,
+			transformation <- thisModule.transformationRoot
+		),
+
+		literal_EID: ASP!Literal(	-- EID: Edge ID
+			name <- 'edge' + thisModule.edgeId + '_' 
+				+ s.pattern.getLiteralMetamodel().name + '_' 
+				+ s.pattern.getLiteralMetaclass().name + '_'
+				+ s.getLiteralMetaedgeName().name,
+			transformation <- thisModule.transformationRoot
+		),
+		
+		edge: ASP!Edge (
+			name <- 'edge_' + literal_EID.name + '=' + exp.value->first().name,
+			literals <- s.pattern.getLiteralMetamodel(),
+			--literals <- literal_EID,
+			literals <- thisModule.getLiteralIDedgeVariable(),
+			literals <- thisModule.getLiteralIDedgetraceVariable(),
+			literals <- s.getLiteralMetaedgeName(),
+			literals <- thisModule.getLiteralIDVariable(),
+			literals <- thisModule.getLiteralIDtraceVariable(),
+			literals <- node.literals->asSequence()->at(2), -- edge source ID
+			literals <- node.literals->asSequence()->at(3), -- edge source IDx
+			-- TMP literals <- literal_NID, -- edge target
+			transformation <- thisModule.transformationRoot
+		),
+		edgex: ASP!Edge (
+			name <- 'edge_' + literal_EID.name + '=' + exp.value->first().name,
+			literals <- s.pattern.getLiteralMetamodel(),
+			--literals <- literal_EID,
+			literals <- thisModule.getLiteralIDedgeVariable(),
+			literals <- thisModule.getLiteralIDedgetraceVariable(),
+			literals <- s.getLiteralMetaedgeName(),
+			literals <- thisModule.getLiteralIDVariable(),
+			literals <- thisModule.getLiteralIDtraceVariable(),
+			literals <- nodex.literals->asSequence()->at(2), -- edge source ID
+			literals <- nodex.literals->asSequence()->at(3), -- edge source IDx
+			isEdgex <- true,
+			transformation <- thisModule.transformationRoot
+		)
+		
+		do{
+			thisModule.edgeId <- thisModule.edgeId + 1;
+			s.getMetanodeFromPredicate(); --create target metanode
+			s.getMetaedgeFromPredicate(); --create metaedge
+		}
+}
+
+-------------------------------------------------------------------------------------------------------------------
+----------------------*******************LAZY RULES*********************-------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
+
+--- Lazy rule called to transform a predicate in LeftPattern of a relation
+lazy rule JTLPredicate2LeftPattern {
+	from 
+		s: JTL!Predicate
+	to
+		leftPattern: ASP!LeftPattern(  
+			name<- s.conditionExpression.left.name, 
+			element<- thisModule.findElement(s)
+		)
+}
+
+--- Lazy lazy called to transform a predicate in RigtPattern of a relation
+lazy rule JTLPredicate2RightPattern {
+	from 
+		s: JTL!Predicate
+	to
+		rightPattern: ASP!RightPattern(  
+			name<- s.conditionExpression.left.name, 
+			element<- thisModule.findElement(s)
+		)
+}
+
+--- this lazy rule creates a Terminal for Predicate p
+lazy rule Predicate2Terminal {
+	from 
+		p:JSP!Predicate
+	to 
+		terminal:ASP!Terminal(
+			name <- p.conditionExpression.left.name,
+			element <- p.getElement() -- associates the corresponding element to the terminal
+		)
+}
+
+--- this lazy rule creates a Terminal for Predicate p (propx, edgex)
+lazy rule Predicate2TerminalX {
+	from 
+		p:JSP!Predicate
+	to 
+		terminal:ASP!Terminal(
+			name <- p.conditionExpression.left.name,
+			element <- p.getElementX() -- associates the corresponding element to the terminal
+		)
+}
+
+--- this lazy rule creates a Terminal for Predicate p as target node of an edge
+lazy rule PredicateTarget2Terminal {
+	from 
+		p:JSP!Predicate
+	to 
+		terminal:ASP!Terminal(
+			name <- 'target_' + p.conditionExpression.left.name,
+			element <- thisModule.resolveTemp(p, 'node')
+		)
+}
+
+--- this lazy rule creates a Not Terminal for Predicate p as target node of an edge
+lazy rule PredicateTarget2NotTerminal {
+	from 
+		p:JSP!Predicate
+	to 
+		terminal:ASP!Not(
+			name <- 'target_' + p.conditionExpression.left.name,
+			element <- thisModule.resolveTemp(p, 'node')
+		)
+}
+
+--- this lazy rule creates a Terminal for Predicate p as target node of an edge (nodex)
+lazy rule PredicateTarget2TerminalX {
+	from 
+		p:JSP!Predicate
+	to 
+		terminal:ASP!Terminal(
+			name <- 'target_' + p.conditionExpression.left.name,
+			element <- thisModule.resolveTemp(p, 'nodex')
+		)
+}
+
+--- this lazy rule creates a Not Terminal for Predicate p as target node of an edge (nodex)
+lazy rule PredicateTarget2NotTerminalX {
+	from 
+		p:JSP!Predicate
+	to 
+		terminal:ASP!Not(
+			name <- 'target_' + p.conditionExpression.left.name,
+			element <- thisModule.resolveTemp(p, 'nodex')
+		)
+}
+
+--- this lazy rule creates a Not Terminal for Predicate p
+lazy rule Predicate2NotTerminal {
+	from 
+		p:JSP!Predicate
+	to 
+		not_terminal:ASP!Not(
+			name <- p.conditionExpression.left.name,
+			element <- p.getElement()
+		)
+}
+
+--- this lazy rule creates a Not Terminal for Predicate p (propx, edgex)
+lazy rule Predicate2NotTerminalX {
+	from 
+		p:JSP!Predicate
+	to 
+		not_terminal:ASP!Not(
+			name <- p.conditionExpression.left.name,
+			element <- p.getElementX()
+		)
+}
+
+--- this lazy rule creates a Terminal for Pattern p
+lazy rule Pattern2Terminal {
+	from 
+		p:JSP!Pattern
+	to 
+		terminal:ASP!Terminal(
+			name <- p.templateExpression.name,
+			element <- thisModule.resolveTemp(p, 'node')
+		)	
+}
+
+--- this lazy rule creates a Terminal for Pattern p (nodex)
+lazy rule Pattern2TerminalX {
+	from 
+		p:JSP!Pattern
+	to 
+		terminal:ASP!Terminal(
+			name <- p.templateExpression.name,
+			element <- thisModule.resolveTemp(p, 'nodex')
+		)	
+}
+
+--- this lazy rule creates a Not Terminal for Pattern p
+lazy rule Pattern2NotTerminal {
+	from 
+		p:JSP!Pattern
+	to 
+		not_terminal:ASP!Not(
+			name <- p.templateExpression.name,
+			element <- thisModule.resolveTemp(p, 'node')
+		)
+}
+
+--- this lazy rule creates a Not Terminal for Pattern p (nodex)
+lazy rule Pattern2NotTerminalX {
+	from 
+		p:JSP!Pattern
+	to 
+		not_terminal:ASP!Not(
+			name <- p.templateExpression.name,
+			element <- thisModule.resolveTemp(p, 'nodex')
+		)
+}
+
+--- This lazy rule creates metanode not been created yet when ecountering JTL!ObjectTemplateExpr in a predicate
+lazy rule Predicate2Metanode{
+	from
+		s:JTL!Predicate
+	using {
+		exp: String	= s.conditionExpression.value.first().referredClass.toString();
+	}
+	to
+		metanode: ASP!Metanode (
+				name <- s.pattern.getLiteralMetamodel().name + '!' + exp,
+				literals <- s.pattern.getLiteralMetamodel(),
+				literals <- s.getLiteralMetanodeTarget(),
+				transformation <- thisModule.transformationRoot
+			)
+	do	{
+			thisModule.metanodes <- thisModule.metanodes->including(s.getPredicateMetanodeKey(), metanode); --insert new metanode in the map
+		}
+}
+
+--- This lazy rule creates metanode not created yet when encountering JTL!ObjectTemplateExpr as domain of a pattern
+lazy rule Pattern2Metanode {
+	from 
+		s: JTL!Pattern
+	using {
+		exp: String	= s.templateExpression.referredClass.toString();
+	}
+	to
+		metanode: ASP!Metanode (
+			name <- s.domain.name + '!' + exp,
+			literals <- s.getLiteralMetamodel(),
+			literals <- s.getLiteralMetaclass(),
+			transformation <- thisModule.transformationRoot
+		)
+	do	{
+			thisModule.metanodes <- thisModule.metanodes->including(s.getPatternMetanodeKey(), metanode); --insert metanode in the map
+		}
+}
+
+--- This lazy rule creates metaprop not created yet when encountering JTL!VarExpression or JTL!BooleanExpression in a predicate
+lazy rule Predicate2Metaprop{
+	from 
+		s:JTL!Predicate
+	using {
+		exp : String	= s.conditionExpression.left.name;
+	}
+	to 
+		metaprop: ASP!Metaprop ( -- (property call)
+				name <- s.pattern.getLiteralMetamodel().name + '!' 
+					+ s.pattern.getLiteralMetaclass().name + '.' 
+					+ exp,
+				literals <- s.pattern.getLiteralMetamodel(),
+				literals <- s.getLiteralMetaprop(),
+				literals <- s.pattern.getLiteralMetaclass(),
+				transformation <- thisModule.transformationRoot
+			)	
+	do	{
+			thisModule.metaprops <- thisModule.metaprops->including(s.getMetapropKey(), metaprop); --insert metaprop in the map
+		}
+}
+
+--- This lazy rule creates metaedge not created yet when encountering JTL!ObjectTemplateExpr as domain of a pattern
+lazy rule Predicate2Metaedge{
+	from
+		s:JTL!Predicate 
+	to
+		metaedge: ASP!Metaedge (
+			name <-  s.pattern.getLiteralMetamodel().name + '!' 
+				+ s.pattern.getLiteralMetaclass().name + '.'
+				+ s.getLiteralMetaedgeName().name,
+			literals <- s.pattern.getLiteralMetamodel(),
+			-- literals <- thisModule.literal_association(),
+			literals <-  s.getLiteralMetaedgeName(),
+			literals <-	 s.pattern.getLiteralMetaclass(), -- source metaclass
+			literals <-	 s.getLiteralMetanodeTarget(),-- target metaclass
+			transformation <- thisModule.transformationRoot
+		)
+	do	{
+			thisModule.metaedges <- thisModule.metaedges->including(s.getMetaedgeKey(), metaedge); --insert metaedge in the map
+		}
+}
+
+
+--- Unique lazy rule that is called to create a Literal with the name of a metamodel from a pattern
+lazy rule JTLPattern2ASPLiteral_MM {
+	from 
+		s: JTL!Pattern
+	to
+		literal_MM: ASP!Literal (
+			name <- 'x_' + s.domain.model.usedPackage,
+			transformation <- thisModule.transformationRoot	
+		)
+	do {
+		thisModule.literals <- thisModule.literals->including(s.domain.name, literal_MM);
+	}	
+}
+
+--- Unique lazy rule that is called to create a Literal with the name of a metaclass from a pattern
+lazy rule JTLPattern2ASPLiteral_MC {
+	from 
+		s: JTL!Pattern
+	to
+		literal_MC: ASP!Literal ( -- Literal class
+				name <- 'x_' + s.templateExpression.referredClass,
+				transformation <- thisModule.transformationRoot
+	)
+	do {
+		thisModule.literals <- thisModule.literals->including(s.templateExpression.referredClass, literal_MC);
+	}
+}
+
+--- Unique lazy rule that is called to create a Literal with the name of a metaprop from a predicate
+lazy rule JTLPredicate2ASPLiteral_MPNAME {
+	from 
+		s: JTL!Predicate
+	to
+		literal_MPNAME: ASP!Literal ( -- right value of the expression
+			name <- 'x_' + s.conditionExpression.left.name,
+			transformation <- thisModule.transformationRoot
+		)
+	do {
+		thisModule.literals <- thisModule.literals->including(s.conditionExpression.left.name, literal_MPNAME);
+	}
+}
+
+--- Unique lazy rule that is called to create a Literal with the name of a metaedge (source) from a predicate
+lazy rule JTLPredicate2ASPLiteral_MENAME {
+	from 
+		s: JTL!Predicate
+	to
+		literal_MENAME: ASP!Literal ( 
+			name <- 'x_' + s.conditionExpression.left.name,
+			transformation <- thisModule.transformationRoot
+			)
+	do {
+		thisModule.literals <- thisModule.literals->including('MENAME_' + s.conditionExpression.left.name, literal_MENAME);
+	}
+}
+
+--- Unique lazy rule that is called to create a Literal with the name of a metanode target of an edge from a predicate
+lazy rule JTLPredicate2ASPLiteral_MET {
+	from 
+		s: JTL!Predicate
+	to
+		literal_MET: ASP!Literal (
+			name <- s.conditionExpression.value.first().referredClass.toString(),
+			transformation <- thisModule.transformationRoot
+		)
+	do {
+		thisModule.literals <- thisModule.literals->including(s.conditionExpression.value.first().referredClass.toString(), literal_MET);
+	}
+}
+
+--- lazy rule that is called to create a Literal for the variable ID
+lazy rule var_ID {
+	from  s:JTL!Predicate
+	to
+		literal_ID: ASP!Literal ( 
+			name <- 'ID',
+			transformation <- thisModule.transformationRoot
+		)
+	do {
+		thisModule.literals <- thisModule.literals->including('ID', literal_ID);
+	}
+	
+}
+--- lazy rule that is called to create a Literal for the variable IDx
+lazy rule var_IDtrace {
+	from  s:JTL!Predicate
+	to
+		literal_IDtrace: ASP!Literal ( 
+			name <- 'IDx',
+			transformation <- thisModule.transformationRoot
+		)
+	do {
+		thisModule.literals <- thisModule.literals->including('IDx', literal_IDtrace);
+	}
+	
+}
+--- lazy rule that is called to create a Literal for the variable IDp
+lazy rule var_IDprop {
+	from  s:JTL!Predicate
+	to
+		literal_IDprop: ASP!Literal ( 
+			name <- 'IDp',
+			transformation <- thisModule.transformationRoot
+		)
+	do {
+		thisModule.literals <- thisModule.literals->including('IDp', literal_IDprop);
+	}
+	
+}
+--- lazy rule that is called to create a Literal for the variable IDpx
+lazy rule var_IDproptrace {
+	from  s:JTL!Predicate
+	to
+		literal_IDproptrace: ASP!Literal ( 
+			name <- 'IDpx',
+			transformation <- thisModule.transformationRoot
+		)
+	do {
+		thisModule.literals <- thisModule.literals->including('IDpx', literal_IDproptrace);
+	}
+	
+}
+
+--- lazy rule that is called to create a Literal for the variable Value
+lazy rule var_Value {
+	from  s:JTL!Predicate
+	to
+		literal_Value: ASP!Literal ( 
+			name <- 'Value',
+			transformation <- thisModule.transformationRoot
+		)
+	do {
+		thisModule.literals <- thisModule.literals->including('Value', literal_Value);
+	}
+	
+}
+
+--- lazy rule that is called to create a Literal for the variable IDe
+lazy rule var_IDedge {
+	from  s:JTL!Predicate
+	to
+		literal_IDedge: ASP!Literal ( 
+			name <- 'IDe',
+			transformation <- thisModule.transformationRoot
+		)
+	do {
+		thisModule.literals <- thisModule.literals->including('IDe', literal_IDedge);
+	}
+	
+}
+--- lazy rule that is called to create a Literal for the variable IDex
+lazy rule var_IDedgetrace {
+	from  s:JTL!Predicate
+	to
+		literal_IDedgetrace: ASP!Literal ( 
+			name <- 'IDex',
+			transformation <- thisModule.transformationRoot
+		)
+	do {
+		thisModule.literals <- thisModule.literals->including('IDex', literal_IDedgetrace);
+	}
+	
+}
+
+--- lazy rule that is called to create a Literal for the variable IDT
+lazy rule var_IDedgetarget {
+	from  s:JTL!Predicate
+	to
+		literal_IDedgetarget: ASP!Literal ( 
+			name <- 'IDT',
+			transformation <- thisModule.transformationRoot
+		)
+	do {
+		thisModule.literals <- thisModule.literals->including('IDT', literal_IDedgetarget);
+	}
+	
+}
+--- lazy rule that is called to create a Literal for the variable IDTx
+lazy rule var_IDedgetracetarget {
+	from  s:JTL!Predicate
+	to
+		literal_IDedgetracetarget: ASP!Literal ( 
+			name <- 'IDTx',
+			transformation <- thisModule.transformationRoot
+		)
+	do {
+		thisModule.literals <- thisModule.literals->including('IDTx', literal_IDedgetracetarget);
+	}
+	
+}
+
+--- This rule creates a literal named 'association' that is generated only once
+unique lazy rule literal_association{
+			from  s:JTL!Predicate
+			to
+			association:ASP!Literal(
+				name <- 'association',
+				transformation <- thisModule.transformationRoot
+			)
+}
+
+
+-------------------------------------------------------------------------------------------------------------------
+----------------------*******************CALLED RULES*********************-----------------------------------------
+-------------------------------------------------------------------------------------------------------------------
+
+--- this called rule creates the constraint of type 1 (type: p1, not p2, list of predicates of p1)
+rule newConstraints_type_1(transf:JTL!Transformation, p1:JTL!Pattern, p2:JTL!Pattern){
+	to 	
+		t: ASP!Constraint(
+				name <-'Constraint' + thisModule.constraintId,
+				expressions <- thisModule.Pattern2Terminal(p1),		--creates a terminal for p1
+				expressions <- thisModule.Pattern2NotTerminal(p2), 	--creates a NOT terminal for p2
+				expressions <- p1.predicate -> collect(p | thisModule.Predicate2Terminal(p)), -- creates a terminal for each predicate of p1
+				transformation <- thisModule.resolveTemp(transf, 't')
+		)
+	
+	do{
+		thisModule.constraintId <- thisModule.constraintId + 1;
+	}
+}
+
+--- this called rule creates the constraint of type 2 (type: p1, p2, not pr)
+rule newConstraints_type_2(transf:JTL!Transformation, p1:JTL!Pattern, p2:JTL!Pattern, pr:JTL!Predicate){
+	to 	
+		t: ASP!Constraint(
+				name <- 'Constraint' + thisModule.constraintId,
+				expressions <- thisModule.Pattern2Terminal(p1),
+				expressions <- thisModule.Pattern2Terminal(p2),
+				expressions <- thisModule.Predicate2NotTerminal(pr),
+				transformation <- thisModule.resolveTemp(transf, 't')
+	)
+	do{
+		thisModule.constraintId <- thisModule.constraintId + 1;
+	}
+}
+
+---This called rule creates a new relation every time it is called. It creates a rule from "pattern" to "predicate" (the input parameters)  
+rule newRelation(pattern:JTL!Pattern, predicate:JTL!Predicate){
+	to
+		t: ASP!Relation ( 
+			id <- pattern.templateExpression.referredClass + '2' + predicate.conditionExpression.left.name,
+			name <-  pattern.templateExpression.referredClass + '2' + predicate.conditionExpression.left.name ,    --Relation name
+			type <- 'bidirectional',--,   --relation type
+			patterns<-leftPattern,
+			patterns<-rightPattern
+		),
+		leftPattern: ASP!LeftPattern(  
+			name<- pattern.templateExpression.referredClass, 
+			element<- pattern.getMetanodeFromPattern(),
+			type<-thisModule.patternType->get(pattern.getMetanodeFromPattern().oclType())
+		),
+		rightPattern: ASP!RightPattern( 
+			name<- predicate.conditionExpression.left.name, 
+			element<-thisModule.findElement(predicate),
+			type<-thisModule.patternType->get(thisModule.findElement(predicate).oclType())
+		)
+	do {
+		thisModule.transformationRoot.relations <- t;
+	}
+}
+
+--- Creates a new ASP!Relation between two predicates
+rule newPred2PredRelation(p1:JTL!Predicate, p2:JTL!Predicate, relationName:String) {
+	to
+		t: ASP!Relation(
+			id <- relationName + '__' +
+				  p1.pattern.templateExpression.referredClass + '_' +
+			      p1.conditionExpression.left.name + '2' +
+				  p2.pattern.templateExpression.referredClass + '_' +
+				  p2.conditionExpression.left.name,
+			name <- relationName + '__' +
+			        p1.pattern.templateExpression.referredClass + '_' +
+			        p1.conditionExpression.left.name + '2' +
+				    p2.pattern.templateExpression.referredClass + '_' +
+				    p2.conditionExpression.left.name,
+			patterns <- leftPattern,
+			patterns <- rightPattern
+		),
+		leftPattern: ASP!LeftPattern(
+			name <- 'left',
+			element <- thisModule.findElement(p1),
+			type<-thisModule.patternType->get(thisModule.findElement(p1).oclType())
+		),
+		rightPattern: ASP!RightPattern(
+			name <- 'right',
+			element <- thisModule.findElement(p2),
+			type<-thisModule.patternType->get(thisModule.findElement(p2).oclType())
+		)
+	do {
+		thisModule.transformationRoot.relations <- t;
+	}
+}
+
+--
+rule newPattern2PatternConstraints(transf:JTL!Transformation, p1:JTL!Pattern, p2:JTL!Pattern) {
+	to
+		t: ASP!Constraint(
+			name <- 'Constraint' + thisModule.constraintId,
+			expressions <- thisModule.Pattern2Terminal(p1),		-- node()
+			expressions <- thisModule.Pattern2NotTerminalX(p2),	-- not nodex()
+			transformation <- thisModule.resolveTemp(transf, 't')
+		)
+	do {
+		thisModule.constraintId <- thisModule.constraintId + 1;
+	}
+}
+
+-- 
+rule newPred2PredContraintsProp2Prop(transf:JTL!Transformation, p1:JTL!Predicate, p2:JTL!Predicate) {
+	to
+		t1: ASP!Constraint(
+			name <- 'Constraint' + thisModule.constraintId,
+			expressions <- thisModule.Pattern2Terminal(p1.pattern),  -- node()
+			expressions <- thisModule.Predicate2Terminal(p1),        -- prop() or edge()
+			expressions <- thisModule.Pattern2TerminalX(p2.pattern), -- nodex()
+			expressions <- thisModule.Predicate2NotTerminalX(p2),    -- not propx() or not edgex()
+			transformation <- thisModule.resolveTemp(transf, 't')
+		)
+	do {
+		thisModule.constraintId <- thisModule.constraintId + 1;
+	}
+}
+
+-- 
+rule newPred2PredContraintsEdge2Edge(transf:JTL!Transformation, p1:JTL!Predicate, p2:JTL!Predicate) {
+	to
+		t1: ASP!Constraint(
+			name <- 'Constraint' + thisModule.constraintId,
+			expressions <- thisModule.Pattern2Terminal(p1.pattern),		-- node(source)
+			expressions <- thisModule.PredicateTarget2Terminal(p1),		-- node(target)
+			expressions <- thisModule.Predicate2Terminal(p1),			-- edge()
+			expressions <- thisModule.Pattern2TerminalX(p2.pattern),	-- nodex(source)
+			expressions <- thisModule.PredicateTarget2TerminalX(p2),	-- nodex(target)
+			expressions <- thisModule.Predicate2NotTerminalX(p2),		-- not edgex()
+			transformation <- thisModule.resolveTemp(transf, 't')
+		)
+--		t2: ASP!Constraint(
+--			name <- 'Constraint' + thisModule.constraintId + 1,
+--			expressions <- thisModule.Pattern2NotTerminalX(p2.pattern),	-- not nodex(source)
+--			expressions <- thisModule.PredicateTarget2TerminalX(p2),	-- nodex(target)
+--			expressions <- thisModule.Predicate2TerminalX(p2),			-- edgex()
+--			transformation <- thisModule.resolveTemp(transf, 't')
+--		),
+--		t3: ASP!Constraint(
+--			name <- 'Constraint' + thisModule.constraintId + 2,
+--			expressions <- thisModule.Pattern2TerminalX(p2.pattern),	-- nodex(source)
+--			expressions <- thisModule.PredicateTarget2NotTerminalX(p2),	-- not nodex(target)
+--			expressions <- thisModule.Predicate2TerminalX(p2),			-- edgex()
+--			transformation <- thisModule.resolveTemp(transf, 't')
+--		)
+	do {
+		thisModule.constraintId <- thisModule.constraintId;
+	}
+}
+
+
+

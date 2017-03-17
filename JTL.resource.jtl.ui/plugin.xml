@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="JTL.resource.jtl.ui.JtlUIMetaInformation" id="JTL.resource.jtl.ui.JtlUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="JTL.resource.jtl.ui.JtlEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="jtl" icon="icons/editor_icon.gif" id="JTL.resource.jtl.ui.JtlEditor" name="EMFText jtl Editor">
+			<contentTypeBinding contentTypeId="JTL.resource.jtl">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="JTL.resource.jtl.ui.JtlPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Jtl Text Editor" id="JTL.resource.jtl.ui.JtlPreferencePage" class="JTL.resource.jtl.ui.JtlPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="JTL.resource.jtl.ui.JtlSyntaxColoringPreferencePage" class="JTL.resource.jtl.ui.JtlSyntaxColoringPreferencePage" category="JTL.resource.jtl.ui.JtlPreferencePage">
+		</page>
+		<page name="Brackets" id="JTL.resource.jtl.ui.JtlBracketPreferencePage" class="JTL.resource.jtl.ui.JtlBracketPreferencePage" category="JTL.resource.jtl.ui.JtlPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="JTL.resource.jtl.ui.JtlNewFileWizard" id="JTL.resource.jtl.ui.JtlNewFileWizard" name="EMFText .jtl file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="JTL.resource.jtl.ui.JtlNewProjectWizard" id="JTL.resource.jtl.ui.JtlNewProjectWizard" name="EMFText jtl project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="JTL.resource.jtl.ui.JtlMarkerResolutionGenerator" markerType="JTL.resource.jtl.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="JTL.resource.jtl.ui.JtlAnnotationModelFactory" extensions="jtl">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="JTL.resource.jtl" name=".jtl File" base-type="org.eclipse.core.runtime.text" file-extensions="jtl">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="jtl" id="JTL.resource.jtl.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="JTL.resource.jtl.ui.occurences">
+		</type>
+		<type name="JTL.resource.jtl.ui.occurences.declaration" super="JTL.resource.jtl.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="JTL.resource.jtl.ui.occurences" label="Occurrences (in .jtl files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="jtl.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="jtl.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="jtl.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="jtl.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="jtl.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="jtl.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="jtl.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="jtl.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="jtl.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="JTL.resource.jtl.ui.occurences.declaration" label="Declarations (in .jtl files)" textPreferenceKey="jtl.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="jtl.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="jtl.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="jtl.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="jtl.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="jtl.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	
+	
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="jtl.PropertyTester" type="java.lang.Object" namespace="jtl" properties="isLaunchable" class="JTL.resource.jtl.ui.JtlPropertyTester">
+		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="JTL.resource.jtl.ui.debug.lineBreakpoint" markerType="JTL.resource.jtl.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="JTL.resource.jtl.ui.debug.lineBreakpoint" label="Breakpoints (in .jtl files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="JTL.resource.jtl.ui.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="JTL.resource.jtl.ui.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="JTL.resource.jtl.ui.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="JTL.resource.jtl.ui.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="JTL.resource.jtl.ui.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="JTL.resource.jtl.ui.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="JTL.resource.jtl.ui.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="JTL.resource.jtl.ui.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="JTL.resource.jtl.ui.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="JTL.resource.jtl.ui.JtlEditor" class="JTL.resource.jtl.ui.debug.JtlAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="JTL.resource.jtl.debug.JtlDebugVariable" class="JTL.resource.jtl.ui.debug.JtlAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="JTL.resource.jtl.debug.JtlDebugVariable" class="JTL.resource.jtl.ui.debug.JtlAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="JTL.resource.jtl.ui.RulerPopupActions" targetID="JTL.resource.jtl.EditorRuler">
+			<action id="JTL.resource.jtl.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="JTL.resource.jtl.ui.JtlEditor" id="JTL.resource.jtl.ui.BreakpointRulerActions">
+			<action id="JTL.resource.jtl.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="JTL.resource.jtl.debugModel" class="JTL.resource.jtl.ui.debug.JtlDebugModelPresentation">
+		</debugModelPresentation>
+	</extension>
+	
+</plugin>

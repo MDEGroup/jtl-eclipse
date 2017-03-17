@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ASPMM" nsURI="http://jtl.univaq.it/aspmm" nsPrefix="ASPMM">
+  <eClassifiers xsi:type="ecore:EClass" name="LocatedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" ordered="false"
+        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commentsBefore" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commentsAfter" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Metamodel" eSuperTypes="#//LocatedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metanodes" ordered="false"
+        upperBound="-1" eType="#//Metanode" containment="true" eOpposite="#//Metanode/metamodel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metaedges" ordered="false"
+        upperBound="-1" eType="#//Metaedge" containment="true" eOpposite="#//Metaedge/metamodel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metaprops" ordered="false"
+        upperBound="-1" eType="#//Metaprop" containment="true" eOpposite="#//Metaprop/metamodel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Metanode" eSuperTypes="#//LocatedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metamodel" ordered="false"
+        lowerBound="1" eType="#//Metamodel" eOpposite="#//Metamodel/metanodes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Metaprop" eSuperTypes="#//LocatedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metamodel" ordered="false"
+        lowerBound="1" eType="#//Metamodel" eOpposite="#//Metamodel/metaprops"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metanode" ordered="false"
+        lowerBound="1" eType="#//Metanode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Metaedge" eSuperTypes="#//LocatedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" ordered="false" unique="false"
+        lowerBound="1" eType="#//MetaedgeType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" ordered="false"
+        lowerBound="1" eType="#//Metanode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
+        lowerBound="1" eType="#//Metanode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metamodel" ordered="false"
+        lowerBound="1" eType="#//Metamodel" eOpposite="#//Metamodel/metaedges"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MetaedgeType">
+    <eLiterals name="association" value="1" literal="association"/>
+    <eLiterals name="generalization" value="2" literal="generalization"/>
+    <eLiterals name="composition" value="3" literal="composition"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: JTL ATL Transformation Runtime Plug-in
+Bundle-SymbolicName: JTL.atl;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Activator: it.univaq.jtl.atl.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.m2m.atl.engine.emfvm,
+ org.eclipse.m2m.atl.engine,
+ org.eclipse.emf.ecore,
+ org.eclipse.m2m.atl.dsls
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Eclipse-LazyStart: true
+Export-Package: it.univaq.jtl.atl.aspm2mm,
+ it.univaq.jtl.atl.ecore2aspmm,
+ it.univaq.jtl.atl.jtl2asp,
+ it.univaq.jtl.atl.mm2aspm
+Bundle-Vendor: JTL

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="ASP.resource.asp.mopp.AspMetaInformation" id="ASP.resource.asp.mopp.AspMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension id="ASP.resource.asp.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<super type="org.eclipse.emf.ecore.diagnostic">
+		</super>
+	</extension>
+	
+	<extension id="ASP.resource.asp.problem.syntax_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="ASP.resource.asp.problem">
+		</super>
+	</extension>
+	
+	<extension id="ASP.resource.asp.problem.print_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="ASP.resource.asp.problem">
+		</super>
+	</extension>
+	
+	<extension id="ASP.resource.asp.problem.unresolved_reference" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="ASP.resource.asp.problem">
+		</super>
+	</extension>
+	
+	<extension id="ASP.resource.asp.problem.analysis_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="ASP.resource.asp.problem">
+		</super>
+	</extension>
+	
+	<extension id="ASP.resource.asp.problem.builder_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="ASP.resource.asp.problem">
+		</super>
+	</extension>
+	
+	<extension id="ASP.resource.asp.nature" name="asp nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="ASP.resource.asp.mopp.AspNature">
+			</run>
+		</runtime>
+		<builder id="ASP.resource.asp.builder">
+		</builder>
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="ASP.resource.asp.builder" name="asp Builder">
+		<builder hasNature="true">
+			<run class="ASP.resource.asp.mopp.AspBuilderAdapter">
+			</run>
+		</builder>
+	</extension>
+	
+	<extension-point id="ASP.resource.asp.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="ASP.resource.asp.mopp.AspResourceFactoryDelegator" type="asp">
+		</parser>
+	</extension>
+	
+	<extension-point id="ASP.resource.asp.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.debug.core.breakpoints">
+		<breakpoint class="ASP.resource.asp.debug.AspLineBreakpoint" id="ASP.resource.asp.debug.breakpoint" markerType="ASP.resource.asp.debug.lineBreakpoint.marker" name="asp Breakpoint">
+		</breakpoint>
+	</extension>
+	
+	<extension id="ASP.resource.asp.debug.lineBreakpoint.marker" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.debug.core.lineBreakpointMarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<persistent value="true">
+		</persistent>
+	</extension>
+	
+	
+	<extension point="org.eclipse.debug.core.sourcePathComputers">
+		<sourcePathComputer class="ASP.resource.asp.debug.AspSourcePathComputerDelegate" id="ASP.resource.asp.ui.sourcePathComputer">
+		</sourcePathComputer>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourceLocators">
+		<sourceLocator id="ASP.resource.asp.ui.sourceLocator" class="ASP.resource.asp.debug.AspSourceLocator" name="asp Source Locator">
+		</sourceLocator>
+	</extension>
+	
+</plugin>

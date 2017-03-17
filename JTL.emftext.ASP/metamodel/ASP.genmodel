@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/JTL.emftext.ASP/src" modelPluginID="JTL.emftext.ASP"
+    modelName="ASP" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>ASP.ecore</foreignModel>
+  <genPackages prefix="ASP" disposableProviderFactory="true" ecorePackage="ASP.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ASP.ecore#//RelationType">
+      <genEnumLiterals ecoreEnumLiteral="ASP.ecore#//RelationType/node"/>
+      <genEnumLiterals ecoreEnumLiteral="ASP.ecore#//RelationType/prop"/>
+      <genEnumLiterals ecoreEnumLiteral="ASP.ecore#//RelationType/edge"/>
+    </genEnums>
+    <genClasses ecoreClass="ASP.ecore#//Transformation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASP.ecore#//Transformation/elements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASP.ecore#//Transformation/relations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Transformation/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASP.ecore#//Transformation/constraints"/>
+    </genClasses>
+    <genClasses ecoreClass="ASP.ecore#//LeftPattern"/>
+    <genClasses ecoreClass="ASP.ecore#//RightPattern"/>
+    <genClasses image="false" ecoreClass="ASP.ecore#//Pattern">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ASP.ecore#//Pattern/element"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Pattern/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Pattern/type"/>
+    </genClasses>
+    <genClasses ecoreClass="ASP.ecore#//Constraint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASP.ecore#//Constraint/expressions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Constraint/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ASP.ecore#//Constraint/transformation"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ASP.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Element/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ASP.ecore#//Element/transformation"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ASP.ecore#//Expression"/>
+    <genClasses ecoreClass="ASP.ecore#//Not">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ASP.ecore#//Not/element"/>
+    </genClasses>
+    <genClasses ecoreClass="ASP.ecore#//And">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASP.ecore#//And/right"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASP.ecore#//And/left"/>
+    </genClasses>
+    <genClasses ecoreClass="ASP.ecore#//Eq">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ASP.ecore#//Eq/right"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ASP.ecore#//Eq/left"/>
+    </genClasses>
+    <genClasses ecoreClass="ASP.ecore#//NotEq">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ASP.ecore#//NotEq/right"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ASP.ecore#//NotEq/left"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ASP.ecore#//Function">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ASP.ecore#//Function/literals"/>
+    </genClasses>
+    <genClasses ecoreClass="ASP.ecore#//Literal"/>
+    <genClasses ecoreClass="ASP.ecore#//Node">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Node/isNodex"/>
+    </genClasses>
+    <genClasses ecoreClass="ASP.ecore#//Prop">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Prop/isPropx"/>
+    </genClasses>
+    <genClasses ecoreClass="ASP.ecore#//Edge">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Edge/isEdgex"/>
+    </genClasses>
+    <genClasses ecoreClass="ASP.ecore#//Relation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASP.ecore#//Relation/patterns"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Relation/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Relation/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Relation/type"/>
+    </genClasses>
+    <genClasses ecoreClass="ASP.ecore#//Terminal">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ASP.ecore#//Terminal/element"/>
+    </genClasses>
+    <genClasses ecoreClass="ASP.ecore#//Metanode"/>
+    <genClasses ecoreClass="ASP.ecore#//Metaprop"/>
+    <genClasses ecoreClass="ASP.ecore#//Metaedge"/>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFText Parser Plugin: jtl
+Bundle-SymbolicName: JTL.resource.jtl;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
+  org.eclipse.emf.ecore,
+  org.eclipse.emf.ecore.change,
+  org.eclipse.emf.validation;resolution:=optional,
+  org.emftext.access;resolution:=optional,
+  org.eclipse.debug.core;resolution:=optional,
+  org.emftext.commons.antlr3_4_0,
+  JTL.emftext.JTL
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: JTL.resource.jtl,
+  JTL.resource.jtl.analysis,
+  JTL.resource.jtl.mopp,
+  JTL.resource.jtl.debug,
+  JTL.resource.jtl.launch,
+  JTL.resource.jtl.grammar,
+  JTL.resource.jtl.util
+Bundle-Activator: JTL.resource.jtl.mopp.JtlPlugin

@@ -1,0 +1,124 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%    TRANSFORMATION ENGINE   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+%%%%%%%%%%%%%%%%%%%%%%   TRACES GENERATION    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%genero i trace relativi agli elementi non presenti nelle relations
+
+is_metanode_related(MMS,MCS) :- relation_node(R, MMS, MCS, X), not relation_direction(R,mmt,MMS), MMS!=mmt.
+
+trace_node(MMS,IDx,ID,MCS) :- node(MMS,IDx,ID,MCS), not is_metanode_related(MMS,MCS),MMS!=mmt.
+
+trace_node(MMS,IDx,ID,MCS) :- node(MMS,IDx,ID,MCS), is_metanode_related(MMS,MCS), not condition(MMS,IDx,ID,MCS), MMS!=mmt.
+
+is_metaedge_related(MMS,Name,NodeSource,NodeTarget) :- relation_edge(R,MMS,Name,NodeSource,NodeTarget, X), not relation_direction(R,mmt,
+MMS), MMS!=mmt.
+
+trace_edge(MMS,IDx,ID,Name,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget) :- 
+        edge(MMS,IDx,ID,Name,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget), not is_metaedge_related(MMS,Name,NodeSource,NodeTarget),
+        node(MMS,IDNodeSourcex,IDNodeSource,NodeSource),node(MMS,IDNodeTargetx,IDNodeTarget,NodeTarget),MMS!=mmt.
+
+is_metaprop_related(MMS,Name,MCS) :- relation_prop(R,MMS,Name,MCS,X), not relation_direction(R,mmt,MMS), MMS!=mmt.
+
+trace_prop(MMS,IDx,ID,IDmcx,IDmc,Name,Value) :- prop(MMS,IDx,ID,IDmcx,IDmc,Name,Value), not is_metaprop_related(MMS,Name,MCS),
+node(MMS,IDmcx,IDmc,MCS),MMS!=mmt.
+
+:- node(MMT,IDx,ID,Node1), nodex(MMT,IDx,ID,Node2), metanode(MMT,Node2),  Node1!=Node2, MMT=mmt.
+
+%%%%%%%%%%% Metamodel Target Conformance Check %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+is_target_metamodel_conform(MM,Node) :- metanode(MM,Node).
+is_target_metamodel_conform(MM,Prop) :- metaprop(MM,Prop,Node).
+is_target_metamodel_conform(MM,Edge) :- metaedge(MM,MetaEdge,Edge,NodeSource,NodeTarget).
+
+%%%%%%%%%% Relations Check %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+is_related(MM,Node) :- relation_node(R,MM,Node,X), relation_node(R,MM2,Node2,Y).
+is_related(MM,Prop) :- relation_prop(R,MM,Prop,Node,X), relation_prop(R,MM2,Prop2,Node2,Y).
+is_related(MM,Edge) :- relation_edge(R,MM,Edge,NodeSource,NodeTarget,X), relation_edge(R,MM2,Edge2,NodeSource2,NodeTarget2,Y).
+
+%%%%%%%%%% Mapping Rules %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%node from node
+%mapping_node(MM,ID,IDx,Node) :- relation_node(R,MM,Node,X), relation_node(R,MM2,Node2,Y),node(MM2,ID,IDx,Node2), MM!=MM2.
+mapping_node(MM,IDX,IDx, Node) :- relation_node(R,MM,Node,X), relation_node(R,MM2,Node2,Y),node(MM2,ID,IDx,Node2), IDX=ID+X, MM!=MM2.
+
+%prop from prop        
+mapping_prop(MM,ID,IDx,IDXmc,IDmcx,Prop,Value) :-
+              relation_prop(R,MM,Prop,Node,X), relation_prop(R,MM2,Prop2,Node2,Y),
+              prop(MM2,ID,IDx,IDmc,IDmcx,Prop2,Value), node(MM2,IDmc,IDmcx,Node2),
+              IDXmc=IDmc+X, MM!=MM2.
+%mapping_prop(MM,ID,IDmc,Prop,Value) :- relation_prop(R,MM,Prop,Node,X), relation_prop(R,MM2,Prop2,Node2,X),
+%              prop(MM2,ID,IDmc2,Prop2,Value2), setting_prop(R,ID,IDmc,Value), MM!=MM2.
+       
+%edge from edge         
+%mapping_edge(MM,IDX,IDx,Edge,IDS,IDSx,IDT,IDTx) :- 
+%                        relation_edge(R,MM,Edge,NodeSource,NodeTarget,X),relation_edge(R,MM2,Edge2,NodeSource2,NodeTarget2,Y), 
+%            edge(MM2,ID,IDx,Edge2,IDS,IDSx,IDT,IDTx), IDX=ID+X, MM!=MM2.
+
+%mapping_edge(MM,IDX,IDx,Edge,IDS,IDSx,IDTZ,IDTx) :- 
+%                        relation_edge(R,MM,Edge,NodeSource,NodeTarget,X),relation_edge(R,MM2,Edge2,NodeSource2,NodeTarget2,Y), 
+%            edge(MM2,ID,IDx,Edge2,IDS,IDSx,IDT,IDTx), 
+%            relation_node(R1,MM,Node,Z), relation_node(R1,MM2,Node2,W),node(MM2,IDT,IDTx,Node2),
+%            IDX=ID+X, IDTZ=IDT+Z, MM!=MM2.
+
+mapping_edge(MM,IDX,IDx,Edge,IDSZ,IDSx,IDTZ,IDTx) :- 
+                        relation_edge(R,MM,Edge,NodeSource,NodeTarget,X),relation_edge(R,MM2,Edge2,NodeSource2,NodeTarget2,Y), 
+            edge(MM2,ID,IDx,Edge2,IDS,IDSx,IDT,IDTx), 
+            relation_node(R1,MM,_,Z), relation_node(R1,MM2,NodeTarget2,W), node(MM2,IDT,IDTx,NodeTarget2),
+            relation_node(R2,MM,_,Z2), relation_node(R2,MM2,NodeSource2,W2), node(MM2,IDS,IDSx,NodeSource2),
+            IDX=ID+X, IDTZ=IDT+Z, IDSZ=IDS+Z2, MM!=MM2.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%% Generability Check %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                                                                
+is_generable_node(MM,ID,IDx,Node) v -is_generable_node(MM,ID,IDx,Node) :- mapping_node(MM,ID,IDx,Node), is_related(MM,Node), 
+                                                                                                                is_target_metamodel_conform(MM,Node), MM=mmt.
+%:- -is_generable_node(MM,ID,IDx,Node).
+
+is_generable_prop(MM,ID,IDx,Prop,Value) v -is_generable_prop(MM,ID,IDx,Prop,Value) :- mapping_prop(MM,ID,IDx,IDmc,IDmcx,Prop,Value), is_related(MM,Prop), 
+                                                                                                               is_target_metamodel_conform(MM,Prop), MM=mmt.
+%:--is_generable_prop(MM,ID,Prop,Value).
+                                                                        
+is_generable_edge(MM,ID,IDx,Edge,IDS,IDSx,IDT,IDTx) v -is_generable_edge(MM,ID,IDx,Edge,IDS,IDSx,IDT,IDTx) :- mapping_edge(MM,ID,IDx,Edge,IDS,IDSx,IDT,IDTx), 
+                                                                                                                is_related(MM,Edge), is_target_metamodel_conform(MM,Edge),MM=mmt.
+%:- -is_generable_edge(MM,ID,IDx,Edge,IDS,IDSx,IDT,IDTx).                                                                                                               
+                                                                                                                
+                        
+%%%%%%%%% Element Generation by Transformation Rule %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+nodex(MM,ID,IDx,Node) :- is_generable_node(MM,ID,IDx,Node), mapping_node(MM,ID,IDx,Node),MM=mmt.
+
+
+propx(MM,ID,IDx,IDmc,IDmcx,Prop,Value) :- is_generable_prop(MM,ID,IDx,Prop,Value), mapping_prop(MM,ID,IDx,IDmc,IDmcx,Prop,Value), MM=mmt.
+
+edgex(MM,ID,IDx,Edge,IDS,IDSx,IDT,IDTx) :- is_generable_edge(MM,ID,IDx,Edge,IDS,IDSx,IDT,IDTx), mapping_edge(MM,ID,IDx,Edge,IDS,IDSx,IDT,IDTx), MM=mmt. 
+    
+
+%%%%%%%%% Element Generation by Traces %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+              
+              
+nodex(MM,IDx,ID,Node) :- trace_node(MM,IDx,ID,Node),MM=mmt.
+%:- nodex(MM,IDx,ID,Node2), trace_node(MM,IDx,ID,Node), Node != Node2.
+ 
+propx(MM,IDx,ID,IDmcx,IDmc,Prop,Value) :-  trace_prop(MM,IDx,ID,IDmcx,IDmc,Prop,Value),
+                                                                                   % prop(MM,IDx,ID,IDmcx,IDmc,Prop,Value), 
+                                                                                   %nodex(MM,IDmcx,IDmc,MCS),%node(MM,IDmcx,IDmc,MCS),
+                                                                                   MM=mmt.
+
+edgex(MM,IDx,ID,Edge,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget) :-  
+                                                                                        trace_edge(MM,IDx,ID,Edge,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget), 
+                                                                                        edge(MM,IDx,ID,Edge,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget), 
+                                                                                        nodex(MM,IDNodeSourcex,IDNodeSource,NodeSource), nodex(MM,IDNodeTargetx,IDNodeTarget,NodeTarget),
+                                                                                        node(MM,IDNodeSourcex,IDNodeSource,NodeSource), node(MM,IDNodeTargetx,IDNodeTarget,NodeTarget), 
+                                                                                        MM=mmt.    
+           
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                           
+
+           
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                           
+
+

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="JTL.resource.jtl.mopp.JtlMetaInformation" id="JTL.resource.jtl.mopp.JtlMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension id="JTL.resource.jtl.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<super type="org.eclipse.emf.ecore.diagnostic">
+		</super>
+	</extension>
+	
+	<extension id="JTL.resource.jtl.problem.syntax_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="JTL.resource.jtl.problem">
+		</super>
+	</extension>
+	
+	<extension id="JTL.resource.jtl.problem.print_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="JTL.resource.jtl.problem">
+		</super>
+	</extension>
+	
+	<extension id="JTL.resource.jtl.problem.unresolved_reference" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="JTL.resource.jtl.problem">
+		</super>
+	</extension>
+	
+	<extension id="JTL.resource.jtl.problem.analysis_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="JTL.resource.jtl.problem">
+		</super>
+	</extension>
+	
+	<extension id="JTL.resource.jtl.problem.builder_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="JTL.resource.jtl.problem">
+		</super>
+	</extension>
+	
+	<extension id="JTL.resource.jtl.nature" name="jtl nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="JTL.resource.jtl.mopp.JtlNature">
+			</run>
+		</runtime>
+		<builder id="JTL.resource.jtl.builder">
+		</builder>
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="JTL.resource.jtl.builder" name="jtl Builder">
+		<builder hasNature="true">
+			<run class="JTL.resource.jtl.mopp.JtlBuilderAdapter">
+			</run>
+		</builder>
+	</extension>
+	
+	<extension-point id="JTL.resource.jtl.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="JTL.resource.jtl.mopp.JtlResourceFactoryDelegator" type="jtl">
+		</parser>
+	</extension>
+	
+	<extension-point id="JTL.resource.jtl.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.debug.core.breakpoints">
+		<breakpoint class="JTL.resource.jtl.debug.JtlLineBreakpoint" id="JTL.resource.jtl.debug.breakpoint" markerType="JTL.resource.jtl.debug.lineBreakpoint.marker" name="jtl Breakpoint">
+		</breakpoint>
+	</extension>
+	
+	<extension id="JTL.resource.jtl.debug.lineBreakpoint.marker" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.debug.core.lineBreakpointMarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<persistent value="true">
+		</persistent>
+	</extension>
+	
+	
+	<extension point="org.eclipse.debug.core.sourcePathComputers">
+		<sourcePathComputer class="JTL.resource.jtl.debug.JtlSourcePathComputerDelegate" id="JTL.resource.jtl.ui.sourcePathComputer">
+		</sourcePathComputer>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourceLocators">
+		<sourceLocator id="JTL.resource.jtl.ui.sourceLocator" class="JTL.resource.jtl.debug.JtlSourceLocator" name="jtl Source Locator">
+		</sourceLocator>
+	</extension>
+ <extension
+       point="JTL.resource.jtl.default_load_options">
+    <provider
+          class="JTL.resource.jtl.PostProcessor"
+          id="JTL.resource.jtl.provider1"
+          name="PostProcessor">
+    </provider>
+ </extension>
+	
+</plugin>

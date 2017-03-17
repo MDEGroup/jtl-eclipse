@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ASPM" nsURI="http://jtl.univaq.it/aspm" nsPrefix="ASPM">
+  <eClassifiers xsi:type="ecore:EClass" name="LocatedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" ordered="false"
+        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commentsBefore" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commentsAfter" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//LocatedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" ordered="false"
+        upperBound="-1" eType="#//Node" containment="true" eOpposite="#//Node/model"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edges" ordered="false"
+        upperBound="-1" eType="#//Edge" containment="true" eOpposite="#//Edge/model"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="props" ordered="false"
+        upperBound="-1" eType="#//Prop" containment="true" eOpposite="#//Prop/model"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//LocatedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="IDtrace" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" ordered="false"
+        lowerBound="1" eType="#//Model" eOpposite="#//Model/nodes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Prop" eSuperTypes="#//LocatedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="IDtrace" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" ordered="false"
+        lowerBound="1" eType="#//Model" eOpposite="#//Model/props"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" ordered="false"
+        lowerBound="1" eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ownerTrace" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Edge" eSuperTypes="#//LocatedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="IDtrace" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" ordered="false"
+        lowerBound="1" eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceTrace" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
+        lowerBound="1" eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetTrace" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" ordered="false"
+        lowerBound="1" eType="#//Model" eOpposite="#//Model/edges"/>
+  </eClassifiers>
+</ecore:EPackage>

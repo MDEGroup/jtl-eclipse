@@ -1,0 +1,95 @@
+-- @atlcompiler atl2006
+
+-- @name		Ecore2ASPmm
+-- @version		1.0
+-- @authors		Ivano Malavolta
+-- @date		2009/09/17
+-- @description	${description}
+
+-- This transformation takes as input an Ecore metamodel and returns the model 
+-- representing the ASP encoding of the metamodel.
+
+module Ecore2ASPmm;
+
+create OUT : ASPmm from IN : ECORE;
+
+helper context OclAny def: isRoot() : Boolean = self.refImmediateComposite().oclIsUndefined();
+helper def: root : ASPmm!Metamodel = OclUndefined;
+
+helper context String def : normalize() : String = 'x_' + self;
+
+entrypoint rule RootEPackage2Metamodel() {
+	to
+		t : ASPmm!Metamodel(
+			name <- ECORE!EPackage.allInstancesFrom('IN')->select(e | e.isRoot()).first().name.normalize()
+		)
+	do {
+		thisModule.root <- t;
+	}
+}
+
+rule EClass2Metanode {
+	from
+		s : ECORE!EClass
+	to
+		t : ASPmm!Metanode(
+			name <- s.name.normalize(),
+			metamodel <- thisModule.root
+		)
+	do {
+		for(e in s.eAllAttributes) {
+			thisModule.EAttribute2Metaprop(e, t);
+		}
+		for(e in s.eAllReferences) {
+			thisModule.EReference2Metaedge(e, t, e.eType);
+			for(e2 in e.eType.getSubAllClasses()) {
+				thisModule.EReference2Metaedge(e, t, e2);	
+			}
+		}
+		for(e in s.eSuperTypes) {
+			thisModule.Inheritance2Metaedge(t, e);
+		}
+	}
+}
+
+helper context ECORE!EClass def : getSubAllClasses() : Sequence(ECORE!EClass) =
+	ECORE!EClass.allInstancesFrom('IN')->select(e | e.eAllSuperTypes.includes(self));
+
+rule EAttribute2Metaprop(s : ECORE!EAttribute, node : ASPmm!Metanode) {
+--	from 
+--		s : ECORE!EAttribute 
+ 	to
+		t : ASPmm!Metaprop(
+			name <- s.name.normalize(),
+			metamodel <- thisModule.root,
+			metanode <- node --s.eContainingClass  
+			)
+}
+
+rule EReference2Metaedge(s : ECORE!EReference, node : ASPmm!Metanode, target : ASPmm!Metanode) {
+--	from
+--		s : ECORE!EReference
+	to
+		t : ASPmm!Metaedge(
+			name <- s.name.normalize(),
+			metamodel <- thisModule.root,
+			source <- node, --s.eContainingClass,
+			target <- target,
+			type <- if(s.containment) then #composition else #association endif
+		)
+}
+
+lazy rule Inheritance2Metaedge {
+	from
+		subClass : ECORE!EClass,
+		superClass : ECORE!EClass
+	to
+		t : ASPmm!Metaedge(
+			name <- 'general'.normalize(),
+			metamodel <- thisModule.root,
+			source <- subClass,
+			target <- superClass,
+			type <- #generalization
+			)
+}
+			

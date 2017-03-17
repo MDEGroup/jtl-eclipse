@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="JTL.commands.actions"
+            name="JTL">
+      </category>
+      <command
+            categoryId="JTL.commands.actions"
+            id="JTL.commands.convert"
+            name="Convert">
+      </command>
+      <command
+            categoryId="JTL.commands.actions"
+            id="JTL.commands.jtl2asp"
+            name="JTL to ASP">
+      </command>
+      <command
+            categoryId="JTL.commands.actions"
+            id="JTL.commands.ecore2aspmm"
+            name="Ecore to ASPmm">
+      </command>
+      <command
+            categoryId="JTL.commands.actions"
+            id="JTL.commands.registermetamodel"
+            name="Register Metamodel">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="jtl.handlers.EmftextHandler"
+            commandId="JTL.commands.convert">
+      </handler>
+      <handler
+            class="jtl.handlers.JTL2ASPHandler"
+            commandId="JTL.commands.jtl2asp">
+      </handler>
+      <handler
+            class="jtl.handlers.Ecore2ASPmmHandler"
+            commandId="JTL.commands.ecore2aspmm">
+      </handler>
+      <handler
+            class="jtl.handlers.RegisterMetamodelHandler"
+            commandId="JTL.commands.registermetamodel">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
+        <menu
+        	id="JTL.menus.popupMenu"
+           	label="JTL">
+
+          <!-- Command menu for ATL Transformation (JTL to ASP) -->
+          <command
+    		  commandId="JTL.commands.jtl2asp"
+        	  id="JTL.menus.jtl2asp"
+          	  label="Convert JTL to ASP">
+          	<visibleWhen
+          		checkEnabled="false">
+          	  <iterate
+          	  	  ifEmpty="false"
+          	      operator="or">
+          	    <adapt
+          	        type="org.eclipse.core.resources.IFile">
+                    <test
+                          property="org.eclipse.core.resources.name"
+                          value="*.ecore">
+                    </test>
+                </adapt>
+              </iterate>
+          	</visibleWhen>
+          </command>
+
+          <!-- Command menu for ATL Transformation (Ecore to ASPmm) -->
+          <command
+    		  commandId="JTL.commands.ecore2aspmm"
+        	  id="JTL.menus.ecore2aspmm"
+          	  label="Convert Ecore to ASPmm">
+          	<visibleWhen
+          		checkEnabled="false">
+          	  <iterate
+          	  	  ifEmpty="false"
+          	      operator="or">
+          	    <adapt
+          	        type="org.eclipse.core.resources.IFile">
+                    <test
+                          property="org.eclipse.core.resources.name"
+                          value="*.ecore">
+                    </test>
+                </adapt>
+              </iterate>
+          	</visibleWhen>
+          </command>
+
+          <!-- Command menu for EMFText Transformation (model2text) -->
+		  <command
+    		  commandId="JTL.commands.convert"
+        	  id="JTL.menus.model2text"
+          	  label="Convert (model2text)">
+          	<visibleWhen
+          		checkEnabled="false">
+          	  <iterate
+          	  	  ifEmpty="false"
+          	      operator="or">
+          	    <adapt
+          	        type="org.eclipse.core.resources.IFile">
+                    <test
+                          property="org.eclipse.core.resources.name"
+                          value="*.ecore">
+                    </test>
+                </adapt>
+              </iterate>
+          	</visibleWhen>
+          </command>
+
+          <!-- Command menu for EMFText Transformation (text2model) -->
+	      <command
+    		  commandId="JTL.commands.convert"
+        	  id="JTL.menus.text2model"
+          	  label="Convert (text2model)">
+          	<visibleWhen
+          		checkEnabled="false">
+          	  <iterate
+          	  	  ifEmpty="false"
+          	      operator="or">
+          	    <adapt
+          	        type="org.eclipse.core.resources.IFile">
+                 <or>
+                    <test
+                          property="org.eclipse.core.resources.name"
+                          value="*.asp">
+                    </test>
+                    <test
+                          property="org.eclipse.core.resources.name"
+                          value="*.aspm">
+                    </test>
+                    <test
+                          property="org.eclipse.core.resources.name"
+                          value="*.aspmm">
+                    </test>
+					<test
+                          property="org.eclipse.core.resources.name"
+                          value="*.jtl">
+                    </test>
+                 </or>
+          	    </adapt>			
+          	  </iterate>
+          	</visibleWhen>
+          </command>
+
+          <!-- Command menu for Register Metamodel -->
+          <command
+    		  commandId="JTL.commands.registermetamodel"
+        	  id="JTL.menus.registermetamodel"
+          	  label="Register Metamodel">
+          	<visibleWhen
+          		checkEnabled="false">
+          	  <iterate
+          	  	  ifEmpty="false"
+          	      operator="or">
+          	    <adapt
+          	        type="org.eclipse.core.resources.IFile">
+                    <test
+                          property="org.eclipse.core.resources.name"
+                          value="*.ecore">
+                    </test>
+                </adapt>
+              </iterate>
+          	</visibleWhen>
+          </command>
+
+        </menu>
+      </menuContribution>
+   </extension>
+
+   <!-- Launch Configuration -->
+   <extension point="org.eclipse.debug.core.launchConfigurationTypes">
+     <launchConfigurationType
+       name="JTL Transformation"
+       delegate="jtl.LaunchConfigurationDelegate"
+       modes="run"
+       id="JTL.launchConfigurationType">
+     </launchConfigurationType>
+   </extension>
+   
+   <!-- Launch Configuration Tab Groups -->
+   <extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+     <launchConfigurationTabGroup
+       type="JTL.launchConfigurationType"
+       class="jtl.LaunchConfigurationTabGroup"
+       id="JTL.launchConfigurationTabGroup">
+       <launchMode
+         mode="run"
+         description="Launch Mode Test Run">
+       </launchMode>
+     </launchConfigurationTabGroup>
+   </extension>
+     
+</plugin>
