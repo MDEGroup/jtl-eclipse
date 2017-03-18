@@ -28,7 +28,7 @@ Mapping of Ecore ASP programs to ASP programs (text) (and viceversa).
 ANTLR framework implementation to integrate with EMFText.
 
 `JTL.atl`:  
-ATL Semantic anchoring from Ecore JTL Programs to Ecore ASP Programs.
+ATL semantic anchoring from Ecore JTL Programs to Ecore ASP Programs.
 
 `JTL`:  
 ASP-based transformation engine and OSGi Eclipse Equinox integration plug-in.
