@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link ASP.impl.ConstraintImpl#getExpressions <em>Expressions</em>}</li>
  *   <li>{@link ASP.impl.ConstraintImpl#getName <em>Name</em>}</li>
  *   <li>{@link ASP.impl.ConstraintImpl#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link ASP.impl.ConstraintImpl#getComment <em>Comment</em>}</li>
  * </ul>
  *
  * @generated
@@ -69,6 +70,26 @@ public class ConstraintImpl extends MinimalEObjectImpl.Container implements Cons
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getComment() <em>Comment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComment()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMMENT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getComment() <em>Comment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComment()
+	 * @generated
+	 * @ordered
+	 */
+	protected String comment = COMMENT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -168,6 +189,27 @@ public class ConstraintImpl extends MinimalEObjectImpl.Container implements Cons
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getComment() {
+		return comment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setComment(String newComment) {
+		String oldComment = comment;
+		comment = newComment;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ASPPackage.CONSTRAINT__COMMENT, oldComment, comment));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -223,6 +265,8 @@ public class ConstraintImpl extends MinimalEObjectImpl.Container implements Cons
 				return getName();
 			case ASPPackage.CONSTRAINT__TRANSFORMATION:
 				return getTransformation();
+			case ASPPackage.CONSTRAINT__COMMENT:
+				return getComment();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -246,6 +290,9 @@ public class ConstraintImpl extends MinimalEObjectImpl.Container implements Cons
 			case ASPPackage.CONSTRAINT__TRANSFORMATION:
 				setTransformation((Transformation)newValue);
 				return;
+			case ASPPackage.CONSTRAINT__COMMENT:
+				setComment((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -267,6 +314,9 @@ public class ConstraintImpl extends MinimalEObjectImpl.Container implements Cons
 			case ASPPackage.CONSTRAINT__TRANSFORMATION:
 				setTransformation((Transformation)null);
 				return;
+			case ASPPackage.CONSTRAINT__COMMENT:
+				setComment(COMMENT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -285,6 +335,8 @@ public class ConstraintImpl extends MinimalEObjectImpl.Container implements Cons
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ASPPackage.CONSTRAINT__TRANSFORMATION:
 				return getTransformation() != null;
+			case ASPPackage.CONSTRAINT__COMMENT:
+				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -301,6 +353,8 @@ public class ConstraintImpl extends MinimalEObjectImpl.Container implements Cons
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", comment: ");
+		result.append(comment);
 		result.append(')');
 		return result.toString();
 	}

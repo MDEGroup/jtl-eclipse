@@ -211,6 +211,9 @@ public abstract class AbstractJTLLauncher {
 		String tmpStr = tmp.toString()
 				.replaceFirst("(?s).+?(?=relation_)", "#const mmt = " + targetmmName + ".\n");
 		
+		// Add a newline after the relations
+		tmpStr = tmpStr.replaceFirst("(relation_.*\n)%", "$1\n%");
+		
 		// Append the target metamodel fact mmt= to the contraints
 		tmpStr = setTransformationDirection(tmpStr);
 	
@@ -233,7 +236,7 @@ public abstract class AbstractJTLLauncher {
 	 * @param transfASP generated ASP program to update
 	 * @return ASP program updated witj transformation direction
 	 */
-	private String setTransformationDirection(final String transfASP) {		
+	private String setTransformationDirection(final String transfASP) {
 		final String newline = System.getProperty("line.separator");
 		String result = "";
 		Pattern p = Pattern.compile("(nodex|propx|edgex)\\(([^,]+)");

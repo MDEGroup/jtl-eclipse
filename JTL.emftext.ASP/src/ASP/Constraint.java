@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link ASP.Constraint#getExpressions <em>Expressions</em>}</li>
  *   <li>{@link ASP.Constraint#getName <em>Name</em>}</li>
  *   <li>{@link ASP.Constraint#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link ASP.Constraint#getComment <em>Comment</em>}</li>
  * </ul>
  *
  * @see ASP.ASPPackage#getConstraint()
@@ -94,5 +95,31 @@ public interface Constraint extends EObject {
 	 * @generated
 	 */
 	void setTransformation(Transformation value);
+
+	/**
+	 * Returns the value of the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Comment</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Comment</em>' attribute.
+	 * @see #setComment(String)
+	 * @see ASP.ASPPackage#getConstraint_Comment()
+	 * @model unique="false" ordered="false"
+	 * @generated
+	 */
+	String getComment();
+
+	/**
+	 * Sets the value of the '{@link ASP.Constraint#getComment <em>Comment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Comment</em>' attribute.
+	 * @see #getComment()
+	 * @generated
+	 */
+	void setComment(String value);
 
 } // Constraint

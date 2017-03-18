@@ -338,7 +338,6 @@ public class AspPrinter implements ASP.resource.asp.IAspTextPrinter {
 	
 	
 	public void print_ASP_RightPattern(ASP.RightPattern element, String outertab, java.io.PrintWriter out) {
-		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
@@ -376,9 +375,6 @@ public class AspPrinter implements ASP.resource.asp.IAspTextPrinter {
 		}
 		// DEFINITION PART BEGINS (CsString)
 		out.print(".");
-		// DEFINITION PART BEGINS (LineBreak)
-		out.println();
-		out.print(localtab);
 	}
 	
 	
@@ -1013,7 +1009,7 @@ public class AspPrinter implements ASP.resource.asp.IAspTextPrinter {
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(3);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.CONSTRAINT__EXPRESSIONS));
 		printCountingMap.put("expressions", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
@@ -1021,12 +1017,27 @@ public class AspPrinter implements ASP.resource.asp.IAspTextPrinter {
 		printCountingMap.put("name", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.CONSTRAINT__TRANSFORMATION));
 		printCountingMap.put("transformation", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.CONSTRAINT__COMMENT));
+		printCountingMap.put("comment", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
 		boolean iterate = true;
 		java.io.StringWriter sWriter = null;
 		java.io.PrintWriter out1 = null;
 		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_ASP_Constraint_0(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
 		// DEFINITION PART BEGINS (CsString)
 		out.print(":-");
 		// DEFINITION PART BEGINS (WhiteSpaces)
@@ -1053,7 +1064,7 @@ public class AspPrinter implements ASP.resource.asp.IAspTextPrinter {
 			sWriter = new java.io.StringWriter();
 			out1 = new java.io.PrintWriter(sWriter);
 			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
-			print_ASP_Constraint_0(element, localtab, out1, printCountingMap1);
+			print_ASP_Constraint_1(element, localtab, out1, printCountingMap1);
 			if (printCountingMap.equals(printCountingMap1)) {
 				iterate = false;
 				out1.close();
@@ -1073,6 +1084,25 @@ public class AspPrinter implements ASP.resource.asp.IAspTextPrinter {
 	}
 	
 	public void print_ASP_Constraint_0(ASP.Constraint element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		count = printCountingMap.get("comment");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.CONSTRAINT__COMMENT));
+			if (o != null) {
+				ASP.resource.asp.IAspTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASP.ASPPackage.CONSTRAINT__COMMENT), element));
+			}
+			printCountingMap.put("comment", count - 1);
+		}
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
+	}
+	
+	public void print_ASP_Constraint_1(ASP.Constraint element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		String localtab = outertab;
 		int count;
 		// DEFINITION PART BEGINS (CsString)

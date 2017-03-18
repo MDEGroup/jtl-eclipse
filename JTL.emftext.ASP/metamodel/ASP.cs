@@ -35,7 +35,7 @@ RULES {
 	LeftPattern  ::= type[node : "relation_node", prop : "relation_prop", edge : "relation_edge"] #0 element['(',')'] ".";
 	@SuppressWarnings(featureWithoutSyntax,explicitSyntaxChoice)
 //	RightPattern ::= ("relation_node" | "relation_prop" | "relation_edge") element['(',')'] ".";
-	RightPattern ::= type[node : "relation_node", prop : "relation_prop", edge : "relation_edge"] #0 element['(',')'] "." !0;
+	RightPattern ::= type[node : "relation_node", prop : "relation_prop", edge : "relation_edge"] #0 element['(',')'] ".";
 	
 	@SuppressWarnings(featureWithoutSyntax,minOccurenceMismatch)
 	Metanode ::= "metanode(" literals[] "," #1 literals[] ")." !0;
@@ -56,7 +56,7 @@ RULES {
 	Edge ::= isEdgex["edgex(" : "edge("] literals[] "," #1 literals[] "," #1 literals[] "," #1 literals[] "," #1 literals[] ")." !0;
 
 	@SuppressWarnings(featureWithoutSyntax)
-	Constraint ::= ":-" #1 expressions ("," #1 expressions)* #0 "." !0;
+	Constraint ::= (comment[] !0)? ":-" #1 expressions ("," #1 expressions)* #0 "." !0;
 
 	@SuppressWarnings(featureWithoutSyntax,optionalKeyword)
 	Literal ::= name[] (#0 ".")? !0;

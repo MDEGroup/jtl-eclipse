@@ -28,6 +28,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASP.ecore#//Constraint/expressions"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Constraint/name"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ASP.ecore#//Constraint/transformation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Constraint/comment"/>
     </genClasses>
     <genClasses image="false" ecoreClass="ASP.ecore#//Element">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Element/name"/>

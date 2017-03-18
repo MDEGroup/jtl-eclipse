@@ -199,7 +199,6 @@ public class AspDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	protected boolean tryToResolveIdentifierInGenModelRegistry(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, ASP.resource.asp.IAspReferenceResolveResult<ReferenceType> result) {
 		org.eclipse.emf.ecore.EClass type = reference.getEReferenceType();
 		
-		@SuppressWarnings("deprecation")
 		final java.util.Map<String, org.eclipse.emf.common.util.URI> packageNsURIToGenModelLocationMap = org.eclipse.emf.ecore.plugin.EcorePlugin.getEPackageNsURIToGenModelLocationMap();
 		for (String nextNS : packageNsURIToGenModelLocationMap.keySet()) {
 			org.eclipse.emf.common.util.URI genModelURI = packageNsURIToGenModelLocationMap.get(nextNS);

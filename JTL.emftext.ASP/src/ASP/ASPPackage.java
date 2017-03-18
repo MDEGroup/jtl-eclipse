@@ -324,13 +324,22 @@ public interface ASPPackage extends EPackage {
 	int CONSTRAINT__TRANSFORMATION = 2;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__COMMENT = 3;
+
+	/**
 	 * The number of structural features of the '<em>Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_FEATURE_COUNT = 3;
+	int CONSTRAINT_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Constraint</em>' class.
@@ -1429,6 +1438,17 @@ public interface ASPPackage extends EPackage {
 	EReference getConstraint_Transformation();
 
 	/**
+	 * Returns the meta object for the attribute '{@link ASP.Constraint#getComment <em>Comment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Comment</em>'.
+	 * @see ASP.Constraint#getComment()
+	 * @see #getConstraint()
+	 * @generated
+	 */
+	EAttribute getConstraint_Comment();
+
+	/**
 	 * Returns the meta object for class '{@link ASP.Element <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1948,6 +1968,14 @@ public interface ASPPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONSTRAINT__TRANSFORMATION = eINSTANCE.getConstraint_Transformation();
+
+		/**
+		 * The meta object literal for the '<em><b>Comment</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONSTRAINT__COMMENT = eINSTANCE.getConstraint_Comment();
 
 		/**
 		 * The meta object literal for the '{@link ASP.impl.ElementImpl <em>Element</em>}' class.
