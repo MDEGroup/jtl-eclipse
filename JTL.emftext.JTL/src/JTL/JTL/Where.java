@@ -21,26 +21,28 @@ package JTL.JTL;
  */
 public interface Where extends Pattern {
 	/**
-	 * Returns the value of the '<em><b>Where Owner</b></em>' reference.
+	 * Returns the value of the '<em><b>Where Owner</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link JTL.JTL.Relation#getWhere <em>Where</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Where Owner</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Where Owner</em>' reference.
+	 * @return the value of the '<em>Where Owner</em>' container reference.
 	 * @see #setWhereOwner(Relation)
 	 * @see JTL.JTL.JTLPackage#getWhere_WhereOwner()
-	 * @model
+	 * @see JTL.JTL.Relation#getWhere
+	 * @model opposite="where" transient="false"
 	 * @generated
 	 */
 	Relation getWhereOwner();
 
 	/**
-	 * Sets the value of the '{@link JTL.JTL.Where#getWhereOwner <em>Where Owner</em>}' reference.
+	 * Sets the value of the '{@link JTL.JTL.Where#getWhereOwner <em>Where Owner</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Where Owner</em>' reference.
+	 * @param value the new value of the '<em>Where Owner</em>' container reference.
 	 * @see #getWhereOwner()
 	 * @generated
 	 */

@@ -8,10 +8,12 @@ import JTL.JTL.When;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,16 +29,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public class WhenImpl extends PatternImpl implements When {
-	/**
-	 * The cached value of the '{@link #getWhenOwner() <em>When Owner</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getWhenOwner()
-	 * @generated
-	 * @ordered
-	 */
-	protected Relation whenOwner;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -62,15 +54,8 @@ public class WhenImpl extends PatternImpl implements When {
 	 * @generated
 	 */
 	public Relation getWhenOwner() {
-		if (whenOwner != null && whenOwner.eIsProxy()) {
-			InternalEObject oldWhenOwner = (InternalEObject)whenOwner;
-			whenOwner = (Relation)eResolveProxy(oldWhenOwner);
-			if (whenOwner != oldWhenOwner) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, JTLPackage.WHEN__WHEN_OWNER, oldWhenOwner, whenOwner));
-			}
-		}
-		return whenOwner;
+		if (eContainerFeatureID() != JTLPackage.WHEN__WHEN_OWNER) return null;
+		return (Relation)eInternalContainer();
 	}
 
 	/**
@@ -78,8 +63,9 @@ public class WhenImpl extends PatternImpl implements When {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Relation basicGetWhenOwner() {
-		return whenOwner;
+	public NotificationChain basicSetWhenOwner(Relation newWhenOwner, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newWhenOwner, JTLPackage.WHEN__WHEN_OWNER, msgs);
+		return msgs;
 	}
 
 	/**
@@ -88,10 +74,63 @@ public class WhenImpl extends PatternImpl implements When {
 	 * @generated
 	 */
 	public void setWhenOwner(Relation newWhenOwner) {
-		Relation oldWhenOwner = whenOwner;
-		whenOwner = newWhenOwner;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, JTLPackage.WHEN__WHEN_OWNER, oldWhenOwner, whenOwner));
+		if (newWhenOwner != eInternalContainer() || (eContainerFeatureID() != JTLPackage.WHEN__WHEN_OWNER && newWhenOwner != null)) {
+			if (EcoreUtil.isAncestor(this, newWhenOwner))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newWhenOwner != null)
+				msgs = ((InternalEObject)newWhenOwner).eInverseAdd(this, JTLPackage.RELATION__WHEN, Relation.class, msgs);
+			msgs = basicSetWhenOwner(newWhenOwner, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JTLPackage.WHEN__WHEN_OWNER, newWhenOwner, newWhenOwner));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case JTLPackage.WHEN__WHEN_OWNER:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetWhenOwner((Relation)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case JTLPackage.WHEN__WHEN_OWNER:
+				return basicSetWhenOwner(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case JTLPackage.WHEN__WHEN_OWNER:
+				return eInternalContainer().eInverseRemove(this, JTLPackage.RELATION__WHEN, Relation.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -103,8 +142,7 @@ public class WhenImpl extends PatternImpl implements When {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case JTLPackage.WHEN__WHEN_OWNER:
-				if (resolve) return getWhenOwner();
-				return basicGetWhenOwner();
+				return getWhenOwner();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -148,7 +186,7 @@ public class WhenImpl extends PatternImpl implements When {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case JTLPackage.WHEN__WHEN_OWNER:
-				return whenOwner != null;
+				return getWhenOwner() != null;
 		}
 		return super.eIsSet(featureID);
 	}

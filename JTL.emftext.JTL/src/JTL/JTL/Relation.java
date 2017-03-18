@@ -78,6 +78,7 @@ public interface Relation extends NamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Where</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link JTL.JTL.Where#getWhereOwner <em>Where Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Where</em>' containment reference isn't clear,
@@ -87,7 +88,8 @@ public interface Relation extends NamedElement {
 	 * @return the value of the '<em>Where</em>' containment reference.
 	 * @see #setWhere(Where)
 	 * @see JTL.JTL.JTLPackage#getRelation_Where()
-	 * @model containment="true"
+	 * @see JTL.JTL.Where#getWhereOwner
+	 * @model opposite="whereOwner" containment="true"
 	 * @generated
 	 */
 	Where getWhere();
@@ -104,6 +106,7 @@ public interface Relation extends NamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>When</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link JTL.JTL.When#getWhenOwner <em>When Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>When</em>' containment reference isn't clear,
@@ -113,7 +116,8 @@ public interface Relation extends NamedElement {
 	 * @return the value of the '<em>When</em>' containment reference.
 	 * @see #setWhen(When)
 	 * @see JTL.JTL.JTLPackage#getRelation_When()
-	 * @model containment="true"
+	 * @see JTL.JTL.When#getWhenOwner
+	 * @model opposite="whenOwner" containment="true"
 	 * @generated
 	 */
 	When getWhen();

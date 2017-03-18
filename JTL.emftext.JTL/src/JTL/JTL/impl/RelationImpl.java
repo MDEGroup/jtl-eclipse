@@ -214,9 +214,9 @@ public class RelationImpl extends NamedElementImpl implements Relation {
 		if (newWhere != where) {
 			NotificationChain msgs = null;
 			if (where != null)
-				msgs = ((InternalEObject)where).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - JTLPackage.RELATION__WHERE, null, msgs);
+				msgs = ((InternalEObject)where).eInverseRemove(this, JTLPackage.WHERE__WHERE_OWNER, Where.class, msgs);
 			if (newWhere != null)
-				msgs = ((InternalEObject)newWhere).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - JTLPackage.RELATION__WHERE, null, msgs);
+				msgs = ((InternalEObject)newWhere).eInverseAdd(this, JTLPackage.WHERE__WHERE_OWNER, Where.class, msgs);
 			msgs = basicSetWhere(newWhere, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -257,9 +257,9 @@ public class RelationImpl extends NamedElementImpl implements Relation {
 		if (newWhen != when) {
 			NotificationChain msgs = null;
 			if (when != null)
-				msgs = ((InternalEObject)when).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - JTLPackage.RELATION__WHEN, null, msgs);
+				msgs = ((InternalEObject)when).eInverseRemove(this, JTLPackage.WHEN__WHEN_OWNER, When.class, msgs);
 			if (newWhen != null)
-				msgs = ((InternalEObject)newWhen).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - JTLPackage.RELATION__WHEN, null, msgs);
+				msgs = ((InternalEObject)newWhen).eInverseAdd(this, JTLPackage.WHEN__WHEN_OWNER, When.class, msgs);
 			msgs = basicSetWhen(newWhen, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -315,6 +315,14 @@ public class RelationImpl extends NamedElementImpl implements Relation {
 				return basicSetTransformation((Transformation)otherEnd, msgs);
 			case JTLPackage.RELATION__DOMAIN:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getDomain()).basicAdd(otherEnd, msgs);
+			case JTLPackage.RELATION__WHERE:
+				if (where != null)
+					msgs = ((InternalEObject)where).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - JTLPackage.RELATION__WHERE, null, msgs);
+				return basicSetWhere((Where)otherEnd, msgs);
+			case JTLPackage.RELATION__WHEN:
+				if (when != null)
+					msgs = ((InternalEObject)when).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - JTLPackage.RELATION__WHEN, null, msgs);
+				return basicSetWhen((When)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}

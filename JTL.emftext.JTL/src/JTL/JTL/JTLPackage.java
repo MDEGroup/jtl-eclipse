@@ -715,7 +715,7 @@ public interface JTLPackage extends EPackage {
 	int WHEN__DOMAIN = PATTERN__DOMAIN;
 
 	/**
-	 * The feature id for the '<em><b>When Owner</b></em>' reference.
+	 * The feature id for the '<em><b>When Owner</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -806,7 +806,7 @@ public interface JTLPackage extends EPackage {
 	int WHERE__DOMAIN = PATTERN__DOMAIN;
 
 	/**
-	 * The feature id for the '<em><b>Where Owner</b></em>' reference.
+	 * The feature id for the '<em><b>Where Owner</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1157,10 +1157,10 @@ public interface JTLPackage extends EPackage {
 	EClass getWhen();
 
 	/**
-	 * Returns the meta object for the reference '{@link JTL.JTL.When#getWhenOwner <em>When Owner</em>}'.
+	 * Returns the meta object for the container reference '{@link JTL.JTL.When#getWhenOwner <em>When Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>When Owner</em>'.
+	 * @return the meta object for the container reference '<em>When Owner</em>'.
 	 * @see JTL.JTL.When#getWhenOwner()
 	 * @see #getWhen()
 	 * @generated
@@ -1178,10 +1178,10 @@ public interface JTLPackage extends EPackage {
 	EClass getWhere();
 
 	/**
-	 * Returns the meta object for the reference '{@link JTL.JTL.Where#getWhereOwner <em>Where Owner</em>}'.
+	 * Returns the meta object for the container reference '{@link JTL.JTL.Where#getWhereOwner <em>Where Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Where Owner</em>'.
+	 * @return the meta object for the container reference '<em>Where Owner</em>'.
 	 * @see JTL.JTL.Where#getWhereOwner()
 	 * @see #getWhere()
 	 * @generated
@@ -1466,7 +1466,7 @@ public interface JTLPackage extends EPackage {
 		EClass WHEN = eINSTANCE.getWhen();
 
 		/**
-		 * The meta object literal for the '<em><b>When Owner</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>When Owner</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1484,7 +1484,7 @@ public interface JTLPackage extends EPackage {
 		EClass WHERE = eINSTANCE.getWhere();
 
 		/**
-		 * The meta object literal for the '<em><b>Where Owner</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Where Owner</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

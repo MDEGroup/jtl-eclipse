@@ -8,10 +8,12 @@ import JTL.JTL.Where;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,16 +29,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public class WhereImpl extends PatternImpl implements Where {
-	/**
-	 * The cached value of the '{@link #getWhereOwner() <em>Where Owner</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getWhereOwner()
-	 * @generated
-	 * @ordered
-	 */
-	protected Relation whereOwner;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -62,15 +54,8 @@ public class WhereImpl extends PatternImpl implements Where {
 	 * @generated
 	 */
 	public Relation getWhereOwner() {
-		if (whereOwner != null && whereOwner.eIsProxy()) {
-			InternalEObject oldWhereOwner = (InternalEObject)whereOwner;
-			whereOwner = (Relation)eResolveProxy(oldWhereOwner);
-			if (whereOwner != oldWhereOwner) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, JTLPackage.WHERE__WHERE_OWNER, oldWhereOwner, whereOwner));
-			}
-		}
-		return whereOwner;
+		if (eContainerFeatureID() != JTLPackage.WHERE__WHERE_OWNER) return null;
+		return (Relation)eInternalContainer();
 	}
 
 	/**
@@ -78,8 +63,9 @@ public class WhereImpl extends PatternImpl implements Where {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Relation basicGetWhereOwner() {
-		return whereOwner;
+	public NotificationChain basicSetWhereOwner(Relation newWhereOwner, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newWhereOwner, JTLPackage.WHERE__WHERE_OWNER, msgs);
+		return msgs;
 	}
 
 	/**
@@ -88,10 +74,63 @@ public class WhereImpl extends PatternImpl implements Where {
 	 * @generated
 	 */
 	public void setWhereOwner(Relation newWhereOwner) {
-		Relation oldWhereOwner = whereOwner;
-		whereOwner = newWhereOwner;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, JTLPackage.WHERE__WHERE_OWNER, oldWhereOwner, whereOwner));
+		if (newWhereOwner != eInternalContainer() || (eContainerFeatureID() != JTLPackage.WHERE__WHERE_OWNER && newWhereOwner != null)) {
+			if (EcoreUtil.isAncestor(this, newWhereOwner))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newWhereOwner != null)
+				msgs = ((InternalEObject)newWhereOwner).eInverseAdd(this, JTLPackage.RELATION__WHERE, Relation.class, msgs);
+			msgs = basicSetWhereOwner(newWhereOwner, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JTLPackage.WHERE__WHERE_OWNER, newWhereOwner, newWhereOwner));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case JTLPackage.WHERE__WHERE_OWNER:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetWhereOwner((Relation)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case JTLPackage.WHERE__WHERE_OWNER:
+				return basicSetWhereOwner(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case JTLPackage.WHERE__WHERE_OWNER:
+				return eInternalContainer().eInverseRemove(this, JTLPackage.RELATION__WHERE, Relation.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -103,8 +142,7 @@ public class WhereImpl extends PatternImpl implements Where {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case JTLPackage.WHERE__WHERE_OWNER:
-				if (resolve) return getWhereOwner();
-				return basicGetWhereOwner();
+				return getWhereOwner();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -148,7 +186,7 @@ public class WhereImpl extends PatternImpl implements Where {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case JTLPackage.WHERE__WHERE_OWNER:
-				return whereOwner != null;
+				return getWhereOwner() != null;
 		}
 		return super.eIsSet(featureID);
 	}

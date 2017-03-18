@@ -119,9 +119,9 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="domain" upperBound="-1"
           eType="#//JTL/Domain" containment="true" eOpposite="#//JTL/Domain/relation"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="where" eType="#//JTL/Where"
-          containment="true"/>
+          containment="true" eOpposite="#//JTL/Where/whereOwner"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="when" eType="#//JTL/When"
-          containment="true"/>
+          containment="true" eOpposite="#//JTL/When/whenOwner"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTopLevel" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="variable" upperBound="-1"
@@ -166,10 +166,12 @@
           lowerBound="1" eType="#//essentialocl/OclExpression" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="When" eSuperTypes="#//JTL/Pattern">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="whenOwner" eType="#//JTL/Relation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="whenOwner" eType="#//JTL/Relation"
+          eOpposite="#//JTL/Relation/when"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Where" eSuperTypes="#//JTL/Pattern">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="whereOwner" eType="#//JTL/Relation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="whereOwner" eType="#//JTL/Relation"
+          eOpposite="#//JTL/Relation/where"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="essentialocl" nsURI="http:///essentialocl.ecore" nsPrefix="essentialocl">
