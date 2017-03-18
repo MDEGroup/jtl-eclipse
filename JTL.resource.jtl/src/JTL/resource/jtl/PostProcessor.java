@@ -112,13 +112,17 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 					EObject varexp = t.next();
 					EStructuralFeature veName = varexp.eClass().getEStructuralFeature("name");
 					if (VariableExpImpl.class.isInstance(varexp)) {
-						// Replace the VariableExp object with the ObjectTemplateExp
-						// with the ObjectTemplateExp with the same name
-						EObject objtplexp = findSingle(
-								findInPath(root, varexp, RelationImpl.class), 
-								ObjectTemplateExpImpl.class, "name", varexp.eGet(veName));
-						if (objtplexp != null) {
-							EcoreUtil.replace(varexp, EcoreUtil.copy(objtplexp));
+						// Replace the VariableExp object with
+						// the ObjectTemplateExp with the same name
+						EObject owningRelation = findInPath(root, varexp, RelationImpl.class);
+						ListIterator<EObject> referredDomains = find(owningRelation, DomainImpl.class).listIterator();
+						while (referredDomains.hasNext()) {
+							EList<EObject> objtplexp = find(referredDomains.next(),
+									ObjectTemplateExpImpl.class, "name", varexp.eGet(veName));
+							if (objtplexp != null && objtplexp.size() == 1) {
+								EcoreUtil.replace(varexp, EcoreUtil.copy(objtplexp.get(0)));
+								break;
+							}
 						}
 					}
 				}
@@ -225,14 +229,12 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 		EList<EObject> l = find(root, implClass, feature, value);
 		switch (l.size()) {
 			case 0:
-				// FIXME track down who is causing this
-				//System.out.format("No %s element named '%s' found.\n", implClass.toString(), value);
+				System.out.format("No %s element named '%s' found.\n", implClass.toString(), value);
 				break;
 			case 1:
 				return l.get(0);
 			default:
-				// FIXME track down who is causing this
-				//System.out.format("More than one %s element named '%s'.\n", implClass.toString(), value);
+				System.out.format("More than one %s element named '%s'.\n", implClass.toString(), value);
 				break;
 		}
 		return null;
