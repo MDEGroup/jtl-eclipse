@@ -263,6 +263,8 @@ public abstract class AbstractJTLLauncher {
 	 * @param targetmmFile target metamodel filename
 	 */
 	protected void processTargetModels(final ArrayList<String> modelsFiles, final IFile targetmmFile) {
+		
+		// FIXME check modelsFiles for null and alert the user
 	
 		// Process target models
 		for (String target : modelsFiles) {
