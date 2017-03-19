@@ -1235,6 +1235,11 @@ rule newPred2PredRelation(p1:JTL!Predicate, p2:JTL!Predicate, relationName:Strin
 rule newPattern2PatternConstraints(transf:JTL!Transformation, p1:JTL!Pattern, p2:JTL!Pattern) {
 	to
 		t: ASP!Constraint(
+		    comment <- '% ' + p1.domain.relation.name + ': ' +
+		               p1.templateExpression.referredClass + ' ' +
+		               p1.templateExpression.name + ' -> ' +
+		               p2.templateExpression.referredClass + ' ' +
+		               p2.templateExpression.name,
 			name <- 'Constraint' + thisModule.constraintId,
 			expressions <- thisModule.Pattern2Terminal(p1),		-- node()
 			expressions <- thisModule.Pattern2NotTerminalX(p2),	-- not nodex()
@@ -1249,6 +1254,11 @@ rule newPattern2PatternConstraints(transf:JTL!Transformation, p1:JTL!Pattern, p2
 rule newPred2PredContraintsProp2Prop(transf:JTL!Transformation, p1:JTL!Predicate, p2:JTL!Predicate) {
 	to
 		t1: ASP!Constraint(
+		    comment <- '% ' + p1.pattern.domain.relation.name + ': ' +
+				  p1.pattern.templateExpression.referredClass + '.' +
+			      p1.conditionExpression.left.name + ' -> ' +
+				  p2.pattern.templateExpression.referredClass + '.' +
+				  p2.conditionExpression.left.name,
 			name <- 'Constraint' + thisModule.constraintId,
 			expressions <- thisModule.Pattern2Terminal(p1.pattern),  -- node()
 			expressions <- thisModule.Predicate2Terminal(p1),        -- prop() or edge()
@@ -1265,6 +1275,11 @@ rule newPred2PredContraintsProp2Prop(transf:JTL!Transformation, p1:JTL!Predicate
 rule newPred2PredContraintsEdge2Edge(transf:JTL!Transformation, p1:JTL!Predicate, p2:JTL!Predicate) {
 	to
 		t1: ASP!Constraint(
+		    comment <- '% ' + p1.pattern.domain.relation.name + ': ' +
+				  p1.pattern.templateExpression.referredClass + '->' +
+			      p1.conditionExpression.left.name + ' -> ' +
+				  p2.pattern.templateExpression.referredClass + '->' +
+				  p2.conditionExpression.left.name,
 			name <- 'Constraint' + thisModule.constraintId,
 			expressions <- thisModule.Pattern2Terminal(p1.pattern),		-- node(source)
 			expressions <- thisModule.PredicateTarget2Terminal(p1),		-- node(target)
