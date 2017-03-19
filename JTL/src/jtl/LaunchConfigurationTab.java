@@ -28,24 +28,25 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 	private Text sourcemText;
 	private Text targetmText;
 	private Text transfText;
-	
-	
+
+
 	@Override
 	public void createControl(Composite parent) {
 
 		Composite comp = new Composite(parent, SWT.NONE);
-		setControl(comp);		
-		
+		setControl(comp);
+
         comp.setLayout(new GridLayout());
         comp.setFont(parent.getFont());
-        
+
         // Create a listener for user modifications of text fields
         ModifyListener modListener = new ModifyListener() {
-        	public void modifyText(ModifyEvent e) {
-        		updateLaunchConfigurationDialog();	
+            @Override
+            public void modifyText(ModifyEvent e) {
+                updateLaunchConfigurationDialog();
         	}
         };
-        
+
         // Metamodels selection form
         // Group
         Group metamodelsGroup = new Group(comp, SWT.NONE);
@@ -54,7 +55,7 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         metamodelsGroup.setLayoutData(
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
         metamodelsGroup.setText("Metamodels");
-        
+
         // Source metamodel
         new Label(metamodelsGroup, SWT.NONE).setText("Source:");
         sourcemmText = new Text(metamodelsGroup, SWT.BORDER);
@@ -65,15 +66,15 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         Button sourcemmButton = new Button(metamodelsGroup, SWT.PUSH);
         sourcemmButton.setText("Browse...");
         sourcemmButton.addSelectionListener(new SelectionAdapter() {
-        	public void widgetSelected(SelectionEvent e) {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
         		sourcemmText.setText(selectResource(
-        				"Select a resource as the source metamodel", 
+                        "Select a resource as the source metamodel",
         				IResource.FILE));
         		updateLaunchConfigurationDialog();
         	}
         });
-        
-        
+
         // Target metamodel
         new Label(metamodelsGroup, SWT.NONE).setText("Target:");
         targetmmText = new Text(metamodelsGroup, SWT.BORDER);
@@ -83,14 +84,15 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         Button targetmmButton = new Button(metamodelsGroup, SWT.PUSH);
         targetmmButton.setText("Browse...");
         targetmmButton.addSelectionListener(new SelectionAdapter() {
-        	public void widgetSelected(SelectionEvent e) {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
         		targetmmText.setText(selectResource(
         				"Select a resource as the target metamodel",
         				IResource.FILE));
         		updateLaunchConfigurationDialog();
         	}
         });
-       
+
         // Models selection form
         // Group
         Group modelsGroup = new Group(comp, SWT.NONE);
@@ -99,7 +101,7 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         modelsGroup.setLayoutData(
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
         modelsGroup.setText("Models");
-        
+
         // Source model
         new Label(modelsGroup, SWT.NONE).setText("Source:");
         sourcemText = new Text(modelsGroup, SWT.BORDER);
@@ -109,14 +111,15 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         Button sourcemButton = new Button(modelsGroup, SWT.PUSH);
         sourcemButton.setText("Browse...");
         sourcemButton.addSelectionListener(new SelectionAdapter() {
-        	public void widgetSelected(SelectionEvent e) {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
         		sourcemText.setText(selectResource(
         				"Select a resource as the source model",
         				IResource.FILE));
         		updateLaunchConfigurationDialog();
         	}
         });
-        
+
         // Target models folder
         new Label(modelsGroup, SWT.NONE).setText("Target:");
         targetmText = new Text(modelsGroup, SWT.BORDER);
@@ -126,14 +129,15 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         Button targetmButton = new Button(modelsGroup, SWT.PUSH);
         targetmButton.setText("Browse...");
         targetmButton.addSelectionListener(new SelectionAdapter() {
-        	public void widgetSelected(SelectionEvent e) {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
         		targetmText.setText(selectResource(
         				"Select a folder where to store target models",
         				IResource.FOLDER));
         		updateLaunchConfigurationDialog();
         	}
         });
-        
+
         // Transformation selection form
         // Group
         Group transfGroup = new Group(comp, SWT.NONE);
@@ -142,7 +146,7 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         transfGroup.setLayoutData(
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
         transfGroup.setText("Transformation");
-        
+
         // Transformation
         new Label(transfGroup, SWT.NONE).setText("JTL:");
         transfText = new Text(transfGroup, SWT.BORDER);
@@ -152,7 +156,8 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         Button transfButton = new Button(transfGroup, SWT.PUSH);
         transfButton.setText("Browse...");
         transfButton.addSelectionListener(new SelectionAdapter() {
-        	public void widgetSelected(SelectionEvent e) {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
         		transfText.setText(selectResource(
         				"Select a resource as JTL transformation",
         				IResource.FILE));
@@ -182,33 +187,31 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 			System.out.println("Unable to load the configuration data.");
 			e.printStackTrace();
 		}
-		
 	}
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(LaunchConfigurationAttributes.SOURCEMM_TEXT, 
+		configuration.setAttribute(LaunchConfigurationAttributes.SOURCEMM_TEXT,
 				sourcemmText.getText());
-		configuration.setAttribute(LaunchConfigurationAttributes.TARGETMM_TEXT, 
+		configuration.setAttribute(LaunchConfigurationAttributes.TARGETMM_TEXT,
 				targetmmText.getText());
-		configuration.setAttribute(LaunchConfigurationAttributes.SOURCEM_TEXT, 
+		configuration.setAttribute(LaunchConfigurationAttributes.SOURCEM_TEXT,
 				sourcemText.getText());
-		configuration.setAttribute(LaunchConfigurationAttributes.TARGETM_TEXT, 
+		configuration.setAttribute(LaunchConfigurationAttributes.TARGETM_TEXT,
 				targetmText.getText());
-		configuration.setAttribute(LaunchConfigurationAttributes.TRANSF_TEXT, 
+		configuration.setAttribute(LaunchConfigurationAttributes.TRANSF_TEXT,
 				transfText.getText());
-		
 	}
 
 	@Override
 	public String getName() {
 		return "JTL Transformation";
 	}
-	
+
 	private String selectResource(final String title, final int resourceType) {
 		ResourceListSelectionDialog dialog = new ResourceListSelectionDialog(
-				getShell(), 
-				ResourcesPlugin.getWorkspace().getRoot(), 
+				getShell(),
+				ResourcesPlugin.getWorkspace().getRoot(),
 				resourceType);
 		dialog.setTitle(title);
 		if (dialog.open() == ResourceListSelectionDialog.OK) {
@@ -216,6 +219,34 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 			return ((IResource) result[0]).getFullPath().toString();
 		}
 		return null;
+	}
+
+	@Override
+	public boolean isValid(ILaunchConfiguration launchConfig) {
+		String errorMsg = "";
+		if (sourcemmText.getText().equals("")) {
+			errorMsg += ", the source metamodel";
+		}
+		if (targetmmText.getText().equals("")) {
+			errorMsg += ", the target metamodel";
+		}
+		if (sourcemText.getText().equals("")) {
+			errorMsg += ", the source model";
+		}
+		if (targetmText.getText().equals("")) {
+			errorMsg += ", the target models folder";
+		}
+		if (transfText.getText().equals("")) {
+			errorMsg += ", the JTL transformation";
+		}
+		if (!errorMsg.equals("")) {
+			errorMsg = "Please, select a path for " + errorMsg.substring(1) + ".";
+			this.setErrorMessage(errorMsg);
+			return false;
+		}
+
+		this.setErrorMessage(null);
+		return super.isValid(launchConfig);
 	}
 
 }

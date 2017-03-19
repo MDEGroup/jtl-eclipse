@@ -200,5 +200,44 @@
        </launchMode>
      </launchConfigurationTabGroup>
    </extension>
+
+   <!-- Launch Shortcut -->
+   <extension point="org.eclipse.debug.ui.launchShortcuts">
+     <shortcut
+       label="JTL Application"
+       helpContextId="JTL.launch"
+       modes="run"
+       class="jtl.LaunchShortcut"
+       description="Launch a JTL transformation"
+       id="JTL.launchShortcut">
+	   <description description="Run JTL transformation" mode="run" />
+       <contextualLaunch>
+         <enablement>
+           <with variable="selection">
+             <count value="1" />
+             <iterate ifEmpty="false">
+               <adapt type="org.eclipse.core.resources.IFile">
+                 <or>
+                   <test property="org.eclipse.core.resources.name"
+                         value="*.jtl"/>
+                   <test property="org.eclipse.core.resources.name"
+                         value="*.dl"/>
+                 </or>
+               </adapt>
+             </iterate>
+           </with>
+         </enablement>
+       </contextualLaunch>
+       <configurationType id="JTL.launchConfigurationType" />
+     </shortcut>
+   </extension>
+
+   <!-- ILaunchable adapter -->
+   <extension point="org.eclipse.core.runtime.adapters">
+     <factory class="org.eclipse.core.runtime.IAdaptable"
+           adaptableType="org.eclipse.core.resources.IResource">
+       <adapter type="org.eclipse.debug.ui.actions.ILaunchable"/>
+     </factory>
+   </extension>
      
 </plugin>
