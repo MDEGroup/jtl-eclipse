@@ -246,7 +246,7 @@ helper context JTL!Predicate def: OpCallExpMatchesRelation(r : JTL!Relation): Bo
 	not self.conditionExpression.oclIsUndefined() and				-- not undefined
 	self.conditionExpression.oclIsTypeOf(JTL!OperationCallExp) and	-- and of type OperationCallExp
 	self.conditionExpression.referredOperation = r and				-- matching Relation
-	-- match operation(p1, p2) with correct types (ObjectTemplateExp.referredClass)
+	-- match operation(p1, p2) with correct domains types (ObjectTemplateExp.referredClass)
 	(self.conditionExpression.argument->at(1).referredClass = r.domain->at(1).pattern.templateExpression.referredClass and
 	  self.conditionExpression.argument->at(2).referredClass = r.domain->at(2).pattern.templateExpression.referredClass);
 --	or
@@ -270,7 +270,7 @@ helper context JTL!Predicate def: predMatchesOpCallParams(p : JTL!Predicate): Bo
 	 self.conditionExpression.value.first().name = p.conditionExpression.argument->at(2).name);
 
 --- Find the Predicates with an assignment with value of type ObjectTemplateExp
-helper context JTL!Relation def: getPredicatesWithObjTemExp(): Sequence(JTL!Predicate) =
+helper context JTL!Relation def: getPredicatesWithObjTplExp(): Sequence(JTL!Predicate) =
     self.domain
 	  ->collect(a|a.pattern)																-- in all the patterns
 	  ->collect(a|a.predicate)->flatten()													-- look for predicates
@@ -301,7 +301,13 @@ rule JTLTransformation2ASPTransformation {
 --- It also calls called rules to generate the needed contraints for this relation (contraint type 1, and contstraint type 2)
 rule JTLRelation2ASPRelation {
 		from 
-				s : JTL!Relation (s.isTopLevel = true)
+                s : JTL!Relation (s.isTopLevel = true                               -- the relation is top level
+                                  or                                                -- or
+                                  (s.isTopLevel=false and                           -- it is not top level
+                                   s.transformation.relation                        -- but in any other relation
+                                     ->select(r|not r.where.oclIsUndefined())       -- having a defined where clause
+                                     ->collect(r|r.where.predicate)->flatten()      -- there exists a predicate referring to this relation
+                                     ->exists(p|p.OpCallExpMatchesRelation(s))))    -- and matching name a parameters types
 		using {
 				pattern_set: Sequence(JTL!Pattern) = s.domain->collect(a|a.pattern);	--set of patterns
 				pattern_1: JTL!Pattern = pattern_set->at(1); 	-- first pattern
