@@ -293,6 +293,9 @@ public class AspPrinter implements ASP.resource.asp.IAspTextPrinter {
 			}
 			printCountingMap.put("patterns", count - 1);
 		}
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
 	}
 	
 	

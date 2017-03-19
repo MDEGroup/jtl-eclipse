@@ -211,8 +211,8 @@ public abstract class AbstractJTLLauncher {
 		String tmpStr = tmp.toString()
 				.replaceFirst("(?s).+?(?=relation_)", "#const mmt = " + targetmmName + ".\n");
 		
-		// Add a newline after the relations
-		tmpStr = tmpStr.replaceFirst("(relation_.*\n)%", "$1\n%");
+		// Remove an extra newline after the first comment in constraints
+		tmpStr = tmpStr.replaceFirst("(relation_.*\n\n% .*\n)\n", "$1");
 		
 		// Append the target metamodel fact mmt= to the contraints
 		tmpStr = setTransformationDirection(tmpStr);

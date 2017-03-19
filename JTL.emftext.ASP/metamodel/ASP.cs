@@ -27,7 +27,7 @@ RULES {
 	Transformation ::= elements+ !0 relations+ !0 constraints*;
 	
 	@SuppressWarnings(featureWithoutSyntax)
-	Relation ::= patterns !0 patterns : RightPattern;
+	Relation ::= patterns !0 patterns : RightPattern !0;
 //	Relation ::= patterns (!0 patterns)+;
 	
 	@SuppressWarnings(featureWithoutSyntax,explicitSyntaxChoice)
