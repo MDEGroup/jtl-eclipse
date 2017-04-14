@@ -204,7 +204,7 @@ public class ASPSolver {
 
 			// Print nodes
 			writer.write(nodes);
-			props = "";
+			nodes = "";
 
 			// Print props
 			writer.write(props);
