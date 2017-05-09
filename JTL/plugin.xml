@@ -182,7 +182,7 @@
    <extension point="org.eclipse.debug.core.launchConfigurationTypes">
      <launchConfigurationType
        name="JTL Transformation"
-       delegate="jtl.LaunchConfigurationDelegate"
+       delegate="jtl.eclipse.LaunchConfigurationDelegate"
        modes="run"
        id="JTL.launchConfigurationType">
      </launchConfigurationType>
@@ -192,7 +192,7 @@
    <extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
      <launchConfigurationTabGroup
        type="JTL.launchConfigurationType"
-       class="jtl.LaunchConfigurationTabGroup"
+       class="jtl.eclipse.LaunchConfigurationTabGroup"
        id="JTL.launchConfigurationTabGroup">
        <launchMode
          mode="run"
@@ -207,7 +207,7 @@
        label="JTL Application"
        helpContextId="JTL.launch"
        modes="run"
-       class="jtl.LaunchShortcut"
+       class="jtl.eclipse.LaunchShortcut"
        description="Launch a JTL transformation"
        id="JTL.launchShortcut">
 	   <description description="Run JTL transformation" mode="run" />

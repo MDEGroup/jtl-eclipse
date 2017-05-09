@@ -1,8 +1,7 @@
 package jtl;
 
+import java.io.File;
 import java.util.ArrayList;
-
-import org.eclipse.core.resources.IFile;
 
 public class JTLASPLauncher extends AbstractJTLLauncher {
 
@@ -15,17 +14,14 @@ public class JTLASPLauncher extends AbstractJTLLauncher {
 	 * @param transfFile file specifying the transformation
 	 */
 	@Override
-	public void launch(final IFile sourcemmFile,
-					   final IFile targetmmFile,
-					   final IFile sourcemFile,
-					   final String targetmFolder,
-					   final IFile transfFile) {
-		// IFile filename to string
-		String ASPFile = transfFile.getLocation().toOSString();
-		
+	public void launch(final File sourcemmFile,
+					   final File targetmmFile,
+					   final File sourcemFile,
+					   final File targetmFolder,
+					   final File transfFile) {
 		// Run the solver
-		ArrayList<String> modelsFiles = runSolver(ASPFile, targetmFolder);
-		
+		ArrayList<String> modelsFiles = runSolver(transfFile, targetmFolder);
+
 		// Process target models
 		processTargetModels(modelsFiles, targetmmFile);
 	}

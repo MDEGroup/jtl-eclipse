@@ -1,20 +1,32 @@
-package jtl;
+package jtl.eclipse;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.net.URISyntaxException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -28,15 +40,14 @@ import jtl.handlers.Ecore2ASPmm;
 import jtl.handlers.EmftextConverter;
 import jtl.handlers.JTL2ASP;
 import jtl.handlers.MM2ASPm;
-import jtl.solver.ASPSolver;
+import jtl.solver.AbstractASPSolver;
 
-public abstract class AbstractJTLLauncher {
+public abstract class AbstractEclipseJTLLauncher {
 
 	// Configuration file
 	protected final static String config = "resources/config.properties";
 
 	// List of bundles names to get version from
-	// FIXME check if needed
 	protected final static String[] bundles = new String[] {
 		"ASP.resource.asp",
 		"ASP.resource.asp.ui",
@@ -63,11 +74,65 @@ public abstract class AbstractJTLLauncher {
 	 * @param targetmFolder folder where to save generated target models
 	 * @param transfFile file specifying the transformation
 	 */
-	public abstract void launch(File sourcemmFile,
-								File targetmmFile,
-								File sourcemFile,
-								File targetmFolder,
-								File transfFile);
+	public abstract void launch(IFile sourcemmFile,
+								IFile targetmmFile,
+								IFile sourcemFile,
+								String targetmFolder,
+								IFile transfFile);
+
+	/**
+	 * Check if the files involved in the transformation
+	 * changed since the last run to skip the ASP generation.
+	 * @param launchFiles files involved in the launch
+	 * @param transformation file containing the JTL transformation
+	 * @return true if files changed since the last run
+	 */
+	protected boolean launchFilesChanged(
+			final IFile[] launchFiles,
+			final IFile transformation) {
+		// Generate the ASP filename
+		String ASPFile = transformation.getLocation()
+				.removeFileExtension().addFileExtension("dl")
+				.toOSString();
+
+		// Check if the ASP file exists
+		if (!new File(ASPFile).exists()) {
+			return true;
+		}
+
+		// Get launch files locations and compute the MD5 checksums
+		String[] launchFilesLoc = new String[launchFiles.length];
+		String[] launchFilesMD5 = new String[launchFiles.length];
+		for (int i = 0; i < launchFiles.length; i++) {
+			launchFilesLoc[i] = launchFiles[i].getFullPath().toString();
+			launchFilesMD5[i] = getMD5Digest(launchFiles[i].getLocation().toString());
+		}
+
+		// Look for MD5 checksums in the ASP file
+		try (BufferedReader br = new BufferedReader(new FileReader(ASPFile))) {
+			int verified = 0;
+			String line;
+			// Read the file line by line until %%%-
+			// marking the end of the information section
+			while (verified < launchFiles.length &&
+				   !(line = br.readLine()).equals("%%%-")) {
+				for (int i = 0; i < launchFilesLoc.length; i++) {
+					if (line.contains(launchFilesLoc[i]) &&
+						line.substring(line.lastIndexOf(':') + 2).equals(launchFilesMD5[i])) {
+						verified++;
+					}
+				}
+			}
+			return verified != launchFiles.length;
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found: " + ASPFile);
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Unable to read the file: " + ASPFile);
+			e.printStackTrace();
+		}
+		return true;
+	}
 
 	/**
 	 * Get launch configuration information like
@@ -76,8 +141,27 @@ public abstract class AbstractJTLLauncher {
 	 * @param launchFiles files involved in the launch
 	 * @param asp OutputStream containing the ASP program
 	 */
-	protected void dumpLaunchConfiguration() {
-		// TODO dump configuration for standalone launch
+	protected void dumpLaunchConfiguration(
+			final IFile[] launchFiles,
+			final ByteArrayOutputStream asp) {
+		// Open the information section
+		writeASP("%%% Generated on: " + LocalDateTime.now() + "\n", asp);
+
+		// Compute MD5 of files involved in the launch
+		for (IFile file : launchFiles) {
+			writeASP("% " + file.getFullPath() + " : " +
+					getMD5Digest(file.getLocation().toString()) + "\n",
+					asp);
+		}
+
+		// Get plugins versions
+		for (String bundle : bundles) {
+			writeASP("% " + bundle + " : " +
+					Platform.getBundle(bundle).getVersion().toString() + "\n",
+					asp);
+		}
+		// Close the information section
+		writeASP("%%%-\n\n", asp);
 	}
 
 	/**
@@ -179,15 +263,13 @@ public abstract class AbstractJTLLauncher {
 	 * @param modelsFiles list of generated target models files
 	 * @param targetmmFile target metamodel filename
 	 */
-	protected void processTargetModels(
-			final ArrayList<String> modelsFiles,
-			final File targetmmFile) {
+	protected void processTargetModels(final ArrayList<String> modelsFiles, final IFile targetmmFile) {
 
 		// FIXME check modelsFiles for null and alert the user
 
 		// Process target models
 		for (String target : modelsFiles) {
-			File targetFile = new File(target);
+			IFile targetIFile = getIFileFromURI(target);
 
 			// Convert the ASP target models (text2model)
 			new EmftextConverter().convert(targetIFile);
@@ -202,6 +284,7 @@ public abstract class AbstractJTLLauncher {
 				e.printStackTrace();
 			}
 		}
+		refreshWorkspace();
 	}
 
 	/**
@@ -210,13 +293,14 @@ public abstract class AbstractJTLLauncher {
 	 * @param targetmFolder folder where to save generated target models
 	 * @return List of target models
 	 */
-	protected ArrayList<String> runSolver(final File ASPFile, final File targetmFolder) {
+	protected ArrayList<String> runSolver(final String ASPFile, final String targetmFolder) {
 		ArrayList<String> modelsFiles = null;
 		try {
-			modelsFiles = new ASPSolver().run(ASPFile, targetmFolder);
+			modelsFiles = new AbstractASPSolver().run(ASPFile, targetmFolder);
 		} catch (JASPException | IOException |  URISyntaxException e) {
 			e.printStackTrace();
 		}
+		refreshWorkspace();
 		return modelsFiles;
 	}
 
@@ -409,17 +493,94 @@ public abstract class AbstractJTLLauncher {
 	}
 
 	/**
-	 * Remove a file.
+	 * Find the IFile corresponding to an URI.
+	 * @param uriString URI to convert
+	 * @return corresponding IFile
+	 */
+	protected static IFile getIFileFromURI(final String uriString) {
+		URI uri = URI.createURI(uriString);
+		if (uri.isPlatformResource()) {
+			return (IFile) ResourcesPlugin.getWorkspace().getRoot()
+					.findMember(uri.toPlatformString(true));
+		} else if (uri.isRelative()) {
+			IFile file = (IFile) ResourcesPlugin.getWorkspace().getRoot()
+					.findMember(uri.toString());
+			if (file != null) {
+				return file;
+			}
+		}
+		return getIFileFromURI(uriString.substring(
+				ResourcesPlugin.getWorkspace()
+				.getRoot().getLocation().toString().length()));
+	}
+
+	/**
+	 * Remove a file in the workspace.
 	 * @param file The file to remove.
 	 */
-	protected static void removeFile(final File file) {
-		file.delete();
+	protected static void removeFile(final IFile file) {
+		try {
+			file.delete(true, new NullProgressMonitor());
+		} catch (CoreException e) {
+			System.out.println("There was a problem deleting the file: " +
+					file.getFullPath().toString());
+			e.printStackTrace();
+		}
+	}
 
-		//try {
-			//file.delete(true, new NullProgressMonitor());
-		//} catch (CoreException e) {
-		//	System.out.println("There was a problem deleting the file: ");
-		//	e.printStackTrace();
-		//}
+	/**
+	 * Get MD5 digest of file.
+	 * @param file path to file
+	 * @return MD5 digest
+	 */
+	protected static String getMD5Digest(final String file) {
+		// TODO move to jtl.utils
+		// Get the MD5 algorithm instance
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			System.out.println("No MD5 algorithm found.");
+			e.printStackTrace();
+			return null;
+		}
+
+		// Compute the digest
+		try (FileInputStream fis = new FileInputStream(file)) {
+			byte[] data = new byte[10240];
+			int nread = 0;
+			while ((nread = fis.read(data)) != -1) {
+				md.update(data, 0, nread);
+			}
+		} catch (IOException e) {
+			System.out.println("Unable to read the file: " + file);
+			e.printStackTrace();
+			return null;
+		}
+		byte[] mdbytes = md.digest();
+
+		// Convert the bytes to hex format
+	    StringBuffer sb = new StringBuffer("");
+	    for (int i = 0; i < mdbytes.length; i++) {
+	    		sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+	    }
+
+		return sb.toString();
+	}
+
+	/**
+	 * Refresh all the projects in the workspace.
+	 */
+	protected static void refreshWorkspace() {
+		try {
+			for(IProject project :
+					ResourcesPlugin.getWorkspace().getRoot().getProjects()){
+			    project.refreshLocal(IResource.DEPTH_INFINITE, null);
+			}
+		} catch (CoreException e) {
+			System.out.println("An error occurred refreshing the workspace:");
+			e.printStackTrace();
+			return;
+		}
 	}
 }

@@ -1,4 +1,4 @@
-package jtl;
+package jtl.eclipse;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

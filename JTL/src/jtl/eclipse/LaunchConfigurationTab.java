@@ -1,4 +1,4 @@
-package jtl;
+package jtl.eclipse;
 
 
 import org.eclipse.core.resources.IResource;

@@ -1,4 +1,4 @@
-package jtl;
+package jtl.eclipse;
 
 public interface LaunchConfigurationAttributes {
 

@@ -1,4 +1,4 @@
-package jtl;
+package jtl.eclipse;
 
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup;
 import org.eclipse.debug.ui.CommonTab;
