@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import org.eclipse.core.resources.IFile;
 
 public class JTLExogenousLauncher extends AbstractJTLLauncher {
-	
+
 	/**
 	 * Launch the transformation process.
 	 * @param sourcemmFile source metamodel file
@@ -23,12 +23,12 @@ public class JTLExogenousLauncher extends AbstractJTLLauncher {
 					   final IFile transfFile) {
 		// Initialize the OutputStream that will hold the generated ASP
 		ByteArrayOutputStream asp = new ByteArrayOutputStream();
-		
+
 		// ASP file to launch
 		String ASPFile = transfFile.getLocation()
 				.removeFileExtension().addFileExtension("dl")
 				.toOSString();
-		
+
 		// Files involved in the launch
 		IFile[] launchFiles = new IFile[] {
 			sourcemmFile,
@@ -36,22 +36,22 @@ public class JTLExogenousLauncher extends AbstractJTLLauncher {
 			sourcemFile,
 			transfFile
 		};
-		
+
 		// Check if the files involved in the transformation
 		// changed since the last run to skip the ASP generation.
-		if (launchFilesChanged(launchFiles, transfFile)) {		
+		if (launchFilesChanged(launchFiles, transfFile)) {
 			// Dump launch information
 			dumpLaunchConfiguration(launchFiles, asp);
-			
+
 			// Source Metamodel
 			// Ecore to ASPmm (ATL)
-			String sourcemmASPmmFile = metamodelEcoreToASPmm(sourcemmFile);		
+			String sourcemmASPmmFile = metamodelEcoreToASPmm(sourcemmFile);
 			// ASPmm model to text (EMFText)
 			IFile sourcemmASPmmIFile =
 						emftextModelToText(sourcemmASPmmFile, "%%% SOURCE METAMODEL %%%\n", asp);
 			// Remove the temporary created file
 			removeFile(sourcemmASPmmIFile);
-			
+
 			// Target metamodel
 			// Ecore to ASPmm (ATL)
 			String targetmmASPmmFile = metamodelEcoreToASPmm(targetmmFile);
@@ -62,7 +62,7 @@ public class JTLExogenousLauncher extends AbstractJTLLauncher {
 					emftextModelToText(targetmmASPmmFile, "\n%%% TARGET METAMODEL %%%\n", asp);
 			// Remove the temporary created file
 			removeFile(targetmmASPmmIFile);
-			
+
 			// Source model
 			// Ecore to ASPm (ATL generated from HOT)
 			String sourcemASPmFile = modelEcoreToASPm(sourcemmFile, sourcemFile);
@@ -71,15 +71,15 @@ public class JTLExogenousLauncher extends AbstractJTLLauncher {
 						emftextModelToText(sourcemASPmFile, "\n%%% SOURCE MODEL %%%\n", asp);
 			// Remove the temporary created file
 			removeFile(sourcemASPmIFile);
-			
+
 			// Transformation
 			generateTransformation(transfFile, targetmmName, asp);
 		}
 		// Run the solver
-		ArrayList<String> modelsFiles = runSolver(ASPFile, targetmFolder);
-		
+		ArrayList<String> modelsFiles = runSolver(ASPFile, targetmFolder, sourcemFile.getName());
+
 		// Process target models
 		processTargetModels(modelsFiles, targetmmFile);
 	}
-		
+
 }

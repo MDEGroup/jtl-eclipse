@@ -71,7 +71,7 @@ public class ASPSolver {
 	 * @throws IOException
 	 * @throws URISyntaxException
 	 */
-	public ArrayList<String> run(final String file, final String target)
+	public ArrayList<String> run(final String file, final String target, final String sourceName)
 			throws JASPException, IOException, URISyntaxException {
 
 		// Get the workspace full path
@@ -82,6 +82,9 @@ public class ASPSolver {
 			System.err.println(wsPath + target + " not a directory.");
 			return null;
 		}
+
+		// Remove the extension from the source model filename
+		final String source = sourceName.substring(0, sourceName.lastIndexOf('.'));
 
 		// Load the solver configuration
 		loadConfig();
@@ -148,8 +151,8 @@ public class ASPSolver {
 		String props = "";
 		String edges = "";
 		ArrayList<String> modelsFiles = new ArrayList<String>();
-		for (int c = 1; engine.hasMoreModel(); c++) {
-			Path modelPath = Paths.get(wsPath, target, "m" + c + ".aspm");
+		for (int c = 0; engine.hasMoreModel(); c++) {
+			Path modelPath = Paths.get(wsPath, target, source + ((c>0) ? c : "") + ".aspm");
 			Model model = engine.nextModel();
 			newModel = true;
 			for (Iterator<Atom> i = model.iterator(); i.hasNext();) {
@@ -161,7 +164,7 @@ public class ASPSolver {
 					// Wait until the first atom in the target model to
 					// get the name of the target metamodel to use in model(_, _).
 					if (newModel) {
-						nodes = String.format("model(\"m%d\", %s).%n", c,
+						nodes = String.format("model(\"%s%d\", %s).%n", source, c,
 								atom.getArguments().get(0).toString()
 								.replaceFirst("x_(\\w+)_target", "x_$1"));
 						newModel = false;

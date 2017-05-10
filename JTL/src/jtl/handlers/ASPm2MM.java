@@ -7,14 +7,14 @@ import org.eclipse.m2m.atl.core.ATLCoreException;
 
 public class ASPm2MM {
 
-	public static String runTransformation(IFile mmIn, IFile mIn) 
+	public static String runTransformation(IFile mmIn, IFile mIn)
 			throws IOException, ATLCoreException {
 
 		// Generate the target filename
 		String targetFile = mIn.getFullPath()
 				.removeFileExtension()
 				.removeFileExtension()
-				.addFileExtension("ecore")
+				.addFileExtension("xmi")
 				.toString();
 
 		// Perform the transformation (ASPm to Ecore model)
@@ -23,7 +23,7 @@ public class ASPm2MM {
 				mIn.getFullPath().toString(),
 				targetFile
 		});
-		
+
 		return targetFile;
 	}
 }

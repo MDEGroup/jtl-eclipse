@@ -23,12 +23,12 @@ public class JTLEndogenousLauncher extends AbstractJTLLauncher {
 					   final IFile transfFile) {
 		// Initialize the OutputStream that will hold the generated ASP
 		ByteArrayOutputStream asp = new ByteArrayOutputStream();
-		
+
 		// ASP file to launch
 		String ASPFile = transfFile.getLocation()
 				.removeFileExtension().addFileExtension("dl")
 				.toOSString();
-		
+
 		// Files involved in the launch
 		IFile[] launchFiles = new IFile[] {
 			sourcemmFile,
@@ -38,13 +38,13 @@ public class JTLEndogenousLauncher extends AbstractJTLLauncher {
 
 		// Check if the files involved in the transformation
 		// changed since the last run to skip the ASP generation.
-		if (launchFilesChanged(launchFiles, transfFile)) {			
+		if (launchFilesChanged(launchFiles, transfFile)) {
 			// Dump launch information
 			dumpLaunchConfiguration(launchFiles, asp);
-			
+
 			// Source Metamodel
 			// Ecore to ASPmm (ATL)
-			String sourcemmASPmmFile = metamodelEcoreToASPmm(sourcemmFile);		
+			String sourcemmASPmmFile = metamodelEcoreToASPmm(sourcemmFile);
 			// ASPmm model to text (EMFText)
 			String sourcemmName = getMetamodelName(sourcemmASPmmFile);
 			// Source Metamodel
@@ -61,7 +61,7 @@ public class JTLEndogenousLauncher extends AbstractJTLLauncher {
 					asp);
 			// Remove the temporary created file
 			removeFile(sourcemmASPmmIFile);
-			
+
 			// Source model
 			// Ecore to ASPm (ATL generated from HOT)
 			String sourcemASPmFile = modelEcoreToASPm(sourcemmFile, sourcemFile);
@@ -74,16 +74,16 @@ public class JTLEndogenousLauncher extends AbstractJTLLauncher {
 						asp);
 			// Remove the temporary created file
 			removeFile(sourcemASPmIFile);
-			
+
 			// Transformation
 			generateTransformation(transfFile, sourcemmName + "_target", asp);
 		}
 		// Run the solver
-		ArrayList<String> modelsFiles = runSolver(ASPFile, targetmFolder);
-		
+		ArrayList<String> modelsFiles = runSolver(ASPFile, targetmFolder, sourcemFile.getName());
+
 		// Process target models
 		processTargetModels(modelsFiles, targetmmFile);
-		
+
 	}
 
 }

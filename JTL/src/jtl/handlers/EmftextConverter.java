@@ -17,25 +17,25 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
  *
  */
 public class EmftextConverter {
-	
+
 	public String convert(IFile file) {
-		
+
 		Resource dslResource = doConvert(file);
-		
+
 		// Save the dsl resource (this will automatically use the <DSL>Printer)
 		try {
 			dslResource.save(null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-				
+
 		return dslResource.getURI().toString();
 	}
-	
+
 	public void convert(IFile file, OutputStream out) {
-		
+
 		Resource dslResource = doConvert(file);
-		
+
 		// Save the dsl resource (this will automatically use the <DSL>Printer)
 		try {
 			dslResource.save(out, null);
@@ -43,47 +43,47 @@ public class EmftextConverter {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private Resource doConvert(IFile file) {
-		
+
 		// Register XMI resource factory for all other extensions
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
 				.put(Resource.Factory.Registry.DEFAULT_EXTENSION,
 						new XMIResourceFactoryImpl());
 
-		// Then you can load and save resources in the different 
+		// Then you can load and save resources in the different
 		// formats using a resource set:
 		ResourceSet rs = new ResourceSetImpl();
 
 		// Load xmi resource
 		Resource xmiResource = rs.getResource(
 				URI.createURI(file.getFullPath().toString()), true);
-		
+
 		// Perform the transformation
-		Resource dslResource = 
+		Resource dslResource =
 				dispatch(file, rs, xmiResource.getContents().get(0));
 
 		// Transfer content from XMI to DSL resource
 		dslResource.getContents().addAll(xmiResource.getContents());
-		
+
 		return dslResource;
 	}
-	
+
 	private Resource dispatch(IFile file, ResourceSet rs, EObject root) {
-		
+
 		// The new resource to create
 		Resource dslResource = null;
-		
+
 		// Get file location on filesystem
 		IPath location = file.getLocation();
-		
+
 		// Get the file extension
 		String extension = location.getFileExtension();
-		
+
 		if (root instanceof ASP.impl.TransformationImpl) {
 			// ASP
 			return registerResources(rs, location, extension, "ASP");
-			
+
 		} else if (root instanceof ASPM.impl.ModelImpl) {
 			// ASPM
 			return registerResources(rs, location, extension, "ASPM");
@@ -96,38 +96,42 @@ public class EmftextConverter {
 			// JTLMM
 			return registerResources(rs, location, extension, "JTL");
 		}
-		
+
+		if (dslResource == null) {
+			System.err.println("The file is not a instance of a known implementation.");
+		}
+
 		return dslResource;
 	}
-	
+
 	private Resource registerResources(
 			ResourceSet rs, IPath location, String extension, String dsl) {
-		
+
 		// The new resource to create
 		Resource dslResource = null;
-		
+
 		// The DSL specific ResourceFactory class object
 		Object dslResourceFactory = null;
 		try {
 			dslResourceFactory = Class.forName(
-					String.format("%s.resource.%s.mopp.%sResourceFactory", 
+					String.format("%s.resource.%s.mopp.%sResourceFactory",
 							dsl,
 							dsl.toLowerCase(),
 							dsl.charAt(0) + dsl.substring(1).toLowerCase()))
 					.newInstance();
-		} catch (InstantiationException 
-				| IllegalAccessException 
+		} catch (InstantiationException
+				| IllegalAccessException
 				| ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 		// Register <DSL>ResourceFactory for "<DSL>" file extension
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
 				.put(dsl.toLowerCase(), dslResourceFactory);
-		
+
 		// Create an empty DSL resource
 		// (will be an instance of <DSL>Resource)
-		if (extension.equals("ecore")) {
+		if (extension.equals("ecore") || extension.equals("xmi")) {
 			// model2text
 			dslResource = rs.createResource(URI.createFileURI(location
 					.removeFileExtension().removeFileExtension()
@@ -141,7 +145,7 @@ public class EmftextConverter {
 					.addFileExtension("ecore")
 					.toString()));
 		}
-		
+
 		return dslResource;
 	}
 

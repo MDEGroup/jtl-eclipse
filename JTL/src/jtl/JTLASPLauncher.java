@@ -22,10 +22,10 @@ public class JTLASPLauncher extends AbstractJTLLauncher {
 					   final IFile transfFile) {
 		// IFile filename to string
 		String ASPFile = transfFile.getLocation().toOSString();
-		
+
 		// Run the solver
-		ArrayList<String> modelsFiles = runSolver(ASPFile, targetmFolder);
-		
+		ArrayList<String> modelsFiles = runSolver(ASPFile, targetmFolder, sourcemFile.getName());
+
 		// Process target models
 		processTargetModels(modelsFiles, targetmmFile);
 	}
