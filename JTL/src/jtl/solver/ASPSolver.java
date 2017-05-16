@@ -94,7 +94,7 @@ public class ASPSolver {
 		program.addFromFile(file);
 
 		// On unix white spaces in filenames need to be escaped when
-		// used as argument in a shell (/bin/sh) command.
+		// used as argument in a shell (/bin/sh) command
 		if (this.osType.equals("unix")) {
 			ArrayList<String> inputFiles = new ArrayList<String>();
 			inputFiles.add(file.replaceAll(" ", "\\\\ "));
@@ -105,6 +105,12 @@ public class ASPSolver {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+
+			// And a required library must be included
+			// extending the library path
+			this.solverPath = "LD_LIBRARY_PATH='" +
+					this.solverPath.substring(0, this.solverPath.lastIndexOf('/')) +
+					"' " + this.solverPath;
 		}
 
 		// On windows FileLocator does not escape spaces
