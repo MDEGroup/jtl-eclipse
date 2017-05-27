@@ -10,10 +10,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.FileLocator;
@@ -148,57 +148,48 @@ public class ASPSolver {
 		engine.compute();
 
 		// Process results
-		Set<String> targets = new HashSet<String>();
-		targets.add("nodex");
-		targets.add("propx");
-		targets.add("edgex");
 		boolean newModel = true;
-		String nodes = "";
-		String props = "";
-		String edges = "";
+
+		// Store formatted atoms for reprint
+		Map<String, String> atoms = new LinkedHashMap<String, String>();
+
+		atoms.put("nodex", "");
+		atoms.put("propx", "");
+		atoms.put("edgex", "");
+
+		atoms.put("trace_nodex", "");
+		atoms.put("trace_nb_nodex", "");
+		atoms.put("trace_propx", "");
+		atoms.put("trace_nb_propx", "");
+		atoms.put("trace_edgex", "");
+		atoms.put("trace_nb_edgex", "");
+		atoms.put("trace_linkx", "");
+
 		ArrayList<String> modelsFiles = new ArrayList<String>();
 		for (int c = 0; engine.hasMoreModel(); c++) {
 			Path modelPath = Paths.get(wsPath, target, source + ((c>0) ? c : "") + ".aspm");
+			Path traceModelPath = Paths.get(wsPath, target, source + ((c>0) ? c : "") + "_trace.aspm");
 			Model model = engine.nextModel();
 			newModel = true;
 			for (Iterator<Atom> i = model.iterator(); i.hasNext();) {
 				Atom atom = i.next();
+				final String atomName = atom.getName();
 
-				// Only print nodex, propx and edgex
-				if (targets.contains(atom.getName())) {
+				// Only print selected elements
+				if (atoms.containsKey(atomName)) {
 
 					// Wait until the first atom in the target model to
 					// get the name of the target metamodel to use in model(_, _).
 					if (newModel) {
-						nodes = String.format("model(\"%s%d\", %s).%n", source, c,
+						atoms.put("nodex", atoms.get("nodex") +
+								String.format("model(\"%s%d\", %s).%n", source, c,
 								atom.getArguments().get(0).toString()
-								.replaceFirst("x_(\\w+)_target", "x_$1"));
+								.replaceFirst("x_(\\w+)_target", "x_$1")));
 						newModel = false;
 					}
 
-					// Nodex are stored for later to ensure print order
-					if (atom.getName().equals("nodex")) {
-						nodes += String.format("%s.%n",
-								atom.toString()
-									.replaceFirst("x\\(", "(")
-									.replaceFirst("x_(\\w+)_target", "x_$1"));
-					}
-
-					// Propx are stored for later to ensure print order
-					else if (atom.getName().equals("propx")) {
-						props += String.format("%s.%n",
-								atom.toString()
-									.replaceFirst("x\\(", "(")
-									.replaceFirst("x_(\\w+)_target", "x_$1"));
-					}
-
-					// Edgex are stored for later to ensure print order
-					else if (atom.getName().equals("edgex")) {
-						edges += String.format("%s.%n",
-								atom.toString()
-									.replaceFirst("x\\(", "(")
-									.replaceFirst("x_(\\w+)_target", "x_$1"));
-					}
+					// Atoms are stored for later to ensure print order
+					atoms.put(atomName, atoms.get(atomName) + formatAtom(atom));
 				}
 			}
 
@@ -207,25 +198,38 @@ public class ASPSolver {
 				continue;
 			}
 
-			// Open the model file for writing
+			// Add the processed model to the list of model files
 			modelsFiles.add(modelPath.toString());
-			BufferedWriter writer = Files.newBufferedWriter(modelPath);
 
-			// Print nodes
-			writer.write(nodes);
-			nodes = "";
+			// Open the model file for writing
+			try (BufferedWriter writer = Files.newBufferedWriter(modelPath)) {
+				// Print atoms of the target model
+				for (Map.Entry<String, String> atomSet : atoms.entrySet()) {
+					if (!atomSet.getKey().startsWith("trace_")) {
+						writer.write(atomSet.getValue());
+					}
+				}
+			}
 
-			// Print props
-			writer.write(props);
-			props = "";
+			// Open the trace file for writing
+			try (BufferedWriter writer = Files.newBufferedWriter(traceModelPath)) {
+				// Print atoms of the trace model
+				for (Map.Entry<String, String> atomSet : atoms.entrySet()) {
+					if (atomSet.getKey().startsWith("trace_")) {
+						writer.write(atomSet.getValue());
+					}
+				}
+			}
 
-			// Print edges
-			writer.write(edges);
-			edges = "";
-
-			writer.close();
+			// TODO add the trace file to the list of generated files when text2model will be ready
 		}
 		return modelsFiles;
+	}
+
+	private String formatAtom(final Atom atom) {
+		return String.format("%s.%n", atom.toString()
+				.replaceFirst("x\\(", "(")
+				.replaceFirst("x_(\\w+)_target", "x_$1"));
 	}
 
 }
