@@ -18,13 +18,15 @@ import org.eclipse.m2m.atl.core.ATLCoreException;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import jtl.solver.Ecore2ASPmm;
+
 /**
  * TODO comment
  * Our sample handler extends AbstractHandler, an IHandler base class.
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
-public class JTL2ASPHandler extends AbstractHandler {
+public class MM2ASPmHandler extends AbstractHandler {
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
@@ -45,7 +47,7 @@ public class JTL2ASPHandler extends AbstractHandler {
 		// Perform the transformation
 		String targetFile;
 		try {
-			targetFile = JTL2ASP.runTransformation(file);
+			targetFile = Ecore2ASPmm.runTransformation(file);
 		} catch (IOException | ATLCoreException e1) {
 			MessageDialog.openInformation(window.getShell(),
 					"ATL Transformation",
@@ -63,22 +65,13 @@ public class JTL2ASPHandler extends AbstractHandler {
 			e.printStackTrace();
 		}
 			
-		if (targetFile != null) {
-			MessageDialog.openInformation(
-					window.getShell(),
-					"ATL Transformation",
-					String.format("%s\nconverted to\n%s.", 
-							file.getFullPath(), targetFile));
+		MessageDialog.openInformation(
+				window.getShell(),
+				"ATL Transformation",
+				String.format("%s\nconverted to\n%s.", 
+						file.getFullPath(), targetFile));
 
-			return null;
-		} else {
-			// Sorry, this is not a JTL model
-			MessageDialog.openInformation(
-					window.getShell(),
-					"ATL Transformation",
-					"The source model must be a JTL model.");
-			return null;
-		}
+		return null;
 	}
 
 }

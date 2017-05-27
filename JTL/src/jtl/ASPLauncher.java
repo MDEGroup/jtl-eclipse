@@ -3,7 +3,7 @@ package jtl;
 import java.io.File;
 import java.util.ArrayList;
 
-public class JTLASPLauncher extends AbstractJTLLauncher {
+public class ASPLauncher extends AbstractJTLLauncher {
 
 	/**
 	 * Launch the transformation process.
@@ -20,7 +20,7 @@ public class JTLASPLauncher extends AbstractJTLLauncher {
 					   final File targetmFolder,
 					   final File transfFile) {
 		// Run the solver
-		ArrayList<String> modelsFiles = runSolver(transfFile, targetmFolder);
+		ArrayList<String> modelsFiles = runSolver(transfFile, targetmFolder, sourcemFile);
 
 		// Process target models
 		processTargetModels(modelsFiles, targetmmFile);

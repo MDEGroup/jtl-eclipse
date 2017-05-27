@@ -1,5 +1,7 @@
 package jtl.handlers;
 
+import java.io.File;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -29,21 +31,23 @@ public class EmftextHandler extends AbstractHandler {
 	 * the command has been executed, so extract extract the needed information
 	 * from the application context.
 	 */
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		
+
 		// Get the active window
-		IWorkbenchWindow window = 
+		IWorkbenchWindow window =
 				HandlerUtil.getActiveWorkbenchWindowChecked(event);
-		
+
 		// Get the selected resource (file)
 		Object element = ((IStructuredSelection) window
 				.getSelectionService().getSelection()).getFirstElement();
-		IFile file = (IFile) Platform.getAdapterManager()
+		IFile file = Platform.getAdapterManager()
 				.getAdapter(element, IFile.class);
-		
+
 		// Perform the transformation
-		String targetFile = new EmftextConverter().convert(file);
-		
+		String targetFile = new EmftextConverter().convert(
+				new File(file.getFullPath().toString()));
+
 		// Refresh the Project Explorer to show the new file
 		try {
 			((IResource) element).getProject()
@@ -52,11 +56,11 @@ public class EmftextHandler extends AbstractHandler {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		MessageDialog.openInformation(
 				window.getShell(),
 				"Conversion completed",
-				String.format("%s\nconverted to\n%s.", 
+				String.format("%s\nconverted to\n%s.",
 						file.getFullPath(), targetFile));
 		return null;
 	}

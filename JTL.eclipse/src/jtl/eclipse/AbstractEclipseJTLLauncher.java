@@ -35,12 +35,12 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.atl.core.ATLCoreException;
 
 import jaspwrapper.exception.JASPException;
-import jtl.handlers.ASPm2MM;
-import jtl.handlers.Ecore2ASPmm;
 import jtl.handlers.EmftextConverter;
-import jtl.handlers.JTL2ASP;
-import jtl.handlers.MM2ASPm;
 import jtl.solver.AbstractASPSolver;
+import jtl.solver.Ecore2ASPmm;
+import jtl.transformations.ASPm2MM;
+import jtl.transformations.JTL2ASP;
+import jtl.transformations.MM2ASPm;
 
 public abstract class AbstractEclipseJTLLauncher {
 

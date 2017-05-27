@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Eclipse-BundleShape: dir
 Bundle-ManifestVersion: 2
 Bundle-Name: JTL
-Bundle-SymbolicName: JTL;singleton:=true
+Bundle-SymbolicName: JTL.eclipse;singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Bundle-Activator: jtl.eclipse.Activator
 Require-Bundle: org.eclipse.ui,

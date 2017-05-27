@@ -18,6 +18,8 @@ import org.eclipse.m2m.atl.core.ATLCoreException;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import jtl.solver.Ecore2ASPmm;
+
 /**
  * TODO comment
  * Our sample handler extends AbstractHandler, an IHandler base class.

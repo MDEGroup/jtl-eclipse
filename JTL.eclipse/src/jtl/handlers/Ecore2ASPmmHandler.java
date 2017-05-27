@@ -18,13 +18,15 @@ import org.eclipse.m2m.atl.core.ATLCoreException;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import jtl.solver.Ecore2ASPmm;
+
 /**
  * TODO comment
  * Our sample handler extends AbstractHandler, an IHandler base class.
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
-public class MM2ASPmHandler extends AbstractHandler {
+public class Ecore2ASPmmHandler extends AbstractHandler {
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)

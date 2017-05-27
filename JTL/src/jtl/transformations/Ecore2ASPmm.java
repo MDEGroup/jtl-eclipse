@@ -1,4 +1,4 @@
-package jtl.handlers;
+package jtl.transformations;
 
 import java.io.IOException;
 
@@ -17,7 +17,7 @@ public class Ecore2ASPmm {
 				.toString();
 
 		// Perform the transformation (Ecore to ASPmm)
-		it.univaq.jtl.atl.ecore2aspmm.Ecore2ASPmm.main(new String[] {
+		it.univaq.jtl.jtl.transformations.Ecore2ASPmm.main(new String[] {
 				file.getFullPath().toString(),
 				targetFile
 		});
