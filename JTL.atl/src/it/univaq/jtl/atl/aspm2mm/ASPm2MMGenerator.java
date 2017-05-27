@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
@@ -61,23 +61,23 @@ public class ASPm2MMGenerator {
 	 * @generated
 	 */
 	private Properties properties;
-	
+
 	/**
 	 * The IN model.
 	 * @generated
 	 */
-	protected IModel inModel;	
-	
+	protected IModel inModel;
+
 	protected IModel outModel;
-	
+
 	protected InputStream generated;
-	
+
 	protected String mmOut;
 	protected String mmOutName;
-		
+
 	/**
 	 * The main method.
-	 * 
+	 *
 	 * @param args
 	 *            are the arguments
 	 * @generated
@@ -90,9 +90,9 @@ public class ASPm2MMGenerator {
 				ASPm2MMGenerator runner = new ASPm2MMGenerator();
 				runner.loadModels(args[0]);
 				runner.mmOut = args[0];
-				
+
 				// The generated transformation
-				
+
 				// Since ATL is printing the generated transformation
                 // to Standard Error we need to intercept it adding
                 // a handler to the logger registered by ATL
@@ -117,19 +117,19 @@ public class ASPm2MMGenerator {
                 handler.setLevel(Level.OFF);
                 logger.removeHandler(handler);
                 System.setErr(err);
-				
+
 				// Detect the root element in the input metamodel
 				// in order to get the URI for the injector
 				EObject mmRoot = new ResourceSetImpl().getResource(URI.createURI(args[0]), true).getContents().get(0);
 				EStructuralFeature name = mmRoot.eClass().getEStructuralFeature("name");
 				runner.mmOutName = mmRoot.eGet(name).toString();
-				
+
 				// Load the models to apply the generated transformation
 				runner.genLoadModels(args[1]);
-				
+
 				// Launch the generated transformation
 				runner.doASPm2MM(new NullProgressMonitor());
-				
+
 				// Save the target model of the generated transformation
 				runner.saveModels(args[2]);
 			}
@@ -152,10 +152,10 @@ public class ASPm2MMGenerator {
 		properties.load(getFileURL("ASPm2MMGenerator.properties").openStream());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 	}
-	
+
 	/**
 	 * Load the input and input/output models, initialize output models.
-	 * 
+	 *
 	 * @param inModelPath
 	 *            the IN model path
 	 * @throws ATLCoreException
@@ -170,7 +170,7 @@ public class ASPm2MMGenerator {
 		this.inModel = factory.newModel(ecoreMetamodel);
 		injector.inject(inModel, inModelPath);
 	}
-	
+
 	public void genLoadModels(String inModelPath) throws ATLCoreException {
 		ModelFactory factory = new EMFModelFactory();
 		IInjector injector = new EMFInjector();
@@ -182,7 +182,7 @@ public class ASPm2MMGenerator {
 		injector.inject(inModel, inModelPath);
 		this.outModel = factory.newModel(mmMetamodel);
 	}
-	
+
 	public void saveModels(String outModelPath) throws ATLCoreException {
 		IExtractor extractor = new EMFExtractor();
 		extractor.extract(outModel, outModelPath);
@@ -190,7 +190,7 @@ public class ASPm2MMGenerator {
 
 	/**
 	 * Transform the models.
-	 * 
+	 *
 	 * @param monitor
 	 *            the progress monitor
 	 * @throws ATLCoreException
@@ -209,25 +209,25 @@ public class ASPm2MMGenerator {
 		launcher.addInModel(inModel, "IN", "ECORE");
 		return launcher.launch("run", monitor, launcherOptions, (Object[]) getModulesList());
 	}
-	
+
 	public Object doASPm2MM(IProgressMonitor monitor) throws ATLCoreException, IOException, ATLExecutionException {
 		ILauncher launcher = new EMFVMLauncher();
 		launcher.initialize(new HashMap<String,Object>());
 		launcher.addInModel(inModel, "IN", "ASPm");
 		launcher.addOutModel(outModel, "OUT", this.mmOutName);
-		
+
 		// Compile the generated transformation
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		AtlCompiler.compile(this.generated, out);
 		ByteArrayInputStream asm = new ByteArrayInputStream(out.toByteArray());
-		
+
 		return launcher.launch("run", monitor, new HashMap<String,Object>(), new Object[]{asm});
 	}
-	
+
 	/**
 	 * Returns an Array of the module input streams, parameterized by the
 	 * property file.
-	 * 
+	 *
 	 * @return an Array of the module input streams
 	 * @throws IOException
 	 *             if a module cannot be read
@@ -247,10 +247,10 @@ public class ASPm2MMGenerator {
 		}
 		return modules;
 	}
-	
+
 	/**
 	 * Returns the URI of the given metamodel, parameterized from the property file.
-	 * 
+	 *
 	 * @param metamodelName
 	 *            the metamodel name
 	 * @return the metamodel URI
@@ -258,12 +258,16 @@ public class ASPm2MMGenerator {
 	 * @generated
 	 */
 	protected String getMetamodelUri(String metamodelName) {
-		return properties.getProperty("ASPm2MMGenerator.metamodels." + metamodelName);
+		String uriString = properties.getProperty("ASPm2MMGenerator.metamodels." + metamodelName);
+		if (new EMFModelFactory().getResourceSet().getResource(URI.createURI(uriString), false) == null) {
+			return uriString.replaceFirst("platform:/plugin", "..");
+		}
+		return uriString;
 	}
-	
+
 	/**
 	 * Returns the file name of the given library, parameterized from the property file.
-	 * 
+	 *
 	 * @param libraryName
 	 *            the library name
 	 * @return the library file name
@@ -273,10 +277,10 @@ public class ASPm2MMGenerator {
 	protected InputStream getLibraryAsStream(String libraryName) throws IOException {
 		return getFileURL(properties.getProperty("ASPm2MMGenerator.libraries." + libraryName)).openStream();
 	}
-	
+
 	/**
 	 * Returns the options map, parameterized from the property file.
-	 * 
+	 *
 	 * @return the options map
 	 *
 	 * @generated
@@ -285,22 +289,22 @@ public class ASPm2MMGenerator {
 		Map<String, Object> options = new HashMap<String, Object>();
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			if (entry.getKey().toString().startsWith("ASPm2MMGenerator.options.")) {
-				options.put(entry.getKey().toString().replaceFirst("ASPm2MMGenerator.options.", ""), 
+				options.put(entry.getKey().toString().replaceFirst("ASPm2MMGenerator.options.", ""),
 				entry.getValue().toString());
 			}
 		}
 		return options;
 	}
-	
+
 	/**
 	 * Finds the file in the plug-in. Returns the file URL.
-	 * 
+	 *
 	 * @param fileName
 	 *            the file name
 	 * @return the file URL
 	 * @throws IOException
 	 *             if the file doesn't exist
-	 * 
+	 *
 	 * @generated
 	 */
 	protected static URL getFileURL(String fileName) throws IOException {
@@ -324,7 +328,7 @@ public class ASPm2MMGenerator {
 
 	/**
 	 * Tests if eclipse is running.
-	 * 
+	 *
 	 * @return <code>true</code> if eclipse is running
 	 *
 	 * @generated
