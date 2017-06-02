@@ -82,7 +82,11 @@ public class JTLASPLauncher extends AbstractJTLLauncher {
 				String line;
 				while ((line = br.readLine()) != null) {
 					if (append) {
-						writeASP(line + "\n", asp);
+						if (line.startsWith("#const mmt")) {
+							writeASP("#const mmt = " + targetmmName + ".\n", asp);
+						} else {
+							writeASP(line + "\n", asp);
+						}
 					} else if (line.equals("%%% TRANSFORMATION %%%")) {
 						append = true;
 						writeASP("\n" + line + "\n", asp);
