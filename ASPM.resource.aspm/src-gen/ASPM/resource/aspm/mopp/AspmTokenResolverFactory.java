@@ -24,7 +24,7 @@ public class AspmTokenResolverFactory implements ASPM.resource.aspm.IAspmTokenRe
 		tokenName2TokenResolver = new java.util.LinkedHashMap<String, ASPM.resource.aspm.IAspmTokenResolver>();
 		featureName2CollectInTokenResolver = new java.util.LinkedHashMap<String, ASPM.resource.aspm.IAspmTokenResolver>();
 		registerTokenResolver("TEXT", new ASPM.resource.aspm.analysis.AspmTEXTTokenResolver());
-		registerTokenResolver("QUOTED_34_34", new ASPM.resource.aspm.analysis.AspmQUOTED_34_34TokenResolver());
+		registerTokenResolver("QUOTED_34_34_92", new ASPM.resource.aspm.analysis.AspmQUOTED_34_34_92TokenResolver());
 	}
 	
 	public ASPM.resource.aspm.IAspmTokenResolver createTokenResolver(String tokenName) {

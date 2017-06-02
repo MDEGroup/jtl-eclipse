@@ -17,6 +17,7 @@ query MM2ASPmGenerator = ECORE!EClass.allInstancesFrom('IN')->reject(e | e.abstr
 	'helper def: model : ASPm!Model = OclUndefined;\n\n' +
 	'helper def: rootElement : OclAny = ' + thisModule.getRoot().name + '!EObject.allInstancesFrom(\'IN\')->select(e | e.refImmediateComposite().oclIsUndefined()).first();\n\n' +
 	'helper context String def : normalize() : String = \'x_\' + self;\n\n' +
+	'helper context String def : processList(name : String) : String = self.regexReplaceAll(\'^[^,]+(,[^,]+)+$\',name+\'(["$0"])\').regexReplaceAll(\',([^,]+)\',\'","x_$1\');\n\n' +
 	'helper context String def : contains(s : String) : Boolean = self.indexOf(s)  > 0;\n\n' +
 	'helper context String def : getId() : String =\n' + 
 	'if(self.contains(\'__idTrace:\')) then\n' +
@@ -54,7 +55,7 @@ query MM2ASPmGenerator = ECORE!EClass.allInstancesFrom('IN')->reject(e | e.abstr
 	'\t\tIDtrace <- (s.__xmiID__.getIdTrace() + s.eClass().eAllAttributes.indexOf(tuple.attr).toString()).normalize(),\n'+
 	'\t\tID <- s.__xmiID__.getId() + s.eClass().eAllAttributes.indexOf(tuple.attr).toString(),\n'+
 	'\t\tname <- tuple.attr.name.normalize(),\n'+
-	'\t\tvalue <- tuple.value.normalize(),\n'+
+	'\t\tvalue <- tuple.value.normalize().processList(tuple.attr.name.normalize()),\n'+
 	'\t\tmodel <- thisModule.model,\n'+
 	'\t\towner <- s,\n'+
 	'\t\townerTrace <- t.owner.IDtrace\n'+
