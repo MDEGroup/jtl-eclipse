@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.eclipse.core.resources.IFile;
 
@@ -24,7 +25,8 @@ public class JTLASPLauncher extends AbstractJTLLauncher {
 					   final IFile targetmmFile,
 					   final IFile sourcemFile,
 					   final String targetmFolder,
-					   final IFile transfFile) {
+					   final IFile transfFile,
+					   final IFile tracesFile) {
 		// Initialize the OutputStream that will hold the generated ASP
 		ByteArrayOutputStream asp = new ByteArrayOutputStream();
 
@@ -32,12 +34,16 @@ public class JTLASPLauncher extends AbstractJTLLauncher {
 		String ASPFile = transfFile.getLocation().toOSString();
 
 		// Files involved in the launch
-		IFile[] launchFiles = new IFile[] {
+		final ArrayList<IFile> launchFilesList = new ArrayList<IFile>(Arrays.asList(
 			sourcemmFile,
 			targetmmFile,
 			sourcemFile,
 			transfFile
-		};
+		));
+		if (tracesFile != null) {
+			launchFilesList.add(tracesFile);
+		}
+		final IFile[] launchFiles = launchFilesList.toArray(new IFile[launchFilesList.size()]);
 
 		// TODO endogenous case
 
@@ -75,6 +81,26 @@ public class JTLASPLauncher extends AbstractJTLLauncher {
 						emftextModelToText(sourcemASPmFile, "\n%%% SOURCE MODEL %%%\n", asp);
 			// Remove the temporary created file
 			removeFile(sourcemASPmIFile);
+
+			// Trace model
+			if (tracesFile != null) {
+				// IFile filename to string
+				String tracesFilePath = tracesFile.getLocation().toOSString();
+
+				try (BufferedReader br = new BufferedReader(new FileReader(tracesFilePath))) {
+					String line;
+					writeASP("\n%%% TRACE MODEL %%%\n", asp);
+					while ((line = br.readLine()) != null) {
+						writeASP(line + "\n", asp);
+					}
+				} catch (FileNotFoundException e) {
+					System.out.println("File not found: " + tracesFilePath);
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("Unable to read the file: " + tracesFilePath);
+					e.printStackTrace();
+				}
+			}
 
 			// Keep the text from the '%%% TRANSFORMATION %%%' line on
 			try (BufferedReader br = new BufferedReader(new FileReader(ASPFile))) {

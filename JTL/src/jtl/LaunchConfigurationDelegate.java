@@ -19,15 +19,15 @@ public class LaunchConfigurationDelegate
 					   ILaunch launch,
 					   IProgressMonitor monitor)
 			throws CoreException {
-		
+
 		// Source Metamodel
 		IFile sourcemmFile = AbstractJTLLauncher.getIFileFromURI(configuration
 				.getAttribute(LaunchConfigurationAttributes.SOURCEMM_TEXT, ""));
-		
+
 		// Target metamodel
 		IFile targetmmFile = AbstractJTLLauncher.getIFileFromURI(configuration
 				.getAttribute(LaunchConfigurationAttributes.TARGETMM_TEXT, ""));
-		
+
 		// Source model
 		IFile sourcemFile = AbstractJTLLauncher.getIFileFromURI(configuration
 				.getAttribute(LaunchConfigurationAttributes.SOURCEM_TEXT, ""));
@@ -39,11 +39,18 @@ public class LaunchConfigurationDelegate
 		// Transformation
 		IFile transfFile = AbstractJTLLauncher.getIFileFromURI(configuration
 				.getAttribute(LaunchConfigurationAttributes.TRANSF_TEXT, ""));
-				
+
+		// Traces
+		IFile tracesFile = null;
+		if (configuration.getAttribute(LaunchConfigurationAttributes.TRACE_CHECK, false)) {
+			tracesFile = AbstractJTLLauncher.getIFileFromURI(configuration
+					.getAttribute(LaunchConfigurationAttributes.TRACE_TEXT, ""));
+		}
+
 		// Register the metamodels
 		RegisterMetamodel.registerMetamodel(sourcemmFile);
 		RegisterMetamodel.registerMetamodel(targetmmFile);
-		
+
 		// Dispatch execution to specific launchers:
 		AbstractJTLLauncher launcher;
 		if (transfFile.getFileExtension().equals("dl")) {
@@ -56,8 +63,8 @@ public class LaunchConfigurationDelegate
 			// Exogenous transformation
 			launcher = new JTLExogenousLauncher();
 		}
-		
+
 		// Launch
-		launcher.launch(sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile);
+		launcher.launch(sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile, tracesFile);
 	}
 }

@@ -78,7 +78,8 @@ public abstract class AbstractJTLLauncher {
 								IFile targetmmFile,
 								IFile sourcemFile,
 								String targetmFolder,
-								IFile transfFile);
+								IFile transfFile,
+								IFile tracesFile);
 
 	/**
 	 * Check if the files involved in the transformation
