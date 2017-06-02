@@ -71,7 +71,7 @@ public class ASPSolver {
 	 * @throws IOException
 	 * @throws URISyntaxException
 	 */
-	public ArrayList<String> run(final String file, final String target, final String sourceName)
+	public ArrayList<String> run(final String file, String target, String sourceName)
 			throws JASPException, IOException, URISyntaxException {
 
 		// Get the workspace full path
@@ -79,8 +79,23 @@ public class ASPSolver {
 
 		// Check if the target folder exists
 		if (!Files.isDirectory(Paths.get(wsPath, target))) {
-			System.err.println(wsPath + target + " not a directory.");
-			return null;
+			// If the user provided a target file name
+			// set it as the source model file name
+			if (target.endsWith(".xmi")) {
+				final Path path = Paths.get(target);
+				final Path parent = path.getParent();
+				if (parent != null &&
+					Files.isDirectory(Paths.get(wsPath, parent.toString()))) {
+					sourceName = path.getFileName().toString();
+					target = parent.toString();
+				} else {
+					System.err.println(wsPath + parent + " not a directory.");
+					return null;
+				}
+			} else {
+				System.err.println(wsPath + target + " not a directory.");
+				return null;
+			}
 		}
 
 		// Remove the extension from the source model filename
