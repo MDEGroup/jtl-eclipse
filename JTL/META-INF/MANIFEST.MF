@@ -22,7 +22,8 @@ Require-Bundle: org.eclipse.ui,
  ASPMM.resource.aspmm;bundle-version="1.0.0",
  ASPM.resource.aspm;bundle-version="1.0.0",
  ASP.resource.asp;bundle-version="1.0.0",
- JTL.resource.jtl;bundle-version="1.0.0"
+ JTL.resource.jtl;bundle-version="1.0.0",
+ org.eclipse.ui.workbench
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/jaspwrapper-0.9.jar,

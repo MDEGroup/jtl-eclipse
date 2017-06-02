@@ -17,6 +17,9 @@ public class ASPm2MM {
 				.addFileExtension("xmi")
 				.toString();
 
+		// Register the metamodel
+		RegisterMetamodel.registerMetamodel(mmIn);
+
 		// Perform the transformation (ASPm to Ecore model)
 		it.univaq.jtl.atl.aspm2mm.ASPm2MMGenerator.main(new String[] {
 				mmIn.getFullPath().toString(),
