@@ -1,4 +1,4 @@
-package jtl;
+package jtl.launcher;
 
 import java.io.File;
 
@@ -43,8 +43,18 @@ public class Launcher {
 		// Dispatch execution to specific launchers:
 		AbstractJTLLauncher launcher;
 		if (getFileExtension(transfFile).equals("dl")) {
-			// Launch the ASP transformation file directly
-			launcher = new JTLASPLauncher();
+			if (sourcemmFile.equals(targetmmFile)) {
+				// ASP Endogenous transformation
+				launcher = null;
+			} else {
+				// ASP Exogenous transformation
+				launcher = new ASPExogenousLauncher(
+						sourcemmFile,
+						targetmmFile,
+						sourcemFile,
+						targetmFolder,
+						transfFile);
+			}
 		} else if (getFileExtension(transfFile).equals("jtl")) {
 			if (sourcemmFile.equals(targetmmFile)) {
 				// Endogenous transformation
@@ -61,7 +71,7 @@ public class Launcher {
 		}
 
 		// Launch
-		launcher.launch(sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile);
+		launcher.launch();
 	}
 
 }

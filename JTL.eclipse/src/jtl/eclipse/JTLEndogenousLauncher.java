@@ -53,6 +53,7 @@ public class JTLEndogenousLauncher extends AbstractEclipseJTLLauncher {
 						sourcemmName,
 						sourcemmName + "_source",
 						asp);
+
 			// Target Metamodel (the same as the source one)
 			emftextModelToText(sourcemmASPmmFile,
 					"%%% TARGET METAMODEL %%%\n",

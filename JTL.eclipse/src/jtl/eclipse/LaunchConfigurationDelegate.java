@@ -8,7 +8,7 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 
-import jtl.handlers.RegisterMetamodel;
+import jtl.transformations.RegisterMetamodel;
 
 public class LaunchConfigurationDelegate
 		implements ILaunchConfigurationDelegate {

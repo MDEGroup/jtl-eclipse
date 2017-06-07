@@ -69,7 +69,8 @@ public class ASPSolver extends AbstractASPSolver {
 	@Override
 	protected String getSolverPath(final String solverFile)
 			throws MalformedURLException, IOException {
-		return extractSolver(solverFile).getAbsolutePath();
+		//return extractSolver(solverFile).getAbsolutePath();
+		return getWorkingDir() + '/' + solverFile;
 	}
 
 	/**
@@ -77,6 +78,6 @@ public class ASPSolver extends AbstractASPSolver {
 	 */
 	@Override
 	protected String getWorkingDir() {
-		return "";
+		return System.getProperty("user.dir");
 	}
 }

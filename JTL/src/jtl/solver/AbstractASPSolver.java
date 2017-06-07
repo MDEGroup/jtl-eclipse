@@ -11,10 +11,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
 
 import jaspwrapper.analyzer.OutputAnalyzerFactory;
 import jaspwrapper.exception.JASPException;
@@ -54,6 +54,9 @@ public abstract class AbstractASPSolver {
 	private void loadConfig() throws IOException, URISyntaxException {
 		Properties prop = new Properties();
 		InputStream in = getClass().getClassLoader().getResourceAsStream(config);
+		if (in == null) {
+			in = getClass().getClassLoader().getResourceAsStream(config.substring(config.lastIndexOf('/') + 1));
+		}
 		prop.load(in);
 		String os = System.getProperty("os.name").toLowerCase();
 		String osprop = "";
@@ -79,7 +82,7 @@ public abstract class AbstractASPSolver {
 	 * @throws IOException
 	 * @throws URISyntaxException
 	 */
-	public ArrayList<String> run(final File aspFile, final File target)
+	public ArrayList<String> run(final File aspFile, final File target, final File sourcem)
 			throws JASPException, IOException, URISyntaxException {
 
 		// Get the workspace full path
@@ -90,9 +93,13 @@ public abstract class AbstractASPSolver {
 
 		// Check if the target folder exists
 		if (!Files.isDirectory(new File(wsPath).toPath())) {
-			System.err.println(wsPath + target + " not a directory.");
+			System.err.println(wsPath + " not a directory.");
 			return null;
 		}
+
+		// Remove the extension from the source model filename
+		final String source = sourcem.getName().substring(
+				0, sourcem.getName().lastIndexOf('.'));
 
 		// Load the solver configuration
 		loadConfig();
@@ -113,6 +120,12 @@ public abstract class AbstractASPSolver {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+
+			// And a required library must be included
+			// extending the library path
+			this.solverPath = "LD_LIBRARY_PATH=" +
+					this.solverPath.substring(0, this.solverPath.lastIndexOf('/')) +
+					" " + this.solverPath;
 		}
 
 		// On windows FileLocator does not escape spaces
@@ -150,85 +163,102 @@ public abstract class AbstractASPSolver {
 		engine.loadProgram(program);
 		engine.compute();
 
+		// Store formatted atoms for reprint
+		Map<String, String> atoms = new LinkedHashMap<String, String>();
+
+		atoms.put("nodex", "");
+		atoms.put("propx", "");
+		atoms.put("edgex", "");
+
+		atoms.put("trace_nodex", "");
+		atoms.put("trace_nb_nodex", "");
+		atoms.put("trace_propx", "");
+		atoms.put("trace_nb_propx", "");
+		atoms.put("trace_edgex", "");
+		atoms.put("trace_nb_edgex", "");
+		atoms.put("trace_linkx", "");
+
 		// Process results
-		Set<String> targets = new HashSet<String>();
-		targets.add("nodex");
-		targets.add("propx");
-		targets.add("edgex");
-		boolean newModel = true;
-		String nodes = "";
-		String props = "";
-		String edges = "";
+		boolean emptyModel = true;
+		boolean emptyTraceModel = true;
 		ArrayList<String> modelsFiles = new ArrayList<String>();
-		for (int c = 1; engine.hasMoreModel(); c++) {
-			Path modelPath = Paths.get(wsPath, "m" + c + ".aspm");
+		for (int c = 0; engine.hasMoreModel(); c++) {
+			Path modelPath = Paths.get(wsPath, source + ((c>0) ? c : "") + ".aspm");
+			Path traceModelPath = Paths.get(wsPath, source + ((c>0) ? c : "") + "_trace.aspm");
 			Model model = engine.nextModel();
-			newModel = true;
+			emptyModel = true;
+			emptyTraceModel = true;
 			for (Iterator<Atom> i = model.iterator(); i.hasNext();) {
 				Atom atom = i.next();
+				final String atomName = atom.getName();
 
-				// Only print nodex, propx and edgex
-				if (targets.contains(atom.getName())) {
+				// Only print selected elements
+				if (atoms.containsKey(atomName)) {
 
 					// Wait until the first atom in the target model to
 					// get the name of the target metamodel to use in model(_, _).
-					if (newModel) {
-						nodes = String.format("model(\"m%d\", %s).%n", c,
+					if (emptyModel) {
+						atoms.put("nodex", atoms.get("nodex") +
+								String.format("model(\"%s%d\", %s).%n", source, c,
 								atom.getArguments().get(0).toString()
-								.replaceFirst("x_(\\w+)_target", "x_$1"));
-						newModel = false;
+								.replaceFirst("x_(\\w+)_target", "x_$1")));
+						emptyModel = false;
 					}
 
-					// Nodex are stored for later to ensure print order
-					if (atom.getName().equals("nodex")) {
-						nodes += String.format("%s.%n",
-								atom.toString()
-									.replaceFirst("x\\(", "(")
-									.replaceFirst("x_(\\w+)_target", "x_$1"));
+					// Wait until the first trace atom
+					// to set the trace model not empty
+					if (emptyTraceModel && atomName.startsWith("trace_")) {
+						emptyTraceModel = false;
 					}
 
-					// Propx are stored for later to ensure print order
-					else if (atom.getName().equals("propx")) {
-						props += String.format("%s.%n",
-								atom.toString()
-									.replaceFirst("x\\(", "(")
-									.replaceFirst("x_(\\w+)_target", "x_$1"));
-					}
-
-					// Edgex are stored for later to ensure print order
-					else if (atom.getName().equals("edgex")) {
-						edges += String.format("%s.%n",
-								atom.toString()
-									.replaceFirst("x\\(", "(")
-									.replaceFirst("x_(\\w+)_target", "x_$1"));
-					}
+					// Atoms are stored for later to ensure print order
+					atoms.put(atomName, atoms.get(atomName) + formatAtom(atom));
 				}
 			}
 
 			// Avoid writing empty models files
-			if (newModel) {
-				continue;
+			if (!emptyModel) {
+
+				// Add the processed model to the list of model files
+				modelsFiles.add(modelPath.toString());
+
+				// Open the model file for writing
+				try (BufferedWriter writer = Files.newBufferedWriter(modelPath)) {
+					// Print atoms of the target model
+					for (Map.Entry<String, String> atomSet : atoms.entrySet()) {
+						if (!atomSet.getKey().startsWith("trace_")) {
+							writer.write(atomSet.getValue());
+						}
+					}
+				}
 			}
+			// Avoid writing empty trace model files
+			if (!emptyTraceModel) {
 
-			// Open the model file for writing
-			modelsFiles.add(modelPath.toString());
-			BufferedWriter writer = Files.newBufferedWriter(modelPath);
+				// TODO add the trace file to the list of generated files when text2model will be ready
 
-			// Print nodes
-			writer.write(nodes);
-			nodes = "";
-
-			// Print props
-			writer.write(props);
-			props = "";
-
-			// Print edges
-			writer.write(edges);
-			edges = "";
-
-			writer.close();
+				// Open the trace file for writing
+				try (BufferedWriter writer = Files.newBufferedWriter(traceModelPath)) {
+					// Print atoms of the trace model
+					for (Map.Entry<String, String> atomSet : atoms.entrySet()) {
+						if (atomSet.getKey().startsWith("trace_")) {
+							writer.write(atomSet.getValue());
+						}
+					}
+				}
+			}
 		}
 		return modelsFiles;
 	}
 
+	/**
+	 * Format an ASP atom for reprint.
+	 * @param atom Atom to format
+	 * @return formatted string
+	 */
+	private String formatAtom(final Atom atom) {
+			return String.format("%s.%n", atom.toString()
+					.replaceFirst("x\\(", "(")
+					.replaceFirst("x_(\\w+)_target", "x_$1"));
+	}
 }

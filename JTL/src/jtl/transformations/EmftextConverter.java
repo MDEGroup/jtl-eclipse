@@ -11,11 +11,16 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import org.eclipse.emf.ecore.EPackage;
+
 /**
  * Perform model2text or text2model transformations using
  * EMFText generated factories and parsers.
  */
 public class EmftextConverter {
+
+	private static String ASPMM_URI = "http://jtl.univaq.it/aspmm";
+	private static String ASPM_URI = "http://jtl.univaq.it/aspm";
 
 	/**
 	 * Perform a model2text or text2model transformation
@@ -101,39 +106,45 @@ public class EmftextConverter {
 
 		if (extension.equals("ecore") || extension.equals("xmi")) {
 			// model2text
+
+			registerResourceFactory(registerEPackage(location));
+
 			resource = rs.getResource(URI.createURI(location), true);
 
 			final EObject root = resource.getContents().get(0);
 
 			if (root instanceof ASP.impl.TransformationImpl) {
 				// ASP
-				resource = registerResources(rs, location, "ASP");
+				resource = createDslResource(rs, location, "ASP");
 
 			} else if (root instanceof ASPM.impl.ModelImpl) {
 				// ASPM
-				resource = registerResources(rs, location, "ASPM");
+				resource = createDslResource(rs, location, "ASPM");
 
 			} else if (root instanceof ASPMM.impl.MetamodelImpl) {
 				// ASPMM
-				resource = registerResources(rs, location, "ASPMM");
+				resource = createDslResource(rs, location, "ASPMM");
 
 			} else if (root instanceof JTL.JTL.impl.TransformationImpl) {
 				// JTLMM
-				resource = registerResources(rs, location, "JTL");
+				resource = createDslResource(rs, location, "JTL");
 			}
 		} else {
 			// text2model
-			resource = registerResources(rs, location, extension);
+			registerResourceFactory(extension);
+			resource = createDslResource(rs, location, extension);
+			EPackage.Registry.INSTANCE.remove("http://jtl.univaq.it/" + extension);
 		}
 
 		return resource;
 	}
 
 	/**
-	 * Register a DSL specific ResourceFactory.
+	 * Return the ResourceFactory corresponding to the DSL.
 	 * @param dsl DSL name
+	 * @return ResourceFactory instance
 	 */
-	private void registerResourceFactory(final String dsl) {
+	private Object getResourceFactory(final String dsl) {
 		// The DSL specific ResourceFactory class object
 		Object dslResourceFactory = null;
 		try {
@@ -148,10 +159,38 @@ public class EmftextConverter {
 				| ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		return dslResourceFactory;
+	}
+
+	/**
+	 * Register a DSL specific ResourceFactory.
+	 * @param dsl DSL name
+	 */
+	private void registerResourceFactory(final String dsl) {
 
 		// Register <DSL>ResourceFactory for "<DSL>" file extension
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
-					.put(dsl.toLowerCase(), dslResourceFactory);
+					.put(dsl.toLowerCase(), getResourceFactory(dsl));
+	}
+
+	/**
+	 * Register the EPackage implementation specific to the given file.
+	 * @param file file on which the EPackage will be used
+	 * @return package extension
+	 */
+	private String registerEPackage(final String file) {
+		if (file.endsWith(".aspmm.ecore") &&
+				!(EPackage.Registry.INSTANCE.getEPackage(ASPMM_URI) instanceof ASPMM.impl.ASPMMPackageImpl)) {
+			EPackage.Registry.INSTANCE.remove(ASPMM_URI);
+			EPackage.Registry.INSTANCE.put(ASPMM_URI, ASPMM.ASPMMPackage.eINSTANCE);
+			return "aspmm";
+		} else if (file.endsWith(".aspm.ecore") &&
+				!(EPackage.Registry.INSTANCE.getEPackage(ASPM_URI) instanceof ASPM.impl.ASPMPackageImpl)) {
+			EPackage.Registry.INSTANCE.remove(ASPM_URI);
+			EPackage.Registry.INSTANCE.put(ASPM_URI, ASPM.ASPMPackage.eINSTANCE);
+			return "aspm";
+		}
+		return "";
 	}
 
 	/**
@@ -184,27 +223,11 @@ public class EmftextConverter {
 			// text2model
 			dslResource = rs.createResource(URI.createFileURI(
 					removeFileExtension(location) +
-					'.' + dsl.toLowerCase() + '.' + "ecore"
+					'.' + dsl.toLowerCase() + ".ecore"
 				));
 		}
 
 		return dslResource;
-	}
-
-	/**
-	 * Register and create a resource.
-	 * @param rs ResourceSet for resource creation
-	 * @param location resource file location
-	 * @param extension DSL filename extension
-	 * @return a new resource create from the registered DSL
-	 */
-	private Resource registerResources(
-			final ResourceSet rs,
-			final String location,
-			final String extension) {
-
-		registerResourceFactory(extension);
-		return createDslResource(rs, location, extension);
 	}
 
 	/**

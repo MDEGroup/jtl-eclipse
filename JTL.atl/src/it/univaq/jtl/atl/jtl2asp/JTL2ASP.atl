@@ -368,6 +368,22 @@ rule JTLRelation2ASPRelation {
 					}
 				}
 				
+				-- For every predicate in the first domain look for ObjectTemplateExp with value
+				-- matching an OperationTemplateExp in a predicate in the second domain
+				for (p1 in predicate_1) {
+				    if (p1.conditionExpression.isObjectTemplateExp()) {
+				        for (p2 in predicate_2) {
+				            if (p2.conditionExpression.isObjectTemplateExp()) {
+				                if (p1.conditionExpression.value.first().name = p2.conditionExpression.value.first().name) {
+				                    thisModule.newPred2PredRelation(p1, p2, s.name);						-- relation_edge
+				                    thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p1, p2);	-- domain 1 to domain 2
+				                    thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p2, p1);	-- domain 2 to domain 1
+				                }
+				            }
+				        }
+				    }
+				}
+				
 				-- When the 'when' clause is set
 				if (not predicate_when.oclIsUndefined()) {
 					
@@ -393,7 +409,7 @@ rule JTLRelation2ASPRelation {
 												thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p1, p2);	-- domain 1 to domain 2
 												thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p2, p1);	-- domain 2 to domain 1
 											}	
-										}	
+										}
 									}
 								}
 							}

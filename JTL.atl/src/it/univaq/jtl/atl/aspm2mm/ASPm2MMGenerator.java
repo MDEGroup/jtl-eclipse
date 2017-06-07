@@ -257,7 +257,7 @@ public class ASPm2MMGenerator {
 	 *
 	 * @generated
 	 */
-	protected String getMetamodelUri(String metamodelName) {
+	public String getMetamodelUri(String metamodelName) {
 		String uriString = properties.getProperty("ASPm2MMGenerator.metamodels." + metamodelName);
 		if (new EMFModelFactory().getResourceSet().getResource(URI.createURI(uriString), false) == null) {
 			return uriString.replaceFirst("platform:/plugin", "..");

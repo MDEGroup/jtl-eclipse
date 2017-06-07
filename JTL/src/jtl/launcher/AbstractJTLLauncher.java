@@ -1,20 +1,25 @@
-package jtl;
+package jtl.launcher;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.net.URISyntaxException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -23,17 +28,36 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.atl.core.ATLCoreException;
 
 import jaspwrapper.exception.JASPException;
-import jtl.handlers.ASPm2MM;
-import jtl.handlers.Ecore2ASPmm;
-import jtl.handlers.EmftextConverter;
-import jtl.handlers.JTL2ASP;
-import jtl.handlers.MM2ASPm;
 import jtl.solver.ASPSolver;
+import jtl.transformations.ASPm2MM;
+import jtl.transformations.Ecore2ASPmm;
+import jtl.transformations.EmftextConverter;
+import jtl.transformations.JTL2ASP;
+import jtl.transformations.MM2ASPm;
+import jtl.transformations.RegisterMetamodel;
 
 public abstract class AbstractJTLLauncher {
 
 	// Configuration file
 	protected final static String config = "resources/config.properties";
+
+	// Source metamodel file
+	protected File sourcemmFile;
+
+	// Target metamodel file
+	protected File targetmmFile;
+
+	// Source model file
+	protected File sourcemFile;
+
+	// Target models folder
+	protected File targetmFolder;
+
+	// Transformation file
+	protected File transfFile;
+
+	// ASP output
+	protected ByteArrayOutputStream asp = new ByteArrayOutputStream();
 
 	// List of bundles names to get version from
 	// FIXME check if needed
@@ -46,6 +70,7 @@ public abstract class AbstractJTLLauncher {
 		"ASPMM.resource.aspmm.ui",
 		"JTL",
 		"JTL.atl",
+		"JTL.eclipse",
 		"JTL.emftext.ASP",
 		"JTL.emftext.ASPM",
 		"JTL.emftext.ASPMM",
@@ -56,77 +81,205 @@ public abstract class AbstractJTLLauncher {
 	};
 
 	/**
-	 * Launch the transformation process.
+	 * Default constructor to be used by implementing classes.
 	 * @param sourcemmFile source metamodel file
 	 * @param targetmmFile target metamodel file
 	 * @param sourcemFile source model file
 	 * @param targetmFolder folder where to save generated target models
 	 * @param transfFile file specifying the transformation
 	 */
-	public abstract void launch(File sourcemmFile,
-								File targetmmFile,
-								File sourcemFile,
-								File targetmFolder,
-								File transfFile);
+	public AbstractJTLLauncher(
+			final File sourcemmFile,
+			final File targetmmFile,
+			final File sourcemFile,
+			final File targetmFolder,
+			final File transfFile) {
+		this.sourcemmFile = sourcemmFile;
+		this.targetmmFile = targetmmFile;
+		this.sourcemFile =  sourcemFile;
+		this.targetmFolder = targetmFolder;
+		this.transfFile = transfFile;
+	}
+
+	/**
+	 * Launch the transformation process.
+	 */
+	public void launch() {
+
+		// Check if the files involved in the transformation
+		// changed since the last run to skip the ASP generation.
+		if (launchFilesChanged()) {
+
+			// Dump launch information
+			dumpLaunchConfiguration();
+
+			// Process the source metamodel
+			processSourceMetamodel();
+
+			// Process the target metamodel
+			final String targetmmName = processTargetMetamodel();
+
+			// Process the source model
+			processSourceModel();
+
+			// Generate the transformation
+			generateTransformation(targetmmName);
+
+			// Write the ASP to file
+			this.transfFile = new File(writeASPToFile());
+		}
+
+		// Run the solver
+		ArrayList<String> modelsFiles =
+				runSolver(transfFile, targetmFolder, sourcemFile);
+
+		// Process target models
+		processTargetModels(modelsFiles, targetmmFile);
+	};
+
+	/**
+	 * Process the source metamodel to generate the corresponding ASP code.
+	 */
+	public abstract void processSourceMetamodel();
+
+	/**
+	 * Process the target metamodel to generate the corresponding ASP code.
+	 * @return name of the target metamodel
+	 */
+	public abstract String processTargetMetamodel();
+
+	/**
+	 * Process the source model to generate the corresponding ASP code.
+	 */
+	public abstract void processSourceModel();
+
+	/**
+	 * Check if the files involved in the transformation
+	 * changed since the last run to skip the ASP generation.
+	 * @return true if files changed since the last run
+	 */
+	protected boolean launchFilesChanged() {
+		// Files involved in the launch
+		final File[] launchFiles = new File[] {
+			sourcemmFile,
+			targetmmFile,
+			sourcemFile,
+			transfFile
+		};
+
+		// Generate the ASP filename
+		final String ASPFile = transfFile.getPath().substring(
+				0, transfFile.getPath().lastIndexOf('.')) + ".dl";
+
+		// Check if the ASP file exists
+		if (!new File(ASPFile).exists()) {
+			return true;
+		}
+
+		// Get launch files locations and compute the MD5 checksums
+		String[] launchFilesLoc = new String[launchFiles.length];
+		String[] launchFilesMD5 = new String[launchFiles.length];
+		for (int i = 0; i < launchFiles.length; i++) {
+			launchFilesLoc[i] = launchFiles[i].getPath();
+			launchFilesMD5[i] = getMD5Digest(launchFiles[i].getPath());
+		}
+
+		// Look for MD5 checksums in the ASP file
+		try (BufferedReader br = new BufferedReader(new FileReader(ASPFile))) {
+			int verified = 0;
+			String line;
+			// Read the file line by line until %%%-
+			// marking the end of the information section
+			while (verified < launchFiles.length &&
+				   !(line = br.readLine()).equals("%%%-")) {
+				for (int i = 0; i < launchFilesLoc.length; i++) {
+					if (line.contains(launchFilesLoc[i]) &&
+						line.substring(line.lastIndexOf(':') + 2)
+							.equals(launchFilesMD5[i])) {
+						verified++;
+					}
+				}
+			}
+			return verified != launchFiles.length;
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found: " + ASPFile);
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Unable to read the file: " + ASPFile);
+			e.printStackTrace();
+		}
+
+		return true;
+	}
 
 	/**
 	 * Get launch configuration information like
 	 * plugins versions and MD5 hash of involved files
 	 * and write them as a comment in the ASP program.
-	 * @param launchFiles files involved in the launch
-	 * @param asp OutputStream containing the ASP program
 	 */
 	protected void dumpLaunchConfiguration() {
-		// TODO dump configuration for standalone launch
+		// Files involved in the launch
+		final File[] launchFiles = new File[] {
+			sourcemmFile,
+			targetmmFile,
+			sourcemFile,
+			transfFile
+		};
+
+		// Open the information section
+		writeASP("%%% Generated on: " + LocalDateTime.now() + "\n");
+
+		// Compute MD5 of files involved in the launch
+		for (File file : launchFiles) {
+			writeASP("% " + file.getPath() + " : " +
+					getMD5Digest(file.getPath()) + "\n");
+		}
+
+		// TODO make it work outside Eclipse
+//		// Get plugins versions
+//		for (String bundle : bundles) {
+//			writeASP("% " + bundle + " : " +
+//					Platform.getBundle(bundle).getVersion().toString() + "\n",
+//					asp);
+//		}
+
+		// Close the information section
+		writeASP("%%%-\n\n");
 	}
 
 	/**
 	 * Generate the ASP transformation from the JTL source code.
-	 * @param transfFile JTL transformation filename
-	 * @param asp OutputStream containing the ASP program
+	 * @param targetmmName name of the target metamodel
 	 * @return filename of the final ASP program
 	 */
-	protected String generateTransformation(final IFile transfFile,
-										  final String targetmmName,
-										  final ByteArrayOutputStream asp) {
+	protected void generateTransformation(final String targetmmName) {
 		// JTL text to model (EMFText)
-		emftextTextToModel(transfFile, "\n%%% TRANSFORMATION %%%\n", asp);
-
-		// Refresh all the projects in order to find
-		// the newly created Ecore transformation
-		refreshWorkspace();
+		emftextTextToModel(transfFile, "\n%%% TRANSFORMATION %%%\n");
 
 		// Generate the filename for the newly created Ecore transformation file
-		String ecoreASPFile = transfFile.getFullPath()
-				.removeFileExtension()
-				.addFileExtension("jtl")
-				.addFileExtension("ecore")
-				.toString();
-		IFile ecoreASPIFile = getIFileFromURI(ecoreASPFile);
+		final File ecoreASPFile = new File(transfFile.getPath().substring(
+				0, transfFile.getPath().lastIndexOf('.')) + ".jtl.ecore");
 
 		// JTL to ASP Ecore (ATL)
-		String transfASPFile;
+		File transfASPFile;
 		try {
-			transfASPFile = JTL2ASP.runTransformation(ecoreASPIFile);
+			transfASPFile = new File(JTL2ASP.runTransformation(ecoreASPFile));
 		} catch (IOException | ATLCoreException e) {
 			System.out.println("Unable to perform the JTL to Ecore transformation:");
 			e.printStackTrace();
-			return null;
+			return;
 		}
 		// Remove the temporary created file
-		removeFile(ecoreASPIFile);
-
-		// Impose the transformation direction
-		//setTransformationDirection(transfASPFile, targetmmName);
+		removeFile(ecoreASPFile);
 
 		// JTL ASP model to text (EMFText)
 		ByteArrayOutputStream tmp = new ByteArrayOutputStream();
-		IFile transfASPIFile = getIFileFromURI(transfASPFile);
-		new EmftextConverter().convert(transfASPIFile, tmp);
+		new EmftextConverter().convert(transfASPFile, tmp);
 
 		// Set the mmt constant
 		String tmpStr = tmp.toString()
-				.replaceFirst("(?s).+?(?=relation_)", "#const mmt = " + targetmmName + ".\n");
+				.replaceFirst("(?s).+?(?=relation_)", "#const mmt = " +
+						targetmmName + ".\n");
 
 		// Remove an extra newline after the first comment in constraints
 		tmpStr = tmpStr.replaceFirst("(relation_.*\n\n% .*\n)\n", "$1");
@@ -134,17 +287,12 @@ public abstract class AbstractJTLLauncher {
 		// Append the target metamodel fact mmt= to the contraints
 		tmpStr = setTransformationDirection(tmpStr);
 
-		writeASP(tmpStr, asp);
+		writeASP(tmpStr);
 		// Remove the temporary created file
-		removeFile(transfASPIFile);
+		removeFile(transfASPFile);
 
 		// Append the transformation engine
-		writeTransformationEngine(asp);
-
-		// Write the ASP to file
-		String ASPFile = writeASPToFile(transfFile, asp);
-		refreshWorkspace();
-		return ASPFile;
+		writeTransformationEngine();
 	}
 
 	/**
@@ -185,21 +333,31 @@ public abstract class AbstractJTLLauncher {
 
 		// FIXME check modelsFiles for null and alert the user
 
+		// Register the ASPm metamodel
+		try {
+			RegisterMetamodel.registerMetamodel(new File(
+					new it.univaq.jtl.atl.aspm2mm.ASPm2MMGenerator()
+						.getMetamodelUri("ASPm")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		// Process target models
 		for (String target : modelsFiles) {
 			File targetFile = new File(target);
 
 			// Convert the ASP target models (text2model)
-			new EmftextConverter().convert(targetIFile);
-			refreshWorkspace();
-			targetIFile = getIFileFromURI(target + ".ecore");
+			new EmftextConverter().convert(targetFile);
+			targetFile = new File(target + ".ecore");
 
 			// ASPm to Ecore (ATL generated from HOT)
 			try {
-				ASPm2MM.runTransformation(targetmmFile, targetIFile);
+				ASPm2MM.runTransformation(targetmmFile, targetFile);
 			} catch (IOException | ATLCoreException e) {
 				System.out.println("Unable to perform the Target Model ASPm to Ecore transformation:");
 				e.printStackTrace();
+			} finally {
+				removeFile(targetFile);
 			}
 		}
 	}
@@ -210,10 +368,13 @@ public abstract class AbstractJTLLauncher {
 	 * @param targetmFolder folder where to save generated target models
 	 * @return List of target models
 	 */
-	protected ArrayList<String> runSolver(final File ASPFile, final File targetmFolder) {
+	protected ArrayList<String> runSolver(
+			final File ASPFile,
+			final File targetmFolder,
+			final File sourcemFile) {
 		ArrayList<String> modelsFiles = null;
 		try {
-			modelsFiles = new ASPSolver().run(ASPFile, targetmFolder);
+			modelsFiles = new ASPSolver().run(ASPFile, targetmFolder, sourcemFile);
 		} catch (JASPException | IOException |  URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -224,10 +385,10 @@ public abstract class AbstractJTLLauncher {
 	 * Ecore to ASPmm (ATL).
 	 * This will create the target file of the ATL transformation:
 	 * source filename + .ASPmm.ecore
-	 * @param metamodelFile IFile of the metamodel
+	 * @param metamodelFile File of the metamodel
 	 * @return Path to the converted file
 	 */
-	protected String metamodelEcoreToASPmm(final IFile metamodelFile) {
+	protected String metamodelEcoreToASPmm(final File metamodelFile) {
 		// The file created by the transformation
 		String mmASPmmFile;
 		try {
@@ -235,7 +396,7 @@ public abstract class AbstractJTLLauncher {
 		} catch (IOException | ATLCoreException e) {
 			System.out.println(
 					"Unable to perform the Ecore to ASPmm transformation of file: " +
-					metamodelFile.getFullPath().toString());
+					metamodelFile.getPath());
 			e.printStackTrace();
 			return null;
 		}
@@ -248,7 +409,7 @@ public abstract class AbstractJTLLauncher {
 	 * @param modelFile IFile of the model
 	 * @return Path to the converted file
 	 */
-	protected String modelEcoreToASPm(final IFile metamodelFile, final IFile modelFile) {
+	protected String modelEcoreToASPm(final File metamodelFile, final File modelFile) {
 		// The file created by the transformation
 		String mASPmFile;
 		try {
@@ -256,7 +417,7 @@ public abstract class AbstractJTLLauncher {
 		} catch (IOException | ATLCoreException e) {
 			System.out.println(
 					"Unable to perform the Ecore to ASPm transformation: " +
-					modelFile.getFullPath().toString());
+					modelFile.getPath());
 			e.printStackTrace();
 			return null;
 		}
@@ -267,19 +428,16 @@ public abstract class AbstractJTLLauncher {
 	 * EMFText Model to Text
 	 * @param modelFile Path of the model to convert
 	 * @param comment Comment to write before the produced ASP
-	 * @param asp OutputStream containing the ASP program
 	 * @return IFile of the converted file
 	 */
-	protected IFile emftextModelToText(
-			final String modelFile,
-			final String comment,
-			final ByteArrayOutputStream asp) {
-		IFile modelASPmmIFile = getIFileFromURI(modelFile);
+	protected File emftextModelToText(
+			final String modelFile, final String comment) {
+		final File modelASPmmFile = new File(modelFile);
 		if (comment != null) {
-			writeASP(comment, asp);
+			writeASP(comment);
 		}
-		new EmftextConverter().convert(modelASPmmIFile, asp);
-		return modelASPmmIFile;
+		new EmftextConverter().convert(new File(modelFile), asp);
+		return modelASPmmFile;
 	}
 
 	/**
@@ -291,45 +449,42 @@ public abstract class AbstractJTLLauncher {
 	 * @param asp OutputStream containing the ASP program
 	 * @return IFile of the converted file
 	 */
-	protected IFile emftextModelToText(
+	protected File emftextModelToText(
 			final String modelFile,
 			final String comment,
 			final String modelname,
 			final String replace,
 			final ByteArrayOutputStream asp) {
-		IFile modelASPmmIFile = getIFileFromURI(modelFile);
+		final File modelASPmmFile = new File(modelFile);
 		if (comment != null) {
-			writeASP(comment, asp);
+			writeASP(comment);
 		}
 
 		// Temporary BAOS to replace the text
 		ByteArrayOutputStream tmpReplace = new ByteArrayOutputStream();
 
 		// Convert
-		new EmftextConverter().convert(modelASPmmIFile, tmpReplace);
+		new EmftextConverter().convert(modelASPmmFile, tmpReplace);
 		String converted = tmpReplace.toString();
 
 		// Replace
 		converted = converted.replaceAll(modelname, replace);
 
 		// Write to the output
-		writeASP(converted, asp);
+		writeASP(converted);
 
-		return modelASPmmIFile;
+		return modelASPmmFile;
 	}
 
 	/**
 	 * EMFText Text to Model
 	 * @param textFile IFile of the text file
 	 * @param comment Comment to write before he produced ASP
-	 * @param asp OutputStream containing the ASP program
 	 */
 	protected void emftextTextToModel(
-			final IFile textFile,
-			final String comment,
-			final ByteArrayOutputStream asp) {
+			final File textFile, final String comment) {
 		if (comment != null) {
-			writeASP(comment, asp);
+			writeASP(comment);
 		}
 		new EmftextConverter().convert(textFile);
 	}
@@ -356,7 +511,7 @@ public abstract class AbstractJTLLauncher {
 	 * @param content String to write
 	 * @param asp OutputStream containing the ASP program
 	 */
-	protected void writeASP(final String content, final ByteArrayOutputStream asp) {
+	protected void writeASP(final String content) {
 		try {
 			asp.write(content.getBytes());
 		} catch (IOException e) {
@@ -367,9 +522,8 @@ public abstract class AbstractJTLLauncher {
 
 	/**
 	 * Append the transformation engine to the ASP program.
-	 * @param asp OutputStream containing the ASP program
 	 */
-	protected void writeTransformationEngine(final ByteArrayOutputStream asp) {
+	protected void writeTransformationEngine() {
 		try {
 			Properties prop = new Properties();
 			ClassLoader cl = getClass().getClassLoader();
@@ -389,15 +543,11 @@ public abstract class AbstractJTLLauncher {
 
 	/**
 	 * Write the ASP to file.
-	 * @param transfFile IFile of the transformation used to
-	 * 		  generate the filename of the ASP final file
-	 * @param asp OutputStream containing the ASP program
 	 * @return filename of the ASP final file
 	 */
-	protected String writeASPToFile(final IFile transfFile, final ByteArrayOutputStream asp) {
-		String ASPFile = transfFile.getLocation()
-				.removeFileExtension().addFileExtension("dl")
-				.toOSString();
+	protected String writeASPToFile() {
+		final String ASPFile = transfFile.getPath().substring(
+				0, transfFile.getPath().lastIndexOf('.')) + ".dl";
 		try (OutputStream ASPout = new FileOutputStream(ASPFile)) {
 			asp.writeTo(ASPout);
 		} catch (IOException e) {
@@ -421,5 +571,45 @@ public abstract class AbstractJTLLauncher {
 		//	System.out.println("There was a problem deleting the file: ");
 		//	e.printStackTrace();
 		//}
+	}
+
+	/**
+	 * Get MD5 digest of file.
+	 * @param file path to file
+	 * @return MD5 digest
+	 */
+	protected static String getMD5Digest(final String file) {
+		// TODO move to jtl.utils
+		// Get the MD5 algorithm instance
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			System.out.println("No MD5 algorithm found.");
+			e.printStackTrace();
+			return null;
+		}
+
+		// Compute the digest
+		try (FileInputStream fis = new FileInputStream(file)) {
+			byte[] data = new byte[10240];
+			int nread = 0;
+			while ((nread = fis.read(data)) != -1) {
+				md.update(data, 0, nread);
+			}
+		} catch (IOException e) {
+			System.out.println("Unable to read the file: " + file);
+			e.printStackTrace();
+			return null;
+		}
+		byte[] mdbytes = md.digest();
+
+		// Convert the bytes to hex format
+	    StringBuffer sb = new StringBuffer("");
+	    for (int i = 0; i < mdbytes.length; i++) {
+	    		sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+	    }
+
+		return sb.toString();
 	}
 }
