@@ -45,15 +45,13 @@ public class Launcher {
 		if (getFileExtension(transfFile).equals("dl")) {
 			if (sourcemmFile.equals(targetmmFile)) {
 				// ASP Endogenous transformation
-				launcher = null;
+				launcher = new ASPEndogenousLauncher(
+						sourcemmFile, sourcemFile, targetmFolder, transfFile);
 			} else {
 				// ASP Exogenous transformation
 				launcher = new ASPExogenousLauncher(
-						sourcemmFile,
-						targetmmFile,
-						sourcemFile,
-						targetmFolder,
-						transfFile);
+						sourcemmFile, targetmmFile,	sourcemFile,
+						targetmFolder, transfFile);
 			}
 		} else if (getFileExtension(transfFile).equals("jtl")) {
 			if (sourcemmFile.equals(targetmmFile)) {

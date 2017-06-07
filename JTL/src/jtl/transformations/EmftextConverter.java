@@ -179,15 +179,19 @@ public class EmftextConverter {
 	 * @return package extension
 	 */
 	private String registerEPackage(final String file) {
-		if (file.endsWith(".aspmm.ecore") &&
-				!(EPackage.Registry.INSTANCE.getEPackage(ASPMM_URI) instanceof ASPMM.impl.ASPMMPackageImpl)) {
-			EPackage.Registry.INSTANCE.remove(ASPMM_URI);
-			EPackage.Registry.INSTANCE.put(ASPMM_URI, ASPMM.ASPMMPackage.eINSTANCE);
+		if (file.endsWith(".aspmm.ecore")) {
+			if (!(EPackage.Registry.INSTANCE.getEPackage(ASPMM_URI)
+					instanceof ASPMM.impl.ASPMMPackageImpl)) {
+				EPackage.Registry.INSTANCE.remove(ASPMM_URI);
+				EPackage.Registry.INSTANCE.put(ASPMM_URI, ASPMM.ASPMMPackage.eINSTANCE);
+			}
 			return "aspmm";
-		} else if (file.endsWith(".aspm.ecore") &&
-				!(EPackage.Registry.INSTANCE.getEPackage(ASPM_URI) instanceof ASPM.impl.ASPMPackageImpl)) {
-			EPackage.Registry.INSTANCE.remove(ASPM_URI);
-			EPackage.Registry.INSTANCE.put(ASPM_URI, ASPM.ASPMPackage.eINSTANCE);
+		} else if (file.endsWith(".aspm.ecore")) {
+			if (!(EPackage.Registry.INSTANCE.getEPackage(ASPM_URI)
+					instanceof ASPM.impl.ASPMPackageImpl)) {
+				EPackage.Registry.INSTANCE.remove(ASPM_URI);
+				EPackage.Registry.INSTANCE.put(ASPM_URI, ASPM.ASPMPackage.eINSTANCE);
+			}
 			return "aspm";
 		}
 		return "";

@@ -18,11 +18,10 @@ public abstract class AbstractEndogenousLauncher extends AbstractJTLLauncher {
 	 */
 	public AbstractEndogenousLauncher(
 			final File sourcemmFile,
-			final File targetmmFile,
 			final File sourcemFile,
 			final File targetmFolder,
 			final File transfFile) {
-		super(sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile);
+		super(sourcemmFile, sourcemmFile, sourcemFile, targetmFolder, transfFile);
 	}
 	/**
 	 * Process the source metamodel to generate the corresponding ASP code.
@@ -35,13 +34,11 @@ public abstract class AbstractEndogenousLauncher extends AbstractJTLLauncher {
 		// ASPmm model to text (EMFText)
 		sourcemmName = getMetamodelName(sourcemmASPmm);
 		// ASPmm model to text (EMFText)
-		final File sourcemmASPmmFile = emftextModelToText(sourcemmASPmm,
+		emftextModelToText(sourcemmASPmm,
 							"%%% SOURCE METAMODEL %%%\n",
 							sourcemmName,
 							sourcemmName + "_source",
 							asp);
-		// Remove the temporary created file
-		removeFile(sourcemmASPmmFile);
 	}
 
 	/**
@@ -53,7 +50,7 @@ public abstract class AbstractEndogenousLauncher extends AbstractJTLLauncher {
 	public String processTargetMetamodel() {
 		// ASPmm model to text (EMFText)
 		final File targetmmASPmmFile = emftextModelToText(sourcemmASPmm,
-							"%%% TARGET METAMODEL %%%\n",
+							"\n%%% TARGET METAMODEL %%%\n",
 							sourcemmName,
 							sourcemmName + "_target",
 							asp);

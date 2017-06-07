@@ -59,27 +59,6 @@ public abstract class AbstractJTLLauncher {
 	// ASP output
 	protected ByteArrayOutputStream asp = new ByteArrayOutputStream();
 
-	// List of bundles names to get version from
-	// FIXME check if needed
-	protected final static String[] bundles = new String[] {
-		"ASP.resource.asp",
-		"ASP.resource.asp.ui",
-		"ASPM.resource.aspm",
-		"ASPM.resource.aspm.ui",
-		"ASPMM.resource.aspmm",
-		"ASPMM.resource.aspmm.ui",
-		"JTL",
-		"JTL.atl",
-		"JTL.eclipse",
-		"JTL.emftext.ASP",
-		"JTL.emftext.ASPM",
-		"JTL.emftext.ASPMM",
-		"JTL.emftext.JTL",
-		"JTL.resource.jtl",
-		"JTL.resource.jtl.ui",
-		"org.emftext.commons.antlr3_4_0"
-	};
-
 	/**
 	 * Default constructor to be used by implementing classes.
 	 * @param sourcemmFile source metamodel file
