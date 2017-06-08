@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.m2m.atl.common.ATLExecutionException;
@@ -48,26 +49,26 @@ public class JTL2ASP {
 	 * @generated
 	 */
 	private Properties properties;
-	
+
 	/**
 	 * The IN model.
 	 * @generated
 	 */
-	protected IModel inModel;	
-	
+	protected IModel inModel;
+
 	/**
 	 * The OUT model.
 	 * @generated
 	 */
-	protected IModel outModel;	
-		
+	protected IModel outModel;
+
 	/**
 	 * The main method.
-	 * 
+	 *
 	 * @param args
 	 *            are the arguments
-	 * @throws IOException 
-	 * @throws ATLCoreException 
+	 * @throws IOException
+	 * @throws ATLCoreException
 	 * @generated
 	 */
 	public static void main(String[] args) throws IOException, ATLCoreException {
@@ -99,10 +100,10 @@ public class JTL2ASP {
 		properties.load(getFileURL("JTL2ASP.properties").openStream());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 	}
-	
+
 	/**
 	 * Load the input and input/output models, initialize output models.
-	 * 
+	 *
 	 * @param inModelPath
 	 *            the IN model path
 	 * @throws ATLCoreException
@@ -121,10 +122,10 @@ public class JTL2ASP {
 		injector.inject(inModel, inModelPath);
 		this.outModel = factory.newModel(aspMetamodel);
 	}
-	
+
 	/**
 	 * Save the output and input/output models.
-	 * 
+	 *
 	 * @param outModelPath
 	 *            the OUT model path
 	 * @throws ATLCoreException
@@ -139,7 +140,7 @@ public class JTL2ASP {
 
 	/**
 	 * Transform the models.
-	 * 
+	 *
 	 * @param monitor
 	 *            the progress monitor
 	 * @throws ATLCoreException
@@ -163,7 +164,7 @@ public class JTL2ASP {
 	/**
 	 * Returns an Array of the module input streams, parameterized by the
 	 * property file.
-	 * 
+	 *
 	 * @return an Array of the module input streams
 	 * @throws IOException
 	 *             if a module cannot be read
@@ -183,10 +184,10 @@ public class JTL2ASP {
 		}
 		return modules;
 	}
-	
+
 	/**
 	 * Returns the URI of the given metamodel, parameterized from the property file.
-	 * 
+	 *
 	 * @param metamodelName
 	 *            the metamodel name
 	 * @return the metamodel URI
@@ -194,12 +195,16 @@ public class JTL2ASP {
 	 * @generated
 	 */
 	protected String getMetamodelUri(String metamodelName) {
-		return properties.getProperty("JTL2ASP.metamodels." + metamodelName);
+		String uriString = properties.getProperty("JTL2ASP.metamodels." + metamodelName);
+		if (new EMFModelFactory().getResourceSet().getResource(URI.createURI(uriString), false) == null) {
+			return uriString.replaceFirst("platform:/plugin", "..");
+		}
+		return uriString;
 	}
-	
+
 	/**
 	 * Returns the file name of the given library, parameterized from the property file.
-	 * 
+	 *
 	 * @param libraryName
 	 *            the library name
 	 * @return the library file name
@@ -209,10 +214,10 @@ public class JTL2ASP {
 	protected InputStream getLibraryAsStream(String libraryName) throws IOException {
 		return getFileURL(properties.getProperty("JTL2ASP.libraries." + libraryName)).openStream();
 	}
-	
+
 	/**
 	 * Returns the options map, parameterized from the property file.
-	 * 
+	 *
 	 * @return the options map
 	 *
 	 * @generated
@@ -221,22 +226,22 @@ public class JTL2ASP {
 		Map<String, Object> options = new HashMap<String, Object>();
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			if (entry.getKey().toString().startsWith("JTL2ASP.options.")) {
-				options.put(entry.getKey().toString().replaceFirst("JTL2ASP.options.", ""), 
+				options.put(entry.getKey().toString().replaceFirst("JTL2ASP.options.", ""),
 				entry.getValue().toString());
 			}
 		}
 		return options;
 	}
-	
+
 	/**
 	 * Finds the file in the plug-in. Returns the file URL.
-	 * 
+	 *
 	 * @param fileName
 	 *            the file name
 	 * @return the file URL
 	 * @throws IOException
 	 *             if the file doesn't exist
-	 * 
+	 *
 	 * @generated
 	 */
 	protected static URL getFileURL(String fileName) throws IOException {
@@ -260,7 +265,7 @@ public class JTL2ASP {
 
 	/**
 	 * Tests if eclipse is running.
-	 * 
+	 *
 	 * @return <code>true</code> if eclipse is running
 	 *
 	 * @generated

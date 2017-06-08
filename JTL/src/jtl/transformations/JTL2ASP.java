@@ -36,7 +36,7 @@ public class JTL2ASP {
 
 			// Generate the target filename
 			final String targetFile = path.substring(
-					0, path.lastIndexOf('.')) + ".ASP.ecore";
+					0, path.lastIndexOf('.')) + ".asp.ecore";
 
 			// Perform the transformation (JTL to ASP)
 			it.univaq.jtl.atl.jtl2asp.JTL2ASP.main(new String[] {

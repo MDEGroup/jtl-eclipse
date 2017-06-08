@@ -506,9 +506,17 @@ public abstract class AbstractJTLLauncher {
 		try {
 			Properties prop = new Properties();
 			ClassLoader cl = getClass().getClassLoader();
-			prop.load(cl.getResourceAsStream(config));
+			InputStream in = cl.getResourceAsStream(config);
+			// FIXME create a method to deal with inside/outside Eclipse resource loading
+			if (in == null) {
+				in = cl.getResourceAsStream(config.substring(config.lastIndexOf('/') + 1));
+			}
+			prop.load(in);
 			String te = prop.getProperty("transformation_engine");
 			InputStream is = cl.getResourceAsStream(te);
+			if (is == null) {
+				is = cl.getResourceAsStream(te.substring(te.lastIndexOf('/') + 1));
+			}
 			byte[] buffer = new byte[10240]; // 10KB
 			int len;
 			while ((len = is.read(buffer)) != -1) {

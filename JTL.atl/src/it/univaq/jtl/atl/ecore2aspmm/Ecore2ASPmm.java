@@ -15,8 +15,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Map.Entry;
+import java.util.Properties;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -36,8 +36,6 @@ import org.eclipse.m2m.atl.core.ModelFactory;
 import org.eclipse.m2m.atl.core.emf.EMFExtractor;
 import org.eclipse.m2m.atl.core.emf.EMFInjector;
 import org.eclipse.m2m.atl.core.emf.EMFModelFactory;
-import org.eclipse.m2m.atl.core.emf.EMFModel;
-import org.eclipse.m2m.atl.core.emf.EMFReferenceModel;
 import org.eclipse.m2m.atl.core.launch.ILauncher;
 import org.eclipse.m2m.atl.engine.emfvm.launch.EMFVMLauncher;
 

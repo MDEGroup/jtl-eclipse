@@ -21,6 +21,7 @@ public class EmftextConverter {
 
 	private static String ASPMM_URI = "http://jtl.univaq.it/aspmm";
 	private static String ASPM_URI = "http://jtl.univaq.it/aspm";
+	private static String ASP_URI = "http://jtl.univaq.it/asp";
 
 	/**
 	 * Perform a model2text or text2model transformation
@@ -193,6 +194,13 @@ public class EmftextConverter {
 				EPackage.Registry.INSTANCE.put(ASPM_URI, ASPM.ASPMPackage.eINSTANCE);
 			}
 			return "aspm";
+		} else if (file.endsWith(".asp.ecore")) {
+			if (!(EPackage.Registry.INSTANCE.getEPackage(ASP_URI)
+					instanceof ASP.impl.ASPPackageImpl)) {
+				EPackage.Registry.INSTANCE.remove(ASP_URI);
+				EPackage.Registry.INSTANCE.put(ASP_URI, ASP.ASPPackage.eINSTANCE);
+			}
+			return "asp";
 		}
 		return "";
 	}

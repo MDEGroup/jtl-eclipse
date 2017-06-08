@@ -60,8 +60,9 @@ public class Launcher {
 				launcher = null;
 			} else {
 				// Exogenous transformation
-				//launcher = new JTLExogenousLauncher();
-				launcher = null;
+				launcher = new JTLExogenousLauncher(
+						sourcemmFile, targetmmFile,	sourcemFile,
+						targetmFolder, transfFile);
 			}
 		} else {
 			System.err.println("Transformation file must have '.jtl' or '.dl' extension.");

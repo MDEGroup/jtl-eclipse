@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * 
+ *
  */
 /**
  * This class can be used to configure options that must be used when resources
@@ -13,10 +13,14 @@
 package JTL.resource.jtl.mopp;
 
 public class JtlOptionProvider implements JTL.resource.jtl.IJtlOptionProvider {
-	
+
+	@Override
 	public java.util.Map<?,?> getOptions() {
 		// create a map with static option providers here
-		return java.util.Collections.emptyMap();
+		//return java.util.Collections.emptyMap();
+		return java.util.Collections.singletonMap(
+				JTL.resource.jtl.IJtlOptions.RESOURCE_POSTPROCESSOR_PROVIDER,
+				new JTL.resource.jtl.PostProcessor());
 	}
-	
+
 }
