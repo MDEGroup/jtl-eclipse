@@ -105,8 +105,11 @@ public abstract class AbstractJTLLauncher {
 			generateTransformation(targetmmName);
 
 			// Write the ASP to file
-			this.transfFile = new File(writeASPToFile());
+			writeASPToFile();
 		}
+
+		// Set the ASP filename
+		transfFile = new File(getASPFilename());
 
 		// Run the solver
 		ArrayList<String> modelsFiles =
@@ -147,8 +150,7 @@ public abstract class AbstractJTLLauncher {
 		};
 
 		// Generate the ASP filename
-		final String ASPFile = transfFile.getPath().substring(
-				0, transfFile.getPath().lastIndexOf('.')) + ".dl";
+		final String ASPFile = getASPFilename();
 
 		// Check if the ASP file exists
 		if (!new File(ASPFile).exists()) {
@@ -176,6 +178,7 @@ public abstract class AbstractJTLLauncher {
 						line.substring(line.lastIndexOf(':') + 2)
 							.equals(launchFilesMD5[i])) {
 						verified++;
+						break;
 					}
 				}
 			}
@@ -533,8 +536,7 @@ public abstract class AbstractJTLLauncher {
 	 * @return filename of the ASP final file
 	 */
 	protected String writeASPToFile() {
-		final String ASPFile = transfFile.getPath().substring(
-				0, transfFile.getPath().lastIndexOf('.')) + ".dl";
+		final String ASPFile = getASPFilename();
 		try (OutputStream ASPout = new FileOutputStream(ASPFile)) {
 			asp.writeTo(ASPout);
 		} catch (IOException e) {
@@ -558,6 +560,15 @@ public abstract class AbstractJTLLauncher {
 		//	System.out.println("There was a problem deleting the file: ");
 		//	e.printStackTrace();
 		//}
+	}
+
+	/**
+	 * Returns the ASP filename.
+	 * @return ASP filename
+	 */
+	protected String getASPFilename() {
+		return transfFile.getPath().substring(
+				0, transfFile.getPath().lastIndexOf('.')) + ".dl";
 	}
 
 	/**

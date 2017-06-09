@@ -56,8 +56,8 @@ public class Launcher {
 		} else if (getFileExtension(transfFile).equals("jtl")) {
 			if (sourcemmFile.equals(targetmmFile)) {
 				// Endogenous transformation
-				//launcher = new JTLEndogenousLauncher();
-				launcher = null;
+				launcher = new JTLEndogenousLauncher(
+						sourcemmFile, sourcemFile, targetmFolder, transfFile);
 			} else {
 				// Exogenous transformation
 				launcher = new JTLExogenousLauncher(
