@@ -1021,7 +1021,7 @@ lazy rule JTLPredicate2ASPLiteral_MET {
 		s: JTL!Predicate
 	to
 		literal_MET: ASP!Literal (
-			name <- s.conditionExpression.value.first().referredClass.toString(),
+			name <- 'x_' + s.conditionExpression.value.first().referredClass.toString(),
 			transformation <- thisModule.transformationRoot
 		)
 	do {
