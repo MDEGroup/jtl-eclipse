@@ -103,7 +103,7 @@ public class EmftextConverter {
 		String location = file.getPath();
 
 		// Get the file extension
-		String extension = getFileExtension(location);
+		String extension = jtl.utils.File.getFileExtension(location);
 
 		if (extension.equals("ecore") || extension.equals("xmi")) {
 			// model2text
@@ -218,7 +218,7 @@ public class EmftextConverter {
 			final String dsl) {
 
 		// File extension of the location
-		final String extension = getFileExtension(location);
+		final String extension = jtl.utils.File.getFileExtension(location);
 
 		// The new resource to create
 		Resource dslResource = null;
@@ -228,36 +228,18 @@ public class EmftextConverter {
 		if (extension.equals("ecore") || extension.equals("xmi")) {
 			// model2text
 			dslResource = rs.createResource(URI.createFileURI(
-					removeFileExtension(removeFileExtension(location)) +
+					jtl.utils.File.removeFileExtension(
+					jtl.utils.File.removeFileExtension(location)) +
 					'.' + dsl.toLowerCase()
 				));
 		} else if (extension.equals(dsl.toLowerCase())) {
 			// text2model
 			dslResource = rs.createResource(URI.createFileURI(
-					removeFileExtension(location) +
+					jtl.utils.File.removeFileExtension(location) +
 					'.' + dsl.toLowerCase() + ".ecore"
 				));
 		}
 
 		return dslResource;
 	}
-
-	/**
-	 * Remove the filename extension from a path.
-	 * @param path file path
-	 * @return path without the filename extension
-	 */
-	private String removeFileExtension(final String path) {
-		return path.substring(0, path.lastIndexOf('.'));
-	}
-
-	/**
-	 * Returns the filename extension from a path.
-	 * @param path file path
-	 * @return filename extension
-	 */
-	private String getFileExtension(final String path) {
-		return path.substring(path.lastIndexOf('.') + 1);
-	}
-
 }

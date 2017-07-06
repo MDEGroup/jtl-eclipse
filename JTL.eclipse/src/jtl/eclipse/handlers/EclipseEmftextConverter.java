@@ -2,7 +2,7 @@ package jtl.eclipse.handlers;
 
 import org.eclipse.core.resources.IFile;
 
-import jtl.handlers.EmftextConverter;
+import jtl.transformations.EmftextConverter;
 
 public class EclipseEmftextConverter extends EmftextConverter {
 

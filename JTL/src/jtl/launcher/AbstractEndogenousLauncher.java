@@ -23,6 +23,7 @@ public abstract class AbstractEndogenousLauncher extends AbstractJTLLauncher {
 			final File transfFile) {
 		super(sourcemmFile, sourcemmFile, sourcemFile, targetmFolder, transfFile);
 	}
+
 	/**
 	 * Process the source metamodel to generate the corresponding ASP code.
 	 * @param sourcemmFile source metamodel file

@@ -1,25 +1,30 @@
-package jtl.launcher;
+package jtl.eclipse;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
-public class ASPExogenousLauncher extends AbstractExogenousLauncher implements ASPLauncher {
+import jtl.launcher.ASPLauncher;
+
+public class ASPEndogenousLauncher extends AbstractEclipseEndogenousLauncher implements ASPLauncher {
+
+	private jtl.launcher.ASPEndogenousLauncher launcher;
 
 	/**
-	 * Create an instance of ASPExogenousLauncher.
+	 * Create an instance of ASPEndogenousLauncher.
 	 * @param sourcemmFile source metamodel file
 	 * @param targetmmFile target metamodel file
 	 * @param sourcemFile source model file
 	 * @param targetmFolder folder where to save generated target models
 	 * @param transfFile file specifying the transformation
 	 */
-	public ASPExogenousLauncher(
+	public ASPEndogenousLauncher(
 			final File sourcemmFile,
-			final File targetmmFile,
 			final File sourcemFile,
 			final File targetmFolder,
 			final File transfFile) {
-		super(sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile);
+		super(sourcemmFile, sourcemFile, targetmFolder, transfFile);
+		launcher = new jtl.launcher.ASPEndogenousLauncher(
+				sourcemmFile, sourcemFile, targetmFolder, transfFile);
 	}
 
 	/**
@@ -29,9 +34,8 @@ public class ASPExogenousLauncher extends AbstractExogenousLauncher implements A
 	 * @return filename of the final ASP program
 	 */
 	@Override
-	public void generateTransformation(final String targetmmName) {
-		// Keep the text from the '%%% TRANSFORMATION %%%' line on
-		appendTransformation(transfFile, targetmmName, asp);
+	protected void generateTransformation(final String targetmmName) {
+		launcher.generateTransformation(targetmmName);
 	}
 
 	@Override

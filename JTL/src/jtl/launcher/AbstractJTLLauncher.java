@@ -200,6 +200,24 @@ public abstract class AbstractJTLLauncher {
 	 * and write them as a comment in the ASP program.
 	 */
 	protected void dumpLaunchConfiguration() {
+
+		// Open the information section
+		writeASP("%%% Generated on: " + LocalDateTime.now() + "\n");
+
+		// Compute MD5 of files involved in the launch
+		computeMD5();
+
+		// Get bundles versions
+		getBundlesVersions();
+
+		// Close the information section
+		writeASP("%%%-\n\n");
+	}
+
+	/**
+	 * Compute MD5 of files involved in the launch
+	 */
+	protected void computeMD5() {
 		// Files involved in the launch
 		final File[] launchFiles = new File[] {
 			sourcemmFile,
@@ -208,25 +226,17 @@ public abstract class AbstractJTLLauncher {
 			transfFile
 		};
 
-		// Open the information section
-		writeASP("%%% Generated on: " + LocalDateTime.now() + "\n");
-
-		// Compute MD5 of files involved in the launch
 		for (File file : launchFiles) {
 			writeASP("% " + file.getPath() + " : " +
 					getMD5Digest(file.getPath()) + "\n");
 		}
+	}
 
+	/**
+	 * Get bundles versions
+	 */
+	protected void getBundlesVersions() {
 		// TODO make it work outside Eclipse
-//		// Get plugins versions
-//		for (String bundle : bundles) {
-//			writeASP("% " + bundle + " : " +
-//					Platform.getBundle(bundle).getVersion().toString() + "\n",
-//					asp);
-//		}
-
-		// Close the information section
-		writeASP("%%%-\n\n");
 	}
 
 	/**
@@ -553,13 +563,6 @@ public abstract class AbstractJTLLauncher {
 	 */
 	protected static void removeFile(final File file) {
 		file.delete();
-
-		//try {
-			//file.delete(true, new NullProgressMonitor());
-		//} catch (CoreException e) {
-		//	System.out.println("There was a problem deleting the file: ");
-		//	e.printStackTrace();
-		//}
 	}
 
 	/**

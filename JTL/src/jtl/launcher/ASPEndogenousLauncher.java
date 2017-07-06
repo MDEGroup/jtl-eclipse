@@ -28,7 +28,7 @@ public class ASPEndogenousLauncher extends AbstractEndogenousLauncher implements
 	 * @return filename of the final ASP program
 	 */
 	@Override
-	protected void generateTransformation(final String targetmmName) {
+	public void generateTransformation(final String targetmmName) {
 		// Keep the text from the '%%% TRANSFORMATION %%%' line on
 		appendTransformation(transfFile, targetmmName + "_target", asp);
 	}

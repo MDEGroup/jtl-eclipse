@@ -1,9 +1,13 @@
-package jtl.launcher;
+package jtl.eclipse;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
-public class ASPExogenousLauncher extends AbstractExogenousLauncher implements ASPLauncher {
+import jtl.launcher.ASPLauncher;
+
+public class ASPExogenousLauncher extends AbstractEclipseExogenousLauncher implements ASPLauncher {
+
+	private jtl.launcher.ASPExogenousLauncher launcher;
 
 	/**
 	 * Create an instance of ASPExogenousLauncher.
@@ -20,6 +24,8 @@ public class ASPExogenousLauncher extends AbstractExogenousLauncher implements A
 			final File targetmFolder,
 			final File transfFile) {
 		super(sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile);
+		launcher = new jtl.launcher.ASPExogenousLauncher(
+				sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile);
 	}
 
 	/**
@@ -29,9 +35,8 @@ public class ASPExogenousLauncher extends AbstractExogenousLauncher implements A
 	 * @return filename of the final ASP program
 	 */
 	@Override
-	public void generateTransformation(final String targetmmName) {
-		// Keep the text from the '%%% TRANSFORMATION %%%' line on
-		appendTransformation(transfFile, targetmmName, asp);
+	protected void generateTransformation(final String targetmmName) {
+		launcher.generateTransformation(targetmmName);
 	}
 
 	@Override

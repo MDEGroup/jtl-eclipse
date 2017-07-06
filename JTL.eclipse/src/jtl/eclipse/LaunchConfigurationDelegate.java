@@ -1,6 +1,8 @@
 package jtl.eclipse;
 
 
+import java.io.File;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -21,23 +23,23 @@ public class LaunchConfigurationDelegate
 			throws CoreException {
 
 		// Source Metamodel
-		IFile sourcemmFile = AbstractEclipseJTLLauncher.getIFileFromURI(configuration
+		final File sourcemmFile = new File(configuration
 				.getAttribute(LaunchConfigurationAttributes.SOURCEMM_TEXT, ""));
 
 		// Target metamodel
-		IFile targetmmFile = AbstractEclipseJTLLauncher.getIFileFromURI(configuration
+		final File targetmmFile = new File(configuration
 				.getAttribute(LaunchConfigurationAttributes.TARGETMM_TEXT, ""));
 
 		// Source model
-		IFile sourcemFile = AbstractEclipseJTLLauncher.getIFileFromURI(configuration
+		final File sourcemFile = new File(configuration
 				.getAttribute(LaunchConfigurationAttributes.SOURCEM_TEXT, ""));
 
 		// Target models folder
-		String targetmFolder = configuration
-				.getAttribute(LaunchConfigurationAttributes.TARGETM_TEXT, "");
+		final File targetmFolder = new File(configuration
+				.getAttribute(LaunchConfigurationAttributes.TARGETM_TEXT, ""));
 
 		// Transformation
-		IFile transfFile = AbstractEclipseJTLLauncher.getIFileFromURI(configuration
+		final File transfFile = new File(configuration
 				.getAttribute(LaunchConfigurationAttributes.TRANSF_TEXT, ""));
 
 		// Register the metamodels
@@ -46,18 +48,28 @@ public class LaunchConfigurationDelegate
 
 		// Dispatch execution to specific launchers:
 		AbstractEclipseJTLLauncher launcher;
-		if (transfFile.getFileExtension().equals("dl")) {
-			// Launch the ASP transformation file directly
-			launcher = new JTLASPLauncher();
+		if (jtl.utils.File.getFileExtension(transfFile).equals("dl")) {
+			if (sourcemmFile.equals(targetmmFile)) {
+				// ASP Endogenous transformation
+				launcher = new ASPEndogenousLauncher(
+						sourcemmFile, sourcemFile, targetmFolder, transfFile);
+			} else {
+				// ASP Exogenous transformation
+				launcher = new ASPExogenousLauncher(
+						sourcemmFile, targetmmFile,	sourcemFile,
+						targetmFolder, transfFile);
+			}
 		} else if (sourcemmFile.equals(targetmmFile)) {
 			// Endogenous transformation
-			launcher = new JTLEndogenousLauncher();
+//			launcher = new JTLEndogenousLauncher();
+			launcher = null;
 		} else {
 			// Exogenous transformation
-			launcher = new JTLExogenousLauncher();
+//			launcher = new JTLExogenousLauncher();
+			launcher = null;
 		}
 
 		// Launch
-		launcher.launch(sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile);
+		launcher.launch();
 	}
 }

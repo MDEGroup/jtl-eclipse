@@ -4,15 +4,7 @@ import java.io.File;
 
 public class Launcher {
 
-	private static String getFileExtension(final File file) {
-		if (file.isDirectory()) {
-			return "";
-		}
-		final String name = file.getName();
-		return name.substring(name.lastIndexOf('.') + 1);
-	}
-
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 
 		if (args.length < 5) {
 			System.out.println("Insufficient arguments:");
@@ -26,23 +18,23 @@ public class Launcher {
 		}
 
 		// Source metamodel
-		File sourcemmFile = new File(args[0]);
+		final File sourcemmFile = new File(args[0]);
 
 		// Target metamodel
-		File targetmmFile = new File(args[1]);
+		final File targetmmFile = new File(args[1]);
 
 		// Source model
-		File sourcemFile = new File(args[2]);
+		final File sourcemFile = new File(args[2]);
 
 		// Target models folder
-		File targetmFolder = new File(args[3]);
+		final File targetmFolder = new File(args[3]);
 
 		// Transformation
-		File transfFile = new File(args[4]);
+		final File transfFile = new File(args[4]);
 
 		// Dispatch execution to specific launchers:
 		AbstractJTLLauncher launcher;
-		if (getFileExtension(transfFile).equals("dl")) {
+		if (jtl.utils.File.getFileExtension(transfFile).equals("dl")) {
 			if (sourcemmFile.equals(targetmmFile)) {
 				// ASP Endogenous transformation
 				launcher = new ASPEndogenousLauncher(
@@ -53,7 +45,7 @@ public class Launcher {
 						sourcemmFile, targetmmFile,	sourcemFile,
 						targetmFolder, transfFile);
 			}
-		} else if (getFileExtension(transfFile).equals("jtl")) {
+		} else if (jtl.utils.File.getFileExtension(transfFile).equals("jtl")) {
 			if (sourcemmFile.equals(targetmmFile)) {
 				// Endogenous transformation
 				launcher = new JTLEndogenousLauncher(
