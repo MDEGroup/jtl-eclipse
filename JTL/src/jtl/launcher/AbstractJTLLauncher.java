@@ -29,6 +29,7 @@ import org.eclipse.m2m.atl.core.ATLCoreException;
 
 import jaspwrapper.exception.JASPException;
 import jtl.solver.ASPSolver;
+import jtl.solver.AbstractASPSolver;
 import jtl.transformations.ASPm2MM;
 import jtl.transformations.Ecore2ASPmm;
 import jtl.transformations.EmftextConverter;
@@ -366,11 +367,19 @@ public abstract class AbstractJTLLauncher {
 			final File sourcemFile) {
 		ArrayList<String> modelsFiles = null;
 		try {
-			modelsFiles = new ASPSolver().run(ASPFile, targetmFolder, sourcemFile);
+			modelsFiles = getSolver().run(ASPFile, targetmFolder, sourcemFile);
 		} catch (JASPException | IOException |  URISyntaxException e) {
 			e.printStackTrace();
 		}
 		return modelsFiles;
+	}
+
+	/**
+	 * Return the solver implementation class.
+	 * @return solver object
+	 */
+	protected AbstractASPSolver getSolver() {
+		return new ASPSolver();
 	}
 
 	/**

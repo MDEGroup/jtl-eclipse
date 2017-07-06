@@ -3,7 +3,6 @@ package jtl.eclipse;
 
 import java.io.File;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
@@ -59,14 +58,20 @@ public class LaunchConfigurationDelegate
 						sourcemmFile, targetmmFile,	sourcemFile,
 						targetmFolder, transfFile);
 			}
-		} else if (sourcemmFile.equals(targetmmFile)) {
-			// Endogenous transformation
-//			launcher = new JTLEndogenousLauncher();
-			launcher = null;
+		} else if (jtl.utils.File.getFileExtension(transfFile).equals("jtl")) {
+			if (sourcemmFile.equals(targetmmFile)) {
+				// Endogenous transformation
+				launcher = new JTLEndogenousLauncher(
+						sourcemmFile, sourcemFile, targetmFolder, transfFile);
+			} else {
+				// Exogenous transformation
+				launcher = new JTLExogenousLauncher(
+						sourcemmFile, targetmmFile,	sourcemFile,
+						targetmFolder, transfFile);
+			}
 		} else {
-			// Exogenous transformation
-//			launcher = new JTLExogenousLauncher();
-			launcher = null;
+			System.err.println("Transformation file must have '.jtl' or '.dl' extension.");
+			return;
 		}
 
 		// Launch

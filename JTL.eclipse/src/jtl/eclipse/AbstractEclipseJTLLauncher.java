@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 
 import jtl.launcher.AbstractJTLLauncher;
+import jtl.solver.AbstractASPSolver;
 
 public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 
@@ -51,6 +52,15 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 			final File transfFile) {
 		super(sourcemmFile, targetmmFile, sourcemFile,
 				targetmFolder, transfFile);
+	}
+
+	/**
+	 * Return the solver implementation class.
+	 * @return solver object
+	 */
+	@Override
+	protected AbstractASPSolver getSolver() {
+		return new ASPSolver();
 	}
 
 	/**
