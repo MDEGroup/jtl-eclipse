@@ -167,18 +167,7 @@ public class ASPSolver {
 
 		// Store formatted atoms for reprint
 		Map<String, String> atoms = new LinkedHashMap<String, String>();
-
-		atoms.put("nodex", "");
-		atoms.put("propx", "");
-		atoms.put("edgex", "");
-
-		atoms.put("trace_nodex", "");
-		atoms.put("trace_nb_nodex", "");
-		atoms.put("trace_propx", "");
-		atoms.put("trace_nb_propx", "");
-		atoms.put("trace_edgex", "");
-		atoms.put("trace_nb_edgex", "");
-		atoms.put("trace_linkx", "");
+		initializeAtoms(atoms);
 
 		ArrayList<String> modelsFiles = new ArrayList<String>();
 		for (int c = 0; engine.hasMoreModel(); c++) {
@@ -236,6 +225,8 @@ public class ASPSolver {
 				}
 			}
 
+			initializeAtoms(atoms);
+
 			// TODO add the trace file to the list of generated files when text2model will be ready
 		}
 		return modelsFiles;
@@ -245,6 +236,20 @@ public class ASPSolver {
 		return String.format("%s.%n", atom.toString()
 				.replaceFirst("x\\(", "(")
 				.replaceFirst("x_(\\w+)_target", "x_$1"));
+	}
+
+	private void initializeAtoms(final Map<String, String> atoms) {
+		atoms.put("nodex", "");
+		atoms.put("propx", "");
+		atoms.put("edgex", "");
+
+		atoms.put("trace_nodex", "");
+		atoms.put("trace_nb_nodex", "");
+		atoms.put("trace_propx", "");
+		atoms.put("trace_nb_propx", "");
+		atoms.put("trace_edgex", "");
+		atoms.put("trace_nb_edgex", "");
+		atoms.put("trace_linkx", "");
 	}
 
 }
