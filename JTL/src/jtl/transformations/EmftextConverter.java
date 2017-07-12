@@ -11,6 +11,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import jtl.utils.Files;
+
 import org.eclipse.emf.ecore.EPackage;
 
 /**
@@ -103,7 +105,7 @@ public class EmftextConverter {
 		String location = file.getPath();
 
 		// Get the file extension
-		String extension = jtl.utils.File.getFileExtension(location);
+		String extension = Files.getFileExtension(location);
 
 		if (extension.equals("ecore") || extension.equals("xmi")) {
 			// model2text
@@ -218,7 +220,10 @@ public class EmftextConverter {
 			final String dsl) {
 
 		// File extension of the location
-		final String extension = jtl.utils.File.getFileExtension(location);
+		final String extension = Files.getFileExtension(location);
+
+		// Sanitize URI paths
+		final String fileLocation = location.startsWith("file:/") ? location.substring(5) : location;
 
 		// The new resource to create
 		Resource dslResource = null;
@@ -227,15 +232,15 @@ public class EmftextConverter {
 		// (will be an instance of <DSL>Resource)
 		if (extension.equals("ecore") || extension.equals("xmi")) {
 			// model2text
-			dslResource = rs.createResource(URI.createFileURI(
-					jtl.utils.File.removeFileExtension(
-					jtl.utils.File.removeFileExtension(location)) +
+			dslResource = rs.createResource(URI.createURI(
+					Files.removeFileExtension(
+					Files.removeFileExtension(fileLocation)) +
 					'.' + dsl.toLowerCase()
 				));
 		} else if (extension.equals(dsl.toLowerCase())) {
 			// text2model
-			dslResource = rs.createResource(URI.createFileURI(
-					jtl.utils.File.removeFileExtension(location) +
+			dslResource = rs.createResource(URI.createURI(
+					Files.removeFileExtension(fileLocation) +
 					'.' + dsl.toLowerCase() + ".ecore"
 				));
 		}

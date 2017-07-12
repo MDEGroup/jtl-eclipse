@@ -16,8 +16,14 @@ public class RegisterMetamodel {
 		ResourceSet rs = new ResourceSetImpl();
 
 		// Get the EPackage element
-		Resource mmResource = rs.getResource(
-				URI.createURI(file.getPath()), true);
+		URI uri = URI.createURI(file.getPath());
+		Resource mmResource;
+		try {
+			mmResource = rs.getResource(uri, true);
+		} catch(Exception e) {
+			uri = URI.createFileURI(uri.path());
+			mmResource = rs.getResource(uri, true);
+		}
 		EObject mmPackage = mmResource.getContents().get(0);
 
 		// Register the metamodel namespace URI

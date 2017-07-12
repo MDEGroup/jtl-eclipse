@@ -3,7 +3,7 @@ package jtl.utils;
 /**
  * Utility operations on files.
  */
-public class File {
+public class Files {
 
 	/**
 	 * Get the file extension.
@@ -34,5 +34,14 @@ public class File {
 	 */
 	public static String removeFileExtension(final String path) {
 		return path.substring(0, path.lastIndexOf('.'));
+	}
+
+	/**
+	 * Add a file extension to a path.
+	 * @param path file path
+	 * @param extension the extension to add
+	 */
+	public static String addFileExtension(final String path, final String extension) {
+		return path + '.' + extension;
 	}
 }

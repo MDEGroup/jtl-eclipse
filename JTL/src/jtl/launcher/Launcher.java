@@ -2,6 +2,8 @@ package jtl.launcher;
 
 import java.io.File;
 
+import jtl.utils.Files;
+
 public class Launcher {
 
 	public static void main(final String[] args) {
@@ -34,7 +36,7 @@ public class Launcher {
 
 		// Dispatch execution to specific launchers:
 		AbstractJTLLauncher launcher;
-		if (jtl.utils.File.getFileExtension(transfFile).equals("dl")) {
+		if (Files.getFileExtension(transfFile).equals("dl")) {
 			if (sourcemmFile.equals(targetmmFile)) {
 				// ASP Endogenous transformation
 				launcher = new ASPEndogenousLauncher(
@@ -45,7 +47,7 @@ public class Launcher {
 						sourcemmFile, targetmmFile,	sourcemFile,
 						targetmFolder, transfFile);
 			}
-		} else if (jtl.utils.File.getFileExtension(transfFile).equals("jtl")) {
+		} else if (Files.getFileExtension(transfFile).equals("jtl")) {
 			if (sourcemmFile.equals(targetmmFile)) {
 				// Endogenous transformation
 				launcher = new JTLEndogenousLauncher(

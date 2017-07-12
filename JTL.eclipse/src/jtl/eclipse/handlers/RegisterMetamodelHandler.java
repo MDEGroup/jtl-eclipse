@@ -1,7 +1,7 @@
 /**
  *
  */
-package jtl.handlers;
+package jtl.eclipse.handlers;
 
 import java.io.File;
 

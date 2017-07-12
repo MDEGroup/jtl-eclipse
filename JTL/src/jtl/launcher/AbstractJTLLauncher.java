@@ -36,11 +36,12 @@ import jtl.transformations.EmftextConverter;
 import jtl.transformations.JTL2ASP;
 import jtl.transformations.MM2ASPm;
 import jtl.transformations.RegisterMetamodel;
+import jtl.utils.Files;
 
 public abstract class AbstractJTLLauncher {
 
 	// Configuration file
-	protected final static String config = "resources/config.properties";
+	protected final static String config = "config.properties";
 
 	// Source metamodel file
 	protected File sourcemmFile;
@@ -118,6 +119,9 @@ public abstract class AbstractJTLLauncher {
 
 		// Process target models
 		processTargetModels(modelsFiles, targetmmFile);
+
+		// Clean
+		clean();
 	};
 
 	/**
@@ -250,8 +254,8 @@ public abstract class AbstractJTLLauncher {
 		emftextTextToModel(transfFile, "\n%%% TRANSFORMATION %%%\n");
 
 		// Generate the filename for the newly created Ecore transformation file
-		final File ecoreASPFile = new File(transfFile.getPath().substring(
-				0, transfFile.getPath().lastIndexOf('.')) + ".jtl.ecore");
+		final File ecoreASPFile = new File(Files.addFileExtension(
+				Files.removeFileExtension(transfFile.getPath()), "jtl.ecore"));
 
 		// JTL to ASP Ecore (ATL)
 		File transfASPFile;
@@ -508,6 +512,19 @@ public abstract class AbstractJTLLauncher {
 	}
 
 	/**
+	 * Returns the ASP output stream.
+	 * @returns ASP output stream
+	 */
+	public ByteArrayOutputStream getASP() {
+		return asp;
+	}
+
+	/**
+	 * Clean up the environment at the end of a launch
+	 */
+	public void clean() { }
+
+	/**
 	 * Write a string to buffer of the ASP file.
 	 * @param content String to write
 	 * @param asp OutputStream containing the ASP program
@@ -527,18 +544,11 @@ public abstract class AbstractJTLLauncher {
 	protected void writeTransformationEngine() {
 		try {
 			Properties prop = new Properties();
-			ClassLoader cl = getClass().getClassLoader();
+			ClassLoader cl = AbstractJTLLauncher.class.getClassLoader();
 			InputStream in = cl.getResourceAsStream(config);
-			// FIXME create a method to deal with inside/outside Eclipse resource loading
-			if (in == null) {
-				in = cl.getResourceAsStream(config.substring(config.lastIndexOf('/') + 1));
-			}
 			prop.load(in);
 			String te = prop.getProperty("transformation_engine");
 			InputStream is = cl.getResourceAsStream(te);
-			if (is == null) {
-				is = cl.getResourceAsStream(te.substring(te.lastIndexOf('/') + 1));
-			}
 			byte[] buffer = new byte[10240]; // 10KB
 			int len;
 			while ((len = is.read(buffer)) != -1) {
@@ -570,7 +580,7 @@ public abstract class AbstractJTLLauncher {
 	 * Remove a file.
 	 * @param file The file to remove.
 	 */
-	protected static void removeFile(final File file) {
+	protected void removeFile(final File file) {
 		file.delete();
 	}
 
@@ -579,8 +589,8 @@ public abstract class AbstractJTLLauncher {
 	 * @return ASP filename
 	 */
 	protected String getASPFilename() {
-		return transfFile.getPath().substring(
-				0, transfFile.getPath().lastIndexOf('.')) + ".dl";
+		return Files.addFileExtension(
+			   Files.removeFileExtension(transfFile.getPath()), "dl");
 	}
 
 	/**

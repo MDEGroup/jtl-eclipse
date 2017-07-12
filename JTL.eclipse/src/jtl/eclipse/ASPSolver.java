@@ -17,7 +17,7 @@ public class ASPSolver extends AbstractASPSolver {
 	@Override
 	protected String getSolverPath(final String solverFile)
 			throws MalformedURLException, IOException {
-		return FileLocator.resolve(new URL(solverFile)).getPath();
+		return FileLocator.resolve(new URL("platform:/plugin/JTL/" + solverFile)).getPath();
 	}
 
 	/**

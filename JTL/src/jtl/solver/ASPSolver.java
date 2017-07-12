@@ -69,6 +69,7 @@ public class ASPSolver extends AbstractASPSolver {
 	@Override
 	protected String getSolverPath(final String solverFile)
 			throws MalformedURLException, IOException {
+		// FIXME cross-platform support
 		//return extractSolver(solverFile).getAbsolutePath();
 		return getWorkingDir() + '/' + solverFile;
 	}

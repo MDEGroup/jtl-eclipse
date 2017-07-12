@@ -13,8 +13,8 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
+Bundle-Vendor: JTL
 Export-Package: it.univaq.jtl.atl.aspm2mm,
  it.univaq.jtl.atl.ecore2aspmm,
  it.univaq.jtl.atl.jtl2asp,
  it.univaq.jtl.atl.mm2aspm
-Bundle-Vendor: JTL

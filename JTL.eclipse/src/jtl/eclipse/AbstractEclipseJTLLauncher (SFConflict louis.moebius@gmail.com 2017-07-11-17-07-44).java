@@ -8,6 +8,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 
@@ -64,25 +65,6 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 	}
 
 	/**
-	 * Compute MD5 of files involved in the launch
-	 */
-//	@Override
-//	protected void computeMD5() {
-//		// Files involved in the launch
-//		final File[] launchFiles = new File[] {
-//			sourcemmFile,
-//			targetmmFile,
-//			sourcemFile,
-//			transfFile
-//		};
-//
-//		for (File file : launchFiles) {
-//			writeASP("% " + file.getPath() + " : " +
-//					getMD5Digest(getAbsolutePath(file.getPath())) + "\n");
-//		}
-//	}
-
-	/**
 	 * Get bundles versions
 	 */
 	@Override
@@ -116,16 +98,6 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 //	}
 
 	/**
-	 * Write the ASP to file.
-	 * @return filename of the ASP final file
-	 */
-	@Override
-	protected String writeASPToFile() {
-		transfFile = new File(getAbsolutePath(transfFile.getPath()));
-		return super.writeASPToFile();
-	}
-
-	/**
 	 * Find the IFile corresponding to an URI.
 	 * @param uriString URI to convert
 	 * @return corresponding IFile
@@ -151,9 +123,14 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 	 * Remove a file in the workspace.
 	 * @param file The file to remove.
 	 */
-	@Override
-	protected void removeFile(final File file) {
-		new File(getAbsolutePath(file.getPath())).delete();
+	protected static void removeFile(final IFile file) {
+		try {
+			file.delete(true, new NullProgressMonitor());
+		} catch (CoreException e) {
+			System.out.println("There was a problem deleting the file: " +
+					file.getFullPath().toString());
+			e.printStackTrace();
+		}
 	}
 
 
@@ -171,17 +148,5 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 			e.printStackTrace();
 			return;
 		}
-	}
-
-	/**
-	 * Return the absolute path of a resource
-	 * (including the workspace path).
-	 * @param path Path relative to the workspace
-	 * @return absolute path
-	 */
-	protected static String getAbsolutePath(final String path) {
-		return Paths.get(
-				ResourcesPlugin.getWorkspace().getRoot().getLocation().toString(),
-				path).toString();
 	}
 }

@@ -10,6 +10,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.m2m.atl.core.ATLCoreException;
 
+import jtl.utils.Files;
+
 public class JTL2ASP {
 
 	public static String runTransformation(final File file)
@@ -35,8 +37,8 @@ public class JTL2ASP {
 			final String path = file.getPath();
 
 			// Generate the target filename
-			final String targetFile = path.substring(
-					0, path.lastIndexOf('.')) + ".asp.ecore";
+			final String targetFile = Files.addFileExtension(
+					Files.removeFileExtension(path), "asp.ecore");
 
 			// Perform the transformation (JTL to ASP)
 			it.univaq.jtl.atl.jtl2asp.JTL2ASP.main(new String[] {

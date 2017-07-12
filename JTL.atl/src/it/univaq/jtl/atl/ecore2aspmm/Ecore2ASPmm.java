@@ -193,7 +193,9 @@ public class Ecore2ASPmm {
 	 */
 	public String getMetamodelUri(String metamodelName) {
 		String uriString = properties.getProperty("Ecore2ASPmm.metamodels." + metamodelName);
-		if (new EMFModelFactory().getResourceSet().getResource(URI.createURI(uriString), false) == null) {
+		try {
+			new EMFModelFactory().getResourceSet().getResource(URI.createURI(uriString), true);
+		} catch (Exception e) {
 			return uriString.replaceFirst("platform:/plugin", "..");
 		}
 		return uriString;

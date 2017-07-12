@@ -196,7 +196,9 @@ public class JTL2ASP {
 	 */
 	protected String getMetamodelUri(String metamodelName) {
 		String uriString = properties.getProperty("JTL2ASP.metamodels." + metamodelName);
-		if (new EMFModelFactory().getResourceSet().getResource(URI.createURI(uriString), false) == null) {
+		try {
+			new EMFModelFactory().getResourceSet().getResource(URI.createURI(uriString), true);
+		} catch (Exception e) {
 			return uriString.replaceFirst("platform:/plugin", "..");
 		}
 		return uriString;

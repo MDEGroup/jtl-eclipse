@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import org.eclipse.m2m.atl.core.ATLCoreException;
 
+import jtl.utils.Files;
+
 public class MM2ASPm {
 
 	public static String runTransformation(final File mmIn, final File mIn)
@@ -14,8 +16,8 @@ public class MM2ASPm {
 		final String mInPath = mIn.getPath();
 
 		// Generate the target filename
-		final String targetFile = mInPath.substring(
-				0, mInPath.lastIndexOf(".xmi")) + ".aspm.ecore";
+		final String targetFile = Files.addFileExtension(
+				Files.removeFileExtension(mInPath) , "aspm.ecore");
 
 		// Register the ASPm metamodel
 		RegisterMetamodel.registerMetamodel(new File(
