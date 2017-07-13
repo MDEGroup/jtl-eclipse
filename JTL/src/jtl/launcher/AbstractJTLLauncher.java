@@ -12,10 +12,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -43,6 +45,9 @@ public abstract class AbstractJTLLauncher {
 	// Configuration file
 	protected final static String config = "config.properties";
 
+	// Working directory
+	protected String workingDir = "";
+
 	// Source metamodel file
 	protected File sourcemmFile;
 
@@ -57,6 +62,9 @@ public abstract class AbstractJTLLauncher {
 
 	// Transformation file
 	protected File transfFile;
+
+	// Traces model file
+	protected File tracesFile;
 
 	// ASP output
 	protected ByteArrayOutputStream asp = new ByteArrayOutputStream();
@@ -83,6 +91,70 @@ public abstract class AbstractJTLLauncher {
 	}
 
 	/**
+	 * Default constructor to be used by implementing classes.
+	 * @param sourcemmFile source metamodel file
+	 * @param targetmmFile target metamodel file
+	 * @param sourcemFile source model file
+	 * @param targetmFolder folder where to save generated target models
+	 * @param transfFile file specifying the transformation
+	 * @param tracesFile traces model file
+	 */
+	public AbstractJTLLauncher(
+			final File sourcemmFile,
+			final File targetmmFile,
+			final File sourcemFile,
+			final File targetmFolder,
+			final File transfFile,
+			final File tracesFile) {
+		this.sourcemmFile = sourcemmFile;
+		this.targetmmFile = targetmmFile;
+		this.sourcemFile =  sourcemFile;
+		this.targetmFolder = targetmFolder;
+		this.transfFile = transfFile;
+		this.tracesFile = tracesFile;
+	}
+
+	/**
+	 * Sets the current working directory.
+	 * @param workingDir working directory
+	 */
+	public void setWorkingDir(final String workingDir) {
+		this.workingDir = workingDir;
+	}
+
+	/**
+	 * Returns the transformation file.
+	 * @return transformation file
+	 */
+	public File getTransfFile() {
+		return transfFile;
+	}
+
+	/**
+	 * Sets the transformation file.
+	 * @param transfFile transformation file
+	 */
+	public void setTransfFile(final File transfFile) {
+		this.transfFile = transfFile;
+	}
+
+	/**
+	 * Returns the ASP output stream.
+	 * @returns ASP output stream
+	 */
+	public ByteArrayOutputStream getASP() {
+		return asp;
+	}
+
+	/**
+	 * Sets the ASP output stream.
+	 * @param asp ASP output stream
+	 */
+	public void setASP(final ByteArrayOutputStream asp) {
+		this.asp = asp;
+	}
+
+	/**
 	 * Launch the transformation process.
 	 */
 	public void launch() {
@@ -102,6 +174,9 @@ public abstract class AbstractJTLLauncher {
 
 			// Process the source model
 			processSourceModel();
+
+			// Process the traces model
+			processTracesModel();
 
 			// Generate the transformation
 			generateTransformation(targetmmName);
@@ -147,12 +222,16 @@ public abstract class AbstractJTLLauncher {
 	 */
 	protected boolean launchFilesChanged() {
 		// Files involved in the launch
-		final File[] launchFiles = new File[] {
+		final ArrayList<File> launchFilesList = new ArrayList<File>(Arrays.asList(
 			sourcemmFile,
 			targetmmFile,
 			sourcemFile,
 			transfFile
-		};
+		));
+		if (tracesFile != null) {
+			launchFilesList.add(tracesFile);
+		}
+		final File[] launchFiles = launchFilesList.toArray(new File[launchFilesList.size()]);
 
 		// Generate the ASP filename
 		final String ASPFile = getASPFilename();
@@ -224,12 +303,16 @@ public abstract class AbstractJTLLauncher {
 	 */
 	protected void computeMD5() {
 		// Files involved in the launch
-		final File[] launchFiles = new File[] {
+		final ArrayList<File> launchFilesList = new ArrayList<File>(Arrays.asList(
 			sourcemmFile,
 			targetmmFile,
 			sourcemFile,
 			transfFile
-		};
+		));
+		if (tracesFile != null) {
+			launchFilesList.add(tracesFile);
+		}
+		final File[] launchFiles = launchFilesList.toArray(new File[launchFilesList.size()]);
 
 		for (File file : launchFiles) {
 			writeASP("% " + file.getPath() + " : " +
@@ -356,6 +439,29 @@ public abstract class AbstractJTLLauncher {
 			} finally {
 				removeFile(targetFile);
 			}
+		}
+	}
+
+	/**
+	 * Process the traces model.
+	 */
+	protected void processTracesModel() {
+		if (tracesFile == null) return;
+		final String tracesFilePath = tracesFile.getPath();
+
+		// Copy the entire file in the ASP output
+		try (BufferedReader br = new BufferedReader(new FileReader(tracesFilePath))) {
+			String line;
+			writeASP("\n%%% TRACE MODEL %%%\n");
+			while ((line = br.readLine()) != null) {
+				writeASP(line + "\n");
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found: " + tracesFilePath);
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Unable to read the file: " + tracesFilePath);
+			e.printStackTrace();
 		}
 	}
 
@@ -512,14 +618,6 @@ public abstract class AbstractJTLLauncher {
 	}
 
 	/**
-	 * Returns the ASP output stream.
-	 * @returns ASP output stream
-	 */
-	public ByteArrayOutputStream getASP() {
-		return asp;
-	}
-
-	/**
 	 * Clean up the environment at the end of a launch
 	 */
 	public void clean() { }
@@ -581,7 +679,14 @@ public abstract class AbstractJTLLauncher {
 	 * @param file The file to remove.
 	 */
 	protected void removeFile(final File file) {
-		file.delete();
+		if (file.exists()) {
+			file.delete();
+		} else {
+			final File fullPath = Paths.get(workingDir, file.getPath()).toFile();
+			if (fullPath.exists()) {
+				fullPath.delete();
+			}
+		}
 	}
 
 	/**

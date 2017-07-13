@@ -26,6 +26,29 @@ public class ASPExogenousLauncher extends AbstractEclipseExogenousLauncher imple
 		super(sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile);
 		launcher = new jtl.launcher.ASPExogenousLauncher(
 				sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile);
+		launcher.setASP(asp);
+	}
+
+	/**
+	 * Create an instance of ASPExogenousLauncher.
+	 * @param sourcemmFile source metamodel file
+	 * @param targetmmFile target metamodel file
+	 * @param sourcemFile source model file
+	 * @param targetmFolder folder where to save generated target models
+	 * @param transfFile file specifying the transformation
+	 * @param tracesFile traces model file
+	 */
+	public ASPExogenousLauncher(
+			final File sourcemmFile,
+			final File targetmmFile,
+			final File sourcemFile,
+			final File targetmFolder,
+			final File transfFile,
+			final File tracesFile) {
+		super(sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile, tracesFile);
+		launcher = new jtl.launcher.ASPExogenousLauncher(
+				sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile, tracesFile);
+		launcher.setASP(asp);
 	}
 
 	/**
@@ -36,7 +59,14 @@ public class ASPExogenousLauncher extends AbstractEclipseExogenousLauncher imple
 	 */
 	@Override
 	protected void generateTransformation(final String targetmmName) {
+		// Temporary replace the relative file path with the absolute one
+		final File transfFileRelative = launcher.getTransfFile();
+		launcher.setTransfFile(new File(getAbsolutePath(transfFileRelative.getPath())));
+
 		launcher.generateTransformation(targetmmName);
+
+		// Restore the original path
+		launcher.setTransfFile(transfFileRelative);
 	}
 
 	@Override

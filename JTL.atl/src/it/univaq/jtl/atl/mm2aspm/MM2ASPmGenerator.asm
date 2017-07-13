@@ -44,7 +44,7 @@
 		<constant value="helper def: rootElement : OclAny = "/>
 		<constant value="!EObject.allInstancesFrom('IN')-&gt;select(e | e.refImmediateComposite().oclIsUndefined()).first();&#10;&#10;"/>
 		<constant value="helper context String def : normalize() : String = 'x_' + self;&#10;&#10;"/>
-		<constant value="helper context String def : contains(s : String) : Boolean = self.indexOf(s)  &gt; 0;&#10;&#10;"/>
+		<constant value="helper context String def : processList(name : String) : String = self.regexReplaceAll('^[^,]+(,[^,]+)+$',name+'([&quot;$0&quot;])').regexReplaceAll(',([^,]+)','&quot;,&quot;x_$1');&#10;&#10;"/>
 		<constant value="helper context String def : getId() : String =&#10;"/>
 		<constant value="if(self.contains('__idTrace:')) then&#10;"/>
 		<constant value="&#9;self.split('_ASPid_').at(1)&#10;"/>
@@ -77,7 +77,7 @@
 		<constant value="&#9;&#9;IDtrace &lt;- (s.__xmiID__.getIdTrace() + s.eClass().eAllAttributes.indexOf(tuple.attr).toString()).normalize(),&#10;"/>
 		<constant value="&#9;&#9;ID &lt;- s.__xmiID__.getId() + s.eClass().eAllAttributes.indexOf(tuple.attr).toString(),&#10;"/>
 		<constant value="&#9;&#9;name &lt;- tuple.attr.name.normalize(),&#10;"/>
-		<constant value="&#9;&#9;value &lt;- tuple.value.normalize(),&#10;"/>
+		<constant value="&#9;&#9;value &lt;- tuple.value.normalize().processList(tuple.attr.name.normalize()),&#10;"/>
 		<constant value="&#9;&#9;model &lt;- thisModule.model,&#10;"/>
 		<constant value="&#9;&#9;owner &lt;- s,&#10;"/>
 		<constant value="&#9;&#9;ownerTrace &lt;- t.owner.IDtrace&#10;"/>
@@ -149,8 +149,8 @@
 		<constant value="13:2-18:174"/>
 		<constant value="19:2-19:73"/>
 		<constant value="13:2-19:73"/>
-		<constant value="20:2-20:90"/>
-		<constant value="13:2-20:90"/>
+		<constant value="20:2-20:177"/>
+		<constant value="13:2-20:177"/>
 		<constant value="21:2-21:52"/>
 		<constant value="13:2-21:52"/>
 		<constant value="22:2-22:44"/>
@@ -239,8 +239,8 @@
 		<constant value="13:2-55:95"/>
 		<constant value="56:2-56:46"/>
 		<constant value="13:2-56:46"/>
-		<constant value="57:2-57:43"/>
-		<constant value="13:2-57:43"/>
+		<constant value="57:2-57:84"/>
+		<constant value="13:2-57:84"/>
 		<constant value="58:2-58:36"/>
 		<constant value="13:2-58:36"/>
 		<constant value="59:2-59:21"/>

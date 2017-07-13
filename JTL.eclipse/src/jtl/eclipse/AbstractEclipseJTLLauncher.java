@@ -2,6 +2,8 @@ package jtl.eclipse;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -55,6 +57,26 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 	}
 
 	/**
+	 * Default constructor to be used by implementing classes.
+	 * @param sourcemmFile source metamodel file
+	 * @param targetmmFile target metamodel file
+	 * @param sourcemFile source model file
+	 * @param targetmFolder folder where to save generated target models
+	 * @param transfFile file specifying the transformation
+	 * @param tracesFile traces model file
+	 */
+	public AbstractEclipseJTLLauncher(
+			final File sourcemmFile,
+			final File targetmmFile,
+			final File sourcemFile,
+			final File targetmFolder,
+			final File transfFile,
+			final File tracesFile) {
+		super(sourcemmFile, targetmmFile, sourcemFile,
+				targetmFolder, transfFile, tracesFile);
+	}
+
+	/**
 	 * Return the solver implementation class.
 	 * @return solver object
 	 */
@@ -64,23 +86,44 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 	}
 
 	/**
+	 * Process the traces model.
+	 */
+	@Override
+	protected void processTracesModel() {
+		if (tracesFile == null) return;
+
+		// Temporary replace the relative file path with the absolute one
+		final File tracesFileRelative = tracesFile;
+		tracesFile = new File(getAbsolutePath(tracesFile.getPath()));
+
+		super.processTracesModel();
+
+		// Restore the original path
+		tracesFile = tracesFileRelative;
+	}
+
+	/**
 	 * Compute MD5 of files involved in the launch
 	 */
-//	@Override
-//	protected void computeMD5() {
-//		// Files involved in the launch
-//		final File[] launchFiles = new File[] {
-//			sourcemmFile,
-//			targetmmFile,
-//			sourcemFile,
-//			transfFile
-//		};
-//
-//		for (File file : launchFiles) {
-//			writeASP("% " + file.getPath() + " : " +
-//					getMD5Digest(getAbsolutePath(file.getPath())) + "\n");
-//		}
-//	}
+	@Override
+	protected void computeMD5() {
+		// Files involved in the launch
+		final ArrayList<File> launchFilesList = new ArrayList<File>(Arrays.asList(
+			sourcemmFile,
+			targetmmFile,
+			sourcemFile,
+			transfFile
+		));
+		if (tracesFile != null) {
+			launchFilesList.add(tracesFile);
+		}
+		final File[] launchFiles = launchFilesList.toArray(new File[launchFilesList.size()]);
+
+		for (File file : launchFiles) {
+			writeASP("% " + file.getPath() + " : " +
+					getMD5Digest(getAbsolutePath(file.getPath())) + "\n");
+		}
+	}
 
 	/**
 	 * Get bundles versions
@@ -93,27 +136,6 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 					Platform.getBundle(bundle).getVersion().toString() + "\n");
 		}
 	}
-
-	/**
-	 * Generate the ASP transformation from the JTL source code.
-	 * @param targetmmName name of the target metamodel
-	 * @return filename of the final ASP program
-	 */
-//	@Override
-//	protected void generateTransformation(final String targetmmName) {
-//		// Check for paths relative to the Eclipse working directory
-//		final File transfFileRelative = transfFile;
-//		if (!transfFile.exists()) {
-//			transfFile = Paths.get(
-//					ResourcesPlugin.getWorkspace().getRoot().getLocation().toString(),
-//					transfFile.getPath().toString()).toFile();
-//		}
-//
-//		super.generateTransformation(targetmmName);
-//
-//		// Restore the original File
-//		transfFile = transfFileRelative;
-//	}
 
 	/**
 	 * Write the ASP to file.
@@ -156,6 +178,13 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 		new File(getAbsolutePath(file.getPath())).delete();
 	}
 
+	/**
+	 * Clean up the environment at the end of a launch
+	 */
+	@Override
+	public void clean() {
+		refreshWorkspace();
+	}
 
 	/**
 	 * Refresh all the projects in the workspace.

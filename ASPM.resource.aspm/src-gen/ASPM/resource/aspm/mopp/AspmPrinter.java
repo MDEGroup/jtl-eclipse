@@ -156,7 +156,7 @@ public class AspmPrinter implements ASPM.resource.aspm.IAspmTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPM.ASPMPackage.MODEL__ID));
 			if (o != null) {
-				ASPM.resource.aspm.IAspmTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPM.resource.aspm.IAspmTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPM.ASPMPackage.MODEL__ID), element));
 				out.print(" ");
@@ -301,7 +301,7 @@ public class AspmPrinter implements ASPM.resource.aspm.IAspmTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPM.ASPMPackage.NODE__IDTRACE));
 			if (o != null) {
-				ASPM.resource.aspm.IAspmTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPM.resource.aspm.IAspmTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPM.ASPMPackage.NODE__IDTRACE), element));
 				out.print(" ");
@@ -407,7 +407,7 @@ public class AspmPrinter implements ASPM.resource.aspm.IAspmTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPM.ASPMPackage.PROP__IDTRACE));
 			if (o != null) {
-				ASPM.resource.aspm.IAspmTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPM.resource.aspm.IAspmTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPM.ASPMPackage.PROP__IDTRACE), element));
 				out.print(" ");
@@ -437,7 +437,7 @@ public class AspmPrinter implements ASPM.resource.aspm.IAspmTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPM.ASPMPackage.PROP__OWNER_TRACE));
 			if (o != null) {
-				ASPM.resource.aspm.IAspmTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPM.resource.aspm.IAspmTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPM.ASPMPackage.PROP__OWNER_TRACE), element));
 				out.print(" ");
@@ -467,7 +467,7 @@ public class AspmPrinter implements ASPM.resource.aspm.IAspmTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPM.ASPMPackage.PROP__VALUE));
 			if (o != null) {
-				ASPM.resource.aspm.IAspmTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPM.resource.aspm.IAspmTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPM.ASPMPackage.PROP__VALUE), element));
 				out.print(" ");
@@ -560,7 +560,7 @@ public class AspmPrinter implements ASPM.resource.aspm.IAspmTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPM.ASPMPackage.EDGE__IDTRACE));
 			if (o != null) {
-				ASPM.resource.aspm.IAspmTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPM.resource.aspm.IAspmTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPM.ASPMPackage.EDGE__IDTRACE), element));
 				out.print(" ");
@@ -605,7 +605,7 @@ public class AspmPrinter implements ASPM.resource.aspm.IAspmTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPM.ASPMPackage.EDGE__SOURCE_TRACE));
 			if (o != null) {
-				ASPM.resource.aspm.IAspmTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPM.resource.aspm.IAspmTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPM.ASPMPackage.EDGE__SOURCE_TRACE), element));
 				out.print(" ");
@@ -635,7 +635,7 @@ public class AspmPrinter implements ASPM.resource.aspm.IAspmTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPM.ASPMPackage.EDGE__TARGET_TRACE));
 			if (o != null) {
-				ASPM.resource.aspm.IAspmTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPM.resource.aspm.IAspmTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPM.ASPMPackage.EDGE__TARGET_TRACE), element));
 				out.print(" ");

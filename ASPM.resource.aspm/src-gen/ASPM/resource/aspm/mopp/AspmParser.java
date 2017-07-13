@@ -13,7 +13,7 @@ import java.util.HashMap;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class AspmParser extends AspmANTLRParserBase {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "LINEBREAK", "QUOTED_34_34", "TEXT", "WHITESPACE", "'('", "')'", "','", "'.'", "'edge'", "'model'", "'node'", "'prop'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "LINEBREAK", "QUOTED_34_34_92", "TEXT", "WHITESPACE", "'('", "')'", "','", "'.'", "'edge'", "'model'", "'node'", "'prop'"
     };
 
     public static final int EOF=-1;
@@ -26,7 +26,7 @@ public class AspmParser extends AspmANTLRParserBase {
     public static final int T__14=14;
     public static final int T__15=15;
     public static final int LINEBREAK=4;
-    public static final int QUOTED_34_34=5;
+    public static final int QUOTED_34_34_92=5;
     public static final int TEXT=6;
     public static final int WHITESPACE=7;
 
@@ -596,7 +596,7 @@ public class AspmParser extends AspmANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPM_Model"
-    // Aspm.g:524:1: parse_ASPM_Model returns [ASPM.Model element = null] : a0= 'model' a1= '(' (a2= QUOTED_34_34 ) a3= ',' (a4= TEXT ) a5= ')' a6= '.' ( (a7_0= parse_ASPM_Node ) )* ( (a8_0= parse_ASPM_Prop ) )* ( (a9_0= parse_ASPM_Edge ) )* ;
+    // Aspm.g:524:1: parse_ASPM_Model returns [ASPM.Model element = null] : a0= 'model' a1= '(' (a2= QUOTED_34_34_92 ) a3= ',' (a4= TEXT ) a5= ')' a6= '.' ( (a7_0= parse_ASPM_Node ) )* ( (a8_0= parse_ASPM_Prop ) )* ( (a9_0= parse_ASPM_Edge ) )* ;
     public final ASPM.Model parse_ASPM_Model() throws RecognitionException {
         ASPM.Model element =  null;
 
@@ -621,8 +621,8 @@ public class AspmParser extends AspmANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 2) ) { return element; }
 
-            // Aspm.g:527:2: (a0= 'model' a1= '(' (a2= QUOTED_34_34 ) a3= ',' (a4= TEXT ) a5= ')' a6= '.' ( (a7_0= parse_ASPM_Node ) )* ( (a8_0= parse_ASPM_Prop ) )* ( (a9_0= parse_ASPM_Edge ) )* )
-            // Aspm.g:528:2: a0= 'model' a1= '(' (a2= QUOTED_34_34 ) a3= ',' (a4= TEXT ) a5= ')' a6= '.' ( (a7_0= parse_ASPM_Node ) )* ( (a8_0= parse_ASPM_Prop ) )* ( (a9_0= parse_ASPM_Edge ) )*
+            // Aspm.g:527:2: (a0= 'model' a1= '(' (a2= QUOTED_34_34_92 ) a3= ',' (a4= TEXT ) a5= ')' a6= '.' ( (a7_0= parse_ASPM_Node ) )* ( (a8_0= parse_ASPM_Prop ) )* ( (a9_0= parse_ASPM_Edge ) )* )
+            // Aspm.g:528:2: a0= 'model' a1= '(' (a2= QUOTED_34_34_92 ) a3= ',' (a4= TEXT ) a5= ')' a6= '.' ( (a7_0= parse_ASPM_Node ) )* ( (a8_0= parse_ASPM_Prop ) )* ( (a9_0= parse_ASPM_Edge ) )*
             {
             a0=(Token)match(input,13,FOLLOW_13_in_parse_ASPM_Model115); if (state.failed) return element;
 
@@ -658,10 +658,10 @@ public class AspmParser extends AspmANTLRParserBase {
             		addExpectedElement(null, ASPM.resource.aspm.mopp.AspmExpectationConstants.EXPECTATIONS[2]);
             	}
 
-            // Aspm.g:556:2: (a2= QUOTED_34_34 )
-            // Aspm.g:557:3: a2= QUOTED_34_34
+            // Aspm.g:556:2: (a2= QUOTED_34_34_92 )
+            // Aspm.g:557:3: a2= QUOTED_34_34_92
             {
-            a2=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPM_Model147); if (state.failed) return element;
+            a2=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPM_Model147); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -672,7 +672,7 @@ public class AspmParser extends AspmANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a2 != null) {
-            				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPM.resource.aspm.IAspmTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPM.ASPMPackage.MODEL__ID), result);
@@ -1001,7 +1001,7 @@ public class AspmParser extends AspmANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPM_Node"
-    // Aspm.g:761:1: parse_ASPM_Node returns [ASPM.Node element = null] : a0= 'node' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= TEXT ) a9= ')' a10= '.' ;
+    // Aspm.g:761:1: parse_ASPM_Node returns [ASPM.Node element = null] : a0= 'node' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ')' a10= '.' ;
     public final ASPM.Node parse_ASPM_Node() throws RecognitionException {
         ASPM.Node element =  null;
 
@@ -1024,8 +1024,8 @@ public class AspmParser extends AspmANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 3) ) { return element; }
 
-            // Aspm.g:764:2: (a0= 'node' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= TEXT ) a9= ')' a10= '.' )
-            // Aspm.g:765:2: a0= 'node' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= TEXT ) a9= ')' a10= '.'
+            // Aspm.g:764:2: (a0= 'node' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ')' a10= '.' )
+            // Aspm.g:765:2: a0= 'node' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ')' a10= '.'
             {
             a0=(Token)match(input,14,FOLLOW_14_in_parse_ASPM_Node355); if (state.failed) return element;
 
@@ -1183,10 +1183,10 @@ public class AspmParser extends AspmANTLRParserBase {
             		addExpectedElement(null, ASPM.resource.aspm.mopp.AspmExpectationConstants.EXPECTATIONS[21]);
             	}
 
-            // Aspm.g:897:2: (a6= QUOTED_34_34 )
-            // Aspm.g:898:3: a6= QUOTED_34_34
+            // Aspm.g:897:2: (a6= QUOTED_34_34_92 )
+            // Aspm.g:898:3: a6= QUOTED_34_34_92
             {
-            a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPM_Node465); if (state.failed) return element;
+            a6=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPM_Node465); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -1197,7 +1197,7 @@ public class AspmParser extends AspmANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a6 != null) {
-            				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPM.resource.aspm.IAspmTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPM.ASPMPackage.NODE__IDTRACE), result);
@@ -1340,7 +1340,7 @@ public class AspmParser extends AspmANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPM_Prop"
-    // Aspm.g:1015:1: parse_ASPM_Prop returns [ASPM.Prop element = null] : a0= 'prop' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= TEXT ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= TEXT ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.' ;
+    // Aspm.g:1015:1: parse_ASPM_Prop returns [ASPM.Prop element = null] : a0= 'prop' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= QUOTED_34_34_92 ) a11= ',' (a12= TEXT ) a13= ',' (a14= QUOTED_34_34_92 ) a15= ')' a16= '.' ;
     public final ASPM.Prop parse_ASPM_Prop() throws RecognitionException {
         ASPM.Prop element =  null;
 
@@ -1369,8 +1369,8 @@ public class AspmParser extends AspmANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 4) ) { return element; }
 
-            // Aspm.g:1018:2: (a0= 'prop' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= TEXT ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= TEXT ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.' )
-            // Aspm.g:1019:2: a0= 'prop' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= TEXT ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= TEXT ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.'
+            // Aspm.g:1018:2: (a0= 'prop' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= QUOTED_34_34_92 ) a11= ',' (a12= TEXT ) a13= ',' (a14= QUOTED_34_34_92 ) a15= ')' a16= '.' )
+            // Aspm.g:1019:2: a0= 'prop' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= QUOTED_34_34_92 ) a11= ',' (a12= TEXT ) a13= ',' (a14= QUOTED_34_34_92 ) a15= ')' a16= '.'
             {
             a0=(Token)match(input,15,FOLLOW_15_in_parse_ASPM_Prop568); if (state.failed) return element;
 
@@ -1528,10 +1528,10 @@ public class AspmParser extends AspmANTLRParserBase {
             		addExpectedElement(null, ASPM.resource.aspm.mopp.AspmExpectationConstants.EXPECTATIONS[34]);
             	}
 
-            // Aspm.g:1151:2: (a6= QUOTED_34_34 )
-            // Aspm.g:1152:3: a6= QUOTED_34_34
+            // Aspm.g:1151:2: (a6= QUOTED_34_34_92 )
+            // Aspm.g:1152:3: a6= QUOTED_34_34_92
             {
-            a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPM_Prop678); if (state.failed) return element;
+            a6=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPM_Prop678); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -1542,7 +1542,7 @@ public class AspmParser extends AspmANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a6 != null) {
-            				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPM.resource.aspm.IAspmTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPM.ASPMPackage.PROP__IDTRACE), result);
@@ -1650,10 +1650,10 @@ public class AspmParser extends AspmANTLRParserBase {
             		addExpectedElement(null, ASPM.resource.aspm.mopp.AspmExpectationConstants.EXPECTATIONS[38]);
             	}
 
-            // Aspm.g:1255:2: (a10= QUOTED_34_34 )
-            // Aspm.g:1256:3: a10= QUOTED_34_34
+            // Aspm.g:1255:2: (a10= QUOTED_34_34_92 )
+            // Aspm.g:1256:3: a10= QUOTED_34_34_92
             {
-            a10=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPM_Prop756); if (state.failed) return element;
+            a10=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPM_Prop756); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -1664,7 +1664,7 @@ public class AspmParser extends AspmANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a10 != null) {
-            				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPM.resource.aspm.IAspmTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPM.ASPMPackage.PROP__OWNER_TRACE), result);
@@ -1768,10 +1768,10 @@ public class AspmParser extends AspmANTLRParserBase {
             		addExpectedElement(null, ASPM.resource.aspm.mopp.AspmExpectationConstants.EXPECTATIONS[42]);
             	}
 
-            // Aspm.g:1355:2: (a14= QUOTED_34_34 )
-            // Aspm.g:1356:3: a14= QUOTED_34_34
+            // Aspm.g:1355:2: (a14= QUOTED_34_34_92 )
+            // Aspm.g:1356:3: a14= QUOTED_34_34_92
             {
-            a14=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPM_Prop834); if (state.failed) return element;
+            a14=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPM_Prop834); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -1782,7 +1782,7 @@ public class AspmParser extends AspmANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a14 != null) {
-            				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPM.resource.aspm.IAspmTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPM.ASPMPackage.PROP__VALUE), result);
@@ -1865,7 +1865,7 @@ public class AspmParser extends AspmANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPM_Edge"
-    // Aspm.g:1422:1: parse_ASPM_Edge returns [ASPM.Edge element = null] : a0= 'edge' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= TEXT ) a9= ',' (a10= TEXT ) a11= ',' (a12= QUOTED_34_34 ) a13= ',' (a14= TEXT ) a15= ',' (a16= QUOTED_34_34 ) a17= ')' a18= '.' ;
+    // Aspm.g:1422:1: parse_ASPM_Edge returns [ASPM.Edge element = null] : a0= 'edge' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= TEXT ) a11= ',' (a12= QUOTED_34_34_92 ) a13= ',' (a14= TEXT ) a15= ',' (a16= QUOTED_34_34_92 ) a17= ')' a18= '.' ;
     public final ASPM.Edge parse_ASPM_Edge() throws RecognitionException {
         ASPM.Edge element =  null;
 
@@ -1896,8 +1896,8 @@ public class AspmParser extends AspmANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 5) ) { return element; }
 
-            // Aspm.g:1425:2: (a0= 'edge' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= TEXT ) a9= ',' (a10= TEXT ) a11= ',' (a12= QUOTED_34_34 ) a13= ',' (a14= TEXT ) a15= ',' (a16= QUOTED_34_34 ) a17= ')' a18= '.' )
-            // Aspm.g:1426:2: a0= 'edge' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= TEXT ) a9= ',' (a10= TEXT ) a11= ',' (a12= QUOTED_34_34 ) a13= ',' (a14= TEXT ) a15= ',' (a16= QUOTED_34_34 ) a17= ')' a18= '.'
+            // Aspm.g:1425:2: (a0= 'edge' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= TEXT ) a11= ',' (a12= QUOTED_34_34_92 ) a13= ',' (a14= TEXT ) a15= ',' (a16= QUOTED_34_34_92 ) a17= ')' a18= '.' )
+            // Aspm.g:1426:2: a0= 'edge' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= TEXT ) a11= ',' (a12= QUOTED_34_34_92 ) a13= ',' (a14= TEXT ) a15= ',' (a16= QUOTED_34_34_92 ) a17= ')' a18= '.'
             {
             a0=(Token)match(input,12,FOLLOW_12_in_parse_ASPM_Edge898); if (state.failed) return element;
 
@@ -2055,10 +2055,10 @@ public class AspmParser extends AspmANTLRParserBase {
             		addExpectedElement(null, ASPM.resource.aspm.mopp.AspmExpectationConstants.EXPECTATIONS[52]);
             	}
 
-            // Aspm.g:1558:2: (a6= QUOTED_34_34 )
-            // Aspm.g:1559:3: a6= QUOTED_34_34
+            // Aspm.g:1558:2: (a6= QUOTED_34_34_92 )
+            // Aspm.g:1559:3: a6= QUOTED_34_34_92
             {
-            a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPM_Edge1008); if (state.failed) return element;
+            a6=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPM_Edge1008); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -2069,7 +2069,7 @@ public class AspmParser extends AspmANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a6 != null) {
-            				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPM.resource.aspm.IAspmTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPM.ASPMPackage.EDGE__IDTRACE), result);
@@ -2236,10 +2236,10 @@ public class AspmParser extends AspmANTLRParserBase {
             		addExpectedElement(null, ASPM.resource.aspm.mopp.AspmExpectationConstants.EXPECTATIONS[58]);
             	}
 
-            // Aspm.g:1712:2: (a12= QUOTED_34_34 )
-            // Aspm.g:1713:3: a12= QUOTED_34_34
+            // Aspm.g:1712:2: (a12= QUOTED_34_34_92 )
+            // Aspm.g:1713:3: a12= QUOTED_34_34_92
             {
-            a12=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPM_Edge1125); if (state.failed) return element;
+            a12=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPM_Edge1125); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -2250,7 +2250,7 @@ public class AspmParser extends AspmANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a12 != null) {
-            				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPM.resource.aspm.IAspmTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPM.ASPMPackage.EDGE__SOURCE_TRACE), result);
@@ -2358,10 +2358,10 @@ public class AspmParser extends AspmANTLRParserBase {
             		addExpectedElement(null, ASPM.resource.aspm.mopp.AspmExpectationConstants.EXPECTATIONS[62]);
             	}
 
-            // Aspm.g:1816:2: (a16= QUOTED_34_34 )
-            // Aspm.g:1817:3: a16= QUOTED_34_34
+            // Aspm.g:1816:2: (a16= QUOTED_34_34_92 )
+            // Aspm.g:1817:3: a16= QUOTED_34_34_92
             {
-            a16=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPM_Edge1203); if (state.failed) return element;
+            a16=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPM_Edge1203); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -2372,7 +2372,7 @@ public class AspmParser extends AspmANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a16 != null) {
-            				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPM.resource.aspm.IAspmTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a16.getText(), element.eClass().getEStructuralFeature(ASPM.ASPMPackage.EDGE__TARGET_TRACE), result);
@@ -2460,7 +2460,7 @@ public class AspmParser extends AspmANTLRParserBase {
     public static final BitSet FOLLOW_EOF_in_start89 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_13_in_parse_ASPM_Model115 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_8_in_parse_ASPM_Model129 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPM_Model147 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPM_Model147 = new BitSet(new long[]{0x0000000000000400L});
     public static final BitSet FOLLOW_10_in_parse_ASPM_Model168 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_TEXT_in_parse_ASPM_Model186 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_9_in_parse_ASPM_Model207 = new BitSet(new long[]{0x0000000000000800L});
@@ -2474,7 +2474,7 @@ public class AspmParser extends AspmANTLRParserBase {
     public static final BitSet FOLLOW_10_in_parse_ASPM_Node408 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_TEXT_in_parse_ASPM_Node426 = new BitSet(new long[]{0x0000000000000400L});
     public static final BitSet FOLLOW_10_in_parse_ASPM_Node447 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPM_Node465 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPM_Node465 = new BitSet(new long[]{0x0000000000000400L});
     public static final BitSet FOLLOW_10_in_parse_ASPM_Node486 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_TEXT_in_parse_ASPM_Node504 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_9_in_parse_ASPM_Node525 = new BitSet(new long[]{0x0000000000000800L});
@@ -2485,15 +2485,15 @@ public class AspmParser extends AspmANTLRParserBase {
     public static final BitSet FOLLOW_10_in_parse_ASPM_Prop621 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_TEXT_in_parse_ASPM_Prop639 = new BitSet(new long[]{0x0000000000000400L});
     public static final BitSet FOLLOW_10_in_parse_ASPM_Prop660 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPM_Prop678 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPM_Prop678 = new BitSet(new long[]{0x0000000000000400L});
     public static final BitSet FOLLOW_10_in_parse_ASPM_Prop699 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_TEXT_in_parse_ASPM_Prop717 = new BitSet(new long[]{0x0000000000000400L});
     public static final BitSet FOLLOW_10_in_parse_ASPM_Prop738 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPM_Prop756 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPM_Prop756 = new BitSet(new long[]{0x0000000000000400L});
     public static final BitSet FOLLOW_10_in_parse_ASPM_Prop777 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_TEXT_in_parse_ASPM_Prop795 = new BitSet(new long[]{0x0000000000000400L});
     public static final BitSet FOLLOW_10_in_parse_ASPM_Prop816 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPM_Prop834 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPM_Prop834 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_9_in_parse_ASPM_Prop855 = new BitSet(new long[]{0x0000000000000800L});
     public static final BitSet FOLLOW_11_in_parse_ASPM_Prop869 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_12_in_parse_ASPM_Edge898 = new BitSet(new long[]{0x0000000000000100L});
@@ -2502,17 +2502,17 @@ public class AspmParser extends AspmANTLRParserBase {
     public static final BitSet FOLLOW_10_in_parse_ASPM_Edge951 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_TEXT_in_parse_ASPM_Edge969 = new BitSet(new long[]{0x0000000000000400L});
     public static final BitSet FOLLOW_10_in_parse_ASPM_Edge990 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPM_Edge1008 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPM_Edge1008 = new BitSet(new long[]{0x0000000000000400L});
     public static final BitSet FOLLOW_10_in_parse_ASPM_Edge1029 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_TEXT_in_parse_ASPM_Edge1047 = new BitSet(new long[]{0x0000000000000400L});
     public static final BitSet FOLLOW_10_in_parse_ASPM_Edge1068 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_TEXT_in_parse_ASPM_Edge1086 = new BitSet(new long[]{0x0000000000000400L});
     public static final BitSet FOLLOW_10_in_parse_ASPM_Edge1107 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPM_Edge1125 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPM_Edge1125 = new BitSet(new long[]{0x0000000000000400L});
     public static final BitSet FOLLOW_10_in_parse_ASPM_Edge1146 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_TEXT_in_parse_ASPM_Edge1164 = new BitSet(new long[]{0x0000000000000400L});
     public static final BitSet FOLLOW_10_in_parse_ASPM_Edge1185 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPM_Edge1203 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPM_Edge1203 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_9_in_parse_ASPM_Edge1224 = new BitSet(new long[]{0x0000000000000800L});
     public static final BitSet FOLLOW_11_in_parse_ASPM_Edge1238 = new BitSet(new long[]{0x0000000000000002L});
 

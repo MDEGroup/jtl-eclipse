@@ -554,7 +554,7 @@ parse_ASPM_Model returns [ASPM.Model element = null]
 	}
 	
 	(
-		a2 = QUOTED_34_34		
+		a2 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPM.resource.aspm.mopp.AspmTerminateParsingException();
@@ -564,7 +564,7 @@ parse_ASPM_Model returns [ASPM.Model element = null]
 				startIncompleteElement(element);
 			}
 			if (a2 != null) {
-				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPM.resource.aspm.IAspmTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPM.ASPMPackage.MODEL__ID), result);
@@ -895,7 +895,7 @@ parse_ASPM_Node returns [ASPM.Node element = null]
 	}
 	
 	(
-		a6 = QUOTED_34_34		
+		a6 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPM.resource.aspm.mopp.AspmTerminateParsingException();
@@ -905,7 +905,7 @@ parse_ASPM_Node returns [ASPM.Node element = null]
 				startIncompleteElement(element);
 			}
 			if (a6 != null) {
-				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPM.resource.aspm.IAspmTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPM.ASPMPackage.NODE__IDTRACE), result);
@@ -1149,7 +1149,7 @@ parse_ASPM_Prop returns [ASPM.Prop element = null]
 	}
 	
 	(
-		a6 = QUOTED_34_34		
+		a6 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPM.resource.aspm.mopp.AspmTerminateParsingException();
@@ -1159,7 +1159,7 @@ parse_ASPM_Prop returns [ASPM.Prop element = null]
 				startIncompleteElement(element);
 			}
 			if (a6 != null) {
-				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPM.resource.aspm.IAspmTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPM.ASPMPackage.PROP__IDTRACE), result);
@@ -1253,7 +1253,7 @@ parse_ASPM_Prop returns [ASPM.Prop element = null]
 	}
 	
 	(
-		a10 = QUOTED_34_34		
+		a10 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPM.resource.aspm.mopp.AspmTerminateParsingException();
@@ -1263,7 +1263,7 @@ parse_ASPM_Prop returns [ASPM.Prop element = null]
 				startIncompleteElement(element);
 			}
 			if (a10 != null) {
-				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPM.resource.aspm.IAspmTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPM.ASPMPackage.PROP__OWNER_TRACE), result);
@@ -1353,7 +1353,7 @@ parse_ASPM_Prop returns [ASPM.Prop element = null]
 	}
 	
 	(
-		a14 = QUOTED_34_34		
+		a14 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPM.resource.aspm.mopp.AspmTerminateParsingException();
@@ -1363,7 +1363,7 @@ parse_ASPM_Prop returns [ASPM.Prop element = null]
 				startIncompleteElement(element);
 			}
 			if (a14 != null) {
-				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPM.resource.aspm.IAspmTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPM.ASPMPackage.PROP__VALUE), result);
@@ -1556,7 +1556,7 @@ parse_ASPM_Edge returns [ASPM.Edge element = null]
 	}
 	
 	(
-		a6 = QUOTED_34_34		
+		a6 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPM.resource.aspm.mopp.AspmTerminateParsingException();
@@ -1566,7 +1566,7 @@ parse_ASPM_Edge returns [ASPM.Edge element = null]
 				startIncompleteElement(element);
 			}
 			if (a6 != null) {
-				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPM.resource.aspm.IAspmTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPM.ASPMPackage.EDGE__IDTRACE), result);
@@ -1710,7 +1710,7 @@ parse_ASPM_Edge returns [ASPM.Edge element = null]
 	}
 	
 	(
-		a12 = QUOTED_34_34		
+		a12 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPM.resource.aspm.mopp.AspmTerminateParsingException();
@@ -1720,7 +1720,7 @@ parse_ASPM_Edge returns [ASPM.Edge element = null]
 				startIncompleteElement(element);
 			}
 			if (a12 != null) {
-				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPM.resource.aspm.IAspmTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPM.ASPMPackage.EDGE__SOURCE_TRACE), result);
@@ -1814,7 +1814,7 @@ parse_ASPM_Edge returns [ASPM.Edge element = null]
 	}
 	
 	(
-		a16 = QUOTED_34_34		
+		a16 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPM.resource.aspm.mopp.AspmTerminateParsingException();
@@ -1824,7 +1824,7 @@ parse_ASPM_Edge returns [ASPM.Edge element = null]
 				startIncompleteElement(element);
 			}
 			if (a16 != null) {
-				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPM.resource.aspm.IAspmTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPM.resource.aspm.IAspmTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a16.getText(), element.eClass().getEStructuralFeature(ASPM.ASPMPackage.EDGE__TARGET_TRACE), result);
@@ -1890,7 +1890,7 @@ WHITESPACE:
 	((' '|'\t'|'\f'))
 	{ _channel = 99; }
 ;
-QUOTED_34_34:
-	(('"')(~('"'))*('"'))
+QUOTED_34_34_92:
+	(('"')(('\\''"')|('\\''\\')|(~('"'|'\\')))*('"'))
 ;
 

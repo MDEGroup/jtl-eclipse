@@ -22,6 +22,24 @@ public class ASPEndogenousLauncher extends AbstractEndogenousLauncher implements
 	}
 
 	/**
+	 * Create an instance of ASPEndogenousLauncher.
+	 * @param sourcemmFile source metamodel file
+	 * @param targetmmFile target metamodel file
+	 * @param sourcemFile source model file
+	 * @param targetmFolder folder where to save generated target models
+	 * @param transfFile file specifying the transformation
+	 * @param tracesFile traces model file
+	 */
+	public ASPEndogenousLauncher(
+			final File sourcemmFile,
+			final File sourcemFile,
+			final File targetmFolder,
+			final File transfFile,
+			final File tracesFile) {
+		super(sourcemmFile, sourcemFile, targetmFolder, transfFile, tracesFile);
+	}
+
+	/**
 	 * Override the generateTransformation method to just
 	 * append the transformation already in the .dl file.
 	 * @param targetmmName name of the target metamodel

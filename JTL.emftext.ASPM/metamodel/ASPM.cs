@@ -16,15 +16,15 @@ TOKENS {
 RULES {
 	
 	@SuppressWarnings(featureWithoutSyntax)
-	Model ::= "model" "(" ID['"','"'] "," name[] ")" "." !0 nodes* props* edges*;
+	Model ::= "model" "(" ID['"','"','\\'] "," name[] ")" "." !0 nodes* props* edges*;
 	
 	@SuppressWarnings(featureWithoutSyntax)
-	Node ::= "node" "(" model[] "," ID[] "," IDtrace['"','"'] "," name[] ")" "." !0;
+	Node ::= "node" "(" model[] "," ID[] "," IDtrace['"','"','\\'] "," name[] ")" "." !0;
 	
 	@SuppressWarnings(featureWithoutSyntax)
-	Prop ::= "prop" "(" model[] "," ID[] "," IDtrace['"','"'] "," owner[] "," ownerTrace['"','"'] "," name[] "," value['"','"'] ")" "." !0;
+	Prop ::= "prop" "(" model[] "," ID[] "," IDtrace['"','"','\\'] "," owner[] "," ownerTrace['"','"','\\'] "," name[] "," value['"','"','\\'] ")" "." !0;
 	
 	@SuppressWarnings(featureWithoutSyntax)
-	Edge ::= "edge" "(" model[] "," ID[] "," IDtrace['"','"'] "," name[] "," source[] "," sourceTrace['"','"'] "," target[] "," targetTrace['"','"'] ")" "." !0;
+	Edge ::= "edge" "(" model[] "," ID[] "," IDtrace['"','"','\\'] "," name[] "," source[] "," sourceTrace['"','"','\\'] "," target[] "," targetTrace['"','"','\\'] ")" "." !0;
 	
 }

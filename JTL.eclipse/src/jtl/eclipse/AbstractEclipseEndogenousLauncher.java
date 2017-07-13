@@ -2,6 +2,8 @@ package jtl.eclipse;
 
 import java.io.File;
 
+import org.eclipse.core.resources.ResourcesPlugin;
+
 import jtl.launcher.AbstractEndogenousLauncher;
 
 public abstract class AbstractEclipseEndogenousLauncher extends AbstractEclipseJTLLauncher {
@@ -24,6 +26,30 @@ public abstract class AbstractEclipseEndogenousLauncher extends AbstractEclipseJ
 		super(sourcemmFile, sourcemmFile, sourcemFile, targetmFolder, transfFile);
 		launcher = new AbstractEndogenousLauncher(
 				sourcemmFile, sourcemFile, targetmFolder, transfFile) {	};
+		this.asp = launcher.getASP();
+		launcher.setWorkingDir(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString());
+	}
+
+	/**
+	 * Default constructor to be used by implementing classes.
+	 * @param sourcemmFile source metamodel file
+	 * @param targetmmFile target metamodel file
+	 * @param sourcemFile source model file
+	 * @param targetmFolder folder where to save generated target models
+	 * @param transfFile file specifying the transformation
+	 * @param tracesFile traces model file
+	 */
+	public AbstractEclipseEndogenousLauncher(
+			final File sourcemmFile,
+			final File sourcemFile,
+			final File targetmFolder,
+			final File transfFile,
+			final File tracesFile) {
+		super(sourcemmFile, sourcemmFile, sourcemFile, targetmFolder, transfFile, tracesFile);
+		launcher = new AbstractEndogenousLauncher(
+				sourcemmFile, sourcemFile, targetmFolder, transfFile, tracesFile) {	};
+		this.asp = launcher.getASP();
+		launcher.setWorkingDir(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString());
 	}
 
 	/**

@@ -195,7 +195,7 @@ public abstract class AbstractASPSolver {
 
 					// Wait until the first atom in the target model to
 					// get the name of the target metamodel to use in model(_, _).
-					if (emptyModel) {
+					if (emptyModel && !atomName.startsWith("trace_")) {
 						atoms.put("nodex", atoms.get("nodex") +
 								String.format("model(\"%s%d\", %s).%n", source, c,
 								atom.getArguments().get(0).toString()

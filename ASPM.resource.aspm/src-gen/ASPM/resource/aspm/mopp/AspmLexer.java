@@ -20,7 +20,7 @@ public class AspmLexer extends Lexer {
     public static final int T__14=14;
     public static final int T__15=15;
     public static final int LINEBREAK=4;
-    public static final int QUOTED_34_34=5;
+    public static final int QUOTED_34_34_92=5;
     public static final int TEXT=6;
     public static final int WHITESPACE=7;
 
@@ -398,16 +398,16 @@ public class AspmLexer extends Lexer {
     }
     // $ANTLR end "WHITESPACE"
 
-    // $ANTLR start "QUOTED_34_34"
-    public final void mQUOTED_34_34() throws RecognitionException {
+    // $ANTLR start "QUOTED_34_34_92"
+    public final void mQUOTED_34_34_92() throws RecognitionException {
         try {
-            int _type = QUOTED_34_34;
+            int _type = QUOTED_34_34_92;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspm.g:1893:13: ( ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) ) )
-            // Aspm.g:1894:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Aspm.g:1893:16: ( ( ( '\"' ) ( ( '\\\\' '\"' ) | ( '\\\\' '\\\\' ) | (~ ( '\"' | '\\\\' ) ) )* ( '\"' ) ) )
+            // Aspm.g:1894:2: ( ( '\"' ) ( ( '\\\\' '\"' ) | ( '\\\\' '\\\\' ) | (~ ( '\"' | '\\\\' ) ) )* ( '\"' ) )
             {
-            // Aspm.g:1894:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
-            // Aspm.g:1894:3: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
+            // Aspm.g:1894:2: ( ( '\"' ) ( ( '\\\\' '\"' ) | ( '\\\\' '\\\\' ) | (~ ( '\"' | '\\\\' ) ) )* ( '\"' ) )
+            // Aspm.g:1894:3: ( '\"' ) ( ( '\\\\' '\"' ) | ( '\\\\' '\\\\' ) | (~ ( '\"' | '\\\\' ) ) )* ( '\"' )
             {
             // Aspm.g:1894:3: ( '\"' )
             // Aspm.g:1894:4: '\"'
@@ -417,22 +417,64 @@ public class AspmLexer extends Lexer {
             }
 
 
-            // Aspm.g:1894:8: (~ ( '\"' ) )*
+            // Aspm.g:1894:8: ( ( '\\\\' '\"' ) | ( '\\\\' '\\\\' ) | (~ ( '\"' | '\\\\' ) ) )*
             loop3:
             do {
-                int alt3=2;
+                int alt3=4;
                 int LA3_0 = input.LA(1);
 
-                if ( ((LA3_0 >= '\u0000' && LA3_0 <= '!')||(LA3_0 >= '#' && LA3_0 <= '\uFFFF')) ) {
-                    alt3=1;
+                if ( (LA3_0=='\\') ) {
+                    int LA3_2 = input.LA(2);
+
+                    if ( (LA3_2=='\"') ) {
+                        alt3=1;
+                    }
+                    else if ( (LA3_2=='\\') ) {
+                        alt3=2;
+                    }
+
+
+                }
+                else if ( ((LA3_0 >= '\u0000' && LA3_0 <= '!')||(LA3_0 >= '#' && LA3_0 <= '[')||(LA3_0 >= ']' && LA3_0 <= '\uFFFF')) ) {
+                    alt3=3;
                 }
 
 
                 switch (alt3) {
             	case 1 :
-            	    // Aspm.g:
+            	    // Aspm.g:1894:9: ( '\\\\' '\"' )
             	    {
-            	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '\uFFFF') ) {
+            	    // Aspm.g:1894:9: ( '\\\\' '\"' )
+            	    // Aspm.g:1894:10: '\\\\' '\"'
+            	    {
+            	    match('\\'); 
+
+            	    match('\"'); 
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 2 :
+            	    // Aspm.g:1894:19: ( '\\\\' '\\\\' )
+            	    {
+            	    // Aspm.g:1894:19: ( '\\\\' '\\\\' )
+            	    // Aspm.g:1894:20: '\\\\' '\\\\'
+            	    {
+            	    match('\\'); 
+
+            	    match('\\'); 
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 3 :
+            	    // Aspm.g:1894:30: (~ ( '\"' | '\\\\' ) )
+            	    {
+            	    if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '!')||(input.LA(1) >= '#' && input.LA(1) <= '[')||(input.LA(1) >= ']' && input.LA(1) <= '\uFFFF') ) {
             	        input.consume();
             	    }
             	    else {
@@ -451,8 +493,8 @@ public class AspmLexer extends Lexer {
             } while (true);
 
 
-            // Aspm.g:1894:17: ( '\"' )
-            // Aspm.g:1894:18: '\"'
+            // Aspm.g:1894:45: ( '\"' )
+            // Aspm.g:1894:46: '\"'
             {
             match('\"'); 
 
@@ -471,10 +513,10 @@ public class AspmLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "QUOTED_34_34"
+    // $ANTLR end "QUOTED_34_34_92"
 
     public void mTokens() throws RecognitionException {
-        // Aspm.g:1:8: ( T__8 | T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | TEXT | LINEBREAK | WHITESPACE | QUOTED_34_34 )
+        // Aspm.g:1:8: ( T__8 | T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | TEXT | LINEBREAK | WHITESPACE | QUOTED_34_34_92 )
         int alt4=12;
         switch ( input.LA(1) ) {
         case '(':
@@ -826,9 +868,9 @@ public class AspmLexer extends Lexer {
                 }
                 break;
             case 12 :
-                // Aspm.g:1:82: QUOTED_34_34
+                // Aspm.g:1:82: QUOTED_34_34_92
                 {
-                mQUOTED_34_34(); 
+                mQUOTED_34_34_92(); 
 
 
                 }

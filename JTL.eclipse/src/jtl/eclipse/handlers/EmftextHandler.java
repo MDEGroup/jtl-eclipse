@@ -1,6 +1,7 @@
 package jtl.eclipse.handlers;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -15,6 +16,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import jtl.transformations.EmftextConverter;
+import jtl.transformations.RegisterMetamodel;
 
 /**
  * Eclipse handler for Emftext transformations.
@@ -47,7 +49,7 @@ public class EmftextHandler extends AbstractHandler {
 
 		// Perform the transformation
 		String targetFile = new EmftextConverter().convert(
-				new File(file.getRawLocationURI().toString()));
+				new File(file.getFullPath().toString()));
 
 		// Refresh the Project Explorer to show the new file
 		try {
@@ -57,11 +59,30 @@ public class EmftextHandler extends AbstractHandler {
 			e.printStackTrace();
 		}
 
+		// Register the target metamodel
+		registerEmftextMetamodel(file.getFileExtension());
+
 		MessageDialog.openInformation(
 				window.getShell(),
 				"Conversion completed",
 				String.format("%s\nconverted to\n%s.",
 						file.getFullPath(), targetFile));
 		return null;
+	}
+
+	private void registerEmftextMetamodel(final String extension) {
+		try {
+			if (extension.equals("aspm")) {
+				RegisterMetamodel.registerMetamodel(new File(
+						new it.univaq.jtl.atl.mm2aspm.MM2ASPmGenerator()
+							.getMetamodelUri("ASPm")));
+			} else if (extension.equals("aspmm")) {
+				RegisterMetamodel.registerMetamodel(new File(
+						new it.univaq.jtl.atl.ecore2aspmm.Ecore2ASPmm()
+							.getMetamodelUri("ASPmm")));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

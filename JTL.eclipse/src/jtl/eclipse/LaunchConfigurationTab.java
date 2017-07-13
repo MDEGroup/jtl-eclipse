@@ -1,6 +1,8 @@
 package jtl.eclipse;
 
 
+import java.util.ArrayList;
+
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -16,6 +18,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -28,6 +31,9 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 	private Text sourcemText;
 	private Text targetmText;
 	private Text transfText;
+	private Button tracesCheck;
+	private Text tracesText;
+	private ArrayList<Control> tracesControls = new ArrayList<Control>();
 
 
 	@Override
@@ -164,6 +170,40 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         		updateLaunchConfigurationDialog();
         	}
         });
+
+        // Traces model
+        tracesCheck = new Button(transfGroup, SWT.CHECK);
+        tracesCheck.setText("Provide a trace model");
+        tracesCheck.setLayoutData(
+        		new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+        tracesCheck.addSelectionListener(new SelectionAdapter() {
+        	@Override
+            public void widgetSelected(SelectionEvent e) {
+            	final Button check = (Button) e.getSource();
+            	setTraceModelVisible(check.getSelection());
+        		updateLaunchConfigurationDialog();
+        	}
+        });
+        final Label tracesLabel = new Label(transfGroup, SWT.NONE);
+        tracesLabel.setText("Traces:");
+        tracesText = new Text(transfGroup, SWT.BORDER);
+        tracesText.setLayoutData(
+        		new GridData(SWT.FILL, SWT.CENTER, true, false));
+        tracesText.addModifyListener(modListener);
+        final Button tracesButton = new Button(transfGroup, SWT.PUSH);
+        tracesButton.setText("Browse...");
+        tracesButton.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+        		tracesText.setText(selectResource(
+        				"Select a resource as trace model",
+        				IResource.FILE));
+        		updateLaunchConfigurationDialog();
+        	}
+        });
+        tracesControls.add(tracesLabel);
+        tracesControls.add(tracesText);
+        tracesControls.add(tracesButton);
 	}
 
 	@Override
@@ -183,6 +223,11 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 				.getAttribute(LaunchConfigurationAttributes.TARGETM_TEXT, ""));
 			transfText.setText(configuration
 				.getAttribute(LaunchConfigurationAttributes.TRANSF_TEXT, ""));
+			tracesText.setText(configuration
+					.getAttribute(LaunchConfigurationAttributes.TRACE_TEXT, ""));
+			tracesCheck.setSelection(configuration
+					.getAttribute(LaunchConfigurationAttributes.TRACE_CHECK, false));
+			setTraceModelVisible(tracesCheck.getSelection());
 		} catch (CoreException e) {
 			System.out.println("Unable to load the configuration data.");
 			e.printStackTrace();
@@ -201,6 +246,10 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 				targetmText.getText());
 		configuration.setAttribute(LaunchConfigurationAttributes.TRANSF_TEXT,
 				transfText.getText());
+		configuration.setAttribute(LaunchConfigurationAttributes.TRACE_TEXT,
+				tracesText.getText());
+		configuration.setAttribute(LaunchConfigurationAttributes.TRACE_CHECK,
+				tracesCheck.getSelection());
 	}
 
 	@Override
@@ -239,6 +288,9 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 		if (transfText.getText().equals("")) {
 			errorMsg += ", the JTL transformation";
 		}
+		if (tracesCheck.getSelection() && tracesText.getText().equals("")) {
+			errorMsg += ", the trace model";
+		}
 		if (!errorMsg.equals("")) {
 			errorMsg = "Please, select a path for " + errorMsg.substring(1) + ".";
 			this.setErrorMessage(errorMsg);
@@ -247,6 +299,12 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 
 		this.setErrorMessage(null);
 		return super.isValid(launchConfig);
+	}
+
+	private void setTraceModelVisible(final boolean visible) {
+		for (Control c : tracesControls) {
+			c.setVisible(visible);
+		}
 	}
 
 }
