@@ -418,7 +418,7 @@ rule JTLRelation2ASPRelation {
 				}
 				
 				-- When the 'when' clause is set
-				if (not predicate_where.oclIsUndefined()) {
+				if (not predicate_where.oclIsUndefined() and false) {
 				    
 				    -- Look for Predicates of type OperationCallExp in the 'when' clause
 					for (p in predicate_where) {
@@ -950,7 +950,9 @@ lazy rule Predicate2Metaedge{
 			-- literals <- thisModule.literal_association(),
 			literals <-  s.getLiteralMetaedgeName(),
 			literals <-	 s.pattern.getLiteralMetaclass(), -- source metaclass
-			literals <-	 s.getLiteralMetanodeTarget(),-- target metaclass
+			--literals <- thisModule.JTLPattern2ASPLiteral_MC(s.pattern),
+			--literals <-	 s.getLiteralMetanodeTarget(),-- target metaclass
+			literals <- thisModule.JTLPredicate2ASPLiteral_MET(s),
 			transformation <- thisModule.transformationRoot
 		)
 	do	{
