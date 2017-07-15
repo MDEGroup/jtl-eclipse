@@ -37,6 +37,7 @@ is_target_metamodel_conform(MM,Edge) :- metaedge(MM,MetaEdge,Edge,NodeSource,Nod
 is_related(MM,Node) :- relation_node(R,MM,Node,X), relation_node(R,MM2,Node2,Y).
 is_related(MM,Prop) :- relation_prop(R,MM,Prop,Node,X), relation_prop(R,MM2,Prop2,Node2,Y).
 is_related(MM,Edge) :- relation_edge(R,MM,Edge,NodeSource,NodeTarget,X), relation_edge(R,MM2,Edge2,NodeSource2,NodeTarget2,Y).
+is_related(MM,Edge) :- relation_edge(R,MM,Edge,NodeSource,NodeTarget,X), relation_node(R,MM2,Node2,Y).
 
 %%%%%%%%%% Mapping Rules %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -69,6 +70,14 @@ mapping_edge(MM,IDX,IDx,Edge,IDSZ,IDSx,IDTZ,IDTx) :-
             relation_node(R1,MM,_,Z), relation_node(R1,MM2,NodeTarget2,W), node(MM2,IDT,IDTx,NodeTarget2),
             relation_node(R2,MM,_,Z2), relation_node(R2,MM2,NodeSource2,W2), node(MM2,IDS,IDSx,NodeSource2),
             IDX=ID+X, IDTZ=IDT+Z, IDSZ=IDS+Z2, MM!=MM2.
+
+% edge from node
+mapping_edge(MM,ID,IDx,Edge,ID,IDx,IDT,IDTx) :-
+relation_edge(R,MM,Edge,NodeSource,NodeTarget,X),relation_node(R,MM2,Node2,Y),
+relation_node(R2,MM,NodeSource,Z), relation_node(R2,MM2,Node2,W),
+         node(MM2,ID,IDx,Node2), nodex(MM,ID,IDx,NodeSource),
+         nodex(MM,IDT,IDTx,NodeTarget),
+         MM!=MM2.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
