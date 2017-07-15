@@ -1,0 +1,3 @@
+ instructions.install = \
+    chmod(targetDir:@artifact,targetFile:lib/dl-complex.linux.20110713.static.beta,permissions:755);
+    chmod(targetDir:@artifact,targetFile:lib/dl-complex.mac.20110713.static.beta,permissions:755);
