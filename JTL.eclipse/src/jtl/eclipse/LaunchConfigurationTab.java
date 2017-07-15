@@ -297,6 +297,30 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 			return false;
 		}
 
+		if (sourcemmText.getText().contains(" ")) {
+			errorMsg += "source metamodel, ";
+		}
+		if (targetmmText.getText().contains(" ")) {
+			errorMsg += "target metamodel, ";
+		}
+		if (sourcemText.getText().contains(" ")) {
+			errorMsg += "source model, ";
+		}
+		if (targetmText.getText().contains(" ")) {
+			errorMsg += "target models folder, ";
+		}
+		if (transfText.getText().contains(" ")) {
+			errorMsg += "JTL transformation, ";
+		}
+		if (tracesCheck.getSelection() && tracesText.getText().contains(" ")) {
+			errorMsg += "trace model, ";
+		}
+		if (!errorMsg.equals("")) {
+			errorMsg = errorMsg.substring(0, errorMsg.length() - 2) + " cannot contain spaces.";
+			this.setErrorMessage(errorMsg);
+			return false;
+		}
+
 		this.setErrorMessage(null);
 		return super.isValid(launchConfig);
 	}
