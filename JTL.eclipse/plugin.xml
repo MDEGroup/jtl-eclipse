@@ -299,5 +299,18 @@
        <adapter type="org.eclipse.debug.ui.actions.ILaunchable"/>
      </factory>
    </extension>
+   
+   <!-- New Project Wizard -->
+   <extension point="org.eclipse.ui.newWizards">
+     <category id="it.univaq.jtl.eclipse.JTLProjectCategory" name="JTL Project">
+     </category>
+         <!--icon="/icons/default_new_icon.gif"-->
+     <wizard
+         category="it.univaq.jtl.eclipse.JTLProjectCategory"
+         class="jtl.eclipse.JTLNewProjectWizard"
+         id="jtl.eclipse.JTLNewProjectWizard"
+         name="JTL Project" project="true">
+	 </wizard>
+   </extension>
      
 </plugin>

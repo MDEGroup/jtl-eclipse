@@ -26,6 +26,6 @@ Require-Bundle: org.eclipse.ui,
  JTL.resource.jtl
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Import-Package: org.eclipse.ui.dialogs
+Import-Package: org.eclipse.ui.dialogs, org.eclipse.ui.actions
 Bundle-Classpath: .
 Bundle-Vendor: JTL
