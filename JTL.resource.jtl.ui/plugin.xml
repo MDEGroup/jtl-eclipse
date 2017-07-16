@@ -27,16 +27,6 @@
 		</page>
 	</extension>
 	
-	<extension point="org.eclipse.ui.newWizards">
-		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
-		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="JTL.resource.jtl.ui.JtlNewFileWizard" id="JTL.resource.jtl.ui.JtlNewFileWizard" name="EMFText .jtl file">
-		</wizard>
-		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
-		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="JTL.resource.jtl.ui.JtlNewProjectWizard" id="JTL.resource.jtl.ui.JtlNewProjectWizard" name="EMFText jtl project" project="true">
-		</wizard>
-	</extension>
 	
 	<extension point="org.eclipse.ui.ide.markerResolution">
 		<markerResolutionGenerator class="JTL.resource.jtl.ui.JtlMarkerResolutionGenerator" markerType="JTL.resource.jtl.problem">

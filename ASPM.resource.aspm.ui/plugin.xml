@@ -27,16 +27,6 @@
 		</page>
 	</extension>
 	
-	<extension point="org.eclipse.ui.newWizards">
-		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
-		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="ASPM.resource.aspm.ui.AspmNewFileWizard" id="ASPM.resource.aspm.ui.AspmNewFileWizard" name="EMFText .aspm file">
-		</wizard>
-		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
-		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="ASPM.resource.aspm.ui.AspmNewProjectWizard" id="ASPM.resource.aspm.ui.AspmNewProjectWizard" name="EMFText aspm project" project="true">
-		</wizard>
-	</extension>
 	
 	<extension point="org.eclipse.ui.ide.markerResolution">
 		<markerResolutionGenerator class="ASPM.resource.aspm.ui.AspmMarkerResolutionGenerator" markerType="ASPM.resource.aspm.problem">

@@ -27,16 +27,6 @@
 		</page>
 	</extension>
 	
-	<extension point="org.eclipse.ui.newWizards">
-		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
-		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="ASP.resource.asp.ui.AspNewFileWizard" id="ASP.resource.asp.ui.AspNewFileWizard" name="EMFText .asp file">
-		</wizard>
-		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
-		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="ASP.resource.asp.ui.AspNewProjectWizard" id="ASP.resource.asp.ui.AspNewProjectWizard" name="EMFText asp project" project="true">
-		</wizard>
-	</extension>
 	
 	<extension point="org.eclipse.ui.ide.markerResolution">
 		<markerResolutionGenerator class="ASP.resource.asp.ui.AspMarkerResolutionGenerator" markerType="ASP.resource.asp.problem">
