@@ -33,7 +33,7 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 	public Map<?, ?> getOptions() {
 		return Collections.singletonMap(IJtlOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
 	}
-	
+
 	@Override
 	public IJtlResourcePostProcessor getResourcePostProcessor() {
 		return this;
@@ -43,7 +43,7 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 	public void process(JtlResource resource) {
 		EObject root = resource.getContents().get(0);
 		// perform model modifications here
-		
+
 		// Set the value of Transformation->Relation->Domain.model
 		ListIterator<EObject> domains = find(root, DomainImpl.class).listIterator();
 		while (domains.hasNext()) {
@@ -57,7 +57,7 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 				}
 			}
 		}
-		
+
 		// Set the value of Transformation->Relation->Domain->Pattern.domain
 		ListIterator<EObject> patterns = find(root, PatternImpl.class).listIterator();
 		while (patterns.hasNext()) {
@@ -67,7 +67,6 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 			if (DomainImpl.class.isInstance(pattern.eContainer())) {
 				pattern.eSet(domain, pattern.eContainer());
 			// Otherwise use the first Domain in the current Relation
-			// FIXME Does this make any sense?
 			} else {
 				EObject relation = findInPath(root, pattern, RelationImpl.class);
 				ListIterator<EObject> l = relation.eContents().listIterator();
@@ -104,7 +103,7 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 			if (relation != null) {
 				opcallexp.eSet(oceRefOp, relation);
 			}
-			
+
 			EStructuralFeature argument = opcallexp.eClass().getEStructuralFeature("argument");
 			if (opcallexp.eIsSet(argument)) {
 				ListIterator<EObject> t = opcallexp.eContents().listIterator();
@@ -128,7 +127,7 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 				}
 			}
 		}
-		
+
 		// Set the value of OperationCallExp.referredOperation
 		opcallexps = find(root, OperationCallExpImpl.class).listIterator();
 		while (opcallexps.hasNext()) {
@@ -137,7 +136,7 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 			EStructuralFeature referredOperation = opcallexp.eClass().getEStructuralFeature("referredOperation");
 			opcallexp.eSet(referredOperation, findSingle(root, RelationImpl.class, "name", opcallexp.eGet(name)));
 		}
-		
+
 		// Set the value of VariableExp.referredVariable
 		ListIterator<EObject> varexps = find(root, VariableExpImpl.class).listIterator();
 		while (varexps.hasNext()) {
@@ -152,7 +151,7 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 				}
 			}
 		}
-		
+
 		// Create the PropertyCallExp element as AssignExp.left
 		EClass propertyCallExpEClass = (EClass) modelMetaData.getType("http:///essentialocl.ecore", "PropertyCallExp");
 		ListIterator<EObject> assignexps = find(root, AssignExpImpl.class).listIterator();
@@ -166,15 +165,15 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 				assignexp.eSet(left, propertyCallExp);
 			}
 		}
-		
+
 		// In the case of endogenous transformations, rename the source and target metamodels
 		endogenousTransformationRename(root);
-		
+
 	}
 
 	@Override
 	public void terminate() { }
-	
+
 	/**
 	 * Find instances of a specific class in the model.
 	 * @param root - Model root.
@@ -192,7 +191,7 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 		}
 		return found;
 	}
-	
+
 	/**
 	 * Find instances of a specific class in the model having a provided feature.
 	 * @param root - Model root.
@@ -215,10 +214,10 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 		}
 		return found;
 	}
-	
+
 	/**
 	 * Find a single instance of a specific class having a provided feature.
-	 * 
+	 *
 	 * @param root - Model root.
 	 * @param implClass - Class to find.
 	 * @param feature - Feature to look for.
@@ -240,10 +239,10 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 		return null;
 
 	}
-	
+
 	/**
 	 * Find the first istance of a specific class along the path to root.
-	 * 
+	 *
 	 * @param root - Model root.
 	 * @param currentObj - Model starting point.
 	 * @param implClass - Class to find.
@@ -257,7 +256,7 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Rename the type feature of all the ObjectTemplateExp
 	 * objects found in a domain.
@@ -271,13 +270,13 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 			EStructuralFeature type = objtplexp.eClass().getEStructuralFeature("type");
 			objtplexp.eSet(type, rename);
 		}
-		
+
 	}
-	
+
 	/*
 	 * In the case of endogenous transformations,
 	 * rename the source and target metamodels.
-	 * 
+	 *
 	 * @param root - Model root.
 	 */
 	private void endogenousTransformationRename(EObject root) {
@@ -288,25 +287,25 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 		if (!model1.eGet(metamodelname).equals(model2.eGet(metamodelname))) {
 			return;
 		}
-		
+
 		// Endogenous case
 		String sourcemmRename = model1.eGet(metamodelname) + "_source";
 		String targetmmRename = model2.eGet(metamodelname) + "_target";
-		
+
 		// Change metamodels names
 		model1.eSet(metamodelname, sourcemmRename);
 		model2.eSet(metamodelname, targetmmRename);
-		
+
 		// Iterate over relations to rename ObjectTemplateExp.type
 		while (l.hasNext()) {
 			EObject relation = l.next();
 			if (RelationImpl.class.isInstance(relation)) {
 				EList<EObject> domains = relation.eContents();
-				
+
 				// Look for ObjectTemplateExp in the first (source) domain
 				EObject domain1 = domains.get(0);
 				renameObjTplExpTypeInDomain(domain1, sourcemmRename);
-				
+
 				// Look for ObjectTemplateExp in the second (target) domain
 				EObject domain2 = domains.get(1);
 				renameObjTplExpTypeInDomain(domain2, targetmmRename);
