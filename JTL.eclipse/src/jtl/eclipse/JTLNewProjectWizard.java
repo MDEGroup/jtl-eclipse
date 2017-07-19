@@ -1,6 +1,9 @@
 package jtl.eclipse;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspace;
@@ -9,6 +12,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
@@ -43,11 +47,13 @@ public class JTLNewProjectWizard extends Wizard implements INewWizard {
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		// Set default image for all wizard pages
-//		org.eclipse.core.runtime.IPath path = new org.eclipse.core.runtime.Path("icons/new_project_wizban.gif");
-//		org.osgi.framework.Bundle bundle = ASPM.resource.aspm.ui.AspmUIPlugin.getDefault().getBundle();
-//		java.net.URL url = org.eclipse.core.runtime.FileLocator.find(bundle, path, null);
-//		org.eclipse.jface.resource.ImageDescriptor descriptor = org.eclipse.jface.resource.ImageDescriptor.createFromURL(url);
-//		setDefaultPageImageDescriptor(descriptor);
+		URL url = null;
+		try {
+			url = new URL("platform:/plugin/JTL.eclipse/icons/newprj_wiz.png");
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		setDefaultPageImageDescriptor(ImageDescriptor.createFromURL(url));
 
 		wizardNewProjectCreationPage =new WizardNewProjectCreationPage("New JTL project");
 		wizardNewProjectCreationPage.setTitle("New JTL project");

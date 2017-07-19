@@ -71,6 +71,7 @@
             locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
         <menu
         	id="JTL.menus.popupMenu"
+        	icon="/icons/jtl.gif"
            	label="JTL">
 
           <!-- Command menu for ATL Transformation (JTL to ASP) -->
@@ -269,6 +270,7 @@
        modes="run"
        class="jtl.eclipse.LaunchShortcut"
        description="Launch a JTL transformation"
+       icon="/icons/jtl.gif"
        id="JTL.launchShortcut">
 	   <description description="Run JTL transformation" mode="run" />
        <contextualLaunch>
@@ -304,11 +306,11 @@
    <extension point="org.eclipse.ui.newWizards">
      <category id="it.univaq.jtl.eclipse.JTLProjectCategory" name="JTL Project">
      </category>
-         <!--icon="/icons/default_new_icon.gif"-->
      <wizard
          category="it.univaq.jtl.eclipse.JTLProjectCategory"
          class="jtl.eclipse.JTLNewProjectWizard"
          id="jtl.eclipse.JTLNewProjectWizard"
+         icon="/icons/new_project_wizard.gif"
          name="JTL Project" project="true">
 	 </wizard>
    </extension>

@@ -50,10 +50,7 @@ public class LaunchShortcut implements ILaunchShortcut {
 	}
 
 	@Override
-	public void launch(IEditorPart arg0, String arg1) {
-		// TODO Auto-generated method stub
-
-	}
+	public void launch(IEditorPart arg0, String arg1) {	}
 
 	private void launch(IFile file, String mode) {
 		try {
