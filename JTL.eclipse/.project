@@ -3,6 +3,8 @@
 	<name>JTL.eclipse</name>
 	<comment></comment>
 	<projects>
+		<project>JTL</project>
+		<project>JTL.atl</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

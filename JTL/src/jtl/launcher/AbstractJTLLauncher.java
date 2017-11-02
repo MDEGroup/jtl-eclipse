@@ -643,10 +643,14 @@ public abstract class AbstractJTLLauncher {
 		try {
 			Properties prop = new Properties();
 			ClassLoader cl = AbstractJTLLauncher.class.getClassLoader();
-			InputStream in = cl.getResourceAsStream(config);
+			InputStream in = null;
+			in = cl.getResourceAsStream(config);
+			if (in == null) cl.getResourceAsStream("resources/" + config);
 			prop.load(in);
 			String te = prop.getProperty("transformation_engine");
-			InputStream is = cl.getResourceAsStream(te);
+			InputStream is = null;
+			is = cl.getResourceAsStream(te);
+			if (is == null) cl.getResourceAsStream("resources/" + te);
 			byte[] buffer = new byte[10240]; // 10KB
 			int len;
 			while ((len = is.read(buffer)) != -1) {

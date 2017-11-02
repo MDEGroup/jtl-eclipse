@@ -85,6 +85,13 @@ helper context JTL!Pattern def: getLiteralMetaclass(): ASP!Literal =
 		else thisModule.literals.get(self.templateExpression.referredClass)
 	endif;
 
+--- This helper calls a lazy rule to create a metaclass literal, in case the literal was not created previously
+helper context JTL!ObjectTemplateExp def: getLiteralMetaclass(): ASP!Literal =
+	if thisModule.literals.get(self.referredClass).oclIsUndefined() 
+		then thisModule.JTLObjTplExp2ASPLiteral_MC(self)
+		else thisModule.literals.get(self.referredClass)
+	endif;
+
 --- This helper calls lazy rule to create a metaprop literal, in case the literal was not created previously
 helper context JTL!Predicate def: getLiteralMetaprop(): ASP!Literal =
 	if thisModule.literals->get(self.conditionExpression.left.name).oclIsUndefined() 
@@ -98,6 +105,12 @@ helper context JTL!Predicate def: getLiteralMetaedgeName(): ASP!Literal =
 		then thisModule.JTLPredicate2ASPLiteral_MENAME(self)
 		else thisModule.literals.get('MENAME_' + self.conditionExpression.left.name)
 	endif;
+
+helper context JTL!ObjectTemplateExp def: getLiteralMetaedgeName(): ASP!Literal =
+    if thisModule.literals->get('MENAME_' + self->refImmediateComposite().left.name).oclIsUndefined()
+    		then thisModule.JTLObjTplExp2ASPLiteral_MENAME(self)
+    		else thisModule.literals.get('MENAME_' + self->refImmediateComposite().left.name)
+    	endif;
 
 --- This helper calls lazy rule to create a metanode literal as the target node of an edge, in case the literal was not created previously
 helper context JTL!Predicate def: getLiteralMetanodeTarget(): ASP!Literal =
@@ -238,6 +251,9 @@ helper context JTL!Predicate def: getMetaedgeKey(): String =
 		else ''
 	endif;
 
+helper context JTL!ObjectTemplateExp def: getMetaedgeKey(): String =
+    self.getPredicateFromObjTplExp().pattern.getPatternMetanodeKey() + '.' + self->refImmediateComposite().left.name + ':' + self.referredClass;
+
 --- maps the metaclass type ('Metanode', 'Metaprop', 'Metaedge') to the pattern type ('node', 'prop', 'edge')
 helper def: patternType: Map (ASP!Function, String) = Map {(ASP!Metanode, 'node'), (ASP!Metaprop, 'prop'), (ASP!Metaedge, 'edge')};
 
@@ -276,6 +292,23 @@ helper context JTL!Relation def: getPredicatesWithObjTplExp(): Sequence(JTL!Pred
 	  ->collect(a|a.predicate)->flatten()													-- look for predicates
 	  ->select(a|a.conditionExpression.oclIsTypeOf(JTL!AssignExp))							-- check if they contain an assignment
 	  ->select(a|a.conditionExpression.value.first().oclIsTypeOf(JTL!ObjectTemplateExp));	-- and if the value is of type ObjectTemplateExp
+
+--- Recursively find ObjectTemplateExp names
+helper context JTL!ObjectTemplateExp def: getAllObjTplExp(): Sequence(JTL!ObjectTemplateExp) =
+    if not self.inside.first().oclIsUndefined()
+    then
+    	Sequence{self, self.inside->select(a|a.isObjectTemplateExp())->collect(a|a.value.first().getAllObjTplExp())}->flatten()
+    else
+        Sequence{self}
+    endif;
+    
+--- Get ObjectTemplateExp corresponding Predicate
+helper context JTL!ObjectTemplateExp def: getPredicateFromObjTplExp(): JTL!Predicate =
+    if self->refImmediateComposite()->refImmediateComposite()->oclIsTypeOf(JTL!Predicate) then
+    		self->refImmediateComposite()->refImmediateComposite()
+    	else
+    	    self->refImmediateComposite()->refImmediateComposite().getPredicateFromObjTplExp()
+    	endif;
 
 -------------------------------------------------------------------------------------------------------------------
 ----------------------*******************RULES*********************------------------------------------------------
@@ -370,14 +403,38 @@ rule JTLRelation2ASPRelation {
 				
 				-- For every predicate in the first domain look for ObjectTemplateExp with value
 				-- matching an OperationTemplateExp in a predicate in the second domain
+--				for (p1 in predicate_1) {
+--				    if (p1.conditionExpression.isObjectTemplateExp()) {
+				        --p1.conditionExpression.value.first().getAllObjTplExp()->debug('ObjTplExp:');
+--				        for (p2 in predicate_2) {
+--				            if (p2.conditionExpression.isObjectTemplateExp()) {
+				        		--p2.conditionExpression.value.first().getAllObjTplExp()->debug('ObjTplExp:');
+				                --if (p1.conditionExpression.value.first().name = p2.conditionExpression.value.first().name) {
+--				                if (p1.conditionExpression.value.first().getAllObjTplExp().asSet()
+--				                    ->intersection(
+--				                    p2.conditionExpression.value.first().getAllObjTplExp())->notEmpty()) {
+--				                    thisModule.newPred2PredRelation(p1, p2, s.name);						-- relation_edge
+--				                    thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p1, p2);	-- domain 1 to domain 2
+--				                    thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p2, p1);	-- domain 2 to domain 1
+--				                }
+--				            }
+--				        }
+--				    }
+--				}
 				for (p1 in predicate_1) {
 				    if (p1.conditionExpression.isObjectTemplateExp()) {
 				        for (p2 in predicate_2) {
 				            if (p2.conditionExpression.isObjectTemplateExp()) {
-				                if (p1.conditionExpression.value.first().name = p2.conditionExpression.value.first().name) {
-				                    thisModule.newPred2PredRelation(p1, p2, s.name);						-- relation_edge
-				                    thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p1, p2);	-- domain 1 to domain 2
-				                    thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p2, p1);	-- domain 2 to domain 1
+				                for (ote1 in p1.conditionExpression.value.first().getAllObjTplExp()) {
+				                    for (ote2 in p2.conditionExpression.value.first().getAllObjTplExp()) {
+				                        if (ote1.name = ote2.name) {
+				                            ote1->debug('ote1');
+				                            ote2->debug('ote2');
+				                            thisModule.newObjTplExp2ObjTplExpRelation(ote1, ote2, s.name);
+						                    thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p1, p2);	-- domain 1 to domain 2
+						                    thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p2, p1);	-- domain 2 to domain 1
+				                        }
+				                    }
 				                }
 				            }
 				        }
@@ -418,21 +475,21 @@ rule JTLRelation2ASPRelation {
 				}
 				
 				-- When the 'when' clause is set
-				if (not predicate_where.oclIsUndefined() and false) {
+--				if (not predicate_where.oclIsUndefined() and false) {
 				    
 				    -- Look for Predicates of type OperationCallExp in the 'when' clause
-					for (p in predicate_where) {
-					    for (r in relations) {
-					    	r->debug('Relation:');
-					    	r.domain
-					    		->collect(a|a.pattern) 
-					    		->collect(a|a.predicate)->flatten()
-					    		->select(a|a.conditionExpression.oclIsTypeOf(JTL!AssignExp))
-					    		->select(a|a.conditionExpression.value.first().oclIsTypeOf(JTL!ObjectTemplateExp))
-					    		->debug('ObjTemExp:');
-					    }					    
-					}
-				}
+--					for (p in predicate_where) {
+--					    for (r in relations) {
+--					    	r->debug('Relation:');
+--					    	r.domain
+--					    		->collect(a|a.pattern) 
+--					    		->collect(a|a.predicate)->flatten()
+--					    		->select(a|a.conditionExpression.oclIsTypeOf(JTL!AssignExp))
+--					    		->select(a|a.conditionExpression.value.first().oclIsTypeOf(JTL!ObjectTemplateExp))
+--					    		->debug('ObjTemExp:');
+--					    }					    
+--					}
+--				}
 				
 				-- Constraints generation:
 				
@@ -960,6 +1017,28 @@ lazy rule Predicate2Metaedge{
 		}
 }
 
+--- Unique lazy rule that creates a Metaedge from an ObjectTemplateExp
+unique lazy rule ObjTplExp2Metaedge {
+    from
+    	s : JTL!ObjectTemplateExp
+    to
+    	metaedge : ASP!Metaedge (
+    		name <- s.getPredicateFromObjTplExp().pattern.getLiteralMetamodel().name + '!' +
+    				s.referredClass + '.' +
+				s.getLiteralMetaedgeName().name,
+		literals <- s.getPredicateFromObjTplExp().pattern.getLiteralMetamodel(),
+		literals <- s.getLiteralMetaedgeName(),
+		literals <- if s->refImmediateComposite()->refImmediateComposite()->oclIsTypeOf(JTL!Predicate) -- source metaclass
+					then s.getPredicateFromObjTplExp().pattern.getLiteralMetaclass()
+					else s->refImmediateComposite()->refImmediateComposite().getLiteralMetaclass()
+					endif,
+		literals <- thisModule.JTLObjTplExp2ASPLiteral_MET(s),
+		transformation <- thisModule.transformationRoot
+    	)
+    do {
+        thisModule.metaedges <- thisModule.metaedges->including(s.getMetaedgeKey(), metaedge); --insert metaedge in the map
+    }
+}
 
 --- Unique lazy rule that is called to create a Literal with the name of a metamodel from a pattern
 lazy rule JTLPattern2ASPLiteral_MM {
@@ -986,6 +1065,20 @@ lazy rule JTLPattern2ASPLiteral_MC {
 	)
 	do {
 		thisModule.literals <- thisModule.literals->including(s.templateExpression.referredClass, literal_MC);
+	}
+}
+
+--- Unique lazy rule that is called to create a Literal with the name of a metaclass from an ObjectTemplateExp
+unique lazy rule JTLObjTplExp2ASPLiteral_MC {
+	from 
+		s: JTL!ObjectTemplateExp
+	to
+		literal_MC: ASP!Literal ( -- Literal class
+				name <- 'x_' + s.referredClass,
+				transformation <- thisModule.transformationRoot
+	)
+	do {
+		thisModule.literals <- thisModule.literals->including(s.referredClass, literal_MC);
 	}
 }
 
@@ -1017,6 +1110,20 @@ lazy rule JTLPredicate2ASPLiteral_MENAME {
 	}
 }
 
+--- Unique lazy rule that is called to create a Literal with the name of a metaedge (source) from an ObjectTemplateExp
+unique lazy rule JTLObjTplExp2ASPLiteral_MENAME {
+	from 
+		s: JTL!ObjectTemplateExp
+	to
+		literal_MENAME: ASP!Literal ( 
+			name <- 'x_' + s->refImmediateComposite().left.name,
+			transformation <- thisModule.transformationRoot
+			)
+	do {
+		thisModule.literals <- thisModule.literals->including('MENAME_' + s->refImmediateComposite().left.name, literal_MENAME);
+	}
+}
+
 --- Unique lazy rule that is called to create a Literal with the name of a metanode target of an edge from a predicate
 lazy rule JTLPredicate2ASPLiteral_MET {
 	from 
@@ -1028,6 +1135,20 @@ lazy rule JTLPredicate2ASPLiteral_MET {
 		)
 	do {
 		thisModule.literals <- thisModule.literals->including(s.conditionExpression.value.first().referredClass.toString(), literal_MET);
+	}
+}
+
+--- Unique lazy rule that is called to create a Literal with the name of a metanode target of an edge from an ObjectTemplateExp
+unique lazy rule JTLObjTplExp2ASPLiteral_MET {
+	from 
+		s: JTL!ObjectTemplateExp
+	to
+		literal_MET: ASP!Literal (
+			name <- 'x_' + s.referredClass.toString(),
+			transformation <- thisModule.transformationRoot
+		)
+	do {
+		thisModule.literals <- thisModule.literals->including(s.referredClass.toString(), literal_MET);
 	}
 }
 
@@ -1249,6 +1370,42 @@ rule newPred2PredRelation(p1:JTL!Predicate, p2:JTL!Predicate, relationName:Strin
 			name <- 'right',
 			element <- thisModule.findElement(p2),
 			type<-thisModule.patternType->get(thisModule.findElement(p2).oclType())
+		)
+	do {
+		thisModule.transformationRoot.relations <- t;
+	}
+}
+
+--- Creates a new ASP!Relation between two predicates
+rule newObjTplExp2ObjTplExpRelation(ote1:JTL!ObjectTemplateExp, ote2:JTL!ObjectTemplateExp, relationName:String) {
+    to
+		t: ASP!Relation(
+			id <- relationName->debug() + '__' +
+				  ote1.referredClass + '_' +
+				  ote1->refImmediateComposite().left->debug().name + '2' +
+				  ote2.referredClass + '_' +
+				  ote2->refImmediateComposite().left->debug().name,
+			name <- relationName + '__' +
+				  ote1.referredClass + '_' +
+				  ote1->refImmediateComposite().left.name + '2' +
+				  ote2.referredClass + '_' +
+				  ote2->refImmediateComposite().left.name,
+			patterns <- leftPattern,
+			patterns <- rightPattern
+		),
+		leftPattern: ASP!LeftPattern(
+			name <- 'left',
+			element <- thisModule.ObjTplExp2Metaedge(ote1),
+			type <- 'edge'
+			--element <- thisModule.findElement(ote1),
+			--type<-thisModule.patternType->get(thisModule.findElement(ote1).oclType())
+		),
+		rightPattern: ASP!RightPattern(
+			name <- 'right',
+			element <- thisModule.ObjTplExp2Metaedge(ote2),
+			type <- 'edge'
+			--element <- thisModule.findElement(ote2),
+			--type<-thisModule.patternType->get(thisModule.findElement(ote2).oclType())
 		)
 	do {
 		thisModule.transformationRoot.relations <- t;

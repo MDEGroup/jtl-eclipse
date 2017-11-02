@@ -108,20 +108,18 @@ public class PostProcessor implements IJtlOptionProvider, IJtlResourcePostProces
 			if (opcallexp.eIsSet(argument)) {
 				ListIterator<EObject> t = opcallexp.eContents().listIterator();
 				while (t.hasNext()) {
+					int argNumber = t.nextIndex();
 					EObject varexp = t.next();
 					EStructuralFeature veName = varexp.eClass().getEStructuralFeature("name");
 					if (VariableExpImpl.class.isInstance(varexp)) {
 						// Replace the VariableExp object with
 						// the ObjectTemplateExp with the same name
 						EObject owningRelation = findInPath(root, varexp, RelationImpl.class);
-						ListIterator<EObject> referredDomains = find(owningRelation, DomainImpl.class).listIterator();
-						while (referredDomains.hasNext()) {
-							EList<EObject> objtplexp = find(referredDomains.next(),
-									ObjectTemplateExpImpl.class, "name", varexp.eGet(veName));
-							if (objtplexp != null && objtplexp.size() == 1) {
-								EcoreUtil.replace(varexp, EcoreUtil.copy(objtplexp.get(0)));
-								break;
-							}
+						EList<EObject> referredDomains = find(owningRelation, DomainImpl.class);
+						EList<EObject> objtplexp = find(referredDomains.get(argNumber),
+								ObjectTemplateExpImpl.class, "name", varexp.eGet(veName));
+						if (objtplexp != null && objtplexp.size() == 1) {
+							EcoreUtil.replace(varexp, EcoreUtil.copy(objtplexp.get(0)));
 						}
 					}
 				}

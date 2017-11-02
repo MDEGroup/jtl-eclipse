@@ -5,13 +5,14 @@ Bundle-SymbolicName: ASPM.resource.aspm;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Vendor: Software Technology Group - TU Dresden Germany
 Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
-  org.eclipse.emf.ecore,
-  org.eclipse.emf.ecore.change,
-  org.eclipse.emf.validation;resolution:=optional,
-  org.emftext.access;resolution:=optional,
-  org.eclipse.debug.core;resolution:=optional,
-  org.emftext.commons.antlr3_4_0,
-  JTL.emftext.ASPM
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.change,
+ org.eclipse.emf.validation;resolution:=optional,
+ org.emftext.access;resolution:=optional,
+ org.eclipse.debug.core;resolution:=optional,
+ org.emftext.commons.antlr3_4_0,
+ JTL.emftext.ASPM,
+ org.eclipse.emf.common
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: ASPM.resource.aspm,
