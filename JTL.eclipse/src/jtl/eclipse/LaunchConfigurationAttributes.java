@@ -9,4 +9,7 @@ public interface LaunchConfigurationAttributes {
 	public static final String TRANSF_TEXT = "it.univaq.jtl.transf";
 	public static final String TRACE_CHECK = "it.univaq.jtl.tracecheck";
 	public static final String TRACE_TEXT = "it.univaq.jtl.trace";
+	public static final String CHAIN_CHECK = "it.univaq.jtl.chaincheck";
+	public static final String CHAIN_COMBO = "it.univaq.jtl.chaincombo";
+	public static final String CHAIN_LIMIT = "it.univaq.jtl.chainlimit";
 }

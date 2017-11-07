@@ -111,6 +111,14 @@ public class LaunchConfigurationDelegate
 			return;
 		}
 
+		// Set the chained trasformation, if needed
+		if (configuration.getAttribute(LaunchConfigurationAttributes.CHAIN_CHECK, false)) {
+			launcher.setChainTransformation(
+					configuration.getAttribute(LaunchConfigurationAttributes.CHAIN_COMBO, ""));
+			launcher.setChainLimit(
+					configuration.getAttribute(LaunchConfigurationAttributes.CHAIN_LIMIT, 1));
+		}
+
 		// Launch
 		launcher.launch();
 	}

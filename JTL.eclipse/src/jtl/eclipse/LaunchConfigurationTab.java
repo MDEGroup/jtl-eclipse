@@ -2,12 +2,18 @@ package jtl.eclipse;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -17,10 +23,12 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ResourceListSelectionDialog;
 
@@ -32,8 +40,12 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 	private Text targetmText;
 	private Text transfText;
 	private Button tracesCheck;
+	private Button chainCheck;
 	private Text tracesText;
+	private Combo chainCombo;
+	private Spinner chainLimitSpinner;
 	private ArrayList<Control> tracesControls = new ArrayList<Control>();
+	private ArrayList<Control> chainControls = new ArrayList<Control>();
 
 
 	@Override
@@ -46,7 +58,7 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         comp.setFont(parent.getFont());
 
         // Create a listener for user modifications of text fields
-        ModifyListener modListener = new ModifyListener() {
+        ModifyListener modTextListener = new ModifyListener() {
             @Override
             public void modifyText(ModifyEvent e) {
                 updateLaunchConfigurationDialog();
@@ -67,7 +79,7 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         sourcemmText = new Text(metamodelsGroup, SWT.BORDER);
         sourcemmText.setLayoutData(
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
-        sourcemmText.addModifyListener(modListener);
+        sourcemmText.addModifyListener(modTextListener);
         //sourcemmText.addModifyListener(new ModifyListener() {
         Button sourcemmButton = new Button(metamodelsGroup, SWT.PUSH);
         sourcemmButton.setText("Browse...");
@@ -86,7 +98,7 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         targetmmText = new Text(metamodelsGroup, SWT.BORDER);
         targetmmText.setLayoutData(
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
-        targetmmText.addModifyListener(modListener);
+        targetmmText.addModifyListener(modTextListener);
         Button targetmmButton = new Button(metamodelsGroup, SWT.PUSH);
         targetmmButton.setText("Browse...");
         targetmmButton.addSelectionListener(new SelectionAdapter() {
@@ -113,7 +125,7 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         sourcemText = new Text(modelsGroup, SWT.BORDER);
         sourcemText.setLayoutData(
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
-        sourcemText.addModifyListener(modListener);
+        sourcemText.addModifyListener(modTextListener);
         Button sourcemButton = new Button(modelsGroup, SWT.PUSH);
         sourcemButton.setText("Browse...");
         sourcemButton.addSelectionListener(new SelectionAdapter() {
@@ -131,7 +143,7 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         targetmText = new Text(modelsGroup, SWT.BORDER);
         targetmText.setLayoutData(
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
-        targetmText.addModifyListener(modListener);
+        targetmText.addModifyListener(modTextListener);
         Button targetmButton = new Button(modelsGroup, SWT.PUSH);
         targetmButton.setText("Browse...");
         targetmButton.addSelectionListener(new SelectionAdapter() {
@@ -148,7 +160,7 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         // Group
         Group transfGroup = new Group(comp, SWT.NONE);
         transfGroup.setFont(comp.getFont());
-        transfGroup.setLayout(new GridLayout(3, false));
+        transfGroup.setLayout(new GridLayout(4, false));
         transfGroup.setLayoutData(
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
         transfGroup.setText("Transformation");
@@ -158,9 +170,11 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         transfText = new Text(transfGroup, SWT.BORDER);
         transfText.setLayoutData(
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
-        transfText.addModifyListener(modListener);
+        transfText.addModifyListener(modTextListener);
         Button transfButton = new Button(transfGroup, SWT.PUSH);
         transfButton.setText("Browse...");
+        transfButton.setLayoutData(
+        		new GridData(SWT.BEGINNING, SWT.CENTER, false, false, 2, 1));
         transfButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
@@ -175,7 +189,7 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         tracesCheck = new Button(transfGroup, SWT.CHECK);
         tracesCheck.setText("Provide a trace model");
         tracesCheck.setLayoutData(
-        		new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+        		new GridData(SWT.FILL, SWT.CENTER, true, false, 4, 1));
         tracesCheck.addSelectionListener(new SelectionAdapter() {
         	@Override
             public void widgetSelected(SelectionEvent e) {
@@ -189,9 +203,11 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         tracesText = new Text(transfGroup, SWT.BORDER);
         tracesText.setLayoutData(
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
-        tracesText.addModifyListener(modListener);
+        tracesText.addModifyListener(modTextListener);
         final Button tracesButton = new Button(transfGroup, SWT.PUSH);
         tracesButton.setText("Browse...");
+        tracesButton.setLayoutData(
+        		new GridData(SWT.BEGINNING, SWT.CENTER, false, false, 2, 1));
         tracesButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
@@ -204,6 +220,67 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         tracesControls.add(tracesLabel);
         tracesControls.add(tracesText);
         tracesControls.add(tracesButton);
+
+        // Chain
+        chainCheck = new Button(transfGroup, SWT.CHECK);
+        chainCheck.setText("Chain this transformation");
+        chainCheck.setLayoutData(
+        		new GridData(SWT.FILL, SWT.CENTER, true, false, 4, 1));
+        chainCheck.addSelectionListener(new SelectionAdapter() {
+        	@Override
+            public void widgetSelected(SelectionEvent e) {
+            	final Button check = (Button) e.getSource();
+            	setChainVisible(check.getSelection());
+        		updateLaunchConfigurationDialog();
+        	}
+        });
+        final Label chainLabel = new Label(transfGroup, SWT.NONE);
+        chainLabel.setText("Next:");
+
+        // Get the set of JTL launch configurations from the launch manager
+        final ILaunchManager launchManager =
+        		DebugPlugin.getDefault().getLaunchManager();
+        ILaunchConfigurationType launchConfigurationType = launchManager
+        		.getLaunchConfigurationType("JTL.launchConfigurationType");
+        ILaunchConfiguration[] launchConfigurations = null;
+        try {
+			launchConfigurations = launchManager
+					.getLaunchConfigurations(launchConfigurationType);
+		} catch (CoreException e1) {
+			e1.printStackTrace();
+		}
+
+        // Sort the launch configurations by name
+        Arrays.sort(launchConfigurations, new Comparator<ILaunchConfiguration>() {
+        	@Override
+        	public int compare(final ILaunchConfiguration lc1, final ILaunchConfiguration lc2) {
+        		return lc1.getName().compareTo(lc2.getName());
+        	}
+        });
+
+        chainCombo = new Combo(transfGroup, SWT.DROP_DOWN);
+        chainCombo.setToolTipText("Select a launch configuration");
+        for (ILaunchConfiguration config : launchConfigurations) {
+        	chainCombo.add(config.getName());
+        }
+        chainCombo.setLayoutData(
+        		new GridData(SWT.FILL, SWT.CENTER, true, false));
+        chainCombo.addSelectionListener(new SelectionAdapter() {
+        	@Override
+        	public void widgetSelected(SelectionEvent e) {
+                updateLaunchConfigurationDialog();
+        	}
+        });
+        final Label chainLimitLabel = new Label(transfGroup, SWT.NONE);
+        chainLimitLabel.setText("Limit:");
+        chainLimitSpinner = new Spinner(transfGroup, SWT.BORDER);
+        chainLimitSpinner.setToolTipText("Limit the number of input models");
+        chainLimitSpinner.setMinimum(1);
+        chainLimitSpinner.addModifyListener(modTextListener);
+        chainControls.add(chainLabel);
+        chainControls.add(chainCombo);
+        chainControls.add(chainLimitLabel);
+        chainControls.add(chainLimitSpinner);
 	}
 
 	@Override
@@ -228,6 +305,13 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 			tracesCheck.setSelection(configuration
 					.getAttribute(LaunchConfigurationAttributes.TRACE_CHECK, false));
 			setTraceModelVisible(tracesCheck.getSelection());
+			chainCheck.setSelection(configuration
+					.getAttribute(LaunchConfigurationAttributes.CHAIN_CHECK, false));
+			chainCombo.setText(configuration
+					.getAttribute(LaunchConfigurationAttributes.CHAIN_COMBO, ""));
+			chainLimitSpinner.setSelection(configuration
+					.getAttribute(LaunchConfigurationAttributes.CHAIN_LIMIT, 1));
+			setChainVisible(chainCheck.getSelection());
 		} catch (CoreException e) {
 			System.out.println("Unable to load the configuration data.");
 			e.printStackTrace();
@@ -250,6 +334,12 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 				tracesText.getText());
 		configuration.setAttribute(LaunchConfigurationAttributes.TRACE_CHECK,
 				tracesCheck.getSelection());
+		configuration.setAttribute(LaunchConfigurationAttributes.CHAIN_CHECK,
+				chainCheck.getSelection());
+		configuration.setAttribute(LaunchConfigurationAttributes.CHAIN_COMBO,
+				chainCombo.getText());
+		configuration.setAttribute(LaunchConfigurationAttributes.CHAIN_LIMIT,
+				chainLimitSpinner.getSelection());
 	}
 
 	@Override
@@ -321,12 +411,24 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 			return false;
 		}
 
+		if (chainCheck.getSelection() && chainCombo.getText().equals("")) {
+			errorMsg += "Select the next launch configuration in the chain";
+			this.setErrorMessage(errorMsg);
+			return false;
+		}
+
 		this.setErrorMessage(null);
 		return super.isValid(launchConfig);
 	}
 
 	private void setTraceModelVisible(final boolean visible) {
 		for (Control c : tracesControls) {
+			c.setVisible(visible);
+		}
+	}
+
+	private void setChainVisible(final boolean visible) {
+		for (Control c : chainControls) {
 			c.setVisible(visible);
 		}
 	}

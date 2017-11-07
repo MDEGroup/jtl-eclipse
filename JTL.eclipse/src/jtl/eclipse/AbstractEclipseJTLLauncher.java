@@ -11,6 +11,11 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.ILaunchManager;
+import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.ILaunchConfigurationType;
+import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.emf.common.util.URI;
 
 import jtl.launcher.AbstractJTLLauncher;
@@ -100,6 +105,57 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 
 		// Restore the original path
 		tracesFile = tracesFileRelative;
+	}
+
+	/**
+	 * Runs the next transformation in the chain.
+	 * @param targetFiles List of files to use as input
+	 *        of the chained transformation
+	 */
+	@Override
+	protected void runChainTransformation(final ArrayList<String> targetFiles) {
+		// Get the launch configuration of the
+		// next transformation in the chain
+		ILaunchConfiguration lc = getLaunchConfiguration(this.chainTransformation);
+		if (lc != null) {
+			for (int i = 0; i < this.chainLimit; i++) {
+				try {
+					ILaunchConfigurationWorkingCopy lcwc =
+							lc.copy("CHAINED_" + this.chainTransformation);
+					lcwc.setAttribute(LaunchConfigurationAttributes.SOURCEM_TEXT, targetFiles.get(i));
+					lcwc.launch(ILaunchManager.RUN_MODE, null);
+				} catch (CoreException e) {
+					System.err.println("An error occurred launching a chained transformation...");
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+
+	/**
+	 * Retrieves a JTL launch configuration specified by a name.
+	 * @param name Name of the launch configuration
+	 */
+	protected ILaunchConfiguration  getLaunchConfiguration(final String name) {
+		final ILaunchManager launchManager =
+        		DebugPlugin.getDefault().getLaunchManager();
+        ILaunchConfigurationType launchConfigurationType = launchManager
+        		.getLaunchConfigurationType("JTL.launchConfigurationType");
+        ILaunchConfiguration[] launchConfigurations = null;
+        try {
+			launchConfigurations = launchManager
+					.getLaunchConfigurations(launchConfigurationType);
+		} catch (CoreException e1) {
+			e1.printStackTrace();
+		}
+
+        for (ILaunchConfiguration lc : launchConfigurations) {
+        	if (lc.getName().equals(name)) {
+        		return lc;
+        	}
+        }
+        return null;
 	}
 
 	/**

@@ -66,6 +66,12 @@ public abstract class AbstractJTLLauncher {
 	// Traces model file
 	protected File tracesFile;
 
+	// Next transformation in the chain
+	protected String chainTransformation;
+
+	// Limit the number of models in input to the next transformation
+	protected int chainLimit;
+
 	// ASP output
 	protected ByteArrayOutputStream asp = new ByteArrayOutputStream();
 
@@ -155,6 +161,23 @@ public abstract class AbstractJTLLauncher {
 	}
 
 	/**
+	 * Sets the name of the next transformation in the chain.
+	 * @param name Name of the next transformation
+	 */
+	public void setChainTransformation(final String name) {
+		this.chainTransformation = name;
+	}
+
+	/**
+	 * Sets the limit to the number of model to use
+	 * as input of the next transformation in the chain.
+	 * @param limit Limit to the number of models
+	 */
+	public void setChainLimit(final int limit) {
+		this.chainLimit = limit;
+	}
+
+	/**
 	 * Launch the transformation process.
 	 */
 	public void launch() {
@@ -189,11 +212,22 @@ public abstract class AbstractJTLLauncher {
 		transfFile = new File(getASPFilename());
 
 		// Run the solver
-		ArrayList<String> modelsFiles =
+		final ArrayList<String> modelsFiles =
 				runSolver(transfFile, targetmFolder, sourcemFile);
 
-		// Process target models
-		processTargetModels(modelsFiles, targetmmFile);
+		if (modelsFiles != null && modelsFiles.size() > 0) {
+			// Process target models
+			final ArrayList<String> targetFiles =
+					processTargetModels(modelsFiles, targetmmFile);
+
+			// Run the next transformation in the chain
+			if (this.chainTransformation != null &&
+				this.chainLimit > 0 &&
+				this.chainLimit <= modelsFiles.size()) {
+
+				runChainTransformation(targetFiles);
+			}
+		}
 
 		// Clean
 		clean();
@@ -406,8 +440,9 @@ public abstract class AbstractJTLLauncher {
 	 * Process the ASP target models.
 	 * @param modelsFiles list of generated target models files
 	 * @param targetmmFile target metamodel filename
+	 * @return list of the target models files after processing
 	 */
-	protected void processTargetModels(
+	protected ArrayList<String> processTargetModels(
 			final ArrayList<String> modelsFiles,
 			final File targetmmFile) {
 
@@ -423,6 +458,7 @@ public abstract class AbstractJTLLauncher {
 		}
 
 		// Process target models
+		ArrayList<String> targetFiles = new ArrayList<String>();
 		for (String target : modelsFiles) {
 			File targetFile = new File(target);
 
@@ -432,7 +468,10 @@ public abstract class AbstractJTLLauncher {
 
 			// ASPm to Ecore (ATL generated from HOT)
 			try {
-				ASPm2MM.runTransformation(targetmmFile, targetFile);
+				final String xmiFilename = ASPm2MM.runTransformation(targetmmFile, targetFile);
+
+				// Add the generated file to the list of processed models files
+				targetFiles.add(xmiFilename);
 			} catch (IOException | ATLCoreException e) {
 				System.out.println("Unable to perform the Target Model ASPm to Ecore transformation:");
 				e.printStackTrace();
@@ -440,6 +479,8 @@ public abstract class AbstractJTLLauncher {
 				removeFile(targetFile);
 			}
 		}
+
+		return targetFiles;
 	}
 
 	/**
@@ -464,6 +505,13 @@ public abstract class AbstractJTLLauncher {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Runs the next transformation in the chain.
+	 * @param targetFiles List of files to use as input
+	 *        of the chained transformation
+	 */
+	protected void runChainTransformation(ArrayList<String> targetFiles) {}
 
 	/**
 	 * Run the solver to generate the target models.
