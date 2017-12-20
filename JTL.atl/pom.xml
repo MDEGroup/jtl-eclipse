@@ -4,12 +4,10 @@
   <artifactId>JTL.atl</artifactId>
   <version>0.2.0-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
-  
+
   <parent>
-    <groupId>JTL.mavenmain</groupId>
-    <artifactId>JTL.mavenmain</artifactId>
-    <version>1.0.0</version>
-    <relativePath>../JTL.maven/MavenMain/pom.xml</relativePath>
+  	<groupId>JTL.maven</groupId>
+  	<artifactId>JTL.maven</artifactId>
+  	<version>1.0.0-SNAPSHOT</version>
   </parent>
-  
 </project>

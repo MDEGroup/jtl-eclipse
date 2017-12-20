@@ -6,10 +6,10 @@
   <packaging>eclipse-plugin</packaging>
     
   <parent>
-    <groupId>JTL.mavenmain</groupId>
-    <artifactId>JTL.mavenmain</artifactId>
+    <groupId>JTL.maven</groupId>
+    <artifactId>JTL.maven</artifactId>
     <version>1.0.0</version>
-    <relativePath>../JTL.maven/MavenMain/pom.xml</relativePath>
+    <relativePath>../JTL.maven/pom.xml</relativePath>
   </parent>
   
 </project>
