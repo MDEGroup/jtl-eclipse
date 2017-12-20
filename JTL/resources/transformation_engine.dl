@@ -48,7 +48,7 @@ mapping_node(MM,IDX,IDx, Node) :- relation_node(R,MM,Node,X), relation_node(R,MM
 %prop from prop        
 mapping_prop(MM,ID,IDx,IDXmc,IDmcx,Prop,Value) :-
               relation_prop(R,MM,Prop,Node,X), relation_prop(R,MM2,Prop2,Node2,Y),
-              prop(MM2,ID,IDx,IDmc,IDmcx,Prop2,Value), node(MM2,IDmc,IDmcx,Node2),
+              prop(MM2,ID,IDx,IDmc,IDmcx,Prop2,Value), node(MM2,IDmc,IDmcx,Node2), nodex(MM,IDmc,IDmcx,Node),
               IDXmc=IDmc+X, MM!=MM2.
 %mapping_prop(MM,ID,IDmc,Prop,Value) :- relation_prop(R,MM,Prop,Node,X), relation_prop(R,MM2,Prop2,Node2,X),
 %              prop(MM2,ID,IDmc2,Prop2,Value2), setting_prop(R,ID,IDmc,Value), MM!=MM2.
