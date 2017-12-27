@@ -3,28 +3,68 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 
-%%%%%%%%%%%%%%%%%%%%%%   TRACES GENERATION    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%genero i trace relativi agli elementi non presenti nelle relations
+%%%%%%%%%%%%%%%%%%%%%%   TRACES GENERATION    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%genero i trace relativi agli elementi non presenti nelle relations%%%%%%%
 
-is_metanode_related(MMS,MCS) :- relation_node(R, MMS, MCS, X), not relation_direction(R,mmt,MMS), MMS!=mmt.
+is_metanode_related(MMS,MCS) :- relation_node(R, MMS, MCS, X), relation_node(R, mmt, MCT, Y), 
+								%not relation_direction(R,mmt,MMS), 
+								MMS!=mmt.
+is_metanode_non_bijective_related(MMS,MCS) :- relation_node(R, MMS, MCS, X), relation_node(R, mmt, MCT, Y), 
+											  relation_node(R2, MMS, MCS2, Z), relation_node(R2, mmt, MCT, W), 
+											  MCS!=MCS2, R!=R2, MMS!=mmt.
 
-trace_node(MMS,IDx,ID,MCS) :- node(MMS,IDx,ID,MCS), not is_metanode_related(MMS,MCS),MMS!=mmt.
+trace_nodex(MMS,IDx,ID,MCS) :- node(MMS,IDx,ID,MCS), not is_metanode_related(MMS,MCS), MMS!=mmt.
+trace_nb_nodex(MMS,IDx,ID,MCS) :- node(MMS,IDx,ID,MCS), is_metanode_non_bijective_related(MMS,MCS), MMS!=mmt.
+%-------------------------------------------------------------------------------%
 
-trace_node(MMS,IDx,ID,MCS) :- node(MMS,IDx,ID,MCS), is_metanode_related(MMS,MCS), not condition(MMS,IDx,ID,MCS), MMS!=mmt.
-
-is_metaedge_related(MMS,Name,NodeSource,NodeTarget) :- relation_edge(R,MMS,Name,NodeSource,NodeTarget, X), not relation_direction(R,mmt,
-MMS), MMS!=mmt.
-
-trace_edge(MMS,IDx,ID,Name,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget) :- 
+is_metaedge_related(MMS,NameS,NodeSourceS,NodeTargetS) :- relation_edge(R,MMS,NameS,NodeSourceS,NodeTargetS,X), relation_edge(R,mmt,NameT,NodeSourceT,NodeTargetT,Y), 
+													   % not relation_direction(R,mmt,MMS), 
+													   MMS!=mmt.
+is_metaedge_non_bijective_related(MMS,NameS,NodeSourceS,NodeTargetS) :- relation_edge(R,MMS,NameS,NodeSourceS,NodeTargetS,X), relation_edge(R,mmt,NameT,NodeSourceT,NodeTargetT,Y), 
+																	    relation_edge(R2,MMS,NameS2,NodeSourceS2,NodeTargetS2,Z), relation_edge(R2,mmt,NameT,NodeSourceT,NodeTargetT,W), 
+											  						    NameS!=NameS2, R!=R2, MMS!=mmt.
+											  
+trace_edgex(MMS,IDx,ID,Name,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget) :- 
         edge(MMS,IDx,ID,Name,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget), not is_metaedge_related(MMS,Name,NodeSource,NodeTarget),
         node(MMS,IDNodeSourcex,IDNodeSource,NodeSource),node(MMS,IDNodeTargetx,IDNodeTarget,NodeTarget),MMS!=mmt.
+trace_nb_edgex(MMS,IDx,ID,Name,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget) :- 
+        edge(MMS,IDx,ID,Name,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget), is_metaedge_non_bijective_related(MMS,Name,NodeSourceS,NodeTargetS),
+        node(MMS,IDNodeSourcex,IDNodeSource,NodeSource),node(MMS,IDNodeTargetx,IDNodeTarget,NodeTarget),MMS!=mmt.
 
-is_metaprop_related(MMS,Name,MCS) :- relation_prop(R,MMS,Name,MCS,X), not relation_direction(R,mmt,MMS), MMS!=mmt.
+%-------------------------------------------------------------------------------%        
+is_metaprop_related(MMS,NameS,MCS) :- relation_prop(R,MMS,NameS,MCS,X), relation_prop(R,mmt,NameT,MCT,Y), 
+									 %not relation_direction(R,mmt,MMS), 
+									 MMS!=mmt.
+is_metaprop_non_bijective_related(MMS,NameS,MCS) :- relation_prop(R,MMS,NameS,MCS,X), relation_prop(R,mmt,NameT,MCT,Y), 
+									  relation_prop(R2,MMS,NameS2,MCS2,Z), relation_prop(R2,mmt,NameT,MCT,W), 
+									  NameS!=NameS2, R!=R2, MMS!=mmt.
 
-trace_prop(MMS,IDx,ID,IDmcx,IDmc,Name,Value) :- prop(MMS,IDx,ID,IDmcx,IDmc,Name,Value), not is_metaprop_related(MMS,Name,MCS),
+trace_propx(MMS,IDx,ID,IDmcx,IDmc,Name,Value) :- prop(MMS,IDx,ID,IDmcx,IDmc,Name,Value), not is_metaprop_related(MMS,Name,MCS),
+node(MMS,IDmcx,IDmc,MCS),MMS!=mmt.
+trace_nb_propx(MMS,IDx,ID,IDmcx,IDmc,Name,Value) :- prop(MMS,IDx,ID,IDmcx,IDmc,Name,Value), is_metaprop_non_bijective_related(MMS,Name,MCS),
 node(MMS,IDmcx,IDmc,MCS),MMS!=mmt.
 
-:- node(MMT,IDx,ID,Node1), nodex(MMT,IDx,ID,Node2), metanode(MMT,Node2),  Node1!=Node2, MMT=mmt.
+
+%:- node(MMT,IDx,ID,Node1), nodex(MMT,IDx,ID,Node2), metanode(MMT,Node2),  Node1!=Node2, MMT=mmt.
+
+%%%%%%%%genero i trace links%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+trace_model(MML,MMR) :-  metamodel(MML), MML!=MMR, MMR = mmt.
+trace_linkx(MM,ID,IDx,Node,R) :- relation_node(R,MM,Node,X), relation_node(R,MM2,Node2,Y),
+                           node(MM,ID,IDx,Node),MM!=MM2.                           
+trace_linkx(MM,ID,IDx,Node,R) :- relation_node(R,MM,Node,X), relation_node(R,MM2,Node2,Y),
+                           nodex(MM,ID,IDx,Node),MM!=MM2.  
+                           
+trace_linkx(MM,ID,IDx,Prop,R) :- relation_prop(R,MM,Prop,Node,X), relation_prop(R,MM2,Prop2,Node2,Y),
+                           prop(MM,ID,IDx,IDp,IDpx,Prop,Value), node(MM,IDp,IDpx,Node), MM!=MM2.                           
+trace_linkx(MM,ID,IDx,Prop,R) :- relation_prop(R,MM,Prop,Node,X), relation_prop(R,MM2,Prop2,Node2,Y),
+                           propx(MM,ID,IDx,IDp,IDpx,Prop,Value), nodex(MM,IDp,IDpx,Node), MM!=MM2.
+
+trace_linkx(MM,ID,IDx,Edge,R) :- relation_edge(R,MM,Edge,NodeSource,NodeTarget,X), relation_edge(R,MM2,Edge2,NodeSource2,NodeTarget2,Y),
+                           edge(MM,ID,IDx,Edge,IDS,IDSx,IDT,IDTx), node(MM,IDS,IDSx,NodeSource), node(MM,IDT,IDTx,NodeTarget), MM!=MM2.                           
+trace_linkx(MM,ID,IDx,Edge,R) :- relation_edge(R,MM,Edge,NodeSource,NodeTarget,X), relation_edge(R,MM2,Edge2,NodeSource2,NodeTarget2,Y),
+                           edgex(MM,ID,IDx,Edge,IDS,IDSx,IDT,IDTx), nodex(MM,IDS,IDSx,NodeSource), nodex(MM,IDT,IDTx,NodeTarget), MM!=MM2. 
 
 %%%%%%%%%%% Metamodel Target Conformance Check %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
