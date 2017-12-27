@@ -8,8 +8,7 @@
   <parent>
     <groupId>JTL.maven</groupId>
     <artifactId>JTL.maven</artifactId>
-    <version>1.0.0</version>
-    <relativePath>../JTL.maven/pom.xml</relativePath>
+  	<version>1.0.0-SNAPSHOT</version>
   </parent>
 
 </project>
