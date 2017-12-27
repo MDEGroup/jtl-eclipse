@@ -19,6 +19,7 @@ helper def: literals: Map (String, ASP!Literal) = Map {};
 helper def: nodeId: Integer = 0; 		---This variable is a counter for the creation of node ids
 helper def: propId: Integer = 0; 		---This helper is a counter for the creation of prop ids
 helper def: edgeId: Integer = 0; 		---This helper is a counter for the creation of edge ids
+helper def: ruleId: Integer = 0; 		---This helper is a counter for the creation of rules ids
 helper def: constraintId: Integer = 0; 	---This helper is a counter for the creation of contraints ids
 helper def: transformationRoot: ASP!Transformation = ASP!Transformation;
 
@@ -310,6 +311,23 @@ helper context JTL!ObjectTemplateExp def: getPredicateFromObjTplExp(): JTL!Predi
     	    self->refImmediateComposite()->refImmediateComposite().getPredicateFromObjTplExp()
     	endif;
 
+--- Check if a relation is activated by a where clause
+helper context JTL!Relation def: isTriggeredByWhere(): Boolean =
+    self.isTopLevel=false and                                    -- the Relation is not 'top'
+    self.transformation.relation                                 -- and in any other relation
+      ->select(r|not r.where.oclIsUndefined())                   -- having a defined where clause
+      ->collect(r|r.where.predicate)->flatten()                  -- there exists a predicate referring to this relation
+      ->exists(p|p.OpCallExpMatchesRelation(self));              -- and matching name and parameters types
+      
+--- Get the relation triggering this one
+helper context JTL!Relation def: getTriggeringRelation(): JTL!Relation =
+    if self.isTopLevel=true then self else
+      self.transformation.relation
+        ->select(r|not r.where.oclIsUndefined())
+        ->collect(r|r.where.predicate)->flatten()
+        ->select(p|p.OpCallExpMatchesRelation(self))->at(1).refImmediateComposite().refImmediateComposite()
+    endif;
+
 -------------------------------------------------------------------------------------------------------------------
 ----------------------*******************RULES*********************------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------
@@ -336,11 +354,7 @@ rule JTLRelation2ASPRelation {
 		from 
                 s : JTL!Relation (s.isTopLevel = true                               -- the relation is top level
                                   or                                                -- or
-                                  (s.isTopLevel=false and                           -- it is not top level
-                                   s.transformation.relation                        -- but in any other relation
-                                     ->select(r|not r.where.oclIsUndefined())       -- having a defined where clause
-                                     ->collect(r|r.where.predicate)->flatten()      -- there exists a predicate referring to this relation
-                                     ->exists(p|p.OpCallExpMatchesRelation(s))))    -- and matching name a parameters types
+                                  s.isTriggeredByWhere())                           -- is activated by a where clause
 		using {
 				pattern_set: Sequence(JTL!Pattern) = s.domain->collect(a|a.pattern);	--set of patterns
 				pattern_1: JTL!Pattern = pattern_set->at(1); 	-- first pattern
@@ -353,6 +367,8 @@ rule JTLRelation2ASPRelation {
 				predicate_when:Sequence(JTL!Predicate) = if not s.when.oclIsUndefined() then s.when.predicate else OclUndefined endif;
 				predicate_where: Sequence(JTL!Predicate) = if not s.where.oclIsUndefined() then s.where.predicate else OclUndefined endif;
 				relations: Sequence(JTL!Relation) = s.transformation.relation;
+				
+				triggeringPredicateSet : Sequence(JTL!Predicate) = s.getTriggeringRelation().domain->collect(a|a.pattern)->collect(a|a.predicate);
 		}
 		to 
 			-- Base case: JTL!Pattern to JTL!Pattern relation
@@ -379,67 +395,81 @@ rule JTLRelation2ASPRelation {
 				type <- 'node'
 			)
 			do {
-				-- Generate constraints for the base case (JTL!Pattern to JTL!Pattern)
-				thisModule.newPattern2PatternConstraints(s.transformation, pattern_1, pattern_2); -- domain 1 to domain 2
-				thisModule.newPattern2PatternConstraints(s.transformation, pattern_2, pattern_1); -- domain 2 to domain 1
-				
-				-- Relations and contraints generation besides the base case:
+			    -- Check if this relation is activated by a where clause
+			    -- and if triggering relation contains defined predicates
+			    if (s.isTriggeredByWhere() and
+			       s.getTriggeringRelation().domain
+			         ->collect(a|a.pattern)
+			         ->collect(a|a.predicate)->flatten()
+			         ->collect(a|a.conditionExpression)
+			         .notEmpty()) {
+			        
+			        -- Generates the constraints based on condition expressed in the triggering relation
+			        for (p1 in triggeringPredicateSet->at(1)) {
+    				    if (p1.conditionExpression.isObjectTemplateExp()) {
+    				        for (p2 in triggeringPredicateSet->at(2)) {
+    				            if (p2.conditionExpression.isObjectTemplateExp()) {
+    				                for (ote1 in p1.conditionExpression.value.first().getAllObjTplExp()) {
+    				                    for (ote2 in p2.conditionExpression.value.first().getAllObjTplExp()) {
+    				                        if (ote1.name = ote2.name) {
+    				                            thisModule.newConditionalConstraints(s.transformation, p1, p2);
+    				                        }
+    				                    }
+    				                }
+    				            }
+    				        }
+    				    }
+    				}
+			    } else {			    			    
+					-- Generate constraints for the base case (JTL!Pattern to JTL!Pattern)
+					thisModule.newPattern2PatternConstraints(s.transformation, pattern_1, pattern_2); -- domain 1 to domain 2
+					thisModule.newPattern2PatternConstraints(s.transformation, pattern_2, pattern_1); -- domain 2 to domain 1
+					-- Relations and contraints generation besides the base case:
 
-				-- For every predicate in the first domain look for VariableExp with value
-				-- matching a VariableExp value in a predicate in the second domain
-				for (p1 in predicate_1) {
-					if (p1.conditionExpression.isVarExp()) {
-						for (p2 in predicate_2) {
-							if (p2.conditionExpression.isVarExp()) {
-								if (p1.conditionExpression.value.first().name = p2.conditionExpression.value.first().name) {
-									thisModule.newPred2PredRelation(p1, p2, s.name);                     	-- relation_prop
-									thisModule.newPred2PredContraintsProp2Prop(s.transformation, p1, p2);	-- domain 1 to domain 2
-									thisModule.newPred2PredContraintsProp2Prop(s.transformation, p2, p1);	-- domain 2 to domain 1
-								}
-							}
-						}
-					}
-				}
-				
-				-- For every predicate in the first domain look for ObjectTemplateExp with value
-				-- matching an OperationTemplateExp in a predicate in the second domain
---				for (p1 in predicate_1) {
---				    if (p1.conditionExpression.isObjectTemplateExp()) {
-				        --p1.conditionExpression.value.first().getAllObjTplExp()->debug('ObjTplExp:');
---				        for (p2 in predicate_2) {
---				            if (p2.conditionExpression.isObjectTemplateExp()) {
-				        		--p2.conditionExpression.value.first().getAllObjTplExp()->debug('ObjTplExp:');
-				                --if (p1.conditionExpression.value.first().name = p2.conditionExpression.value.first().name) {
---				                if (p1.conditionExpression.value.first().getAllObjTplExp().asSet()
---				                    ->intersection(
---				                    p2.conditionExpression.value.first().getAllObjTplExp())->notEmpty()) {
---				                    thisModule.newPred2PredRelation(p1, p2, s.name);						-- relation_edge
---				                    thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p1, p2);	-- domain 1 to domain 2
---				                    thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p2, p1);	-- domain 2 to domain 1
---				                }
---				            }
---				        }
---				    }
---				}
-				for (p1 in predicate_1) {
-				    if (p1.conditionExpression.isObjectTemplateExp()) {
-				        for (p2 in predicate_2) {
-				            if (p2.conditionExpression.isObjectTemplateExp()) {
-				                for (ote1 in p1.conditionExpression.value.first().getAllObjTplExp()) {
-				                    for (ote2 in p2.conditionExpression.value.first().getAllObjTplExp()) {
-				                        if (ote1.name = ote2.name) {
-				                            ote1->debug('ote1');
-				                            ote2->debug('ote2');
-				                            thisModule.newObjTplExp2ObjTplExpRelation(ote1, ote2, s.name);
-						                    thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p1, p2);	-- domain 1 to domain 2
-						                    thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p2, p1);	-- domain 2 to domain 1
-				                        }
-				                    }
-				                }
-				            }
-				        }
-				    }
-				}
+    				-- For every predicate in the first domain look for VariableExp with value
+    				-- matching a VariableExp value in a predicate in the second domain
+    				for (p1 in predicate_1) {
+    					if (p1.conditionExpression.isVarExp()) {
+    						for (p2 in predicate_2) {
+    							if (p2.conditionExpression.isVarExp()) {
+    								if (p1.conditionExpression.value.first().name = p2.conditionExpression.value.first().name) {
+    									thisModule.newPred2PredRelation(p1, p2, s.name);                     	-- relation_prop
+    									thisModule.newPred2PredContraintsProp2Prop(s.transformation, p1, p2);	-- domain 1 to domain 2
+    									thisModule.newPred2PredContraintsProp2Prop(s.transformation, p2, p1);	-- domain 2 to domain 1
+    								}
+    							}
+    						}
+    					}
+    				}
+    				
+    				-- For every predicate in the first domain look for ObjectTemplateExp with value
+    				-- matching an OperationTemplateExp in a predicate in the second domain
+    				for (p1 in predicate_1) {
+    				    if (p1.conditionExpression.isObjectTemplateExp()) {
+    				        for (p2 in predicate_2) {
+    				            if (p2.conditionExpression.isObjectTemplateExp()) {
+    				                for (ote1 in p1.conditionExpression.value.first().getAllObjTplExp()) {
+    				                    for (ote2 in p2.conditionExpression.value.first().getAllObjTplExp()) {
+    				                        if (ote1.name = ote2.name) {
+    				                            
+    				                            -- Check if the matching predicates are used in a where call
+    				                            if (predicate_where.oclIsUndefined() or
+    				                                predicate_where
+    				                                  ->select(p|p1.predMatchesOpCallParams(p))
+    				                                  ->collect(p|p2.predMatchesOpCallParams(p))
+    				                                  .isEmpty()) {
+        				                            thisModule.newObjTplExp2ObjTplExpRelation(ote1, ote2, s.name);
+        						                    thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p1, p2);	-- domain 1 to domain 2
+        						                    thisModule.newPred2PredContraintsEdge2Edge(s.transformation, p2, p1);	-- domain 2 to domain 1
+    				                            }
+    				                        }
+    				                    }
+    				                }
+    				            }
+    				        }
+    				    }
+    				}
+			    }
 				
 				-- When the 'when' clause is set
 				if (not predicate_when.oclIsUndefined()) {
@@ -474,75 +504,6 @@ rule JTLRelation2ASPRelation {
 					}
 				}
 				
-				-- When the 'when' clause is set
---				if (not predicate_where.oclIsUndefined() and false) {
-				    
-				    -- Look for Predicates of type OperationCallExp in the 'when' clause
---					for (p in predicate_where) {
---					    for (r in relations) {
---					    	r->debug('Relation:');
---					    	r.domain
---					    		->collect(a|a.pattern) 
---					    		->collect(a|a.predicate)->flatten()
---					    		->select(a|a.conditionExpression.oclIsTypeOf(JTL!AssignExp))
---					    		->select(a|a.conditionExpression.value.first().oclIsTypeOf(JTL!ObjectTemplateExp))
---					    		->debug('ObjTemExp:');
---					    }					    
---					}
---				}
-				
-				-- Constraints generation:
-				
-				
-			-- the following imperative section creates RELATIONS and CONSTRAINTS by using called rules and the variables in the 
-			-- using section of this rule
-			
-			-- create relation_set for first domain with predicate of the second domain
-			--for (p in predicate_2){
-			--	if not p.oclIsUndefined() then							
-			--		thisModule.newRelation(pattern_1,p)
-			--	else false
-			--		endif;
-			--}		
-			-- create relation_set for second domain with predicate of the first domain
-			--for (p in predicate_1){
-			--	if not p.oclIsUndefined() then							
-			--		thisModule.newRelation(pattern_2,p)
-			--	else false
-			--	endif;
-			--}
-			
-			--TWO TYPES OF CONSTRAINTS are created
-			-- type1: constraints of the type: 	domain_1, NOT domain_2, and predicates of first domain
-			--			  						domain_2, NOT domain_1, and predicates of second domain
-			-- type2: constraints of the type: 	domain_1, domain_2, not predicate_1.1
-			--									domain_1, domain_2, not predicate_1.2
-			--									domain_1, domain_2, not predicate_1.3
-			--									domain_1, domain_2, not predicate_2.1
-			--									domain_1, domain_2, not predicate_2.2
-			--									domain_1, domain_2, not predicate_2.3
-
-			--create constraints constraint_type1 #1
-			--thisModule.newConstraints_type_1(s.transformation, pattern_1,pattern_2);
-
-			--create constraints constraint_type1 #2
-			--thisModule.newConstraints_type_1(s.transformation, pattern_2,pattern_1); 
-
-			--create constraints type_2  --> domain 1
-			--for (p in predicate_1){
-			--	if not p.oclIsUndefined() then		
-			--		thisModule.newConstraints_type_2(s.transformation, pattern_1, pattern_2, p)
-			--		else false
-			--		endif;
-			--}	
-			--create constraints type_2  --> domain 2
-			--for (p in predicate_2){
-			--	if not p.oclIsUndefined() then		
-			--		thisModule.newConstraints_type_2(s.transformation, pattern_1,pattern_2, p)
-			--		else false
-			--		endif;
-			--}
-			
 			}
 }			
 
@@ -800,6 +761,41 @@ lazy rule JTLPredicate2RightPattern {
 			name<- s.conditionExpression.left.name, 
 			element<- thisModule.findElement(s)
 		)
+}
+
+--- creates a NamedFunction, to be used in a rule, using the name of the conditionExpression
+lazy rule Predicate2RuleTerminal {
+    from
+  		p: JTL!Predicate
+  	to
+  		terminal:ASP!Terminal(  		    
+  			name <- p.conditionExpression.left.name,
+  			element <- thisModule.Predicate2NamedFunction(p),
+    	    transformation <- thisModule.transformationRoot
+  		)
+}
+unique lazy rule Predicate2NamedFunction {
+    from
+  		p: JTL!Predicate
+  	to
+  		terminal:ASP!NamedFunction(
+  			name <- p.conditionExpression.left.name,
+			literals <- thisModule.getLiteralIDVariable(),
+			literals <- thisModule.getLiteralIDtraceVariable(),
+    	    transformation <- thisModule.transformationRoot
+  		)
+}
+
+--- creates a Not NamedFunction, to be used in a rule, using the name of the conditionExpression
+lazy rule Predicate2RuleNotTerminal {
+    from
+  		p: JTL!Predicate
+  	to
+  		terminal:ASP!Not(  		    
+  			name <- p.conditionExpression.left.name,
+  			element <- thisModule.Predicate2NamedFunction(p),
+    	    transformation <- thisModule.transformationRoot
+  		)
 }
 
 --- this lazy rule creates a Terminal for Predicate p
@@ -1380,11 +1376,11 @@ rule newPred2PredRelation(p1:JTL!Predicate, p2:JTL!Predicate, relationName:Strin
 rule newObjTplExp2ObjTplExpRelation(ote1:JTL!ObjectTemplateExp, ote2:JTL!ObjectTemplateExp, relationName:String) {
     to
 		t: ASP!Relation(
-			id <- relationName->debug() + '__' +
+			id <- relationName + '__' +
 				  ote1.referredClass + '_' +
-				  ote1->refImmediateComposite().left->debug().name + '2' +
+				  ote1->refImmediateComposite().left.name + '2' +
 				  ote2.referredClass + '_' +
-				  ote2->refImmediateComposite().left->debug().name,
+				  ote2->refImmediateComposite().left.name,
 			name <- relationName + '__' +
 				  ote1.referredClass + '_' +
 				  ote1->refImmediateComposite().left.name + '2' +
@@ -1485,8 +1481,45 @@ rule newPred2PredContraintsEdge2Edge(transf:JTL!Transformation, p1:JTL!Predicate
 --			transformation <- thisModule.resolveTemp(transf, 't')
 --		)
 	do {
-		thisModule.constraintId <- thisModule.constraintId;
+		thisModule.constraintId <- thisModule.constraintId + 1;
 	}
+}
+
+--- Generates the constraints based on condition expressed in the triggering relation
+rule newConditionalConstraints(transf:JTL!Transformation, p1:JTL!Predicate, p2:JTL!Predicate) {
+    to
+    	-- condition(ID, IDx) :- edge(x_HSM, _, _, x_ownedState, IDT, IDTx, ID, IDx), node(x_HSM, IDT, IDTx, x_StateMachine), node(x_HSM, ID, IDx, x_State), mmt=x_NHSM.
+    	t1: ASP!Rule(
+    	    comment <- '%%% TEST1',
+    	    name <- 'Rule' + thisModule.ruleId,
+    	    head <- thisModule.Predicate2RuleTerminal(p1),				-- condition rule head
+    	    expressions <- thisModule.Predicate2Terminal(p1),			-- edge()
+			expressions <- thisModule.Pattern2Terminal(p1.pattern),		-- node(source)
+			expressions <- thisModule.PredicateTarget2Terminal(p1),		-- node(target)    	    
+    	    transformation <- thisModule.resolveTemp(transf, 't')
+    	),
+    	-- :- node(x_HSM, ID, IDx, x_State), condition(ID, IDx), not nodex(x_NHSM, ID, IDx, x_State), mmt=x_NHSM.
+    	t2: ASP!Constraint(
+    	    comment <- '%%% TEST2',    	    
+    	    name <- 'Constraint' + thisModule.constraintId,
+			expressions <- thisModule.Pattern2Terminal(p1.pattern),		-- node(source)
+    	    expressions <- thisModule.Predicate2RuleTerminal(p1),		-- condition rule
+			expressions <- thisModule.Pattern2NotTerminalX(p1.pattern),	-- nodex(source)
+    	    transformation <- thisModule.resolveTemp(transf, 't')
+    	),
+    	-- :- node(x_HSM, ID, IDx, x_State), not condition(ID, IDx), nodex(x_NHSM, ID, IDx, x_State), mmt=x_NHSM.
+    	t3: ASP!Constraint(
+    	    comment <- '%%% TEST3',    	    
+    	    name <- 'Constraint' + (thisModule.constraintId + 1),
+			expressions <- thisModule.Pattern2Terminal(p1.pattern),		-- node(source)
+    	    expressions <- thisModule.Predicate2RuleNotTerminal(p1),	-- not condition rule
+			expressions <- thisModule.Pattern2TerminalX(p1.pattern),	-- nodex(source)
+    	    transformation <- thisModule.resolveTemp(transf, 't')
+    	)
+    	do {
+    	    thisModule.ruleId <- thisModule.ruleId + 1;
+			thisModule.constraintId <- thisModule.constraintId + 2;
+		}
 }
 
 
