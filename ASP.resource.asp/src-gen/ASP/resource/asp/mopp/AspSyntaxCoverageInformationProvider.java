@@ -20,6 +20,8 @@ public class AspSyntaxCoverageInformationProvider {
 			ASP.ASPPackage.eINSTANCE.getNode(),
 			ASP.ASPPackage.eINSTANCE.getProp(),
 			ASP.ASPPackage.eINSTANCE.getEdge(),
+			ASP.ASPPackage.eINSTANCE.getNamedFunction(),
+			ASP.ASPPackage.eINSTANCE.getRule(),
 			ASP.ASPPackage.eINSTANCE.getConstraint(),
 			ASP.ASPPackage.eINSTANCE.getLiteral(),
 			ASP.ASPPackage.eINSTANCE.getTerminal(),

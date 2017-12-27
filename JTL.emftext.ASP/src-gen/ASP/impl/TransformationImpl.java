@@ -6,6 +6,7 @@ import ASP.ASPPackage;
 import ASP.Constraint;
 import ASP.Element;
 import ASP.Relation;
+import ASP.Rule;
 import ASP.Transformation;
 
 import java.util.Collection;
@@ -37,6 +38,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link ASP.impl.TransformationImpl#getRelations <em>Relations</em>}</li>
  *   <li>{@link ASP.impl.TransformationImpl#getName <em>Name</em>}</li>
  *   <li>{@link ASP.impl.TransformationImpl#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link ASP.impl.TransformationImpl#getRules <em>Rules</em>}</li>
  * </ul>
  *
  * @generated
@@ -91,6 +93,16 @@ public class TransformationImpl extends MinimalEObjectImpl.Container implements 
 	 * @ordered
 	 */
 	protected EList<Constraint> constraints;
+
+	/**
+	 * The cached value of the '{@link #getRules() <em>Rules</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRules()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Rule> rules;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -173,6 +185,18 @@ public class TransformationImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Rule> getRules() {
+		if (rules == null) {
+			rules = new EObjectContainmentWithInverseEList<Rule>(Rule.class, this, ASPPackage.TRANSFORMATION__RULES, ASPPackage.RULE__TRANSFORMATION);
+		}
+		return rules;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -181,6 +205,8 @@ public class TransformationImpl extends MinimalEObjectImpl.Container implements 
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getElements()).basicAdd(otherEnd, msgs);
 			case ASPPackage.TRANSFORMATION__CONSTRAINTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConstraints()).basicAdd(otherEnd, msgs);
+			case ASPPackage.TRANSFORMATION__RULES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRules()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -199,6 +225,8 @@ public class TransformationImpl extends MinimalEObjectImpl.Container implements 
 				return ((InternalEList<?>)getRelations()).basicRemove(otherEnd, msgs);
 			case ASPPackage.TRANSFORMATION__CONSTRAINTS:
 				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
+			case ASPPackage.TRANSFORMATION__RULES:
+				return ((InternalEList<?>)getRules()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -219,6 +247,8 @@ public class TransformationImpl extends MinimalEObjectImpl.Container implements 
 				return getName();
 			case ASPPackage.TRANSFORMATION__CONSTRAINTS:
 				return getConstraints();
+			case ASPPackage.TRANSFORMATION__RULES:
+				return getRules();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -247,6 +277,10 @@ public class TransformationImpl extends MinimalEObjectImpl.Container implements 
 				getConstraints().clear();
 				getConstraints().addAll((Collection<? extends Constraint>)newValue);
 				return;
+			case ASPPackage.TRANSFORMATION__RULES:
+				getRules().clear();
+				getRules().addAll((Collection<? extends Rule>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -271,6 +305,9 @@ public class TransformationImpl extends MinimalEObjectImpl.Container implements 
 			case ASPPackage.TRANSFORMATION__CONSTRAINTS:
 				getConstraints().clear();
 				return;
+			case ASPPackage.TRANSFORMATION__RULES:
+				getRules().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -291,6 +328,8 @@ public class TransformationImpl extends MinimalEObjectImpl.Container implements 
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ASPPackage.TRANSFORMATION__CONSTRAINTS:
 				return constraints != null && !constraints.isEmpty();
+			case ASPPackage.TRANSFORMATION__RULES:
+				return rules != null && !rules.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -92,6 +92,14 @@ public class AspPrinter implements ASP.resource.asp.IAspTextPrinter {
 			print_ASP_Edge((ASP.Edge) element, globaltab, out);
 			return;
 		}
+		if (element instanceof ASP.NamedFunction) {
+			print_ASP_NamedFunction((ASP.NamedFunction) element, globaltab, out);
+			return;
+		}
+		if (element instanceof ASP.Rule) {
+			print_ASP_Rule((ASP.Rule) element, globaltab, out);
+			return;
+		}
 		if (element instanceof ASP.Constraint) {
 			print_ASP_Constraint((ASP.Constraint) element, globaltab, out);
 			return;
@@ -173,7 +181,7 @@ public class AspPrinter implements ASP.resource.asp.IAspTextPrinter {
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(4);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(5);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.TRANSFORMATION__ELEMENTS));
 		printCountingMap.put("elements", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
@@ -183,6 +191,8 @@ public class AspPrinter implements ASP.resource.asp.IAspTextPrinter {
 		printCountingMap.put("name", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.TRANSFORMATION__CONSTRAINTS));
 		printCountingMap.put("constraints", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.TRANSFORMATION__RULES));
+		printCountingMap.put("rules", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		// print collected hidden tokens
 		int count;
 		// DEFINITION PART BEGINS (Containment)
@@ -217,6 +227,24 @@ public class AspPrinter implements ASP.resource.asp.IAspTextPrinter {
 				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
 			}
 			printCountingMap.put("relations", 0);
+		}
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("rules");
+		if (count > 0) {
+			java.util.List<?> list = (java.util.List<?>)element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.TRANSFORMATION__RULES));
+			int index  = list.size() - count;
+			if (index < 0) {
+				index = 0;
+			}
+			java.util.ListIterator<?> it  = list.listIterator(index);
+			while (it.hasNext()) {
+				Object o = it.next();
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("rules", 0);
 		}
 		// DEFINITION PART BEGINS (LineBreak)
 		out.println();
@@ -1002,6 +1030,251 @@ public class AspPrinter implements ASP.resource.asp.IAspTextPrinter {
 		// DEFINITION PART BEGINS (LineBreak)
 		out.println();
 		out.print(localtab);
+	}
+	
+	
+	public void print_ASP_NamedFunction(ASP.NamedFunction element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(3);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.NAMED_FUNCTION__NAME));
+		printCountingMap.put("name", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.NAMED_FUNCTION__TRANSFORMATION));
+		printCountingMap.put("transformation", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.NAMED_FUNCTION__LITERALS));
+		printCountingMap.put("literals", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		// print collected hidden tokens
+		int count;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		count = printCountingMap.get("name");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.NAMED_FUNCTION__NAME));
+			if (o != null) {
+				ASP.resource.asp.IAspTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASP.ASPPackage.NAMED_FUNCTION__NAME), element));
+			}
+			printCountingMap.put("name", count - 1);
+		}
+		// DEFINITION PART BEGINS (WhiteSpaces)
+		// DEFINITION PART BEGINS (CsString)
+		out.print("(");
+		// DEFINITION PART BEGINS (WhiteSpaces)
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		count = printCountingMap.get("literals");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.NAMED_FUNCTION__LITERALS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				ASP.resource.asp.IAspTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getFunctionLiteralsReferenceResolver().deResolve((ASP.Literal) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(ASP.ASPPackage.NAMED_FUNCTION__LITERALS)), element.eClass().getEStructuralFeature(ASP.ASPPackage.NAMED_FUNCTION__LITERALS), element));
+			}
+			printCountingMap.put("literals", count - 1);
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_ASP_NamedFunction_0(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+		// DEFINITION PART BEGINS (WhiteSpaces)
+		// DEFINITION PART BEGINS (CsString)
+		out.print(")");
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
+	}
+	
+	public void print_ASP_NamedFunction_0(ASP.NamedFunction element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print(",");
+		// DEFINITION PART BEGINS (WhiteSpaces)
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		count = printCountingMap.get("literals");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.NAMED_FUNCTION__LITERALS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				ASP.resource.asp.IAspTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getFunctionLiteralsReferenceResolver().deResolve((ASP.Literal) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(ASP.ASPPackage.NAMED_FUNCTION__LITERALS)), element.eClass().getEStructuralFeature(ASP.ASPPackage.NAMED_FUNCTION__LITERALS), element));
+			}
+			printCountingMap.put("literals", count - 1);
+		}
+	}
+	
+	
+	public void print_ASP_Rule(ASP.Rule element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
+		// The printCountingMap contains a mapping from feature names to the number of
+		// remaining elements that still need to be printed. The map is initialized with
+		// the number of elements stored in each structural feature. For lists this is the
+		// list size. For non-multiple features it is either 1 (if the feature is set) or
+		// 0 (if the feature is null).
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(5);
+		Object temp;
+		temp = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.RULE__EXPRESSIONS));
+		printCountingMap.put("expressions", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
+		temp = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.RULE__NAME));
+		printCountingMap.put("name", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.RULE__TRANSFORMATION));
+		printCountingMap.put("transformation", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.RULE__COMMENT));
+		printCountingMap.put("comment", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.RULE__HEAD));
+		printCountingMap.put("head", temp == null ? 0 : 1);
+		// print collected hidden tokens
+		int count;
+		boolean iterate = true;
+		java.io.StringWriter sWriter = null;
+		java.io.PrintWriter out1 = null;
+		java.util.Map<String, Integer> printCountingMap1 = null;
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_ASP_Rule_0(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
+		}
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("head");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.RULE__HEAD));
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("head", count - 1);
+		}
+		// DEFINITION PART BEGINS (WhiteSpaces)
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print(":-");
+		// DEFINITION PART BEGINS (WhiteSpaces)
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("expressions");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.RULE__EXPRESSIONS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("expressions", count - 1);
+		}
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		iterate = true;
+		while (iterate) {
+			sWriter = new java.io.StringWriter();
+			out1 = new java.io.PrintWriter(sWriter);
+			printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+			print_ASP_Rule_1(element, localtab, out1, printCountingMap1);
+			if (printCountingMap.equals(printCountingMap1)) {
+				iterate = false;
+				out1.close();
+			} else {
+				out1.flush();
+				out1.close();
+				out.print(sWriter.toString());
+				printCountingMap.putAll(printCountingMap1);
+			}
+		}
+		// DEFINITION PART BEGINS (WhiteSpaces)
+		// DEFINITION PART BEGINS (CsString)
+		out.print(".");
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
+	}
+	
+	public void print_ASP_Rule_0(ASP.Rule element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		count = printCountingMap.get("comment");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.RULE__COMMENT));
+			if (o != null) {
+				ASP.resource.asp.IAspTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASP.ASPPackage.RULE__COMMENT), element));
+			}
+			printCountingMap.put("comment", count - 1);
+		}
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
+	}
+	
+	public void print_ASP_Rule_1(ASP.Rule element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		String localtab = outertab;
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print(",");
+		// DEFINITION PART BEGINS (WhiteSpaces)
+		out.print(" ");
+		// DEFINITION PART BEGINS (Containment)
+		count = printCountingMap.get("expressions");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.RULE__EXPRESSIONS));
+			java.util.List<?> list = (java.util.List<?>) o;
+			int index = list.size() - count;
+			if (index >= 0) {
+				o = list.get(index);
+			} else {
+				o = null;
+			}
+			if (o != null) {
+				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
+			}
+			printCountingMap.put("expressions", count - 1);
+		}
 	}
 	
 	

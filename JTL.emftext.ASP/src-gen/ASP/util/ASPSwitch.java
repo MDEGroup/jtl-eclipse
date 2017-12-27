@@ -92,6 +92,12 @@ public class ASPSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ASPPackage.RULE: {
+				Rule rule = (Rule)theEObject;
+				T result = caseRule(rule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ASPPackage.CONSTRAINT: {
 				Constraint constraint = (Constraint)theEObject;
 				T result = caseConstraint(constraint);
@@ -154,6 +160,14 @@ public class ASPSwitch<T> extends Switch<T> {
 				Literal literal = (Literal)theEObject;
 				T result = caseLiteral(literal);
 				if (result == null) result = caseElement(literal);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ASPPackage.NAMED_FUNCTION: {
+				NamedFunction namedFunction = (NamedFunction)theEObject;
+				T result = caseNamedFunction(namedFunction);
+				if (result == null) result = caseFunction(namedFunction);
+				if (result == null) result = caseElement(namedFunction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -280,6 +294,21 @@ public class ASPSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePattern(Pattern object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Rule</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRule(Rule object) {
 		return null;
 	}
 
@@ -415,6 +444,21 @@ public class ASPSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseLiteral(Literal object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Function</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Function</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamedFunction(NamedFunction object) {
 		return null;
 	}
 

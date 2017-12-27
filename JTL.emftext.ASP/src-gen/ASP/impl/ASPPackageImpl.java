@@ -16,6 +16,7 @@ import ASP.Literal;
 import ASP.Metaedge;
 import ASP.Metanode;
 import ASP.Metaprop;
+import ASP.NamedFunction;
 import ASP.Node;
 import ASP.Not;
 import ASP.NotEq;
@@ -24,6 +25,7 @@ import ASP.Prop;
 import ASP.Relation;
 import ASP.RelationType;
 import ASP.RightPattern;
+import ASP.Rule;
 import ASP.Terminal;
 import ASP.Transformation;
 
@@ -69,6 +71,13 @@ public class ASPPackageImpl extends EPackageImpl implements ASPPackage {
 	 * @generated
 	 */
 	private EClass patternEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass ruleEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -132,6 +141,13 @@ public class ASPPackageImpl extends EPackageImpl implements ASPPackage {
 	 * @generated
 	 */
 	private EClass literalEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass namedFunctionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -307,6 +323,15 @@ public class ASPPackageImpl extends EPackageImpl implements ASPPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTransformation_Rules() {
+		return (EReference)transformationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getLeftPattern() {
 		return leftPatternEClass;
 	}
@@ -354,6 +379,60 @@ public class ASPPackageImpl extends EPackageImpl implements ASPPackage {
 	 */
 	public EAttribute getPattern_Type() {
 		return (EAttribute)patternEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRule() {
+		return ruleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRule_Expressions() {
+		return (EReference)ruleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRule_Name() {
+		return (EAttribute)ruleEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRule_Transformation() {
+		return (EReference)ruleEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRule_Comment() {
+		return (EAttribute)ruleEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRule_Head() {
+		return (EReference)ruleEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -568,6 +647,15 @@ public class ASPPackageImpl extends EPackageImpl implements ASPPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getNamedFunction() {
+		return namedFunctionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getNode() {
 		return nodeEClass;
 	}
@@ -749,6 +837,7 @@ public class ASPPackageImpl extends EPackageImpl implements ASPPackage {
 		createEReference(transformationEClass, TRANSFORMATION__RELATIONS);
 		createEAttribute(transformationEClass, TRANSFORMATION__NAME);
 		createEReference(transformationEClass, TRANSFORMATION__CONSTRAINTS);
+		createEReference(transformationEClass, TRANSFORMATION__RULES);
 
 		leftPatternEClass = createEClass(LEFT_PATTERN);
 
@@ -758,6 +847,13 @@ public class ASPPackageImpl extends EPackageImpl implements ASPPackage {
 		createEReference(patternEClass, PATTERN__ELEMENT);
 		createEAttribute(patternEClass, PATTERN__NAME);
 		createEAttribute(patternEClass, PATTERN__TYPE);
+
+		ruleEClass = createEClass(RULE);
+		createEReference(ruleEClass, RULE__EXPRESSIONS);
+		createEAttribute(ruleEClass, RULE__NAME);
+		createEReference(ruleEClass, RULE__TRANSFORMATION);
+		createEAttribute(ruleEClass, RULE__COMMENT);
+		createEReference(ruleEClass, RULE__HEAD);
 
 		constraintEClass = createEClass(CONSTRAINT);
 		createEReference(constraintEClass, CONSTRAINT__EXPRESSIONS);
@@ -790,6 +886,8 @@ public class ASPPackageImpl extends EPackageImpl implements ASPPackage {
 		createEReference(functionEClass, FUNCTION__LITERALS);
 
 		literalEClass = createEClass(LITERAL);
+
+		namedFunctionEClass = createEClass(NAMED_FUNCTION);
 
 		nodeEClass = createEClass(NODE);
 		createEAttribute(nodeEClass, NODE__IS_NODEX);
@@ -856,6 +954,7 @@ public class ASPPackageImpl extends EPackageImpl implements ASPPackage {
 		notEqEClass.getESuperTypes().add(this.getExpression());
 		functionEClass.getESuperTypes().add(this.getElement());
 		literalEClass.getESuperTypes().add(this.getElement());
+		namedFunctionEClass.getESuperTypes().add(this.getFunction());
 		nodeEClass.getESuperTypes().add(this.getFunction());
 		propEClass.getESuperTypes().add(this.getFunction());
 		edgeEClass.getESuperTypes().add(this.getFunction());
@@ -870,6 +969,7 @@ public class ASPPackageImpl extends EPackageImpl implements ASPPackage {
 		initEReference(getTransformation_Relations(), this.getRelation(), null, "relations", null, 1, -1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransformation_Name(), ecorePackage.getEString(), "name", null, 0, 1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformation_Constraints(), this.getConstraint(), this.getConstraint_Transformation(), "constraints", null, 0, -1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransformation_Rules(), this.getRule(), this.getRule_Transformation(), "rules", null, 0, -1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(leftPatternEClass, LeftPattern.class, "LeftPattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -879,6 +979,13 @@ public class ASPPackageImpl extends EPackageImpl implements ASPPackage {
 		initEReference(getPattern_Element(), this.getFunction(), null, "element", null, 1, 1, Pattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPattern_Name(), ecorePackage.getEString(), "name", null, 1, 1, Pattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPattern_Type(), this.getRelationType(), "type", null, 1, 1, Pattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(ruleEClass, Rule.class, "Rule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRule_Expressions(), this.getExpression(), null, "expressions", null, 1, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRule_Name(), ecorePackage.getEString(), "name", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRule_Transformation(), this.getTransformation(), this.getTransformation_Rules(), "transformation", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRule_Comment(), ecorePackage.getEString(), "comment", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getRule_Head(), this.getTerminal(), null, "head", null, 1, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(constraintEClass, Constraint.class, "Constraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConstraint_Expressions(), this.getExpression(), null, "expressions", null, 1, -1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -911,6 +1018,8 @@ public class ASPPackageImpl extends EPackageImpl implements ASPPackage {
 		initEReference(getFunction_Literals(), this.getLiteral(), null, "literals", null, 1, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(literalEClass, Literal.class, "Literal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(namedFunctionEClass, NamedFunction.class, "NamedFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(nodeEClass, Node.class, "Node", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNode_IsNodex(), ecorePackage.getEBoolean(), "isNodex", "false", 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

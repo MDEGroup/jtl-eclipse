@@ -24,7 +24,7 @@ TOKENSTYLES {
 
 RULES {
 	@SuppressWarnings(featureWithoutSyntax)
-	Transformation ::= elements+ !0 relations+ !0 constraints*;
+	Transformation ::= elements+ !0 relations+ !0 rules* !0 constraints*;
 	
 	@SuppressWarnings(featureWithoutSyntax)
 	Relation ::= patterns !0 patterns : RightPattern !0;
@@ -54,7 +54,13 @@ RULES {
 	@SuppressWarnings(featureWithoutSyntax,minOccurenceMismatch,explicitSyntaxChoice)
 //	Edge ::= ("edge(" | "edgex(") literals[] "," #1 literals[] "," #1 literals[] "," #1 literals[] "," #1 literals[] ")." !0;
 	Edge ::= isEdgex["edgex(" : "edge("] literals[] "," #1 literals[] "," #1 literals[] "," #1 literals[] "," #1 literals[] ")." !0;
+	
+	@SuppressWarnings(featureWithoutSyntax)
+	NamedFunction ::= name[] #0 "(" #0 literals[] ("," #1 literals[])* #0 ")" !0;
 
+	@SuppressWarnings(featureWithoutSyntax)
+	Rule ::= (comment[] !0)? head #1 ":-" #1 expressions ("," #1 expressions)* #0 "." !0;
+	
 	@SuppressWarnings(featureWithoutSyntax)
 	Constraint ::= (comment[] !0)? ":-" #1 expressions ("," #1 expressions)* #0 "." !0;
 

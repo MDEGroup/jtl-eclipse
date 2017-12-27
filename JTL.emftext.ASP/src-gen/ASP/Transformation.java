@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link ASP.Transformation#getRelations <em>Relations</em>}</li>
  *   <li>{@link ASP.Transformation#getName <em>Name</em>}</li>
  *   <li>{@link ASP.Transformation#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link ASP.Transformation#getRules <em>Rules</em>}</li>
  * </ul>
  *
  * @see ASP.ASPPackage#getTransformation()
@@ -103,5 +104,23 @@ public interface Transformation extends EObject {
 	 * @generated
 	 */
 	EList<Constraint> getConstraints();
+
+	/**
+	 * Returns the value of the '<em><b>Rules</b></em>' containment reference list.
+	 * The list contents are of type {@link ASP.Rule}.
+	 * It is bidirectional and its opposite is '{@link ASP.Rule#getTransformation <em>Transformation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Rules</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Rules</em>' containment reference list.
+	 * @see ASP.ASPPackage#getTransformation_Rules()
+	 * @see ASP.Rule#getTransformation
+	 * @model opposite="transformation" containment="true"
+	 * @generated
+	 */
+	EList<Rule> getRules();
 
 } // Transformation

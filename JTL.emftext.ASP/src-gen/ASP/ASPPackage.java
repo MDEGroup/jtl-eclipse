@@ -104,13 +104,22 @@ public interface ASPPackage extends EPackage {
 	int TRANSFORMATION__CONSTRAINTS = 3;
 
 	/**
+	 * The feature id for the '<em><b>Rules</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION__RULES = 4;
+
+	/**
 	 * The number of structural features of the '<em>Transformation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_FEATURE_COUNT = 4;
+	int TRANSFORMATION_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Transformation</em>' class.
@@ -287,6 +296,79 @@ public interface ASPPackage extends EPackage {
 	int RIGHT_PATTERN_OPERATION_COUNT = PATTERN_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link ASP.impl.RuleImpl <em>Rule</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ASP.impl.RuleImpl
+	 * @see ASP.impl.ASPPackageImpl#getRule()
+	 * @generated
+	 */
+	int RULE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__EXPRESSIONS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__NAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Transformation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__TRANSFORMATION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__COMMENT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Head</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__HEAD = 4;
+
+	/**
+	 * The number of structural features of the '<em>Rule</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_FEATURE_COUNT = 5;
+
+	/**
+	 * The number of operations of the '<em>Rule</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link ASP.impl.ConstraintImpl <em>Constraint</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -294,7 +376,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getConstraint()
 	 * @generated
 	 */
-	int CONSTRAINT = 4;
+	int CONSTRAINT = 5;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -358,7 +440,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getElement()
 	 * @generated
 	 */
-	int ELEMENT = 5;
+	int ELEMENT = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -404,7 +486,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getExpression()
 	 * @generated
 	 */
-	int EXPRESSION = 6;
+	int EXPRESSION = 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -450,7 +532,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getNot()
 	 * @generated
 	 */
-	int NOT = 7;
+	int NOT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -505,7 +587,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getAnd()
 	 * @generated
 	 */
-	int AND = 8;
+	int AND = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -569,7 +651,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getEq()
 	 * @generated
 	 */
-	int EQ = 9;
+	int EQ = 10;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -633,7 +715,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getNotEq()
 	 * @generated
 	 */
-	int NOT_EQ = 10;
+	int NOT_EQ = 11;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -697,7 +779,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getFunction()
 	 * @generated
 	 */
-	int FUNCTION = 11;
+	int FUNCTION = 12;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -752,7 +834,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getLiteral()
 	 * @generated
 	 */
-	int LITERAL = 12;
+	int LITERAL = 13;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -791,6 +873,61 @@ public interface ASPPackage extends EPackage {
 	int LITERAL_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link ASP.impl.NamedFunctionImpl <em>Named Function</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see ASP.impl.NamedFunctionImpl
+	 * @see ASP.impl.ASPPackageImpl#getNamedFunction()
+	 * @generated
+	 */
+	int NAMED_FUNCTION = 14;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_FUNCTION__NAME = FUNCTION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Transformation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_FUNCTION__TRANSFORMATION = FUNCTION__TRANSFORMATION;
+
+	/**
+	 * The feature id for the '<em><b>Literals</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_FUNCTION__LITERALS = FUNCTION__LITERALS;
+
+	/**
+	 * The number of structural features of the '<em>Named Function</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_FUNCTION_FEATURE_COUNT = FUNCTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Named Function</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_FUNCTION_OPERATION_COUNT = FUNCTION_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link ASP.impl.NodeImpl <em>Node</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -798,7 +935,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getNode()
 	 * @generated
 	 */
-	int NODE = 13;
+	int NODE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -862,7 +999,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getProp()
 	 * @generated
 	 */
-	int PROP = 14;
+	int PROP = 16;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -926,7 +1063,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getEdge()
 	 * @generated
 	 */
-	int EDGE = 15;
+	int EDGE = 17;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -990,7 +1127,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getRelation()
 	 * @generated
 	 */
-	int RELATION = 16;
+	int RELATION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Patterns</b></em>' containment reference list.
@@ -1054,7 +1191,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getTerminal()
 	 * @generated
 	 */
-	int TERMINAL = 17;
+	int TERMINAL = 19;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1109,7 +1246,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getMetanode()
 	 * @generated
 	 */
-	int METANODE = 18;
+	int METANODE = 20;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1164,7 +1301,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getMetaprop()
 	 * @generated
 	 */
-	int METAPROP = 19;
+	int METAPROP = 21;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1219,7 +1356,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getMetaedge()
 	 * @generated
 	 */
-	int METAEDGE = 20;
+	int METAEDGE = 22;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1274,7 +1411,7 @@ public interface ASPPackage extends EPackage {
 	 * @see ASP.impl.ASPPackageImpl#getRelationType()
 	 * @generated
 	 */
-	int RELATION_TYPE = 21;
+	int RELATION_TYPE = 23;
 
 
 	/**
@@ -1330,6 +1467,17 @@ public interface ASPPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTransformation_Constraints();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link ASP.Transformation#getRules <em>Rules</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Rules</em>'.
+	 * @see ASP.Transformation#getRules()
+	 * @see #getTransformation()
+	 * @generated
+	 */
+	EReference getTransformation_Rules();
 
 	/**
 	 * Returns the meta object for class '{@link ASP.LeftPattern <em>Left Pattern</em>}'.
@@ -1393,6 +1541,71 @@ public interface ASPPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPattern_Type();
+
+	/**
+	 * Returns the meta object for class '{@link ASP.Rule <em>Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Rule</em>'.
+	 * @see ASP.Rule
+	 * @generated
+	 */
+	EClass getRule();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link ASP.Rule#getExpressions <em>Expressions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Expressions</em>'.
+	 * @see ASP.Rule#getExpressions()
+	 * @see #getRule()
+	 * @generated
+	 */
+	EReference getRule_Expressions();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ASP.Rule#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see ASP.Rule#getName()
+	 * @see #getRule()
+	 * @generated
+	 */
+	EAttribute getRule_Name();
+
+	/**
+	 * Returns the meta object for the container reference '{@link ASP.Rule#getTransformation <em>Transformation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Transformation</em>'.
+	 * @see ASP.Rule#getTransformation()
+	 * @see #getRule()
+	 * @generated
+	 */
+	EReference getRule_Transformation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ASP.Rule#getComment <em>Comment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Comment</em>'.
+	 * @see ASP.Rule#getComment()
+	 * @see #getRule()
+	 * @generated
+	 */
+	EAttribute getRule_Comment();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link ASP.Rule#getHead <em>Head</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Head</em>'.
+	 * @see ASP.Rule#getHead()
+	 * @see #getRule()
+	 * @generated
+	 */
+	EReference getRule_Head();
 
 	/**
 	 * Returns the meta object for class '{@link ASP.Constraint <em>Constraint</em>}'.
@@ -1639,6 +1852,16 @@ public interface ASPPackage extends EPackage {
 	EClass getLiteral();
 
 	/**
+	 * Returns the meta object for class '{@link ASP.NamedFunction <em>Named Function</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Named Function</em>'.
+	 * @see ASP.NamedFunction
+	 * @generated
+	 */
+	EClass getNamedFunction();
+
+	/**
 	 * Returns the meta object for class '{@link ASP.Node <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1882,6 +2105,14 @@ public interface ASPPackage extends EPackage {
 		EReference TRANSFORMATION__CONSTRAINTS = eINSTANCE.getTransformation_Constraints();
 
 		/**
+		 * The meta object literal for the '<em><b>Rules</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSFORMATION__RULES = eINSTANCE.getTransformation_Rules();
+
+		/**
 		 * The meta object literal for the '{@link ASP.impl.LeftPatternImpl <em>Left Pattern</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1934,6 +2165,56 @@ public interface ASPPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PATTERN__TYPE = eINSTANCE.getPattern_Type();
+
+		/**
+		 * The meta object literal for the '{@link ASP.impl.RuleImpl <em>Rule</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see ASP.impl.RuleImpl
+		 * @see ASP.impl.ASPPackageImpl#getRule()
+		 * @generated
+		 */
+		EClass RULE = eINSTANCE.getRule();
+
+		/**
+		 * The meta object literal for the '<em><b>Expressions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RULE__EXPRESSIONS = eINSTANCE.getRule_Expressions();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RULE__NAME = eINSTANCE.getRule_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Transformation</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RULE__TRANSFORMATION = eINSTANCE.getRule_Transformation();
+
+		/**
+		 * The meta object literal for the '<em><b>Comment</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RULE__COMMENT = eINSTANCE.getRule_Comment();
+
+		/**
+		 * The meta object literal for the '<em><b>Head</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RULE__HEAD = eINSTANCE.getRule_Head();
 
 		/**
 		 * The meta object literal for the '{@link ASP.impl.ConstraintImpl <em>Constraint</em>}' class.
@@ -2136,6 +2417,16 @@ public interface ASPPackage extends EPackage {
 		 * @generated
 		 */
 		EClass LITERAL = eINSTANCE.getLiteral();
+
+		/**
+		 * The meta object literal for the '{@link ASP.impl.NamedFunctionImpl <em>Named Function</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see ASP.impl.NamedFunctionImpl
+		 * @see ASP.impl.ASPPackageImpl#getNamedFunction()
+		 * @generated
+		 */
+		EClass NAMED_FUNCTION = eINSTANCE.getNamedFunction();
 
 		/**
 		 * The meta object literal for the '{@link ASP.impl.NodeImpl <em>Node</em>}' class.

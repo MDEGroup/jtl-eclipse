@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import ASP.impl.EdgeImpl;
+import ASP.impl.NamedFunctionImpl;
 import ASP.impl.NodeImpl;
 import ASP.impl.PropImpl;
 
@@ -26,6 +27,9 @@ class ElementPrinter {
 		} else if (EdgeImpl.class.isInstance(element)) {
 			EStructuralFeature isEdgex = element.eClass().getEStructuralFeature("isEdgex");
 			elementPrint = (boolean) element.eGet(isEdgex) ? "edgex(" : "edge(";
+		} else if (NamedFunctionImpl.class.isInstance(element)) {
+			EStructuralFeature name = element.eClass().getEStructuralFeature("name");
+			elementPrint = element.eGet(name) + "(";
 		}
 
 		@SuppressWarnings("unchecked")

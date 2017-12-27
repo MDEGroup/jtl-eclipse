@@ -82,6 +82,12 @@ public class AbstractAspInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
+		if (object instanceof ASP.Rule) {
+			result = interprete_ASP_Rule((ASP.Rule) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
 		if (object instanceof ASP.Constraint) {
 			result = interprete_ASP_Constraint((ASP.Constraint) object, context);
 		}
@@ -118,14 +124,20 @@ public class AbstractAspInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
-		if (object instanceof ASP.Node) {
-			result = interprete_ASP_Node((ASP.Node) object, context);
+		if (object instanceof ASP.NamedFunction) {
+			result = interprete_ASP_NamedFunction((ASP.NamedFunction) object, context);
 		}
 		if (result != null) {
 			return result;
 		}
 		if (object instanceof ASP.Prop) {
 			result = interprete_ASP_Prop((ASP.Prop) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof ASP.Edge) {
+			result = interprete_ASP_Edge((ASP.Edge) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -142,8 +154,8 @@ public class AbstractAspInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
-		if (object instanceof ASP.Edge) {
-			result = interprete_ASP_Edge((ASP.Edge) object, context);
+		if (object instanceof ASP.Node) {
+			result = interprete_ASP_Node((ASP.Node) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -203,6 +215,10 @@ public class AbstractAspInterpreter<ResultType, ContextType> {
 		return null;
 	}
 	
+	public ResultType interprete_ASP_Rule(ASP.Rule rule, ContextType context) {
+		return null;
+	}
+	
 	public ResultType interprete_ASP_Constraint(ASP.Constraint constraint, ContextType context) {
 		return null;
 	}
@@ -236,6 +252,10 @@ public class AbstractAspInterpreter<ResultType, ContextType> {
 	}
 	
 	public ResultType interprete_ASP_Literal(ASP.Literal literal, ContextType context) {
+		return null;
+	}
+	
+	public ResultType interprete_ASP_NamedFunction(ASP.NamedFunction namedFunction, ContextType context) {
 		return null;
 	}
 	

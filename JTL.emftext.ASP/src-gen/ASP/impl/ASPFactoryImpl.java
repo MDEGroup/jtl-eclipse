@@ -60,12 +60,14 @@ public class ASPFactoryImpl extends EFactoryImpl implements ASPFactory {
 			case ASPPackage.TRANSFORMATION: return createTransformation();
 			case ASPPackage.LEFT_PATTERN: return createLeftPattern();
 			case ASPPackage.RIGHT_PATTERN: return createRightPattern();
+			case ASPPackage.RULE: return createRule();
 			case ASPPackage.CONSTRAINT: return createConstraint();
 			case ASPPackage.NOT: return createNot();
 			case ASPPackage.AND: return createAnd();
 			case ASPPackage.EQ: return createEq();
 			case ASPPackage.NOT_EQ: return createNotEq();
 			case ASPPackage.LITERAL: return createLiteral();
+			case ASPPackage.NAMED_FUNCTION: return createNamedFunction();
 			case ASPPackage.NODE: return createNode();
 			case ASPPackage.PROP: return createProp();
 			case ASPPackage.EDGE: return createEdge();
@@ -144,6 +146,16 @@ public class ASPFactoryImpl extends EFactoryImpl implements ASPFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Rule createRule() {
+		RuleImpl rule = new RuleImpl();
+		return rule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Constraint createConstraint() {
 		ConstraintImpl constraint = new ConstraintImpl();
 		return constraint;
@@ -197,6 +209,16 @@ public class ASPFactoryImpl extends EFactoryImpl implements ASPFactory {
 	public Literal createLiteral() {
 		LiteralImpl literal = new LiteralImpl();
 		return literal;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NamedFunction createNamedFunction() {
+		NamedFunctionImpl namedFunction = new NamedFunctionImpl();
+		return namedFunction;
 	}
 
 	/**

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/JTL.emftext.ASP/src" modelPluginID="JTL.emftext.ASP"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/JTL.emftext.ASP/src-gen" modelPluginID="JTL.emftext.ASP"
     modelName="ASP" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
     operationReflection="true" importOrganizing="true">
@@ -16,6 +16,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASP.ecore#//Transformation/relations"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Transformation/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASP.ecore#//Transformation/constraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASP.ecore#//Transformation/rules"/>
     </genClasses>
     <genClasses ecoreClass="ASP.ecore#//LeftPattern"/>
     <genClasses ecoreClass="ASP.ecore#//RightPattern"/>
@@ -23,6 +24,13 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ASP.ecore#//Pattern/element"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Pattern/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Pattern/type"/>
+    </genClasses>
+    <genClasses ecoreClass="ASP.ecore#//Rule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASP.ecore#//Rule/expressions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Rule/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ASP.ecore#//Rule/transformation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Rule/comment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASP.ecore#//Rule/head"/>
     </genClasses>
     <genClasses ecoreClass="ASP.ecore#//Constraint">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASP.ecore#//Constraint/expressions"/>
@@ -54,6 +62,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ASP.ecore#//Function/literals"/>
     </genClasses>
     <genClasses ecoreClass="ASP.ecore#//Literal"/>
+    <genClasses ecoreClass="ASP.ecore#//NamedFunction"/>
     <genClasses ecoreClass="ASP.ecore#//Node">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Node/isNodex"/>
     </genClasses>

@@ -49,6 +49,15 @@ public interface ASPFactory extends EFactory {
 	RightPattern createRightPattern();
 
 	/**
+	 * Returns a new object of class '<em>Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Rule</em>'.
+	 * @generated
+	 */
+	Rule createRule();
+
+	/**
 	 * Returns a new object of class '<em>Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -101,6 +110,15 @@ public interface ASPFactory extends EFactory {
 	 * @generated
 	 */
 	Literal createLiteral();
+
+	/**
+	 * Returns a new object of class '<em>Named Function</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Named Function</em>'.
+	 * @generated
+	 */
+	NamedFunction createNamedFunction();
 
 	/**
 	 * Returns a new object of class '<em>Node</em>'.

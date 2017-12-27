@@ -84,6 +84,10 @@ public class ASPAdapterFactory extends AdapterFactoryImpl {
 				return createPatternAdapter();
 			}
 			@Override
+			public Adapter caseRule(Rule object) {
+				return createRuleAdapter();
+			}
+			@Override
 			public Adapter caseConstraint(Constraint object) {
 				return createConstraintAdapter();
 			}
@@ -118,6 +122,10 @@ public class ASPAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseLiteral(Literal object) {
 				return createLiteralAdapter();
+			}
+			@Override
+			public Adapter caseNamedFunction(NamedFunction object) {
+				return createNamedFunctionAdapter();
 			}
 			@Override
 			public Adapter caseNode(Node object) {
@@ -224,6 +232,20 @@ public class ASPAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPatternAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ASP.Rule <em>Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ASP.Rule
+	 * @generated
+	 */
+	public Adapter createRuleAdapter() {
 		return null;
 	}
 
@@ -350,6 +372,20 @@ public class ASPAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLiteralAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ASP.NamedFunction <em>Named Function</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ASP.NamedFunction
+	 * @generated
+	 */
+	public Adapter createNamedFunctionAdapter() {
 		return null;
 	}
 

@@ -232,28 +232,36 @@ public class AspPrinter2 implements ASP.resource.asp.IAspTextPrinter {
 			printInternal(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_9, foundFormattingElements);
 			return;
 		}
-		if (element instanceof ASP.Constraint) {
+		if (element instanceof ASP.NamedFunction) {
 			printInternal(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_10, foundFormattingElements);
 			return;
 		}
-		if (element instanceof ASP.Literal) {
+		if (element instanceof ASP.Rule) {
 			printInternal(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11, foundFormattingElements);
 			return;
 		}
-		if (element instanceof ASP.Terminal) {
+		if (element instanceof ASP.Constraint) {
 			printInternal(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_12, foundFormattingElements);
 			return;
 		}
-		if (element instanceof ASP.Not) {
+		if (element instanceof ASP.Literal) {
 			printInternal(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_13, foundFormattingElements);
 			return;
 		}
-		if (element instanceof ASP.Eq) {
+		if (element instanceof ASP.Terminal) {
 			printInternal(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_14, foundFormattingElements);
 			return;
 		}
-		if (element instanceof ASP.NotEq) {
+		if (element instanceof ASP.Not) {
 			printInternal(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_15, foundFormattingElements);
+			return;
+		}
+		if (element instanceof ASP.Eq) {
+			printInternal(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_16, foundFormattingElements);
+			return;
+		}
+		if (element instanceof ASP.NotEq) {
+			printInternal(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_17, foundFormattingElements);
 			return;
 		}
 		

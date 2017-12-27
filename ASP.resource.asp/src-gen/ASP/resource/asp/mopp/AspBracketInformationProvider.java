@@ -36,7 +36,7 @@ public class AspBracketInformationProvider {
 	
 	public java.util.Collection<ASP.resource.asp.IAspBracketPair> getBracketPairs() {
 		java.util.Collection<ASP.resource.asp.IAspBracketPair> result = new java.util.ArrayList<ASP.resource.asp.IAspBracketPair>();
-		result.add(new BracketPair("(", ")", false));
+		result.add(new BracketPair("(", ")", true));
 		return result;
 	}
 	
