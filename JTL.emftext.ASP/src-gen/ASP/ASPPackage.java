@@ -351,13 +351,22 @@ public interface ASPPackage extends EPackage {
 	int RULE__HEAD = 4;
 
 	/**
+	 * The feature id for the '<em><b>Direction</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__DIRECTION = 5;
+
+	/**
 	 * The number of structural features of the '<em>Rule</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RULE_FEATURE_COUNT = 5;
+	int RULE_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>Rule</em>' class.
@@ -415,13 +424,22 @@ public interface ASPPackage extends EPackage {
 	int CONSTRAINT__COMMENT = 3;
 
 	/**
+	 * The feature id for the '<em><b>Direction</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__DIRECTION = 4;
+
+	/**
 	 * The number of structural features of the '<em>Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_FEATURE_COUNT = 4;
+	int CONSTRAINT_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Constraint</em>' class.
@@ -1608,6 +1626,17 @@ public interface ASPPackage extends EPackage {
 	EReference getRule_Head();
 
 	/**
+	 * Returns the meta object for the reference '{@link ASP.Rule#getDirection <em>Direction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Direction</em>'.
+	 * @see ASP.Rule#getDirection()
+	 * @see #getRule()
+	 * @generated
+	 */
+	EReference getRule_Direction();
+
+	/**
 	 * Returns the meta object for class '{@link ASP.Constraint <em>Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1660,6 +1689,17 @@ public interface ASPPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getConstraint_Comment();
+
+	/**
+	 * Returns the meta object for the reference '{@link ASP.Constraint#getDirection <em>Direction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Direction</em>'.
+	 * @see ASP.Constraint#getDirection()
+	 * @see #getConstraint()
+	 * @generated
+	 */
+	EReference getConstraint_Direction();
 
 	/**
 	 * Returns the meta object for class '{@link ASP.Element <em>Element</em>}'.
@@ -2217,6 +2257,14 @@ public interface ASPPackage extends EPackage {
 		EReference RULE__HEAD = eINSTANCE.getRule_Head();
 
 		/**
+		 * The meta object literal for the '<em><b>Direction</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RULE__DIRECTION = eINSTANCE.getRule_Direction();
+
+		/**
 		 * The meta object literal for the '{@link ASP.impl.ConstraintImpl <em>Constraint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2257,6 +2305,14 @@ public interface ASPPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CONSTRAINT__COMMENT = eINSTANCE.getConstraint_Comment();
+
+		/**
+		 * The meta object literal for the '<em><b>Direction</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSTRAINT__DIRECTION = eINSTANCE.getConstraint_Direction();
 
 		/**
 		 * The meta object literal for the '{@link ASP.impl.ElementImpl <em>Element</em>}' class.

@@ -31,12 +31,14 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ASP.ecore#//Rule/transformation"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Rule/comment"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASP.ecore#//Rule/head"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ASP.ecore#//Rule/direction"/>
     </genClasses>
     <genClasses ecoreClass="ASP.ecore#//Constraint">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASP.ecore#//Constraint/expressions"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Constraint/name"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ASP.ecore#//Constraint/transformation"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Constraint/comment"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ASP.ecore#//Constraint/direction"/>
     </genClasses>
     <genClasses image="false" ecoreClass="ASP.ecore#//Element">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASP.ecore#//Element/name"/>

@@ -399,7 +399,7 @@ public abstract class AbstractJTLLauncher {
 		tmpStr = tmpStr.replaceFirst("(relation_.*\n\n% .*\n)\n", "$1");
 
 		// Append the target metamodel fact mmt= to the contraints
-		tmpStr = setTransformationDirection(tmpStr);
+		//tmpStr = setTransformationDirection(tmpStr);
 
 		writeASP(tmpStr);
 		// Remove the temporary created file

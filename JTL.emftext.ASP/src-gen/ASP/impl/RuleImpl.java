@@ -4,6 +4,7 @@ package ASP.impl;
 
 import ASP.ASPPackage;
 import ASP.Expression;
+import ASP.Literal;
 import ASP.Rule;
 import ASP.Terminal;
 import ASP.Transformation;
@@ -38,6 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link ASP.impl.RuleImpl#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link ASP.impl.RuleImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link ASP.impl.RuleImpl#getHead <em>Head</em>}</li>
+ *   <li>{@link ASP.impl.RuleImpl#getDirection <em>Direction</em>}</li>
  * </ul>
  *
  * @generated
@@ -102,6 +104,16 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule {
 	 * @ordered
 	 */
 	protected Terminal head;
+
+	/**
+	 * The cached value of the '{@link #getDirection() <em>Direction</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDirection()
+	 * @generated
+	 * @ordered
+	 */
+	protected Literal direction;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -265,6 +277,44 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Literal getDirection() {
+		if (direction != null && direction.eIsProxy()) {
+			InternalEObject oldDirection = (InternalEObject)direction;
+			direction = (Literal)eResolveProxy(oldDirection);
+			if (direction != oldDirection) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ASPPackage.RULE__DIRECTION, oldDirection, direction));
+			}
+		}
+		return direction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Literal basicGetDirection() {
+		return direction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDirection(Literal newDirection) {
+		Literal oldDirection = direction;
+		direction = newDirection;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ASPPackage.RULE__DIRECTION, oldDirection, direction));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -326,6 +376,9 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule {
 				return getComment();
 			case ASPPackage.RULE__HEAD:
 				return getHead();
+			case ASPPackage.RULE__DIRECTION:
+				if (resolve) return getDirection();
+				return basicGetDirection();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -355,6 +408,9 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule {
 			case ASPPackage.RULE__HEAD:
 				setHead((Terminal)newValue);
 				return;
+			case ASPPackage.RULE__DIRECTION:
+				setDirection((Literal)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -382,6 +438,9 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule {
 			case ASPPackage.RULE__HEAD:
 				setHead((Terminal)null);
 				return;
+			case ASPPackage.RULE__DIRECTION:
+				setDirection((Literal)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -404,6 +463,8 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule {
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 			case ASPPackage.RULE__HEAD:
 				return head != null;
+			case ASPPackage.RULE__DIRECTION:
+				return direction != null;
 		}
 		return super.eIsSet(featureID);
 	}

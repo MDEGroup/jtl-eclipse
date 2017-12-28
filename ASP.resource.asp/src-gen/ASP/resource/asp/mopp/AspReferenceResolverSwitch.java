@@ -15,6 +15,8 @@ public class AspReferenceResolverSwitch implements ASP.resource.asp.IAspReferenc
 	
 	protected ASP.resource.asp.analysis.PatternElementReferenceResolver patternElementReferenceResolver = new ASP.resource.asp.analysis.PatternElementReferenceResolver();
 	protected ASP.resource.asp.analysis.FunctionLiteralsReferenceResolver functionLiteralsReferenceResolver = new ASP.resource.asp.analysis.FunctionLiteralsReferenceResolver();
+	protected ASP.resource.asp.analysis.RuleDirectionReferenceResolver ruleDirectionReferenceResolver = new ASP.resource.asp.analysis.RuleDirectionReferenceResolver();
+	protected ASP.resource.asp.analysis.ConstraintDirectionReferenceResolver constraintDirectionReferenceResolver = new ASP.resource.asp.analysis.ConstraintDirectionReferenceResolver();
 	protected ASP.resource.asp.analysis.TerminalElementReferenceResolver terminalElementReferenceResolver = new ASP.resource.asp.analysis.TerminalElementReferenceResolver();
 	protected ASP.resource.asp.analysis.NotElementReferenceResolver notElementReferenceResolver = new ASP.resource.asp.analysis.NotElementReferenceResolver();
 	protected ASP.resource.asp.analysis.EqLeftReferenceResolver eqLeftReferenceResolver = new ASP.resource.asp.analysis.EqLeftReferenceResolver();
@@ -28,6 +30,14 @@ public class AspReferenceResolverSwitch implements ASP.resource.asp.IAspReferenc
 	
 	public ASP.resource.asp.IAspReferenceResolver<ASP.Function, ASP.Literal> getFunctionLiteralsReferenceResolver() {
 		return getResolverChain(ASP.ASPPackage.eINSTANCE.getFunction_Literals(), functionLiteralsReferenceResolver);
+	}
+	
+	public ASP.resource.asp.IAspReferenceResolver<ASP.Rule, ASP.Literal> getRuleDirectionReferenceResolver() {
+		return getResolverChain(ASP.ASPPackage.eINSTANCE.getRule_Direction(), ruleDirectionReferenceResolver);
+	}
+	
+	public ASP.resource.asp.IAspReferenceResolver<ASP.Constraint, ASP.Literal> getConstraintDirectionReferenceResolver() {
+		return getResolverChain(ASP.ASPPackage.eINSTANCE.getConstraint_Direction(), constraintDirectionReferenceResolver);
 	}
 	
 	public ASP.resource.asp.IAspReferenceResolver<ASP.Terminal, ASP.Element> getTerminalElementReferenceResolver() {
@@ -61,6 +71,8 @@ public class AspReferenceResolverSwitch implements ASP.resource.asp.IAspReferenc
 		}
 		patternElementReferenceResolver.setOptions(options);
 		functionLiteralsReferenceResolver.setOptions(options);
+		ruleDirectionReferenceResolver.setOptions(options);
+		constraintDirectionReferenceResolver.setOptions(options);
 		terminalElementReferenceResolver.setOptions(options);
 		notElementReferenceResolver.setOptions(options);
 		eqLeftReferenceResolver.setOptions(options);
@@ -87,6 +99,22 @@ public class AspReferenceResolverSwitch implements ASP.resource.asp.IAspReferenc
 			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
 			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("literals")) {
 				functionLiteralsReferenceResolver.resolve(identifier, (ASP.Function) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			}
+		}
+		if (ASP.ASPPackage.eINSTANCE.getRule().isInstance(container)) {
+			AspFuzzyResolveResult<ASP.Literal> frr = new AspFuzzyResolveResult<ASP.Literal>(result);
+			String referenceName = reference.getName();
+			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("direction")) {
+				ruleDirectionReferenceResolver.resolve(identifier, (ASP.Rule) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
+			}
+		}
+		if (ASP.ASPPackage.eINSTANCE.getConstraint().isInstance(container)) {
+			AspFuzzyResolveResult<ASP.Literal> frr = new AspFuzzyResolveResult<ASP.Literal>(result);
+			String referenceName = reference.getName();
+			org.eclipse.emf.ecore.EStructuralFeature feature = container.eClass().getEStructuralFeature(referenceName);
+			if (feature != null && feature instanceof org.eclipse.emf.ecore.EReference && referenceName != null && referenceName.equals("direction")) {
+				constraintDirectionReferenceResolver.resolve(identifier, (ASP.Constraint) container, (org.eclipse.emf.ecore.EReference) feature, position, true, frr);
 			}
 		}
 		if (ASP.ASPPackage.eINSTANCE.getTerminal().isInstance(container)) {
@@ -145,6 +173,12 @@ public class AspReferenceResolverSwitch implements ASP.resource.asp.IAspReferenc
 		}
 		if (reference == ASP.ASPPackage.eINSTANCE.getFunction_Literals()) {
 			return getResolverChain(reference, functionLiteralsReferenceResolver);
+		}
+		if (reference == ASP.ASPPackage.eINSTANCE.getRule_Direction()) {
+			return getResolverChain(reference, ruleDirectionReferenceResolver);
+		}
+		if (reference == ASP.ASPPackage.eINSTANCE.getConstraint_Direction()) {
+			return getResolverChain(reference, constraintDirectionReferenceResolver);
 		}
 		if (reference == ASP.ASPPackage.eINSTANCE.getTerminal_Element()) {
 			return getResolverChain(reference, terminalElementReferenceResolver);

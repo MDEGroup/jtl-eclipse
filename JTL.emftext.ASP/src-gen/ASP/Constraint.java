@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link ASP.Constraint#getName <em>Name</em>}</li>
  *   <li>{@link ASP.Constraint#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link ASP.Constraint#getComment <em>Comment</em>}</li>
+ *   <li>{@link ASP.Constraint#getDirection <em>Direction</em>}</li>
  * </ul>
  *
  * @see ASP.ASPPackage#getConstraint()
@@ -121,5 +122,31 @@ public interface Constraint extends EObject {
 	 * @generated
 	 */
 	void setComment(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Direction</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Direction</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Direction</em>' reference.
+	 * @see #setDirection(Literal)
+	 * @see ASP.ASPPackage#getConstraint_Direction()
+	 * @model required="true"
+	 * @generated
+	 */
+	Literal getDirection();
+
+	/**
+	 * Sets the value of the '{@link ASP.Constraint#getDirection <em>Direction</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Direction</em>' reference.
+	 * @see #getDirection()
+	 * @generated
+	 */
+	void setDirection(Literal value);
 
 } // Constraint

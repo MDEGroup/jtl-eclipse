@@ -5,6 +5,7 @@ package ASP.impl;
 import ASP.ASPPackage;
 import ASP.Constraint;
 import ASP.Expression;
+import ASP.Literal;
 import ASP.Transformation;
 
 import java.util.Collection;
@@ -36,6 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link ASP.impl.ConstraintImpl#getName <em>Name</em>}</li>
  *   <li>{@link ASP.impl.ConstraintImpl#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link ASP.impl.ConstraintImpl#getComment <em>Comment</em>}</li>
+ *   <li>{@link ASP.impl.ConstraintImpl#getDirection <em>Direction</em>}</li>
  * </ul>
  *
  * @generated
@@ -90,6 +92,16 @@ public class ConstraintImpl extends MinimalEObjectImpl.Container implements Cons
 	 * @ordered
 	 */
 	protected String comment = COMMENT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getDirection() <em>Direction</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDirection()
+	 * @generated
+	 * @ordered
+	 */
+	protected Literal direction;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -210,6 +222,44 @@ public class ConstraintImpl extends MinimalEObjectImpl.Container implements Cons
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Literal getDirection() {
+		if (direction != null && direction.eIsProxy()) {
+			InternalEObject oldDirection = (InternalEObject)direction;
+			direction = (Literal)eResolveProxy(oldDirection);
+			if (direction != oldDirection) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ASPPackage.CONSTRAINT__DIRECTION, oldDirection, direction));
+			}
+		}
+		return direction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Literal basicGetDirection() {
+		return direction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDirection(Literal newDirection) {
+		Literal oldDirection = direction;
+		direction = newDirection;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ASPPackage.CONSTRAINT__DIRECTION, oldDirection, direction));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -267,6 +317,9 @@ public class ConstraintImpl extends MinimalEObjectImpl.Container implements Cons
 				return getTransformation();
 			case ASPPackage.CONSTRAINT__COMMENT:
 				return getComment();
+			case ASPPackage.CONSTRAINT__DIRECTION:
+				if (resolve) return getDirection();
+				return basicGetDirection();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -293,6 +346,9 @@ public class ConstraintImpl extends MinimalEObjectImpl.Container implements Cons
 			case ASPPackage.CONSTRAINT__COMMENT:
 				setComment((String)newValue);
 				return;
+			case ASPPackage.CONSTRAINT__DIRECTION:
+				setDirection((Literal)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -317,6 +373,9 @@ public class ConstraintImpl extends MinimalEObjectImpl.Container implements Cons
 			case ASPPackage.CONSTRAINT__COMMENT:
 				setComment(COMMENT_EDEFAULT);
 				return;
+			case ASPPackage.CONSTRAINT__DIRECTION:
+				setDirection((Literal)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -337,6 +396,8 @@ public class ConstraintImpl extends MinimalEObjectImpl.Container implements Cons
 				return getTransformation() != null;
 			case ASPPackage.CONSTRAINT__COMMENT:
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
+			case ASPPackage.CONSTRAINT__DIRECTION:
+				return direction != null;
 		}
 		return super.eIsSet(featureID);
 	}
