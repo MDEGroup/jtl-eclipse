@@ -3,7 +3,6 @@ package jtl.eclipse;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 
 import org.eclipse.core.resources.IResource;
