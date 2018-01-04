@@ -36,7 +36,7 @@ helper context ECORE!EClass def : classToRuleString() : String =
 			'\t)\n' +
 			'\tdo {\n'+
 			-- '\t\tt.setElementIDbyRefType(\'ElementRefXMI\', s.IDtrace.denormalize() + \'_ASPid_\' + s.ID);\n' + 
-			-- '\t\tt.__xmiID__ <- s.IDtrace.denormalize() + \'_ASPid_\' + s.ID;\n' + 
+			'\t\tt.__xmiID__ <- s.IDtrace.denormalize() + \'_ASPid_\' + s.ID;\n' + 
 			-- '\t\tt.__xmiID__ <- s.ID;\n' + 
 			'\t}\n'+
 			'}\n\n';

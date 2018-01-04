@@ -19,14 +19,14 @@ query MM2ASPmGenerator = ECORE!EClass.allInstancesFrom('IN')->reject(e | e.abstr
 	'helper context String def : normalize() : String = \'x_\' + self;\n\n' +
 	'helper context String def : processList(name : String) : String = self.regexReplaceAll(\'^[^,]+(,[^,]+)+$\',name+\'(["$0"])\').regexReplaceAll(\',([^,]+)\',\'","x_$1\');\n\n' +
 	'helper context String def : getId() : String =\n' + 
-	'if(self.contains(\'__idTrace:\')) then\n' +
-	'\tself.split(\'_ASPid_\').at(1)\n' +
+	'if(self.contains(\'_ASPid_\')) then\n' +
+	'\tself.split(\'_ASPid_\').at(2)\n' +
 	'else\n' +
 	'\tthisModule.count().toString()\n' +
 	'endif;\n\n' +
 	'helper context String def : getIdTrace() : String =\n' +
-	'if(self.contains(\'__idTrace:\')) then\n' +
-	'\tself.split(\'_ASPid_\').at(2)\n' +
+	'if(self.contains(\'_ASPid_\')) then\n' +
+	'\tself.split(\'_ASPid_\').at(1)\n' +
 	'else\n' +
 	'\tself\n' +
 	'endif;\n\n' +

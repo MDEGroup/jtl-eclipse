@@ -32,11 +32,13 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.m2m.atl.common.ATLExecutionException;
 import org.eclipse.m2m.atl.core.ATLCoreException;
 import org.eclipse.m2m.atl.core.IExtractor;
@@ -46,7 +48,9 @@ import org.eclipse.m2m.atl.core.IReferenceModel;
 import org.eclipse.m2m.atl.core.ModelFactory;
 import org.eclipse.m2m.atl.core.emf.EMFExtractor;
 import org.eclipse.m2m.atl.core.emf.EMFInjector;
+import org.eclipse.m2m.atl.core.emf.EMFModel;
 import org.eclipse.m2m.atl.core.emf.EMFModelFactory;
+import org.eclipse.m2m.atl.core.emf.EMFReferenceModel;
 import org.eclipse.m2m.atl.core.launch.ILauncher;
 import org.eclipse.m2m.atl.engine.compiler.AtlCompiler;
 import org.eclipse.m2m.atl.engine.emfvm.launch.EMFVMLauncher;
@@ -173,6 +177,31 @@ public class ASPm2MMGenerator {
 
 	public void genLoadModels(String inModelPath) throws ATLCoreException {
 		ModelFactory factory = new EMFModelFactory();
+		ModelFactory xmifactory = new EMFModelFactory() {
+			@Override
+			public IModel newModel(IReferenceModel referenceModel) {
+				return new EMFModel((EMFReferenceModel)referenceModel, this) {
+					@Override
+					public Object newElement(Object metaElement) {
+						Resource mainResource = getResource();
+						if (mainResource == null) {
+							mainResource = new XMIResourceImpl(URI.createURI("new-model")) {
+								@Override
+								protected boolean useUUIDs() {
+									return true;
+								}
+							};
+							setResource(mainResource);
+						}
+						EClass ec = (EClass)metaElement;
+						EObject ret = null;
+						ret = ec.getEPackage().getEFactoryInstance().create(ec);
+						mainResource.getContents().add(ret);
+						return ret;
+					}
+				};
+			}
+		};
 		IInjector injector = new EMFInjector();
 		IReferenceModel mmMetamodel = factory.newReferenceModel();
 		injector.inject(mmMetamodel, this.mmOut);
@@ -180,7 +209,7 @@ public class ASPm2MMGenerator {
 		injector.inject(aspmMetamodel, getMetamodelUri("ASPm"));
 		this.inModel = factory.newModel(aspmMetamodel);
 		injector.inject(inModel, inModelPath);
-		this.outModel = factory.newModel(mmMetamodel);
+		this.outModel = xmifactory.newModel(mmMetamodel);
 	}
 
 	public void saveModels(String outModelPath) throws ATLCoreException {

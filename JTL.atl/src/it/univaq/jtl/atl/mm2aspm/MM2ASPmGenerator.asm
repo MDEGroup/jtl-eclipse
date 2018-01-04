@@ -46,13 +46,13 @@
 		<constant value="helper context String def : normalize() : String = 'x_' + self;&#10;&#10;"/>
 		<constant value="helper context String def : processList(name : String) : String = self.regexReplaceAll('^[^,]+(,[^,]+)+$',name+'([&quot;$0&quot;])').regexReplaceAll(',([^,]+)','&quot;,&quot;x_$1');&#10;&#10;"/>
 		<constant value="helper context String def : getId() : String =&#10;"/>
-		<constant value="if(self.contains('__idTrace:')) then&#10;"/>
-		<constant value="&#9;self.split('_ASPid_').at(1)&#10;"/>
+		<constant value="if(self.contains('_ASPid_')) then&#10;"/>
+		<constant value="&#9;self.split('_ASPid_').at(2)&#10;"/>
 		<constant value="else&#10;"/>
 		<constant value="&#9;thisModule.count().toString()&#10;"/>
 		<constant value="endif;&#10;&#10;"/>
 		<constant value="helper context String def : getIdTrace() : String =&#10;"/>
-		<constant value="&#9;self.split('_ASPid_').at(2)&#10;"/>
+		<constant value="&#9;self.split('_ASPid_').at(1)&#10;"/>
 		<constant value="&#9;self&#10;"/>
 		<constant value="helper def: counter : Integer = 0;&#10;&#10;"/>
 		<constant value="rule count() {&#10;"/>
@@ -153,8 +153,8 @@
 		<constant value="13:2-20:177"/>
 		<constant value="21:2-21:52"/>
 		<constant value="13:2-21:52"/>
-		<constant value="22:2-22:44"/>
-		<constant value="13:2-22:44"/>
+		<constant value="22:2-22:41"/>
+		<constant value="13:2-22:41"/>
 		<constant value="23:2-23:37"/>
 		<constant value="13:2-23:37"/>
 		<constant value="24:2-24:10"/>
@@ -165,8 +165,8 @@
 		<constant value="13:2-26:14"/>
 		<constant value="27:2-27:57"/>
 		<constant value="13:2-27:57"/>
-		<constant value="28:2-28:44"/>
-		<constant value="13:2-28:44"/>
+		<constant value="28:2-28:41"/>
+		<constant value="13:2-28:41"/>
 		<constant value="29:2-29:37"/>
 		<constant value="13:2-29:37"/>
 		<constant value="30:2-30:10"/>
