@@ -44,6 +44,8 @@ node(MMS,IDmcx,IDmc,MCS),MMS!=mmt.
 trace_nb_propx(MMS,IDx,ID,IDmcx,IDmc,Name,Value) :- prop(MMS,IDx,ID,IDmcx,IDmc,Name,Value), is_metaprop_non_bijective_related(MMS,Name,MCS),
 node(MMS,IDmcx,IDmc,MCS),MMS!=mmt.
 
+trace_propx(MMS,IDx,ID,IDmcx,IDmc,Name,Value) :- prop(MMS,IDx,ID,IDmcx,IDmc,Name,Value), trace_nodex(MMS,IDmcx,IDmc,MCS),MMS!=mmt.
+trace_nb_propx(MMS,IDx,ID,IDmcx,IDmc,Name,Value) :- prop(MMS,IDx,ID,IDmcx,IDmc,Name,Value), trace_nb_nodex(MMS,IDmcx,IDmc,MCS),MMS!=mmt.
 
 %:- node(MMT,IDx,ID,Node1), nodex(MMT,IDx,ID,Node2), metanode(MMT,Node2),  Node1!=Node2, MMT=mmt.
 
@@ -105,35 +107,37 @@ mapping_prop(MM,ID,IDx,IDXmc,IDmcx,Prop,Value) :-
 %            IDX=ID+X, IDTZ=IDT+Z, MM!=MM2.
 
 mapping_edge(MM,IDX,IDx,Edge,IDSZ,IDSx,IDTZ,IDTx) :- 
-                        relation_edge(R,MM,Edge,NodeSource,NodeTarget,X),relation_edge(R,MM2,Edge2,NodeSource2,NodeTarget2,Y), 
+            relation_edge(R,MM,Edge,NodeSource,NodeTarget,X),relation_edge(R,MM2,Edge2,NodeSource2,NodeTarget2,Y), 
             edge(MM2,ID,IDx,Edge2,IDS,IDSx,IDT,IDTx), 
+            nodex(MM,IDS,IDSx,NodeSource), nodex(MM,IDT,IDTx,NodeTarget),
             relation_node(R1,MM,_,Z), relation_node(R1,MM2,NodeTarget2,W), node(MM2,IDT,IDTx,NodeTarget2),
             relation_node(R2,MM,_,Z2), relation_node(R2,MM2,NodeSource2,W2), node(MM2,IDS,IDSx,NodeSource2),
             IDX=ID+X, IDTZ=IDT+Z, IDSZ=IDS+Z2, MM!=MM2.
 
 % edge from node
 mapping_edge(MM,ID,IDx,Edge,ID,IDx,IDT,IDTx) :-
-relation_edge(R,MM,Edge,NodeSource,NodeTarget,X),relation_node(R,MM2,Node2,Y),
-relation_node(R2,MM,NodeSource,Z), relation_node(R2,MM2,Node2,W),
-         node(MM2,ID,IDx,Node2), nodex(MM,ID,IDx,NodeSource),
-         nodex(MM,IDT,IDTx,NodeTarget),
-         MM!=MM2.
+	relation_edge(R,MM,Edge,NodeSource,NodeTarget,X),relation_node(R,MM2,Node2,Y),
+	relation_node(R2,MM,NodeSource,Z), relation_node(R2,MM2,Node2,W),
+    node(MM2,ID,IDx,Node2), nodex(MM,ID,IDx,NodeSource),
+    nodex(MM,IDT,IDTx,NodeTarget),
+    MM!=MM2.	
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%% Generability Check %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                                                                                 
-is_generable_node(MM,ID,IDx,Node) v -is_generable_node(MM,ID,IDx,Node) :- mapping_node(MM,ID,IDx,Node), is_related(MM,Node), 
+is_generable_node(MM,ID,IDx,Node) v -is_generable_node(MM,ID,IDx,Node) :- mapping_node(MM,ID,IDx,Node), %is_related(MM,Node), 
                                                                                                                 is_target_metamodel_conform(MM,Node), MM=mmt.
 %:- -is_generable_node(MM,ID,IDx,Node).
 
-is_generable_prop(MM,ID,IDx,Prop,Value) v -is_generable_prop(MM,ID,IDx,Prop,Value) :- mapping_prop(MM,ID,IDx,IDmc,IDmcx,Prop,Value), is_related(MM,Prop), 
+is_generable_prop(MM,ID,IDx,Prop,Value) v -is_generable_prop(MM,ID,IDx,Prop,Value) :- mapping_prop(MM,ID,IDx,IDmc,IDmcx,Prop,Value), %is_related(MM,Prop), 
                                                                                                                is_target_metamodel_conform(MM,Prop), MM=mmt.
 %:--is_generable_prop(MM,ID,Prop,Value).
                                                                         
 is_generable_edge(MM,ID,IDx,Edge,IDS,IDSx,IDT,IDTx) v -is_generable_edge(MM,ID,IDx,Edge,IDS,IDSx,IDT,IDTx) :- mapping_edge(MM,ID,IDx,Edge,IDS,IDSx,IDT,IDTx), 
-                                                                                                                is_related(MM,Edge), is_target_metamodel_conform(MM,Edge),MM=mmt.
+                                                                                                                %is_related(MM,Edge), 
+                                                                                                                is_target_metamodel_conform(MM,Edge),MM=mmt.
 %:- -is_generable_edge(MM,ID,IDx,Edge,IDS,IDSx,IDT,IDTx).                                                                                                               
                                                                                                                 
                         
@@ -146,28 +150,40 @@ propx(MM,ID,IDx,IDmc,IDmcx,Prop,Value) :- is_generable_prop(MM,ID,IDx,Prop,Value
 
 edgex(MM,ID,IDx,Edge,IDS,IDSx,IDT,IDTx) :- is_generable_edge(MM,ID,IDx,Edge,IDS,IDSx,IDT,IDTx), mapping_edge(MM,ID,IDx,Edge,IDS,IDSx,IDT,IDTx), MM=mmt. 
     
-
+:- nodex(MM,ID,IDx,Node), nodex(MM,ID,IDx,Node2), is_a_non_bijective_relation(Node,Node2), Node2!=Node.
+is_a_non_bijective_relation(N1,N2):- relation_node(R, MMS, N1, X), relation_node(R, mmt, N2, Y), 
+									relation_node(R2, MMS, N1, Z), relation_node(R2, mmt, N3, W), 
+								    N2!=N3, R!=R2, MMS!=mmt.
+is_a_non_bijective_relation_with(N1,N2,N3):- relation_node(R, MMS, N1, X), relation_node(R, mmt, N2, Y), 
+									relation_node(R2, MMS, N1, Z), relation_node(R2, mmt, N3, W), 
+								    N2!=N3, R!=R2, MMS!=mmt.								    
+:- not nodex(mmt,ID,IDx,Node), not nodex(mmt,ID,IDx,Node2), is_a_non_bijective_relation(Node,Node2), node(MMS,ID,IDx,Node3), is_a_non_bijective_relation_with(Node,Node2,Node3), Node2!=Node, MMS!=mmt.							    
 %%%%%%%%% Element Generation by Traces %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
               
               
-nodex(MM,IDx,ID,Node) :- trace_node(MM,IDx,ID,Node),MM=mmt.
+nodex(MM,IDx,ID,Node):- trace_node(MM,IDx,ID,Node),MM=mmt.
 %:- nodex(MM,IDx,ID,Node2), trace_node(MM,IDx,ID,Node), Node != Node2.
  
-propx(MM,IDx,ID,IDmcx,IDmc,Prop,Value) :-  trace_prop(MM,IDx,ID,IDmcx,IDmc,Prop,Value),
-                                                                                   % prop(MM,IDx,ID,IDmcx,IDmc,Prop,Value), 
-                                                                                   %nodex(MM,IDmcx,IDmc,MCS),%node(MM,IDmcx,IDmc,MCS),
-                                                                                   MM=mmt.
+propx(MM,IDx,ID,IDmcx,IDmc,Prop,Value):- trace_prop(MM,IDx,ID,IDmcx,IDmc,Prop,Value),
+                                         % prop(MM,IDx,ID,IDmcx,IDmc,Prop,Value), 
+										%nodex(MM,IDmcx,IDmc,MCS),%node(MM,IDmcx,IDmc,MCS),
+                                         MM=mmt.
 
-edgex(MM,IDx,ID,Edge,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget) :-  
-                                                                                        trace_edge(MM,IDx,ID,Edge,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget), 
-                                                                                        edge(MM,IDx,ID,Edge,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget), 
-                                                                                        nodex(MM,IDNodeSourcex,IDNodeSource,NodeSource), nodex(MM,IDNodeTargetx,IDNodeTarget,NodeTarget),
-                                                                                        node(MM,IDNodeSourcex,IDNodeSource,NodeSource), node(MM,IDNodeTargetx,IDNodeTarget,NodeTarget), 
-                                                                                        MM=mmt.    
-           
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                           
-
-           
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                           
-
-
+edgex(MM,IDx,ID,Edge,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget):-  
+					trace_edge(MM,IDx,ID,Edge,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget), 
+					%edge(MM,IDx,ID,Edge,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget), 
+                     %%nodex(MM,IDNodeSourcex,IDNodeSource,NodeSource), nodex(MM,IDNodeTargetx,IDNodeTarget,NodeTarget),
+                     %node(MM,IDNodeSourcex,IDNodeSource,NodeSource), node(MM,IDNodeTargetx,IDNodeTarget,NodeTarget), 
+                     MM=mmt.    
+                     
+ :- not nodex(MM,IDx,ID,Node), trace_node(MM,IDx,ID,Node).
+ :- not propx(MM,IDx,ID,IDmcx,IDmc,Prop,Value), trace_prop(MM,IDx,ID,IDmcx,IDmc,Prop,Value).
+ :- not edgex(MM,IDx,ID,Edge,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget), trace_edge(MM,IDx,ID,Edge,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget).
+ 
+ nodex(MM,IDx,ID,Node) :- trace_nb_node(MM,IDx,ID,Node),MM=mmt.
+ propx(MM,IDx,ID,IDmcx,IDmc,Prop,Value) :-  trace_nb_prop(MM,IDx,ID,IDmcx,IDmc,Prop,Value),MM=mmt.
+ edgex(MM,IDx,ID,Edge,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget) :- trace_nb_edge(MM,IDx,ID,Edge,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget), MM=mmt.
+ 
+ :- nodex(MM,IDx,ID,Node2), trace_nb_node(MM,IDx,ID,Node), Node != Node2.
+ %:- not nodex(MM,IDx,ID,Node), trace_nb_node(MM,IDx,ID,Node).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
