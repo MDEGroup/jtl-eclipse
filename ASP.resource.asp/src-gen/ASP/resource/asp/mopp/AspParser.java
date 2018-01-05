@@ -3735,7 +3735,7 @@ public class AspParser extends AspANTLRParserBase {
 
 
     // $ANTLR start "parse_ASP_Rule"
-    // Asp.g:2580:1: parse_ASP_Rule returns [ASP.Rule element = null] : ( ( (a0= TEXT ) ) )? (a1_0= parse_ASP_Terminal ) a2= ':-' (a3_0= parse_ASP_Expression ) ( (a4= ',' (a5_0= parse_ASP_Expression ) ) )* a6= ',' ( (a7= 'mmt=' (a8= TEXT ) ) )? a9= '.' ;
+    // Asp.g:2580:1: parse_ASP_Rule returns [ASP.Rule element = null] : ( ( (a0= TEXT ) ) )? (a1_0= parse_ASP_Terminal ) a2= ':-' (a3_0= parse_ASP_Expression ) ( (a4= ',' (a5_0= parse_ASP_Expression ) ) )* ( (a6= ',' a7= 'mmt=' (a8= TEXT ) ) )? a9= '.' ;
     public final ASP.Rule parse_ASP_Rule() throws RecognitionException {
         ASP.Rule element =  null;
 
@@ -3760,8 +3760,8 @@ public class AspParser extends AspANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 13) ) { return element; }
 
-            // Asp.g:2583:2: ( ( ( (a0= TEXT ) ) )? (a1_0= parse_ASP_Terminal ) a2= ':-' (a3_0= parse_ASP_Expression ) ( (a4= ',' (a5_0= parse_ASP_Expression ) ) )* a6= ',' ( (a7= 'mmt=' (a8= TEXT ) ) )? a9= '.' )
-            // Asp.g:2584:2: ( ( (a0= TEXT ) ) )? (a1_0= parse_ASP_Terminal ) a2= ':-' (a3_0= parse_ASP_Expression ) ( (a4= ',' (a5_0= parse_ASP_Expression ) ) )* a6= ',' ( (a7= 'mmt=' (a8= TEXT ) ) )? a9= '.'
+            // Asp.g:2583:2: ( ( ( (a0= TEXT ) ) )? (a1_0= parse_ASP_Terminal ) a2= ':-' (a3_0= parse_ASP_Expression ) ( (a4= ',' (a5_0= parse_ASP_Expression ) ) )* ( (a6= ',' a7= 'mmt=' (a8= TEXT ) ) )? a9= '.' )
+            // Asp.g:2584:2: ( ( (a0= TEXT ) ) )? (a1_0= parse_ASP_Terminal ) a2= ':-' (a3_0= parse_ASP_Expression ) ( (a4= ',' (a5_0= parse_ASP_Expression ) ) )* ( (a6= ',' a7= 'mmt=' (a8= TEXT ) ) )? a9= '.'
             {
             // Asp.g:2584:2: ( ( (a0= TEXT ) ) )?
             int alt11=2;
@@ -3930,9 +3930,10 @@ public class AspParser extends AspANTLRParserBase {
             		// expected elements (follow set)
             		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[207]);
             		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[208]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[209]);
             	}
 
-            // Asp.g:2699:2: ( (a4= ',' (a5_0= parse_ASP_Expression ) ) )*
+            // Asp.g:2700:2: ( (a4= ',' (a5_0= parse_ASP_Expression ) ) )*
             loop12:
             do {
                 int alt12=2;
@@ -3951,10 +3952,10 @@ public class AspParser extends AspANTLRParserBase {
 
                 switch (alt12) {
             	case 1 :
-            	    // Asp.g:2700:3: (a4= ',' (a5_0= parse_ASP_Expression ) )
+            	    // Asp.g:2701:3: (a4= ',' (a5_0= parse_ASP_Expression ) )
             	    {
-            	    // Asp.g:2700:3: (a4= ',' (a5_0= parse_ASP_Expression ) )
-            	    // Asp.g:2701:4: a4= ',' (a5_0= parse_ASP_Expression )
+            	    // Asp.g:2701:3: (a4= ',' (a5_0= parse_ASP_Expression ) )
+            	    // Asp.g:2702:4: a4= ',' (a5_0= parse_ASP_Expression )
             	    {
             	    a4=(Token)match(input,15,FOLLOW_15_in_parse_ASP_Rule1945); if (state.failed) return element;
 
@@ -3970,14 +3971,14 @@ public class AspParser extends AspANTLRParserBase {
 
             	    if ( state.backtracking==0 ) {
             	    				// expected elements (follow set)
-            	    				addExpectedElement(ASP.ASPPackage.eINSTANCE.getRule(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[209]);
             	    				addExpectedElement(ASP.ASPPackage.eINSTANCE.getRule(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[210]);
             	    				addExpectedElement(ASP.ASPPackage.eINSTANCE.getRule(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[211]);
             	    				addExpectedElement(ASP.ASPPackage.eINSTANCE.getRule(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[212]);
+            	    				addExpectedElement(ASP.ASPPackage.eINSTANCE.getRule(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[213]);
             	    			}
 
-            	    // Asp.g:2718:4: (a5_0= parse_ASP_Expression )
-            	    // Asp.g:2719:5: a5_0= parse_ASP_Expression
+            	    // Asp.g:2719:4: (a5_0= parse_ASP_Expression )
+            	    // Asp.g:2720:5: a5_0= parse_ASP_Expression
             	    {
             	    pushFollow(FOLLOW_parse_ASP_Expression_in_parse_ASP_Rule1971);
             	    a5_0=parse_ASP_Expression();
@@ -4010,8 +4011,9 @@ public class AspParser extends AspANTLRParserBase {
 
             	    if ( state.backtracking==0 ) {
             	    				// expected elements (follow set)
-            	    				addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[213]);
             	    				addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[214]);
+            	    				addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[215]);
+            	    				addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[216]);
             	    			}
 
             	    }
@@ -4028,43 +4030,26 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[215]);
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[216]);
-            	}
-
-            a6=(Token)match(input,15,FOLLOW_15_in_parse_ASP_Rule2012); if (state.failed) return element;
-
-            if ( state.backtracking==0 ) {
-            		if (element == null) {
-            			element = ASP.ASPFactory.eINSTANCE.createRule();
-            			startIncompleteElement(element);
-            		}
-            		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_8, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
-            	}
-
-            if ( state.backtracking==0 ) {
-            		// expected elements (follow set)
             		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[217]);
             		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[218]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[219]);
             	}
 
-            // Asp.g:2768:2: ( (a7= 'mmt=' (a8= TEXT ) ) )?
+            // Asp.g:2756:2: ( (a6= ',' a7= 'mmt=' (a8= TEXT ) ) )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
-            if ( (LA13_0==24) ) {
+            if ( (LA13_0==15) ) {
                 alt13=1;
             }
             switch (alt13) {
                 case 1 :
-                    // Asp.g:2769:3: (a7= 'mmt=' (a8= TEXT ) )
+                    // Asp.g:2757:3: (a6= ',' a7= 'mmt=' (a8= TEXT ) )
                     {
-                    // Asp.g:2769:3: (a7= 'mmt=' (a8= TEXT ) )
-                    // Asp.g:2770:4: a7= 'mmt=' (a8= TEXT )
+                    // Asp.g:2757:3: (a6= ',' a7= 'mmt=' (a8= TEXT ) )
+                    // Asp.g:2758:4: a6= ',' a7= 'mmt=' (a8= TEXT )
                     {
-                    a7=(Token)match(input,24,FOLLOW_24_in_parse_ASP_Rule2035); if (state.failed) return element;
+                    a6=(Token)match(input,15,FOLLOW_15_in_parse_ASP_Rule2021); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     				if (element == null) {
@@ -4072,19 +4057,36 @@ public class AspParser extends AspANTLRParserBase {
                     					startIncompleteElement(element);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_9_0_0_1, null, true);
+                    				retrieveLayoutInformation(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_8_0_0_0, null, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
+                    			}
+
+                    if ( state.backtracking==0 ) {
+                    				// expected elements (follow set)
+                    				addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[220]);
+                    			}
+
+                    a7=(Token)match(input,24,FOLLOW_24_in_parse_ASP_Rule2041); if (state.failed) return element;
+
+                    if ( state.backtracking==0 ) {
+                    				if (element == null) {
+                    					element = ASP.ASPFactory.eINSTANCE.createRule();
+                    					startIncompleteElement(element);
+                    				}
+                    				collectHiddenTokens(element);
+                    				retrieveLayoutInformation(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_8_0_0_2, null, true);
                     				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a7, element);
                     			}
 
                     if ( state.backtracking==0 ) {
                     				// expected elements (follow set)
-                    				addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[219]);
+                    				addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[221]);
                     			}
 
-                    // Asp.g:2784:4: (a8= TEXT )
-                    // Asp.g:2785:5: a8= TEXT
+                    // Asp.g:2786:4: (a8= TEXT )
+                    // Asp.g:2787:5: a8= TEXT
                     {
-                    a8=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_Rule2061); if (state.failed) return element;
+                    a8=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_Rule2067); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     					if (terminateParsing) {
@@ -4113,7 +4115,7 @@ public class AspParser extends AspANTLRParserBase {
                     							completedElement(value, false);
                     						}
                     						collectHiddenTokens(element);
-                    						retrieveLayoutInformation(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_9_0_0_3, proxy, true);
+                    						retrieveLayoutInformation(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_8_0_0_4, proxy, true);
                     						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a8, element);
                     						copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a8, proxy);
                     					}
@@ -4124,7 +4126,7 @@ public class AspParser extends AspANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     				// expected elements (follow set)
-                    				addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[220]);
+                    				addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[222]);
                     			}
 
                     }
@@ -4138,10 +4140,10 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[221]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[223]);
             	}
 
-            a9=(Token)match(input,16,FOLLOW_16_in_parse_ASP_Rule2107); if (state.failed) return element;
+            a9=(Token)match(input,16,FOLLOW_16_in_parse_ASP_Rule2113); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4149,16 +4151,16 @@ public class AspParser extends AspANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_11, null, true);
+            		retrieveLayoutInformation(element, ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_10, null, true);
             		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a9, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[222]);
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[223]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[224]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[225]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[226]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[227]);
             	}
 
             }
@@ -4181,7 +4183,7 @@ public class AspParser extends AspANTLRParserBase {
 
 
     // $ANTLR start "parse_ASP_Constraint"
-    // Asp.g:2850:1: parse_ASP_Constraint returns [ASP.Constraint element = null] : ( ( (a0= TEXT ) ) )? a1= ':-' (a2_0= parse_ASP_Expression ) ( (a3= ',' (a4_0= parse_ASP_Expression ) ) )* a5= ', mmt=' (a6= TEXT ) a7= '.' ;
+    // Asp.g:2852:1: parse_ASP_Constraint returns [ASP.Constraint element = null] : ( ( (a0= TEXT ) ) )? a1= ':-' (a2_0= parse_ASP_Expression ) ( (a3= ',' (a4_0= parse_ASP_Expression ) ) )* a5= ', mmt=' (a6= TEXT ) a7= '.' ;
     public final ASP.Constraint parse_ASP_Constraint() throws RecognitionException {
         ASP.Constraint element =  null;
 
@@ -4203,10 +4205,10 @@ public class AspParser extends AspANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 14) ) { return element; }
 
-            // Asp.g:2853:2: ( ( ( (a0= TEXT ) ) )? a1= ':-' (a2_0= parse_ASP_Expression ) ( (a3= ',' (a4_0= parse_ASP_Expression ) ) )* a5= ', mmt=' (a6= TEXT ) a7= '.' )
-            // Asp.g:2854:2: ( ( (a0= TEXT ) ) )? a1= ':-' (a2_0= parse_ASP_Expression ) ( (a3= ',' (a4_0= parse_ASP_Expression ) ) )* a5= ', mmt=' (a6= TEXT ) a7= '.'
+            // Asp.g:2855:2: ( ( ( (a0= TEXT ) ) )? a1= ':-' (a2_0= parse_ASP_Expression ) ( (a3= ',' (a4_0= parse_ASP_Expression ) ) )* a5= ', mmt=' (a6= TEXT ) a7= '.' )
+            // Asp.g:2856:2: ( ( (a0= TEXT ) ) )? a1= ':-' (a2_0= parse_ASP_Expression ) ( (a3= ',' (a4_0= parse_ASP_Expression ) ) )* a5= ', mmt=' (a6= TEXT ) a7= '.'
             {
-            // Asp.g:2854:2: ( ( (a0= TEXT ) ) )?
+            // Asp.g:2856:2: ( ( (a0= TEXT ) ) )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -4215,15 +4217,15 @@ public class AspParser extends AspANTLRParserBase {
             }
             switch (alt14) {
                 case 1 :
-                    // Asp.g:2855:3: ( (a0= TEXT ) )
+                    // Asp.g:2857:3: ( (a0= TEXT ) )
                     {
-                    // Asp.g:2855:3: ( (a0= TEXT ) )
-                    // Asp.g:2856:4: (a0= TEXT )
+                    // Asp.g:2857:3: ( (a0= TEXT ) )
+                    // Asp.g:2858:4: (a0= TEXT )
                     {
-                    // Asp.g:2856:4: (a0= TEXT )
-                    // Asp.g:2857:5: a0= TEXT
+                    // Asp.g:2858:4: (a0= TEXT )
+                    // Asp.g:2859:5: a0= TEXT
                     {
-                    a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_Constraint2151); if (state.failed) return element;
+                    a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_Constraint2157); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     					if (terminateParsing) {
@@ -4259,7 +4261,7 @@ public class AspParser extends AspANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     				// expected elements (follow set)
-                    				addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[226]);
+                    				addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[228]);
                     			}
 
                     }
@@ -4273,10 +4275,10 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[227]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[229]);
             	}
 
-            a1=(Token)match(input,17,FOLLOW_17_in_parse_ASP_Constraint2197); if (state.failed) return element;
+            a1=(Token)match(input,17,FOLLOW_17_in_parse_ASP_Constraint2203); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4290,16 +4292,16 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getConstraint(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[228]);
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getConstraint(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[229]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getConstraint(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[230]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getConstraint(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[231]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getConstraint(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[232]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getConstraint(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[233]);
             	}
 
-            // Asp.g:2916:2: (a2_0= parse_ASP_Expression )
-            // Asp.g:2917:3: a2_0= parse_ASP_Expression
+            // Asp.g:2918:2: (a2_0= parse_ASP_Expression )
+            // Asp.g:2919:3: a2_0= parse_ASP_Expression
             {
-            pushFollow(FOLLOW_parse_ASP_Expression_in_parse_ASP_Constraint2215);
+            pushFollow(FOLLOW_parse_ASP_Expression_in_parse_ASP_Constraint2221);
             a2_0=parse_ASP_Expression();
 
             state._fsp--;
@@ -4330,11 +4332,11 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[232]);
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[233]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[234]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[235]);
             	}
 
-            // Asp.g:2943:2: ( (a3= ',' (a4_0= parse_ASP_Expression ) ) )*
+            // Asp.g:2945:2: ( (a3= ',' (a4_0= parse_ASP_Expression ) ) )*
             loop15:
             do {
                 int alt15=2;
@@ -4347,12 +4349,12 @@ public class AspParser extends AspANTLRParserBase {
 
                 switch (alt15) {
             	case 1 :
-            	    // Asp.g:2944:3: (a3= ',' (a4_0= parse_ASP_Expression ) )
+            	    // Asp.g:2946:3: (a3= ',' (a4_0= parse_ASP_Expression ) )
             	    {
-            	    // Asp.g:2944:3: (a3= ',' (a4_0= parse_ASP_Expression ) )
-            	    // Asp.g:2945:4: a3= ',' (a4_0= parse_ASP_Expression )
+            	    // Asp.g:2946:3: (a3= ',' (a4_0= parse_ASP_Expression ) )
+            	    // Asp.g:2947:4: a3= ',' (a4_0= parse_ASP_Expression )
             	    {
-            	    a3=(Token)match(input,15,FOLLOW_15_in_parse_ASP_Constraint2242); if (state.failed) return element;
+            	    a3=(Token)match(input,15,FOLLOW_15_in_parse_ASP_Constraint2248); if (state.failed) return element;
 
             	    if ( state.backtracking==0 ) {
             	    				if (element == null) {
@@ -4366,16 +4368,16 @@ public class AspParser extends AspANTLRParserBase {
 
             	    if ( state.backtracking==0 ) {
             	    				// expected elements (follow set)
-            	    				addExpectedElement(ASP.ASPPackage.eINSTANCE.getConstraint(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[234]);
-            	    				addExpectedElement(ASP.ASPPackage.eINSTANCE.getConstraint(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[235]);
             	    				addExpectedElement(ASP.ASPPackage.eINSTANCE.getConstraint(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[236]);
             	    				addExpectedElement(ASP.ASPPackage.eINSTANCE.getConstraint(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[237]);
+            	    				addExpectedElement(ASP.ASPPackage.eINSTANCE.getConstraint(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[238]);
+            	    				addExpectedElement(ASP.ASPPackage.eINSTANCE.getConstraint(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[239]);
             	    			}
 
-            	    // Asp.g:2962:4: (a4_0= parse_ASP_Expression )
-            	    // Asp.g:2963:5: a4_0= parse_ASP_Expression
+            	    // Asp.g:2964:4: (a4_0= parse_ASP_Expression )
+            	    // Asp.g:2965:5: a4_0= parse_ASP_Expression
             	    {
-            	    pushFollow(FOLLOW_parse_ASP_Expression_in_parse_ASP_Constraint2268);
+            	    pushFollow(FOLLOW_parse_ASP_Expression_in_parse_ASP_Constraint2274);
             	    a4_0=parse_ASP_Expression();
 
             	    state._fsp--;
@@ -4406,8 +4408,8 @@ public class AspParser extends AspANTLRParserBase {
 
             	    if ( state.backtracking==0 ) {
             	    				// expected elements (follow set)
-            	    				addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[238]);
-            	    				addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[239]);
+            	    				addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[240]);
+            	    				addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[241]);
             	    			}
 
             	    }
@@ -4424,11 +4426,11 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[240]);
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[241]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[242]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[243]);
             	}
 
-            a5=(Token)match(input,14,FOLLOW_14_in_parse_ASP_Constraint2309); if (state.failed) return element;
+            a5=(Token)match(input,14,FOLLOW_14_in_parse_ASP_Constraint2315); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4442,13 +4444,13 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[242]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[244]);
             	}
 
-            // Asp.g:3011:2: (a6= TEXT )
-            // Asp.g:3012:3: a6= TEXT
+            // Asp.g:3013:2: (a6= TEXT )
+            // Asp.g:3014:3: a6= TEXT
             {
-            a6=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_Constraint2327); if (state.failed) return element;
+            a6=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_Constraint2333); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4488,10 +4490,10 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[243]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[245]);
             	}
 
-            a7=(Token)match(input,16,FOLLOW_16_in_parse_ASP_Constraint2348); if (state.failed) return element;
+            a7=(Token)match(input,16,FOLLOW_16_in_parse_ASP_Constraint2354); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4505,8 +4507,8 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[244]);
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[245]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[246]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[247]);
             	}
 
             }
@@ -4529,7 +4531,7 @@ public class AspParser extends AspANTLRParserBase {
 
 
     // $ANTLR start "parse_ASP_Literal"
-    // Asp.g:3068:1: parse_ASP_Literal returns [ASP.Literal element = null] : (a0= TEXT ) ( (a1= '.' ) )? ;
+    // Asp.g:3070:1: parse_ASP_Literal returns [ASP.Literal element = null] : (a0= TEXT ) ( (a1= '.' ) )? ;
     public final ASP.Literal parse_ASP_Literal() throws RecognitionException {
         ASP.Literal element =  null;
 
@@ -4543,13 +4545,13 @@ public class AspParser extends AspANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 15) ) { return element; }
 
-            // Asp.g:3071:2: ( (a0= TEXT ) ( (a1= '.' ) )? )
-            // Asp.g:3072:2: (a0= TEXT ) ( (a1= '.' ) )?
+            // Asp.g:3073:2: ( (a0= TEXT ) ( (a1= '.' ) )? )
+            // Asp.g:3074:2: (a0= TEXT ) ( (a1= '.' ) )?
             {
-            // Asp.g:3072:2: (a0= TEXT )
-            // Asp.g:3073:3: a0= TEXT
+            // Asp.g:3074:2: (a0= TEXT )
+            // Asp.g:3075:3: a0= TEXT
             {
-            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_Literal2381); if (state.failed) return element;
+            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_Literal2387); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4585,9 +4587,7 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[246]);
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[247]);
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[248]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[248]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[249]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[250]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[251]);
@@ -4600,9 +4600,11 @@ public class AspParser extends AspANTLRParserBase {
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[258]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[259]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[260]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[261]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[262]);
             	}
 
-            // Asp.g:3122:2: ( (a1= '.' ) )?
+            // Asp.g:3124:2: ( (a1= '.' ) )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -4611,12 +4613,12 @@ public class AspParser extends AspANTLRParserBase {
             }
             switch (alt16) {
                 case 1 :
-                    // Asp.g:3123:3: (a1= '.' )
+                    // Asp.g:3125:3: (a1= '.' )
                     {
-                    // Asp.g:3123:3: (a1= '.' )
-                    // Asp.g:3124:4: a1= '.'
+                    // Asp.g:3125:3: (a1= '.' )
+                    // Asp.g:3126:4: a1= '.'
                     {
-                    a1=(Token)match(input,16,FOLLOW_16_in_parse_ASP_Literal2411); if (state.failed) return element;
+                    a1=(Token)match(input,16,FOLLOW_16_in_parse_ASP_Literal2417); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     				if (element == null) {
@@ -4630,8 +4632,6 @@ public class AspParser extends AspANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     				// expected elements (follow set)
-                    				addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[261]);
-                    				addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[262]);
                     				addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[263]);
                     				addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[264]);
                     				addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[265]);
@@ -4644,6 +4644,8 @@ public class AspParser extends AspANTLRParserBase {
                     				addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[272]);
                     				addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[273]);
                     				addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[274]);
+                    				addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[275]);
+                    				addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[276]);
                     			}
 
                     }
@@ -4657,8 +4659,6 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[275]);
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[276]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[277]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[278]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[279]);
@@ -4671,6 +4671,8 @@ public class AspParser extends AspANTLRParserBase {
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[286]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[287]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[288]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[289]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[290]);
             	}
 
             }
@@ -4693,7 +4695,7 @@ public class AspParser extends AspANTLRParserBase {
 
 
     // $ANTLR start "parse_ASP_Terminal"
-    // Asp.g:3173:1: parse_ASP_Terminal returns [ASP.Terminal element = null] : (a0= TEXT ) ;
+    // Asp.g:3175:1: parse_ASP_Terminal returns [ASP.Terminal element = null] : (a0= TEXT ) ;
     public final ASP.Terminal parse_ASP_Terminal() throws RecognitionException {
         ASP.Terminal element =  null;
 
@@ -4706,13 +4708,13 @@ public class AspParser extends AspANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 16) ) { return element; }
 
-            // Asp.g:3176:2: ( (a0= TEXT ) )
-            // Asp.g:3177:2: (a0= TEXT )
+            // Asp.g:3178:2: ( (a0= TEXT ) )
+            // Asp.g:3179:2: (a0= TEXT )
             {
-            // Asp.g:3177:2: (a0= TEXT )
-            // Asp.g:3178:3: a0= TEXT
+            // Asp.g:3179:2: (a0= TEXT )
+            // Asp.g:3180:3: a0= TEXT
             {
-            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_Terminal2463); if (state.failed) return element;
+            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_Terminal2469); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4752,8 +4754,6 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[289]);
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[290]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[291]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[292]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[293]);
@@ -4766,9 +4766,11 @@ public class AspParser extends AspANTLRParserBase {
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[300]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[301]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[302]);
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[303]);
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[304]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[303]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[304]);
             		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[305]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[306]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[307]);
             	}
 
             }
@@ -4791,7 +4793,7 @@ public class AspParser extends AspANTLRParserBase {
 
 
     // $ANTLR start "parse_ASP_Not"
-    // Asp.g:3235:1: parse_ASP_Not returns [ASP.Not element = null] : a0= 'not' (a1= TEXT ) ;
+    // Asp.g:3237:1: parse_ASP_Not returns [ASP.Not element = null] : a0= 'not' (a1= TEXT ) ;
     public final ASP.Not parse_ASP_Not() throws RecognitionException {
         ASP.Not element =  null;
 
@@ -4805,10 +4807,10 @@ public class AspParser extends AspANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 17) ) { return element; }
 
-            // Asp.g:3238:2: (a0= 'not' (a1= TEXT ) )
-            // Asp.g:3239:2: a0= 'not' (a1= TEXT )
+            // Asp.g:3240:2: (a0= 'not' (a1= TEXT ) )
+            // Asp.g:3241:2: a0= 'not' (a1= TEXT )
             {
-            a0=(Token)match(input,27,FOLLOW_27_in_parse_ASP_Not2499); if (state.failed) return element;
+            a0=(Token)match(input,27,FOLLOW_27_in_parse_ASP_Not2505); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4822,13 +4824,13 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[306]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[308]);
             	}
 
-            // Asp.g:3253:2: (a1= TEXT )
-            // Asp.g:3254:3: a1= TEXT
+            // Asp.g:3255:2: (a1= TEXT )
+            // Asp.g:3256:3: a1= TEXT
             {
-            a1=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_Not2517); if (state.failed) return element;
+            a1=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_Not2523); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4868,8 +4870,6 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[307]);
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[308]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[309]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[310]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[311]);
@@ -4882,10 +4882,13 @@ public class AspParser extends AspANTLRParserBase {
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[318]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[319]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[320]);
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[321]);
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[322]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[321]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[322]);
             		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[323]);
             		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[324]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[325]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[326]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[327]);
             	}
 
             }
@@ -4908,7 +4911,7 @@ public class AspParser extends AspANTLRParserBase {
 
 
     // $ANTLR start "parse_ASP_Eq"
-    // Asp.g:3312:1: parse_ASP_Eq returns [ASP.Eq element = null] : (a0= TEXT ) a1= '==' (a2= TEXT ) ;
+    // Asp.g:3315:1: parse_ASP_Eq returns [ASP.Eq element = null] : (a0= TEXT ) a1= '==' (a2= TEXT ) ;
     public final ASP.Eq parse_ASP_Eq() throws RecognitionException {
         ASP.Eq element =  null;
 
@@ -4923,13 +4926,13 @@ public class AspParser extends AspANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 18) ) { return element; }
 
-            // Asp.g:3315:2: ( (a0= TEXT ) a1= '==' (a2= TEXT ) )
-            // Asp.g:3316:2: (a0= TEXT ) a1= '==' (a2= TEXT )
+            // Asp.g:3318:2: ( (a0= TEXT ) a1= '==' (a2= TEXT ) )
+            // Asp.g:3319:2: (a0= TEXT ) a1= '==' (a2= TEXT )
             {
-            // Asp.g:3316:2: (a0= TEXT )
-            // Asp.g:3317:3: a0= TEXT
+            // Asp.g:3319:2: (a0= TEXT )
+            // Asp.g:3320:3: a0= TEXT
             {
-            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_Eq2557); if (state.failed) return element;
+            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_Eq2563); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4969,10 +4972,10 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[325]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[328]);
             	}
 
-            a1=(Token)match(input,18,FOLLOW_18_in_parse_ASP_Eq2578); if (state.failed) return element;
+            a1=(Token)match(input,18,FOLLOW_18_in_parse_ASP_Eq2584); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4986,13 +4989,13 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[326]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[329]);
             	}
 
-            // Asp.g:3370:2: (a2= TEXT )
-            // Asp.g:3371:3: a2= TEXT
+            // Asp.g:3373:2: (a2= TEXT )
+            // Asp.g:3374:3: a2= TEXT
             {
-            a2=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_Eq2596); if (state.failed) return element;
+            a2=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_Eq2602); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -5032,9 +5035,6 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[327]);
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[328]);
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[329]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[330]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[331]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[332]);
@@ -5046,10 +5046,14 @@ public class AspParser extends AspANTLRParserBase {
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[338]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[339]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[340]);
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[341]);
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[342]);
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[343]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[341]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[342]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[343]);
             		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[344]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[345]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[346]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[347]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[348]);
             	}
 
             }
@@ -5072,7 +5076,7 @@ public class AspParser extends AspANTLRParserBase {
 
 
     // $ANTLR start "parse_ASP_NotEq"
-    // Asp.g:3429:1: parse_ASP_NotEq returns [ASP.NotEq element = null] : (a0= TEXT ) a1= '!=' (a2= TEXT ) ;
+    // Asp.g:3433:1: parse_ASP_NotEq returns [ASP.NotEq element = null] : (a0= TEXT ) a1= '!=' (a2= TEXT ) ;
     public final ASP.NotEq parse_ASP_NotEq() throws RecognitionException {
         ASP.NotEq element =  null;
 
@@ -5087,13 +5091,13 @@ public class AspParser extends AspANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 19) ) { return element; }
 
-            // Asp.g:3432:2: ( (a0= TEXT ) a1= '!=' (a2= TEXT ) )
-            // Asp.g:3433:2: (a0= TEXT ) a1= '!=' (a2= TEXT )
+            // Asp.g:3436:2: ( (a0= TEXT ) a1= '!=' (a2= TEXT ) )
+            // Asp.g:3437:2: (a0= TEXT ) a1= '!=' (a2= TEXT )
             {
-            // Asp.g:3433:2: (a0= TEXT )
-            // Asp.g:3434:3: a0= TEXT
+            // Asp.g:3437:2: (a0= TEXT )
+            // Asp.g:3438:3: a0= TEXT
             {
-            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_NotEq2636); if (state.failed) return element;
+            a0=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_NotEq2642); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -5133,10 +5137,10 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[345]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[349]);
             	}
 
-            a1=(Token)match(input,10,FOLLOW_10_in_parse_ASP_NotEq2657); if (state.failed) return element;
+            a1=(Token)match(input,10,FOLLOW_10_in_parse_ASP_NotEq2663); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -5150,13 +5154,13 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[346]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[350]);
             	}
 
-            // Asp.g:3487:2: (a2= TEXT )
-            // Asp.g:3488:3: a2= TEXT
+            // Asp.g:3491:2: (a2= TEXT )
+            // Asp.g:3492:3: a2= TEXT
             {
-            a2=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_NotEq2675); if (state.failed) return element;
+            a2=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASP_NotEq2681); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -5196,10 +5200,6 @@ public class AspParser extends AspANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[347]);
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[348]);
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[349]);
-            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[350]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[351]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[352]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[353]);
@@ -5210,10 +5210,15 @@ public class AspParser extends AspANTLRParserBase {
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[358]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[359]);
             		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[360]);
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[361]);
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[362]);
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[363]);
-            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[364]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[361]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[362]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[363]);
+            		addExpectedElement(ASP.ASPPackage.eINSTANCE.getTransformation(), ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[364]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[365]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[366]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[367]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[368]);
+            		addExpectedElement(null, ASP.resource.asp.mopp.AspExpectationConstants.EXPECTATIONS[369]);
             	}
 
             }
@@ -5236,7 +5241,7 @@ public class AspParser extends AspANTLRParserBase {
 
 
     // $ANTLR start "parse_ASP_Element"
-    // Asp.g:3546:1: parse_ASP_Element returns [ASP.Element element = null] : (c0= parse_ASP_Metanode |c1= parse_ASP_Metaprop |c2= parse_ASP_Metaedge |c3= parse_ASP_Node |c4= parse_ASP_Prop |c5= parse_ASP_Edge |c6= parse_ASP_NamedFunction |c7= parse_ASP_Literal |c8= parse_ASP_Terminal |c9= parse_ASP_Not |c10= parse_ASP_Eq |c11= parse_ASP_NotEq );
+    // Asp.g:3551:1: parse_ASP_Element returns [ASP.Element element = null] : (c0= parse_ASP_Metanode |c1= parse_ASP_Metaprop |c2= parse_ASP_Metaedge |c3= parse_ASP_Node |c4= parse_ASP_Prop |c5= parse_ASP_Edge |c6= parse_ASP_NamedFunction |c7= parse_ASP_Literal |c8= parse_ASP_Terminal |c9= parse_ASP_Not |c10= parse_ASP_Eq |c11= parse_ASP_NotEq );
     public final ASP.Element parse_ASP_Element() throws RecognitionException {
         ASP.Element element =  null;
 
@@ -5270,7 +5275,7 @@ public class AspParser extends AspANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 20) ) { return element; }
 
-            // Asp.g:3547:2: (c0= parse_ASP_Metanode |c1= parse_ASP_Metaprop |c2= parse_ASP_Metaedge |c3= parse_ASP_Node |c4= parse_ASP_Prop |c5= parse_ASP_Edge |c6= parse_ASP_NamedFunction |c7= parse_ASP_Literal |c8= parse_ASP_Terminal |c9= parse_ASP_Not |c10= parse_ASP_Eq |c11= parse_ASP_NotEq )
+            // Asp.g:3552:2: (c0= parse_ASP_Metanode |c1= parse_ASP_Metaprop |c2= parse_ASP_Metaedge |c3= parse_ASP_Node |c4= parse_ASP_Prop |c5= parse_ASP_Edge |c6= parse_ASP_NamedFunction |c7= parse_ASP_Literal |c8= parse_ASP_Terminal |c9= parse_ASP_Not |c10= parse_ASP_Eq |c11= parse_ASP_NotEq )
             int alt17=12;
             switch ( input.LA(1) ) {
             case 22:
@@ -5351,9 +5356,9 @@ public class AspParser extends AspANTLRParserBase {
 
             switch (alt17) {
                 case 1 :
-                    // Asp.g:3548:2: c0= parse_ASP_Metanode
+                    // Asp.g:3553:2: c0= parse_ASP_Metanode
                     {
-                    pushFollow(FOLLOW_parse_ASP_Metanode_in_parse_ASP_Element2707);
+                    pushFollow(FOLLOW_parse_ASP_Metanode_in_parse_ASP_Element2713);
                     c0=parse_ASP_Metanode();
 
                     state._fsp--;
@@ -5364,9 +5369,9 @@ public class AspParser extends AspANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Asp.g:3549:4: c1= parse_ASP_Metaprop
+                    // Asp.g:3554:4: c1= parse_ASP_Metaprop
                     {
-                    pushFollow(FOLLOW_parse_ASP_Metaprop_in_parse_ASP_Element2717);
+                    pushFollow(FOLLOW_parse_ASP_Metaprop_in_parse_ASP_Element2723);
                     c1=parse_ASP_Metaprop();
 
                     state._fsp--;
@@ -5377,9 +5382,9 @@ public class AspParser extends AspANTLRParserBase {
                     }
                     break;
                 case 3 :
-                    // Asp.g:3550:4: c2= parse_ASP_Metaedge
+                    // Asp.g:3555:4: c2= parse_ASP_Metaedge
                     {
-                    pushFollow(FOLLOW_parse_ASP_Metaedge_in_parse_ASP_Element2727);
+                    pushFollow(FOLLOW_parse_ASP_Metaedge_in_parse_ASP_Element2733);
                     c2=parse_ASP_Metaedge();
 
                     state._fsp--;
@@ -5390,9 +5395,9 @@ public class AspParser extends AspANTLRParserBase {
                     }
                     break;
                 case 4 :
-                    // Asp.g:3551:4: c3= parse_ASP_Node
+                    // Asp.g:3556:4: c3= parse_ASP_Node
                     {
-                    pushFollow(FOLLOW_parse_ASP_Node_in_parse_ASP_Element2737);
+                    pushFollow(FOLLOW_parse_ASP_Node_in_parse_ASP_Element2743);
                     c3=parse_ASP_Node();
 
                     state._fsp--;
@@ -5403,9 +5408,9 @@ public class AspParser extends AspANTLRParserBase {
                     }
                     break;
                 case 5 :
-                    // Asp.g:3552:4: c4= parse_ASP_Prop
+                    // Asp.g:3557:4: c4= parse_ASP_Prop
                     {
-                    pushFollow(FOLLOW_parse_ASP_Prop_in_parse_ASP_Element2747);
+                    pushFollow(FOLLOW_parse_ASP_Prop_in_parse_ASP_Element2753);
                     c4=parse_ASP_Prop();
 
                     state._fsp--;
@@ -5416,9 +5421,9 @@ public class AspParser extends AspANTLRParserBase {
                     }
                     break;
                 case 6 :
-                    // Asp.g:3553:4: c5= parse_ASP_Edge
+                    // Asp.g:3558:4: c5= parse_ASP_Edge
                     {
-                    pushFollow(FOLLOW_parse_ASP_Edge_in_parse_ASP_Element2757);
+                    pushFollow(FOLLOW_parse_ASP_Edge_in_parse_ASP_Element2763);
                     c5=parse_ASP_Edge();
 
                     state._fsp--;
@@ -5429,9 +5434,9 @@ public class AspParser extends AspANTLRParserBase {
                     }
                     break;
                 case 7 :
-                    // Asp.g:3554:4: c6= parse_ASP_NamedFunction
+                    // Asp.g:3559:4: c6= parse_ASP_NamedFunction
                     {
-                    pushFollow(FOLLOW_parse_ASP_NamedFunction_in_parse_ASP_Element2767);
+                    pushFollow(FOLLOW_parse_ASP_NamedFunction_in_parse_ASP_Element2773);
                     c6=parse_ASP_NamedFunction();
 
                     state._fsp--;
@@ -5442,9 +5447,9 @@ public class AspParser extends AspANTLRParserBase {
                     }
                     break;
                 case 8 :
-                    // Asp.g:3555:4: c7= parse_ASP_Literal
+                    // Asp.g:3560:4: c7= parse_ASP_Literal
                     {
-                    pushFollow(FOLLOW_parse_ASP_Literal_in_parse_ASP_Element2777);
+                    pushFollow(FOLLOW_parse_ASP_Literal_in_parse_ASP_Element2783);
                     c7=parse_ASP_Literal();
 
                     state._fsp--;
@@ -5455,9 +5460,9 @@ public class AspParser extends AspANTLRParserBase {
                     }
                     break;
                 case 9 :
-                    // Asp.g:3556:4: c8= parse_ASP_Terminal
+                    // Asp.g:3561:4: c8= parse_ASP_Terminal
                     {
-                    pushFollow(FOLLOW_parse_ASP_Terminal_in_parse_ASP_Element2787);
+                    pushFollow(FOLLOW_parse_ASP_Terminal_in_parse_ASP_Element2793);
                     c8=parse_ASP_Terminal();
 
                     state._fsp--;
@@ -5468,9 +5473,9 @@ public class AspParser extends AspANTLRParserBase {
                     }
                     break;
                 case 10 :
-                    // Asp.g:3557:4: c9= parse_ASP_Not
+                    // Asp.g:3562:4: c9= parse_ASP_Not
                     {
-                    pushFollow(FOLLOW_parse_ASP_Not_in_parse_ASP_Element2797);
+                    pushFollow(FOLLOW_parse_ASP_Not_in_parse_ASP_Element2803);
                     c9=parse_ASP_Not();
 
                     state._fsp--;
@@ -5481,9 +5486,9 @@ public class AspParser extends AspANTLRParserBase {
                     }
                     break;
                 case 11 :
-                    // Asp.g:3558:4: c10= parse_ASP_Eq
+                    // Asp.g:3563:4: c10= parse_ASP_Eq
                     {
-                    pushFollow(FOLLOW_parse_ASP_Eq_in_parse_ASP_Element2807);
+                    pushFollow(FOLLOW_parse_ASP_Eq_in_parse_ASP_Element2813);
                     c10=parse_ASP_Eq();
 
                     state._fsp--;
@@ -5494,9 +5499,9 @@ public class AspParser extends AspANTLRParserBase {
                     }
                     break;
                 case 12 :
-                    // Asp.g:3559:4: c11= parse_ASP_NotEq
+                    // Asp.g:3564:4: c11= parse_ASP_NotEq
                     {
-                    pushFollow(FOLLOW_parse_ASP_NotEq_in_parse_ASP_Element2817);
+                    pushFollow(FOLLOW_parse_ASP_NotEq_in_parse_ASP_Element2823);
                     c11=parse_ASP_NotEq();
 
                     state._fsp--;
@@ -5526,7 +5531,7 @@ public class AspParser extends AspANTLRParserBase {
 
 
     // $ANTLR start "parse_ASP_Pattern"
-    // Asp.g:3563:1: parse_ASP_Pattern returns [ASP.Pattern element = null] : (c0= parse_ASP_LeftPattern |c1= parse_ASP_RightPattern );
+    // Asp.g:3568:1: parse_ASP_Pattern returns [ASP.Pattern element = null] : (c0= parse_ASP_LeftPattern |c1= parse_ASP_RightPattern );
     public final ASP.Pattern parse_ASP_Pattern() throws RecognitionException {
         ASP.Pattern element =  null;
 
@@ -5540,7 +5545,7 @@ public class AspParser extends AspANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 21) ) { return element; }
 
-            // Asp.g:3564:2: (c0= parse_ASP_LeftPattern |c1= parse_ASP_RightPattern )
+            // Asp.g:3569:2: (c0= parse_ASP_LeftPattern |c1= parse_ASP_RightPattern )
             int alt18=2;
             switch ( input.LA(1) ) {
             case 31:
@@ -5686,9 +5691,9 @@ public class AspParser extends AspANTLRParserBase {
 
             switch (alt18) {
                 case 1 :
-                    // Asp.g:3565:2: c0= parse_ASP_LeftPattern
+                    // Asp.g:3570:2: c0= parse_ASP_LeftPattern
                     {
-                    pushFollow(FOLLOW_parse_ASP_LeftPattern_in_parse_ASP_Pattern2838);
+                    pushFollow(FOLLOW_parse_ASP_LeftPattern_in_parse_ASP_Pattern2844);
                     c0=parse_ASP_LeftPattern();
 
                     state._fsp--;
@@ -5699,9 +5704,9 @@ public class AspParser extends AspANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Asp.g:3566:4: c1= parse_ASP_RightPattern
+                    // Asp.g:3571:4: c1= parse_ASP_RightPattern
                     {
-                    pushFollow(FOLLOW_parse_ASP_RightPattern_in_parse_ASP_Pattern2848);
+                    pushFollow(FOLLOW_parse_ASP_RightPattern_in_parse_ASP_Pattern2854);
                     c1=parse_ASP_RightPattern();
 
                     state._fsp--;
@@ -5731,7 +5736,7 @@ public class AspParser extends AspANTLRParserBase {
 
 
     // $ANTLR start "parse_ASP_Expression"
-    // Asp.g:3570:1: parse_ASP_Expression returns [ASP.Expression element = null] : (c0= parse_ASP_Terminal |c1= parse_ASP_Not |c2= parse_ASP_Eq |c3= parse_ASP_NotEq );
+    // Asp.g:3575:1: parse_ASP_Expression returns [ASP.Expression element = null] : (c0= parse_ASP_Terminal |c1= parse_ASP_Not |c2= parse_ASP_Eq |c3= parse_ASP_NotEq );
     public final ASP.Expression parse_ASP_Expression() throws RecognitionException {
         ASP.Expression element =  null;
 
@@ -5749,7 +5754,7 @@ public class AspParser extends AspANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 22) ) { return element; }
 
-            // Asp.g:3571:2: (c0= parse_ASP_Terminal |c1= parse_ASP_Not |c2= parse_ASP_Eq |c3= parse_ASP_NotEq )
+            // Asp.g:3576:2: (c0= parse_ASP_Terminal |c1= parse_ASP_Not |c2= parse_ASP_Eq |c3= parse_ASP_NotEq )
             int alt19=4;
             int LA19_0 = input.LA(1);
 
@@ -5758,6 +5763,7 @@ public class AspParser extends AspANTLRParserBase {
                 case EOF:
                 case 14:
                 case 15:
+                case 16:
                     {
                     alt19=1;
                     }
@@ -5795,9 +5801,9 @@ public class AspParser extends AspANTLRParserBase {
             }
             switch (alt19) {
                 case 1 :
-                    // Asp.g:3572:2: c0= parse_ASP_Terminal
+                    // Asp.g:3577:2: c0= parse_ASP_Terminal
                     {
-                    pushFollow(FOLLOW_parse_ASP_Terminal_in_parse_ASP_Expression2869);
+                    pushFollow(FOLLOW_parse_ASP_Terminal_in_parse_ASP_Expression2875);
                     c0=parse_ASP_Terminal();
 
                     state._fsp--;
@@ -5808,9 +5814,9 @@ public class AspParser extends AspANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Asp.g:3573:4: c1= parse_ASP_Not
+                    // Asp.g:3578:4: c1= parse_ASP_Not
                     {
-                    pushFollow(FOLLOW_parse_ASP_Not_in_parse_ASP_Expression2879);
+                    pushFollow(FOLLOW_parse_ASP_Not_in_parse_ASP_Expression2885);
                     c1=parse_ASP_Not();
 
                     state._fsp--;
@@ -5821,9 +5827,9 @@ public class AspParser extends AspANTLRParserBase {
                     }
                     break;
                 case 3 :
-                    // Asp.g:3574:4: c2= parse_ASP_Eq
+                    // Asp.g:3579:4: c2= parse_ASP_Eq
                     {
-                    pushFollow(FOLLOW_parse_ASP_Eq_in_parse_ASP_Expression2889);
+                    pushFollow(FOLLOW_parse_ASP_Eq_in_parse_ASP_Expression2895);
                     c2=parse_ASP_Eq();
 
                     state._fsp--;
@@ -5834,9 +5840,9 @@ public class AspParser extends AspANTLRParserBase {
                     }
                     break;
                 case 4 :
-                    // Asp.g:3575:4: c3= parse_ASP_NotEq
+                    // Asp.g:3580:4: c3= parse_ASP_NotEq
                     {
-                    pushFollow(FOLLOW_parse_ASP_NotEq_in_parse_ASP_Expression2899);
+                    pushFollow(FOLLOW_parse_ASP_NotEq_in_parse_ASP_Expression2905);
                     c3=parse_ASP_NotEq();
 
                     state._fsp--;
@@ -5868,10 +5874,10 @@ public class AspParser extends AspANTLRParserBase {
         ASP.Literal c7 =null;
 
 
-        // Asp.g:3555:4: (c7= parse_ASP_Literal )
-        // Asp.g:3555:4: c7= parse_ASP_Literal
+        // Asp.g:3560:4: (c7= parse_ASP_Literal )
+        // Asp.g:3560:4: c7= parse_ASP_Literal
         {
-        pushFollow(FOLLOW_parse_ASP_Literal_in_synpred26_Asp2777);
+        pushFollow(FOLLOW_parse_ASP_Literal_in_synpred26_Asp2783);
         c7=parse_ASP_Literal();
 
         state._fsp--;
@@ -5887,10 +5893,10 @@ public class AspParser extends AspANTLRParserBase {
         ASP.Terminal c8 =null;
 
 
-        // Asp.g:3556:4: (c8= parse_ASP_Terminal )
-        // Asp.g:3556:4: c8= parse_ASP_Terminal
+        // Asp.g:3561:4: (c8= parse_ASP_Terminal )
+        // Asp.g:3561:4: c8= parse_ASP_Terminal
         {
-        pushFollow(FOLLOW_parse_ASP_Terminal_in_synpred27_Asp2787);
+        pushFollow(FOLLOW_parse_ASP_Terminal_in_synpred27_Asp2793);
         c8=parse_ASP_Terminal();
 
         state._fsp--;
@@ -5906,10 +5912,10 @@ public class AspParser extends AspANTLRParserBase {
         ASP.LeftPattern c0 =null;
 
 
-        // Asp.g:3565:2: (c0= parse_ASP_LeftPattern )
-        // Asp.g:3565:2: c0= parse_ASP_LeftPattern
+        // Asp.g:3570:2: (c0= parse_ASP_LeftPattern )
+        // Asp.g:3570:2: c0= parse_ASP_LeftPattern
         {
-        pushFollow(FOLLOW_parse_ASP_LeftPattern_in_synpred30_Asp2838);
+        pushFollow(FOLLOW_parse_ASP_LeftPattern_in_synpred30_Asp2844);
         c0=parse_ASP_LeftPattern();
 
         state._fsp--;
@@ -5975,8 +5981,8 @@ public class AspParser extends AspANTLRParserBase {
         "\2\10\1\uffff\1\10\1\uffff\1\12\4\10\1\16\1\12\1\10\2\16\2\10\3"+
         "\16";
     static final String DFA3_maxS =
-        "\2\21\1\uffff\1\33\1\uffff\1\22\1\10\1\33\2\10\1\17\1\22\1\10\2"+
-        "\17\2\10\3\17";
+        "\2\21\1\uffff\1\33\1\uffff\1\22\1\10\1\33\2\10\1\20\1\22\1\10\2"+
+        "\20\2\10\3\20";
     static final String DFA3_acceptS =
         "\2\uffff\1\2\1\uffff\1\1\17\uffff";
     static final String DFA3_specialS =
@@ -5987,21 +5993,21 @@ public class AspParser extends AspANTLRParserBase {
             "",
             "\1\5\22\uffff\1\6",
             "",
-            "\1\11\3\uffff\1\2\1\7\2\uffff\1\10",
+            "\1\11\3\uffff\1\2\1\7\1\4\1\uffff\1\10",
             "\1\12",
-            "\1\13\7\uffff\1\4\7\uffff\1\4\2\uffff\1\14",
+            "\1\13\17\uffff\1\4\2\uffff\1\14",
             "\1\15",
             "\1\16",
-            "\1\2\1\7",
-            "\1\20\3\uffff\1\2\1\7\2\uffff\1\17",
+            "\1\2\1\7\1\4",
+            "\1\20\3\uffff\1\2\1\7\1\4\1\uffff\1\17",
             "\1\21",
-            "\1\2\1\7",
-            "\1\2\1\7",
+            "\1\2\1\7\1\4",
+            "\1\2\1\7\1\4",
             "\1\22",
             "\1\23",
-            "\1\2\1\7",
-            "\1\2\1\7",
-            "\1\2\1\7"
+            "\1\2\1\7\1\4",
+            "\1\2\1\7\1\4",
+            "\1\2\1\7\1\4"
     };
 
     static final short[] DFA3_eot = DFA.unpackEncodedString(DFA3_eotS);
@@ -6117,52 +6123,52 @@ public class AspParser extends AspANTLRParserBase {
     public static final BitSet FOLLOW_TEXT_in_parse_ASP_Rule1832 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_parse_ASP_Terminal_in_parse_ASP_Rule1882 = new BitSet(new long[]{0x0000000000020000L});
     public static final BitSet FOLLOW_17_in_parse_ASP_Rule1900 = new BitSet(new long[]{0x0000000008000100L});
-    public static final BitSet FOLLOW_parse_ASP_Expression_in_parse_ASP_Rule1918 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_parse_ASP_Expression_in_parse_ASP_Rule1918 = new BitSet(new long[]{0x0000000000018000L});
     public static final BitSet FOLLOW_15_in_parse_ASP_Rule1945 = new BitSet(new long[]{0x0000000008000100L});
-    public static final BitSet FOLLOW_parse_ASP_Expression_in_parse_ASP_Rule1971 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_parse_ASP_Rule2012 = new BitSet(new long[]{0x0000000001010000L});
-    public static final BitSet FOLLOW_24_in_parse_ASP_Rule2035 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_TEXT_in_parse_ASP_Rule2061 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_parse_ASP_Rule2107 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TEXT_in_parse_ASP_Constraint2151 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_parse_ASP_Constraint2197 = new BitSet(new long[]{0x0000000008000100L});
-    public static final BitSet FOLLOW_parse_ASP_Expression_in_parse_ASP_Constraint2215 = new BitSet(new long[]{0x000000000000C000L});
-    public static final BitSet FOLLOW_15_in_parse_ASP_Constraint2242 = new BitSet(new long[]{0x0000000008000100L});
-    public static final BitSet FOLLOW_parse_ASP_Expression_in_parse_ASP_Constraint2268 = new BitSet(new long[]{0x000000000000C000L});
-    public static final BitSet FOLLOW_14_in_parse_ASP_Constraint2309 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_TEXT_in_parse_ASP_Constraint2327 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_parse_ASP_Constraint2348 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TEXT_in_parse_ASP_Literal2381 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_16_in_parse_ASP_Literal2411 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TEXT_in_parse_ASP_Terminal2463 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_parse_ASP_Not2499 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_TEXT_in_parse_ASP_Not2517 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TEXT_in_parse_ASP_Eq2557 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_parse_ASP_Eq2578 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_TEXT_in_parse_ASP_Eq2596 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TEXT_in_parse_ASP_NotEq2636 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_10_in_parse_ASP_NotEq2657 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_TEXT_in_parse_ASP_NotEq2675 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_Metanode_in_parse_ASP_Element2707 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_Metaprop_in_parse_ASP_Element2717 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_Metaedge_in_parse_ASP_Element2727 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_Node_in_parse_ASP_Element2737 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_Prop_in_parse_ASP_Element2747 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_Edge_in_parse_ASP_Element2757 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_NamedFunction_in_parse_ASP_Element2767 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_Literal_in_parse_ASP_Element2777 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_Terminal_in_parse_ASP_Element2787 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_Not_in_parse_ASP_Element2797 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_Eq_in_parse_ASP_Element2807 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_NotEq_in_parse_ASP_Element2817 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_LeftPattern_in_parse_ASP_Pattern2838 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_RightPattern_in_parse_ASP_Pattern2848 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_Terminal_in_parse_ASP_Expression2869 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_Not_in_parse_ASP_Expression2879 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_Eq_in_parse_ASP_Expression2889 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_NotEq_in_parse_ASP_Expression2899 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_Literal_in_synpred26_Asp2777 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_Terminal_in_synpred27_Asp2787 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASP_LeftPattern_in_synpred30_Asp2838 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_Expression_in_parse_ASP_Rule1971 = new BitSet(new long[]{0x0000000000018000L});
+    public static final BitSet FOLLOW_15_in_parse_ASP_Rule2021 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_24_in_parse_ASP_Rule2041 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASP_Rule2067 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_parse_ASP_Rule2113 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASP_Constraint2157 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_parse_ASP_Constraint2203 = new BitSet(new long[]{0x0000000008000100L});
+    public static final BitSet FOLLOW_parse_ASP_Expression_in_parse_ASP_Constraint2221 = new BitSet(new long[]{0x000000000000C000L});
+    public static final BitSet FOLLOW_15_in_parse_ASP_Constraint2248 = new BitSet(new long[]{0x0000000008000100L});
+    public static final BitSet FOLLOW_parse_ASP_Expression_in_parse_ASP_Constraint2274 = new BitSet(new long[]{0x000000000000C000L});
+    public static final BitSet FOLLOW_14_in_parse_ASP_Constraint2315 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASP_Constraint2333 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_parse_ASP_Constraint2354 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASP_Literal2387 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_16_in_parse_ASP_Literal2417 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASP_Terminal2469 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_parse_ASP_Not2505 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASP_Not2523 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASP_Eq2563 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_parse_ASP_Eq2584 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASP_Eq2602 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASP_NotEq2642 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASP_NotEq2663 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASP_NotEq2681 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_Metanode_in_parse_ASP_Element2713 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_Metaprop_in_parse_ASP_Element2723 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_Metaedge_in_parse_ASP_Element2733 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_Node_in_parse_ASP_Element2743 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_Prop_in_parse_ASP_Element2753 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_Edge_in_parse_ASP_Element2763 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_NamedFunction_in_parse_ASP_Element2773 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_Literal_in_parse_ASP_Element2783 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_Terminal_in_parse_ASP_Element2793 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_Not_in_parse_ASP_Element2803 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_Eq_in_parse_ASP_Element2813 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_NotEq_in_parse_ASP_Element2823 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_LeftPattern_in_parse_ASP_Pattern2844 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_RightPattern_in_parse_ASP_Pattern2854 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_Terminal_in_parse_ASP_Expression2875 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_Not_in_parse_ASP_Expression2885 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_Eq_in_parse_ASP_Expression2895 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_NotEq_in_parse_ASP_Expression2905 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_Literal_in_synpred26_Asp2783 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_Terminal_in_synpred27_Asp2793 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASP_LeftPattern_in_synpred30_Asp2844 = new BitSet(new long[]{0x0000000000000002L});
 
 }

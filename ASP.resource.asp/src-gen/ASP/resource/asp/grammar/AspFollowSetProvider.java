@@ -91,10 +91,10 @@ public class AspFollowSetProvider {
 		TERMINALS[67] = new ASP.resource.asp.mopp.AspExpectedStructuralFeature(ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_10_0_0_5_0_0_2);
 		TERMINALS[68] = new ASP.resource.asp.mopp.AspExpectedCsString(ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_3);
 		TERMINALS[69] = new ASP.resource.asp.mopp.AspExpectedCsString(ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_6_0_0_0);
-		TERMINALS[70] = new ASP.resource.asp.mopp.AspExpectedCsString(ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_8);
-		TERMINALS[71] = new ASP.resource.asp.mopp.AspExpectedCsString(ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_9_0_0_1);
-		TERMINALS[72] = new ASP.resource.asp.mopp.AspExpectedCsString(ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_11);
-		TERMINALS[73] = new ASP.resource.asp.mopp.AspExpectedStructuralFeature(ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_9_0_0_3);
+		TERMINALS[70] = new ASP.resource.asp.mopp.AspExpectedCsString(ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_8_0_0_0);
+		TERMINALS[71] = new ASP.resource.asp.mopp.AspExpectedCsString(ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_10);
+		TERMINALS[72] = new ASP.resource.asp.mopp.AspExpectedCsString(ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_8_0_0_2);
+		TERMINALS[73] = new ASP.resource.asp.mopp.AspExpectedStructuralFeature(ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_11_0_0_8_0_0_4);
 		TERMINALS[74] = new ASP.resource.asp.mopp.AspExpectedCsString(ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_12_0_0_4_0_0_0);
 		TERMINALS[75] = new ASP.resource.asp.mopp.AspExpectedCsString(ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_12_0_0_6);
 		TERMINALS[76] = new ASP.resource.asp.mopp.AspExpectedStructuralFeature(ASP.resource.asp.grammar.AspGrammarInformationProvider.ASP_12_0_0_8);
@@ -599,14 +599,13 @@ public class AspFollowSetProvider {
 		TERMINALS[69].addFollower(TERMINALS[9], new ASP.resource.asp.mopp.AspContainedFeature[] {new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getNot(), FEATURES[4]), });
 		TERMINALS[69].addFollower(TERMINALS[10], new ASP.resource.asp.mopp.AspContainedFeature[] {new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getEq(), FEATURES[4]), });
 		TERMINALS[69].addFollower(TERMINALS[11], new ASP.resource.asp.mopp.AspContainedFeature[] {new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getNotEq(), FEATURES[4]), });
-		TERMINALS[70].addFollower(TERMINALS[71], EMPTY_LINK_ARRAY);
 		TERMINALS[70].addFollower(TERMINALS[72], EMPTY_LINK_ARRAY);
-		TERMINALS[71].addFollower(TERMINALS[73], EMPTY_LINK_ARRAY);
-		TERMINALS[73].addFollower(TERMINALS[72], EMPTY_LINK_ARRAY);
-		TERMINALS[72].addFollower(TERMINALS[14], new ASP.resource.asp.mopp.AspContainedFeature[] {new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getRule(), FEATURES[5]), });
-		TERMINALS[72].addFollower(TERMINALS[8], new ASP.resource.asp.mopp.AspContainedFeature[] {new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getTerminal(), FEATURES[3]), new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getRule(), FEATURES[5]), });
-		TERMINALS[72].addFollower(TERMINALS[15], new ASP.resource.asp.mopp.AspContainedFeature[] {new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getConstraint(), FEATURES[6]), });
-		TERMINALS[72].addFollower(TERMINALS[16], new ASP.resource.asp.mopp.AspContainedFeature[] {new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getConstraint(), FEATURES[6]), });
+		TERMINALS[72].addFollower(TERMINALS[73], EMPTY_LINK_ARRAY);
+		TERMINALS[73].addFollower(TERMINALS[71], EMPTY_LINK_ARRAY);
+		TERMINALS[71].addFollower(TERMINALS[14], new ASP.resource.asp.mopp.AspContainedFeature[] {new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getRule(), FEATURES[5]), });
+		TERMINALS[71].addFollower(TERMINALS[8], new ASP.resource.asp.mopp.AspContainedFeature[] {new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getTerminal(), FEATURES[3]), new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getRule(), FEATURES[5]), });
+		TERMINALS[71].addFollower(TERMINALS[15], new ASP.resource.asp.mopp.AspContainedFeature[] {new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getConstraint(), FEATURES[6]), });
+		TERMINALS[71].addFollower(TERMINALS[16], new ASP.resource.asp.mopp.AspContainedFeature[] {new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getConstraint(), FEATURES[6]), });
 		TERMINALS[15].addFollower(TERMINALS[16], EMPTY_LINK_ARRAY);
 		TERMINALS[16].addFollower(TERMINALS[8], new ASP.resource.asp.mopp.AspContainedFeature[] {new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getTerminal(), FEATURES[7]), });
 		TERMINALS[16].addFollower(TERMINALS[9], new ASP.resource.asp.mopp.AspContainedFeature[] {new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getNot(), FEATURES[7]), });
@@ -683,6 +682,7 @@ public class AspFollowSetProvider {
 		TERMINALS[79].addFollower(TERMINALS[13], new ASP.resource.asp.mopp.AspContainedFeature[] {new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getRightPattern(), FEATURES[0]), new ASP.resource.asp.mopp.AspContainedFeature(ASP.ASPPackage.eINSTANCE.getRelation(), FEATURES[2]), });
 		TERMINALS[79].addFollower(TERMINALS[69], EMPTY_LINK_ARRAY);
 		TERMINALS[79].addFollower(TERMINALS[70], EMPTY_LINK_ARRAY);
+		TERMINALS[79].addFollower(TERMINALS[71], EMPTY_LINK_ARRAY);
 		TERMINALS[79].addFollower(TERMINALS[74], EMPTY_LINK_ARRAY);
 		TERMINALS[79].addFollower(TERMINALS[75], EMPTY_LINK_ARRAY);
 	}

@@ -1228,8 +1228,6 @@ public class AspPrinter implements ASP.resource.asp.IAspTextPrinter {
 			}
 		}
 		// DEFINITION PART BEGINS (WhiteSpaces)
-		// DEFINITION PART BEGINS (CsString)
-		out.print(",");
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		sWriter = new java.io.StringWriter();
 		out1 = new java.io.PrintWriter(sWriter);
@@ -1297,6 +1295,8 @@ public class AspPrinter implements ASP.resource.asp.IAspTextPrinter {
 	
 	public void print_ASP_Rule_2(ASP.Rule element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
 		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print(",");
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		out.print(" ");
 		// DEFINITION PART BEGINS (CsString)
