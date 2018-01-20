@@ -62,7 +62,7 @@ RULES {
 	Rule ::= (comment[] !0)? head #1 ":-" #1 expressions ("," #1 expressions)* #0 ("," #1 "mmt=" #0 direction[])? #0 "." !0;
 	
 	@SuppressWarnings(featureWithoutSyntax)
-	Constraint ::= (comment[] !0)? ":-" #1 expressions ("," #1 expressions)* #0 ", mmt=" #0 direction[] #0 "." !0;
+	Constraint ::= (comment[] !0)? ":-" #1 expressions ("," #1 expressions)* #0 ("," #1 "mmt=" #0 direction[])? #0 "." !0;
 
 	@SuppressWarnings(featureWithoutSyntax,optionalKeyword)
 	Literal ::= name[] (#0 ".")? !0;

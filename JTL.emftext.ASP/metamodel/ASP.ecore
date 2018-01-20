@@ -40,8 +40,7 @@
         eOpposite="#//Transformation/constraints"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" ordered="false"
         unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="direction" lowerBound="1"
-        eType="#//Literal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="direction" eType="#//Literal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

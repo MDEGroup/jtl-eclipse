@@ -33,7 +33,6 @@ public class AspLexer extends Lexer {
     public static final int T__29=29;
     public static final int T__30=30;
     public static final int T__31=31;
-    public static final int T__32=32;
     public static final int COMMENT=4;
     public static final int ELEMENT=5;
     public static final int LINEBREAK=6;
@@ -158,12 +157,10 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:19:7: ( ', mmt=' )
-            // Asp.g:19:9: ', mmt='
+            // Asp.g:19:7: ( ',' )
+            // Asp.g:19:9: ','
             {
-            match(", mmt="); 
-
-
+            match(','); 
 
             }
 
@@ -181,10 +178,10 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:20:7: ( ',' )
-            // Asp.g:20:9: ','
+            // Asp.g:20:7: ( '.' )
+            // Asp.g:20:9: '.'
             {
-            match(','); 
+            match('.'); 
 
             }
 
@@ -202,10 +199,12 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:21:7: ( '.' )
-            // Asp.g:21:9: '.'
+            // Asp.g:21:7: ( ':-' )
+            // Asp.g:21:9: ':-'
             {
-            match('.'); 
+            match(":-"); 
+
+
 
             }
 
@@ -223,10 +222,10 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:22:7: ( ':-' )
-            // Asp.g:22:9: ':-'
+            // Asp.g:22:7: ( '==' )
+            // Asp.g:22:9: '=='
             {
-            match(":-"); 
+            match("=="); 
 
 
 
@@ -246,10 +245,10 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:23:7: ( '==' )
-            // Asp.g:23:9: '=='
+            // Asp.g:23:7: ( 'edge(' )
+            // Asp.g:23:9: 'edge('
             {
-            match("=="); 
+            match("edge("); 
 
 
 
@@ -269,10 +268,10 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:24:7: ( 'edge(' )
-            // Asp.g:24:9: 'edge('
+            // Asp.g:24:7: ( 'edgex(' )
+            // Asp.g:24:9: 'edgex('
             {
-            match("edge("); 
+            match("edgex("); 
 
 
 
@@ -292,10 +291,10 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:25:7: ( 'edgex(' )
-            // Asp.g:25:9: 'edgex('
+            // Asp.g:25:7: ( 'metaedge(' )
+            // Asp.g:25:9: 'metaedge('
             {
-            match("edgex("); 
+            match("metaedge("); 
 
 
 
@@ -315,10 +314,10 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:26:7: ( 'metaedge(' )
-            // Asp.g:26:9: 'metaedge('
+            // Asp.g:26:7: ( 'metanode(' )
+            // Asp.g:26:9: 'metanode('
             {
-            match("metaedge("); 
+            match("metanode("); 
 
 
 
@@ -338,10 +337,10 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:27:7: ( 'metanode(' )
-            // Asp.g:27:9: 'metanode('
+            // Asp.g:27:7: ( 'metaprop(' )
+            // Asp.g:27:9: 'metaprop('
             {
-            match("metanode("); 
+            match("metaprop("); 
 
 
 
@@ -361,10 +360,10 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:28:7: ( 'metaprop(' )
-            // Asp.g:28:9: 'metaprop('
+            // Asp.g:28:7: ( 'mmt=' )
+            // Asp.g:28:9: 'mmt='
             {
-            match("metaprop("); 
+            match("mmt="); 
 
 
 
@@ -384,10 +383,10 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:29:7: ( 'mmt=' )
-            // Asp.g:29:9: 'mmt='
+            // Asp.g:29:7: ( 'node(' )
+            // Asp.g:29:9: 'node('
             {
-            match("mmt="); 
+            match("node("); 
 
 
 
@@ -407,10 +406,10 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:30:7: ( 'node(' )
-            // Asp.g:30:9: 'node('
+            // Asp.g:30:7: ( 'nodex(' )
+            // Asp.g:30:9: 'nodex('
             {
-            match("node("); 
+            match("nodex("); 
 
 
 
@@ -430,10 +429,10 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:31:7: ( 'nodex(' )
-            // Asp.g:31:9: 'nodex('
+            // Asp.g:31:7: ( 'not' )
+            // Asp.g:31:9: 'not'
             {
-            match("nodex("); 
+            match("not"); 
 
 
 
@@ -453,10 +452,10 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:32:7: ( 'not' )
-            // Asp.g:32:9: 'not'
+            // Asp.g:32:7: ( 'prop(' )
+            // Asp.g:32:9: 'prop('
             {
-            match("not"); 
+            match("prop("); 
 
 
 
@@ -476,10 +475,10 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:33:7: ( 'prop(' )
-            // Asp.g:33:9: 'prop('
+            // Asp.g:33:7: ( 'propx(' )
+            // Asp.g:33:9: 'propx('
             {
-            match("prop("); 
+            match("propx("); 
 
 
 
@@ -499,10 +498,10 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:34:7: ( 'propx(' )
-            // Asp.g:34:9: 'propx('
+            // Asp.g:34:7: ( 'relation_edge' )
+            // Asp.g:34:9: 'relation_edge'
             {
-            match("propx("); 
+            match("relation_edge"); 
 
 
 
@@ -522,10 +521,10 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:35:7: ( 'relation_edge' )
-            // Asp.g:35:9: 'relation_edge'
+            // Asp.g:35:7: ( 'relation_node' )
+            // Asp.g:35:9: 'relation_node'
             {
-            match("relation_edge"); 
+            match("relation_node"); 
 
 
 
@@ -545,31 +544,8 @@ public class AspLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:36:7: ( 'relation_node' )
-            // Asp.g:36:9: 'relation_node'
-            {
-            match("relation_node"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__31"
-
-    // $ANTLR start "T__32"
-    public final void mT__32() throws RecognitionException {
-        try {
-            int _type = T__32;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:37:7: ( 'relation_prop' )
-            // Asp.g:37:9: 'relation_prop'
+            // Asp.g:36:7: ( 'relation_prop' )
+            // Asp.g:36:9: 'relation_prop'
             {
             match("relation_prop"); 
 
@@ -584,22 +560,22 @@ public class AspLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__32"
+    // $ANTLR end "T__31"
 
     // $ANTLR start "COMMENT"
     public final void mCOMMENT() throws RecognitionException {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:3584:8: ( ( '%' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
-            // Asp.g:3585:2: ( '%' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Asp.g:3614:8: ( ( '%' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
+            // Asp.g:3615:2: ( '%' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
             {
-            // Asp.g:3585:2: ( '%' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
-            // Asp.g:3585:3: '%' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Asp.g:3615:2: ( '%' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Asp.g:3615:3: '%' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             {
             match('%'); 
 
-            // Asp.g:3585:6: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Asp.g:3615:6: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             loop1:
             do {
                 int alt1=2;
@@ -654,13 +630,13 @@ public class AspLexer extends Lexer {
         try {
             int _type = TEXT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:3588:5: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+ ) )
-            // Asp.g:3589:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+ )
+            // Asp.g:3618:5: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+ ) )
+            // Asp.g:3619:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+ )
             {
-            // Asp.g:3589:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+ )
-            // Asp.g:3589:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+
+            // Asp.g:3619:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+ )
+            // Asp.g:3619:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+
             {
-            // Asp.g:3589:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+
+            // Asp.g:3619:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+
             int cnt2=0;
             loop2:
             do {
@@ -718,13 +694,13 @@ public class AspLexer extends Lexer {
         try {
             int _type = LINEBREAK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:3591:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
-            // Asp.g:3592:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Asp.g:3621:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
+            // Asp.g:3622:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
             {
-            // Asp.g:3592:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // Asp.g:3592:3: ( '\\r\\n' | '\\r' | '\\n' )
+            // Asp.g:3622:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Asp.g:3622:3: ( '\\r\\n' | '\\r' | '\\n' )
             {
-            // Asp.g:3592:3: ( '\\r\\n' | '\\r' | '\\n' )
+            // Asp.g:3622:3: ( '\\r\\n' | '\\r' | '\\n' )
             int alt3=3;
             int LA3_0 = input.LA(1);
 
@@ -750,7 +726,7 @@ public class AspLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // Asp.g:3592:4: '\\r\\n'
+                    // Asp.g:3622:4: '\\r\\n'
                     {
                     match("\r\n"); 
 
@@ -759,14 +735,14 @@ public class AspLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Asp.g:3592:11: '\\r'
+                    // Asp.g:3622:11: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // Asp.g:3592:16: '\\n'
+                    // Asp.g:3622:16: '\\n'
                     {
                     match('\n'); 
 
@@ -797,8 +773,8 @@ public class AspLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:3595:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
-            // Asp.g:3596:2: ( ( ' ' | '\\t' | '\\f' ) )
+            // Asp.g:3625:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
+            // Asp.g:3626:2: ( ( ' ' | '\\t' | '\\f' ) )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -828,13 +804,13 @@ public class AspLexer extends Lexer {
         try {
             int _type = ELEMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:3599:8: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+ ( '(' ) ) )
-            // Asp.g:3600:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+ ( '(' ) )
+            // Asp.g:3629:8: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+ ( '(' ) ) )
+            // Asp.g:3630:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+ ( '(' ) )
             {
-            // Asp.g:3600:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+ ( '(' ) )
-            // Asp.g:3600:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+ ( '(' )
+            // Asp.g:3630:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+ ( '(' ) )
+            // Asp.g:3630:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+ ( '(' )
             {
-            // Asp.g:3600:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+
+            // Asp.g:3630:3: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '!' | ':' )+
             int cnt4=0;
             loop4:
             do {
@@ -873,8 +849,8 @@ public class AspLexer extends Lexer {
             } while (true);
 
 
-            // Asp.g:3600:48: ( '(' )
-            // Asp.g:3600:49: '('
+            // Asp.g:3630:48: ( '(' )
+            // Asp.g:3630:49: '('
             {
             match('('); 
 
@@ -902,21 +878,21 @@ public class AspLexer extends Lexer {
         try {
             int _type = QUOTED_40_41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Asp.g:3603:13: ( ( ( '(' ) (~ ( ')' ) )* ( ')' ) ) )
-            // Asp.g:3604:2: ( ( '(' ) (~ ( ')' ) )* ( ')' ) )
+            // Asp.g:3633:13: ( ( ( '(' ) (~ ( ')' ) )* ( ')' ) ) )
+            // Asp.g:3634:2: ( ( '(' ) (~ ( ')' ) )* ( ')' ) )
             {
-            // Asp.g:3604:2: ( ( '(' ) (~ ( ')' ) )* ( ')' ) )
-            // Asp.g:3604:3: ( '(' ) (~ ( ')' ) )* ( ')' )
+            // Asp.g:3634:2: ( ( '(' ) (~ ( ')' ) )* ( ')' ) )
+            // Asp.g:3634:3: ( '(' ) (~ ( ')' ) )* ( ')' )
             {
-            // Asp.g:3604:3: ( '(' )
-            // Asp.g:3604:4: '('
+            // Asp.g:3634:3: ( '(' )
+            // Asp.g:3634:4: '('
             {
             match('('); 
 
             }
 
 
-            // Asp.g:3604:8: (~ ( ')' ) )*
+            // Asp.g:3634:8: (~ ( ')' ) )*
             loop5:
             do {
                 int alt5=2;
@@ -950,8 +926,8 @@ public class AspLexer extends Lexer {
             } while (true);
 
 
-            // Asp.g:3604:17: ( ')' )
-            // Asp.g:3604:18: ')'
+            // Asp.g:3634:17: ( ')' )
+            // Asp.g:3634:18: ')'
             {
             match(')'); 
 
@@ -973,8 +949,8 @@ public class AspLexer extends Lexer {
     // $ANTLR end "QUOTED_40_41"
 
     public void mTokens() throws RecognitionException {
-        // Asp.g:1:8: ( T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | COMMENT | TEXT | LINEBREAK | WHITESPACE | ELEMENT | QUOTED_40_41 )
-        int alt6=29;
+        // Asp.g:1:8: ( T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | COMMENT | TEXT | LINEBREAK | WHITESPACE | ELEMENT | QUOTED_40_41 )
+        int alt6=28;
         alt6 = dfa6.predict(input);
         switch (alt6) {
             case 1 :
@@ -1154,55 +1130,47 @@ public class AspLexer extends Lexer {
                 }
                 break;
             case 23 :
-                // Asp.g:1:142: T__32
-                {
-                mT__32(); 
-
-
-                }
-                break;
-            case 24 :
-                // Asp.g:1:148: COMMENT
+                // Asp.g:1:142: COMMENT
                 {
                 mCOMMENT(); 
 
 
                 }
                 break;
-            case 25 :
-                // Asp.g:1:156: TEXT
+            case 24 :
+                // Asp.g:1:150: TEXT
                 {
                 mTEXT(); 
 
 
                 }
                 break;
-            case 26 :
-                // Asp.g:1:161: LINEBREAK
+            case 25 :
+                // Asp.g:1:155: LINEBREAK
                 {
                 mLINEBREAK(); 
 
 
                 }
                 break;
-            case 27 :
-                // Asp.g:1:171: WHITESPACE
+            case 26 :
+                // Asp.g:1:165: WHITESPACE
                 {
                 mWHITESPACE(); 
 
 
                 }
                 break;
-            case 28 :
-                // Asp.g:1:182: ELEMENT
+            case 27 :
+                // Asp.g:1:176: ELEMENT
                 {
                 mELEMENT(); 
 
 
                 }
                 break;
-            case 29 :
-                // Asp.g:1:190: QUOTED_40_41
+            case 28 :
+                // Asp.g:1:184: QUOTED_40_41
                 {
                 mQUOTED_40_41(); 
 
@@ -1217,31 +1185,31 @@ public class AspLexer extends Lexer {
 
     protected DFA6 dfa6 = new DFA6(this);
     static final String DFA6_eotS =
-        "\1\uffff\1\22\1\24\1\27\1\31\1\uffff\1\22\1\uffff\5\22\1\uffff\1"+
-        "\22\13\uffff\1\41\6\22\1\uffff\4\22\1\55\4\22\1\uffff\1\22\1\uffff"+
-        "\2\22\1\uffff\4\22\1\uffff\1\22\1\uffff\2\22\2\uffff\3\22\4\uffff"+
-        "\1\22\1\uffff\3\22\2\uffff\5\22\3\uffff\1\22\3\uffff\11\22\1\142"+
-        "\1\143\1\144\3\uffff";
+        "\1\uffff\1\22\1\24\1\27\2\uffff\1\22\1\uffff\5\22\1\uffff\1\22\11"+
+        "\uffff\1\37\6\22\1\uffff\4\22\1\53\4\22\1\uffff\1\22\1\uffff\2\22"+
+        "\1\uffff\4\22\1\uffff\1\22\1\uffff\2\22\2\uffff\3\22\4\uffff\1\22"+
+        "\1\uffff\3\22\2\uffff\5\22\3\uffff\1\22\3\uffff\11\22\1\140\1\141"+
+        "\1\142\3\uffff";
     static final String DFA6_eofS =
-        "\145\uffff";
+        "\143\uffff";
     static final String DFA6_minS =
-        "\1\11\1\41\1\0\1\56\1\40\1\uffff\1\41\1\uffff\5\41\1\uffff\1\41"+
-        "\13\uffff\7\41\1\uffff\11\41\1\uffff\1\41\1\uffff\2\41\1\uffff\4"+
-        "\41\1\uffff\1\41\1\uffff\2\41\2\uffff\3\41\4\uffff\1\41\1\uffff"+
-        "\3\41\2\uffff\5\41\3\uffff\1\41\3\uffff\14\41\3\uffff";
+        "\1\11\1\41\1\0\1\56\2\uffff\1\41\1\uffff\5\41\1\uffff\1\41\11\uffff"+
+        "\7\41\1\uffff\11\41\1\uffff\1\41\1\uffff\2\41\1\uffff\4\41\1\uffff"+
+        "\1\41\1\uffff\2\41\2\uffff\3\41\4\uffff\1\41\1\uffff\3\41\2\uffff"+
+        "\5\41\3\uffff\1\41\3\uffff\14\41\3\uffff";
     static final String DFA6_maxS =
-        "\2\172\1\uffff\1\56\1\40\1\uffff\1\172\1\uffff\5\172\1\uffff\1\172"+
-        "\13\uffff\7\172\1\uffff\11\172\1\uffff\1\172\1\uffff\2\172\1\uffff"+
+        "\2\172\1\uffff\1\56\2\uffff\1\172\1\uffff\5\172\1\uffff\1\172\11"+
+        "\uffff\7\172\1\uffff\11\172\1\uffff\1\172\1\uffff\2\172\1\uffff"+
         "\4\172\1\uffff\1\172\1\uffff\2\172\2\uffff\3\172\4\uffff\1\172\1"+
         "\uffff\3\172\2\uffff\5\172\3\uffff\1\172\3\uffff\14\172\3\uffff";
     static final String DFA6_acceptS =
-        "\5\uffff\1\7\1\uffff\1\11\5\uffff\1\30\1\uffff\1\32\1\33\1\1\1\31"+
-        "\1\34\1\2\1\35\1\4\1\3\1\5\1\6\7\uffff\1\10\11\uffff\1\17\1\uffff"+
-        "\1\22\2\uffff\1\12\4\uffff\1\20\1\uffff\1\23\2\uffff\1\12\1\13\3"+
-        "\uffff\1\20\1\21\1\23\1\24\1\uffff\1\13\3\uffff\1\21\1\24\5\uffff"+
-        "\1\14\1\15\1\16\1\uffff\1\14\1\15\1\16\14\uffff\1\25\1\26\1\27";
+        "\4\uffff\1\5\1\6\1\uffff\1\10\5\uffff\1\27\1\uffff\1\31\1\32\1\1"+
+        "\1\30\1\33\1\2\1\34\1\4\1\3\7\uffff\1\7\11\uffff\1\16\1\uffff\1"+
+        "\21\2\uffff\1\11\4\uffff\1\17\1\uffff\1\22\2\uffff\1\11\1\12\3\uffff"+
+        "\1\17\1\20\1\22\1\23\1\uffff\1\12\3\uffff\1\20\1\23\5\uffff\1\13"+
+        "\1\14\1\15\1\uffff\1\13\1\14\1\15\14\uffff\1\24\1\25\1\26";
     static final String DFA6_specialS =
-        "\2\uffff\1\0\142\uffff}>";
+        "\2\uffff\1\0\140\uffff}>";
     static final String[] DFA6_transitionS = {
             "\1\20\1\17\1\uffff\1\20\1\17\22\uffff\1\20\1\1\3\uffff\1\15"+
             "\2\uffff\1\2\1\3\2\uffff\1\4\1\16\1\5\1\uffff\12\16\1\6\2\uffff"+
@@ -1251,26 +1219,24 @@ public class AspLexer extends Lexer {
             "\3\uffff\32\16\4\uffff\1\16\1\uffff\32\16",
             "\0\25",
             "\1\26",
-            "\1\30",
             "",
-            "\1\16\6\uffff\1\23\4\uffff\1\32\2\uffff\13\16\6\uffff\32\16"+
+            "",
+            "\1\16\6\uffff\1\23\4\uffff\1\30\2\uffff\13\16\6\uffff\32\16"+
             "\4\uffff\1\16\1\uffff\32\16",
             "",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\3\16\1\33\26\16",
+            "\4\uffff\1\16\1\uffff\3\16\1\31\26\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\4\16\1\34\7\16\1\35\15\16",
+            "\4\uffff\1\16\1\uffff\4\16\1\32\7\16\1\33\15\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\16\16\1\36\13\16",
+            "\4\uffff\1\16\1\uffff\16\16\1\34\13\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\21\16\1\37\10\16",
+            "\4\uffff\1\16\1\uffff\21\16\1\35\10\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\4\16\1\40\25\16",
+            "\4\uffff\1\16\1\uffff\4\16\1\36\25\16",
             "",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
             "\4\uffff\1\16\1\uffff\32\16",
-            "",
-            "",
             "",
             "",
             "",
@@ -1283,120 +1249,120 @@ public class AspLexer extends Lexer {
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
             "\4\uffff\1\16\1\uffff\32\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\6\16\1\42\23\16",
+            "\4\uffff\1\16\1\uffff\6\16\1\40\23\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\23\16\1\43\6\16",
+            "\4\uffff\1\16\1\uffff\23\16\1\41\6\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\23\16\1\44\6\16",
+            "\4\uffff\1\16\1\uffff\23\16\1\42\6\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\3\16\1\45\17\16\1\46\6\16",
+            "\4\uffff\1\16\1\uffff\3\16\1\43\17\16\1\44\6\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\16\16\1\47\13\16",
+            "\4\uffff\1\16\1\uffff\16\16\1\45\13\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\13\16\1\50\16\16",
+            "\4\uffff\1\16\1\uffff\13\16\1\46\16\16",
             "",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\4\16\1\51\25\16",
+            "\4\uffff\1\16\1\uffff\4\16\1\47\25\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\1\52\31\16",
-            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\2\uffff\1\53"+
+            "\4\uffff\1\16\1\uffff\1\50\31\16",
+            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\2\uffff\1\51"+
             "\3\uffff\32\16\4\uffff\1\16\1\uffff\32\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\4\16\1\54\25\16",
+            "\4\uffff\1\16\1\uffff\4\16\1\52\25\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
             "\4\uffff\1\16\1\uffff\32\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\17\16\1\56\12\16",
+            "\4\uffff\1\16\1\uffff\17\16\1\54\12\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\1\57\31\16",
-            "\1\16\6\uffff\1\60\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\27\16\1\61\2\16",
+            "\4\uffff\1\16\1\uffff\1\55\31\16",
+            "\1\16\6\uffff\1\56\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
+            "\4\uffff\1\16\1\uffff\27\16\1\57\2\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\4\16\1\62\10\16\1\63\1\16\1\64\12\16",
+            "\4\uffff\1\16\1\uffff\4\16\1\60\10\16\1\61\1\16\1\62\12\16",
+            "",
+            "\1\16\6\uffff\1\63\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
+            "\4\uffff\1\16\1\uffff\27\16\1\64\2\16",
             "",
             "\1\16\6\uffff\1\65\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
             "\4\uffff\1\16\1\uffff\27\16\1\66\2\16",
-            "",
-            "\1\16\6\uffff\1\67\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\27\16\1\70\2\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\23\16\1\71\6\16",
+            "\4\uffff\1\16\1\uffff\23\16\1\67\6\16",
             "",
-            "\1\16\6\uffff\1\73\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
+            "\1\16\6\uffff\1\71\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
             "\4\uffff\1\16\1\uffff\32\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\3\16\1\74\26\16",
+            "\4\uffff\1\16\1\uffff\3\16\1\72\26\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\16\16\1\75\13\16",
+            "\4\uffff\1\16\1\uffff\16\16\1\73\13\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\21\16\1\76\10\16",
+            "\4\uffff\1\16\1\uffff\21\16\1\74\10\16",
+            "",
+            "\1\16\6\uffff\1\76\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
+            "\4\uffff\1\16\1\uffff\32\16",
             "",
             "\1\16\6\uffff\1\100\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
             "\4\uffff\1\16\1\uffff\32\16",
+            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
+            "\4\uffff\1\16\1\uffff\10\16\1\101\21\16",
             "",
-            "\1\16\6\uffff\1\102\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
+            "",
+            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
+            "\4\uffff\1\16\1\uffff\6\16\1\103\23\16",
+            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
+            "\4\uffff\1\16\1\uffff\3\16\1\104\26\16",
+            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
+            "\4\uffff\1\16\1\uffff\16\16\1\105\13\16",
+            "",
+            "",
+            "",
+            "",
+            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
+            "\4\uffff\1\16\1\uffff\16\16\1\110\13\16",
+            "",
+            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
+            "\4\uffff\1\16\1\uffff\4\16\1\111\25\16",
+            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
+            "\4\uffff\1\16\1\uffff\4\16\1\112\25\16",
+            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
+            "\4\uffff\1\16\1\uffff\17\16\1\113\12\16",
+            "",
+            "",
+            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
+            "\4\uffff\1\16\1\uffff\15\16\1\114\14\16",
+            "\1\16\6\uffff\1\115\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
             "\4\uffff\1\16\1\uffff\32\16",
-            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\10\16\1\103\21\16",
-            "",
-            "",
-            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\6\16\1\105\23\16",
-            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\3\16\1\106\26\16",
-            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\16\16\1\107\13\16",
-            "",
-            "",
-            "",
-            "",
-            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\16\16\1\112\13\16",
-            "",
-            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\4\16\1\113\25\16",
-            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\4\16\1\114\25\16",
-            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\17\16\1\115\12\16",
-            "",
-            "",
-            "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\15\16\1\116\14\16",
+            "\1\16\6\uffff\1\116\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
+            "\4\uffff\1\16\1\uffff\32\16",
             "\1\16\6\uffff\1\117\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
             "\4\uffff\1\16\1\uffff\32\16",
-            "\1\16\6\uffff\1\120\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\32\16",
-            "\1\16\6\uffff\1\121\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\32\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\122\1\uffff\32\16",
+            "\4\uffff\1\120\1\uffff\32\16",
             "",
             "",
             "",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\4\16\1\126\10\16\1\127\1\16\1\130\12\16",
+            "\4\uffff\1\16\1\uffff\4\16\1\124\10\16\1\125\1\16\1\126\12\16",
             "",
             "",
             "",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\3\16\1\131\26\16",
+            "\4\uffff\1\16\1\uffff\3\16\1\127\26\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\16\16\1\132\13\16",
+            "\4\uffff\1\16\1\uffff\16\16\1\130\13\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\21\16\1\133\10\16",
+            "\4\uffff\1\16\1\uffff\21\16\1\131\10\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\6\16\1\134\23\16",
+            "\4\uffff\1\16\1\uffff\6\16\1\132\23\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\3\16\1\135\26\16",
+            "\4\uffff\1\16\1\uffff\3\16\1\133\26\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\16\16\1\136\13\16",
+            "\4\uffff\1\16\1\uffff\16\16\1\134\13\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\4\16\1\137\25\16",
+            "\4\uffff\1\16\1\uffff\4\16\1\135\25\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\4\16\1\140\25\16",
+            "\4\uffff\1\16\1\uffff\4\16\1\136\25\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
-            "\4\uffff\1\16\1\uffff\17\16\1\141\12\16",
+            "\4\uffff\1\16\1\uffff\17\16\1\137\12\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
             "\4\uffff\1\16\1\uffff\32\16",
             "\1\16\6\uffff\1\23\4\uffff\1\16\2\uffff\13\16\6\uffff\32\16"+
@@ -1438,7 +1404,7 @@ public class AspLexer extends Lexer {
             this.transition = DFA6_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | COMMENT | TEXT | LINEBREAK | WHITESPACE | ELEMENT | QUOTED_40_41 );";
+            return "1:1: Tokens : ( T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | COMMENT | TEXT | LINEBREAK | WHITESPACE | ELEMENT | QUOTED_40_41 );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;

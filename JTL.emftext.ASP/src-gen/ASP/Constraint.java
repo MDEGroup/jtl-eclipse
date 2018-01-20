@@ -134,7 +134,7 @@ public interface Constraint extends EObject {
 	 * @return the value of the '<em>Direction</em>' reference.
 	 * @see #setDirection(Literal)
 	 * @see ASP.ASPPackage#getConstraint_Direction()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Literal getDirection();

@@ -1392,19 +1392,18 @@ public class AspPrinter implements ASP.resource.asp.IAspTextPrinter {
 			}
 		}
 		// DEFINITION PART BEGINS (WhiteSpaces)
-		// DEFINITION PART BEGINS (CsString)
-		out.print(", mmt=");
-		// DEFINITION PART BEGINS (WhiteSpaces)
-		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
-		count = printCountingMap.get("direction");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.CONSTRAINT__DIRECTION));
-			if (o != null) {
-				ASP.resource.asp.IAspTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getConstraintDirectionReferenceResolver().deResolve((ASP.Literal) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(ASP.ASPPackage.CONSTRAINT__DIRECTION)), element.eClass().getEStructuralFeature(ASP.ASPPackage.CONSTRAINT__DIRECTION), element));
-			}
-			printCountingMap.put("direction", count - 1);
+		// DEFINITION PART BEGINS (CompoundDefinition)
+		sWriter = new java.io.StringWriter();
+		out1 = new java.io.PrintWriter(sWriter);
+		printCountingMap1 = new java.util.LinkedHashMap<String, Integer>(printCountingMap);
+		print_ASP_Constraint_2(element, localtab, out1, printCountingMap1);
+		if (printCountingMap.equals(printCountingMap1)) {
+			out1.close();
+		} else {
+			out1.flush();
+			out1.close();
+			out.print(sWriter.toString());
+			printCountingMap.putAll(printCountingMap1);
 		}
 		// DEFINITION PART BEGINS (WhiteSpaces)
 		// DEFINITION PART BEGINS (CsString)
@@ -1455,6 +1454,28 @@ public class AspPrinter implements ASP.resource.asp.IAspTextPrinter {
 				doPrint((org.eclipse.emf.ecore.EObject) o, out, localtab);
 			}
 			printCountingMap.put("expressions", count - 1);
+		}
+	}
+	
+	public void print_ASP_Constraint_2(ASP.Constraint element, String outertab, java.io.PrintWriter out, java.util.Map<String, Integer> printCountingMap) {
+		int count;
+		// DEFINITION PART BEGINS (CsString)
+		out.print(",");
+		// DEFINITION PART BEGINS (WhiteSpaces)
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("mmt=");
+		// DEFINITION PART BEGINS (WhiteSpaces)
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
+		count = printCountingMap.get("direction");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(ASP.ASPPackage.CONSTRAINT__DIRECTION));
+			if (o != null) {
+				ASP.resource.asp.IAspTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getConstraintDirectionReferenceResolver().deResolve((ASP.Literal) o, element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(ASP.ASPPackage.CONSTRAINT__DIRECTION)), element.eClass().getEStructuralFeature(ASP.ASPPackage.CONSTRAINT__DIRECTION), element));
+			}
+			printCountingMap.put("direction", count - 1);
 		}
 	}
 	
