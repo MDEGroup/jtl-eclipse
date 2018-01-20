@@ -52,7 +52,7 @@
 		<constant value="&#9;thisModule.count().toString()&#10;"/>
 		<constant value="endif;&#10;&#10;"/>
 		<constant value="helper context String def : getIdTrace() : String =&#10;"/>
-		<constant value="&#9;self.split('_ASPid_').at(1)&#10;"/>
+		<constant value="&#9;self.split('_ASPid_').at(1).regexReplaceAll('@','/@').regexReplaceAll('^/@','//@')&#10;"/>
 		<constant value="&#9;self&#10;"/>
 		<constant value="helper def: counter : Integer = 0;&#10;&#10;"/>
 		<constant value="rule count() {&#10;"/>
@@ -167,8 +167,8 @@
 		<constant value="13:2-27:57"/>
 		<constant value="28:2-28:41"/>
 		<constant value="13:2-28:41"/>
-		<constant value="29:2-29:37"/>
-		<constant value="13:2-29:37"/>
+		<constant value="29:2-29:100"/>
+		<constant value="13:2-29:100"/>
 		<constant value="30:2-30:10"/>
 		<constant value="13:2-30:10"/>
 		<constant value="31:2-31:12"/>

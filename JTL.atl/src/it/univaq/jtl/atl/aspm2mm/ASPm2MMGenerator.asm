@@ -41,7 +41,7 @@
 		<constant value=";&#10;&#10;"/>
 		<constant value="create OUT : "/>
 		<constant value=" from IN : ASPm; &#10;&#10;"/>
-		<constant value="helper context String def : denormalize() : String = self.replaceAll('&quot;', ' ').trim().substring(3, self.size()).processList();&#10;"/>
+		<constant value="helper context String def : denormalize() : String = self.replaceAll('&quot;', ' ').trim().substring(3, self.size()).regexReplaceAll('/','').processList();&#10;"/>
 		<constant value="helper context String def : processList() : String = self.regexReplaceAll('\\w+\\(\\[([^\\]]+)\\]\\)', '$1').regexReplaceAll(' x_([^ ]+) ','$1');&#10;&#10;"/>
 		<constant value="1"/>
 		<constant value="EClass"/>
@@ -85,8 +85,8 @@
 		<constant value="13:2-16:57"/>
 		<constant value="16:60-16:83"/>
 		<constant value="13:2-16:83"/>
-		<constant value="17:2-17:136"/>
-		<constant value="13:2-17:136"/>
+		<constant value="17:2-17:164"/>
+		<constant value="13:2-17:164"/>
 		<constant value="18:2-18:173"/>
 		<constant value="13:2-18:173"/>
 		<constant value="12:27-12:39"/>

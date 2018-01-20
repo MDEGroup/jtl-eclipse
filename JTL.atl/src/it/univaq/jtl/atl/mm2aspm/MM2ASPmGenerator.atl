@@ -26,7 +26,7 @@ query MM2ASPmGenerator = ECORE!EClass.allInstancesFrom('IN')->reject(e | e.abstr
 	'endif;\n\n' +
 	'helper context String def : getIdTrace() : String =\n' +
 	'if(self.contains(\'_ASPid_\')) then\n' +
-	'\tself.split(\'_ASPid_\').at(1)\n' +
+	'\tself.split(\'_ASPid_\').at(1).regexReplaceAll(\'@\',\'/@\').regexReplaceAll(\'^/@\',\'//@\')\n' +
 	'else\n' +
 	'\tself\n' +
 	'endif;\n\n' +
