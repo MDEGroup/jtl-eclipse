@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ASP.resource.asp</groupId>
   <artifactId>ASP.resource.asp</artifactId>
-  <version>1.1.0</version>
+  <version>1.1.0-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
    
   <parent>
