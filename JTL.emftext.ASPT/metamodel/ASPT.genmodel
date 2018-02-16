@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/JTL.emftext.ASPT/src" modelPluginID="JTL.emftext.ASPT"
+    modelName="ASPT" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>ASPT.ecore</foreignModel>
+  <genPackages prefix="ASPT" disposableProviderFactory="true" ecorePackage="ASPT.ecore#/">
+    <genClasses ecoreClass="ASPT.ecore#//TraceModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASPT.ecore#//TraceModel/tracelinks"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASPT.ecore#//TraceModel/traceelements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceModel/ID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceModel/MMS"/>
+    </genClasses>
+    <genClasses ecoreClass="ASPT.ecore#//TraceLink">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceLink/relation"/>
+    </genClasses>
+    <genClasses ecoreClass="ASPT.ecore#//TraceElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceElement/metamodel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceElement/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceElement/idx"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceElement/type"/>
+    </genClasses>
+    <genClasses ecoreClass="ASPT.ecore#//TraceNode"/>
+    <genClasses ecoreClass="ASPT.ecore#//TraceProp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceProp/idp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceProp/idpx"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceProp/value"/>
+    </genClasses>
+    <genClasses ecoreClass="ASPT.ecore#//TraceEdge">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceEdge/ids"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceEdge/idsx"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceEdge/idt"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceEdge/idtx"/>
+    </genClasses>
+    <genClasses ecoreClass="ASPT.ecore#//TraceNbNode"/>
+    <genClasses ecoreClass="ASPT.ecore#//TraceNbProp"/>
+    <genClasses ecoreClass="ASPT.ecore#//TraceNbEdge"/>
+  </genPackages>
+</genmodel:GenModel>

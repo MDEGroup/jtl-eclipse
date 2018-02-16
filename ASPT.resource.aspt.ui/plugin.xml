@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="ASPT.resource.aspt.ui.AsptUIMetaInformation" id="ASPT.resource.aspt.ui.AsptUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="ASPT.resource.aspt.ui.AsptEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="aspt" icon="icons/editor_icon.gif" id="ASPT.resource.aspt.ui.AsptEditor" name="EMFText aspt Editor">
+			<contentTypeBinding contentTypeId="ASPT.resource.aspt">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="ASPT.resource.aspt.ui.AsptPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Aspt Text Editor" id="ASPT.resource.aspt.ui.AsptPreferencePage" class="ASPT.resource.aspt.ui.AsptPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="ASPT.resource.aspt.ui.AsptSyntaxColoringPreferencePage" class="ASPT.resource.aspt.ui.AsptSyntaxColoringPreferencePage" category="ASPT.resource.aspt.ui.AsptPreferencePage">
+		</page>
+		<page name="Brackets" id="ASPT.resource.aspt.ui.AsptBracketPreferencePage" class="ASPT.resource.aspt.ui.AsptBracketPreferencePage" category="ASPT.resource.aspt.ui.AsptPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="ASPT.resource.aspt.ui.AsptMarkerResolutionGenerator" markerType="ASPT.resource.aspt.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="ASPT.resource.aspt.ui.AsptAnnotationModelFactory" extensions="aspt">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="ASPT.resource.aspt" name=".aspt File" base-type="org.eclipse.core.runtime.text" file-extensions="aspt">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="aspt" id="ASPT.resource.aspt.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="ASPT.resource.aspt.ui.occurences">
+		</type>
+		<type name="ASPT.resource.aspt.ui.occurences.declaration" super="ASPT.resource.aspt.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="ASPT.resource.aspt.ui.occurences" label="Occurrences (in .aspt files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="aspt.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="aspt.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="aspt.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="aspt.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="aspt.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="aspt.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="aspt.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="aspt.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="aspt.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="ASPT.resource.aspt.ui.occurences.declaration" label="Declarations (in .aspt files)" textPreferenceKey="aspt.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="aspt.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="aspt.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="aspt.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="aspt.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="aspt.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="aspt.PropertyTester" type="java.lang.Object" namespace="aspt" properties="isLaunchable" class="ASPT.resource.aspt.ui.AsptPropertyTester">
+		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="ASPT.resource.aspt.ui.debug.lineBreakpoint" markerType="ASPT.resource.aspt.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="ASPT.resource.aspt.ui.debug.lineBreakpoint" label="Breakpoints (in .aspt files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="ASPT.resource.aspt.ui.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="ASPT.resource.aspt.ui.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="ASPT.resource.aspt.ui.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="ASPT.resource.aspt.ui.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="ASPT.resource.aspt.ui.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="ASPT.resource.aspt.ui.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="ASPT.resource.aspt.ui.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="ASPT.resource.aspt.ui.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="ASPT.resource.aspt.ui.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="ASPT.resource.aspt.ui.AsptEditor" class="ASPT.resource.aspt.ui.debug.AsptAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="ASPT.resource.aspt.debug.AsptDebugVariable" class="ASPT.resource.aspt.ui.debug.AsptAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="ASPT.resource.aspt.debug.AsptDebugVariable" class="ASPT.resource.aspt.ui.debug.AsptAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="ASPT.resource.aspt.ui.RulerPopupActions" targetID="ASPT.resource.aspt.EditorRuler">
+			<action id="ASPT.resource.aspt.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="ASPT.resource.aspt.ui.AsptEditor" id="ASPT.resource.aspt.ui.BreakpointRulerActions">
+			<action id="ASPT.resource.aspt.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="ASPT.resource.aspt.debugModel" class="ASPT.resource.aspt.ui.debug.AsptDebugModelPresentation">
+		</debugModelPresentation>
+	</extension>
+	
+</plugin>
