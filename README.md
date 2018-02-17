@@ -7,12 +7,17 @@ Components:
 `JTL.emftext.ASPMM`,  
 `ASPMM.resource.aspmm`,  
 `ASPMM.resource.aspmm.ui`:  
-Serialization (encoding) of Ecore Metamodels to ASP facts and unserialization (decoding) of ASP facts to Ecore Models.
+Serialization (encoding) of Ecore Metamodels to ASP facts and unserialization (decoding) of ASP facts to Ecore Metamodels.
 
 `JTL.emftext.ASPM`,  
 `ASPM.resource.aspm`,  
 `ASPM.resource.aspm.ui`:  
 Serialization (encoding) of Ecore Models to ASP facts and unserialization (decoding) of ASP facts to Ecore Models.
+
+`JTL.emftext.ASPT`,  
+`ASPT.resource.aspt`,  
+`ASPT.resource.aspt.ui`:  
+Serialization (encoding) of Ecore Trace Models to ASP facts and unserialization (decoding) of ASP facts to Ecore Trace Models.
 
 `JTL.emftext.JTL`,  
 `JTL.resource.jtl`,  
