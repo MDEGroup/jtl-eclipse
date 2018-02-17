@@ -36,6 +36,7 @@ public class AsptBracketInformationProvider {
 	
 	public java.util.Collection<ASPT.resource.aspt.IAsptBracketPair> getBracketPairs() {
 		java.util.Collection<ASPT.resource.aspt.IAsptBracketPair> result = new java.util.ArrayList<ASPT.resource.aspt.IAsptBracketPair>();
+		result.add(new BracketPair("(", ")", true));
 		result.add(new BracketPair("\"", "\"", false));
 		return result;
 	}

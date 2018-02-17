@@ -21,6 +21,8 @@ public class AsptLexer extends Lexer {
     public static final int T__18=18;
     public static final int T__19=19;
     public static final int T__20=20;
+    public static final int T__21=21;
+    public static final int T__22=22;
     public static final int FLOAT=4;
     public static final int IDENTIFIER=5;
     public static final int INTEGER=6;
@@ -58,12 +60,10 @@ public class AsptLexer extends Lexer {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:15:7: ( ').' )
-            // Aspt.g:15:9: ').'
+            // Aspt.g:15:7: ( '(' )
+            // Aspt.g:15:9: '('
             {
-            match(")."); 
-
-
+            match('('); 
 
             }
 
@@ -81,10 +81,10 @@ public class AsptLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:16:7: ( ',' )
-            // Aspt.g:16:9: ','
+            // Aspt.g:16:7: ( ')' )
+            // Aspt.g:16:9: ')'
             {
-            match(','); 
+            match(')'); 
 
             }
 
@@ -102,12 +102,10 @@ public class AsptLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:17:7: ( 'trace_edge(' )
-            // Aspt.g:17:9: 'trace_edge('
+            // Aspt.g:17:7: ( ',' )
+            // Aspt.g:17:9: ','
             {
-            match("trace_edge("); 
-
-
+            match(','); 
 
             }
 
@@ -125,12 +123,10 @@ public class AsptLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:18:7: ( 'trace_link(' )
-            // Aspt.g:18:9: 'trace_link('
+            // Aspt.g:18:7: ( '.' )
+            // Aspt.g:18:9: '.'
             {
-            match("trace_link("); 
-
-
+            match('.'); 
 
             }
 
@@ -148,10 +144,10 @@ public class AsptLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:19:7: ( 'trace_model(' )
-            // Aspt.g:19:9: 'trace_model('
+            // Aspt.g:19:7: ( 'trace_edge' )
+            // Aspt.g:19:9: 'trace_edge'
             {
-            match("trace_model("); 
+            match("trace_edge"); 
 
 
 
@@ -171,10 +167,10 @@ public class AsptLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:20:7: ( 'trace_nb_edge(' )
-            // Aspt.g:20:9: 'trace_nb_edge('
+            // Aspt.g:20:7: ( 'trace_link' )
+            // Aspt.g:20:9: 'trace_link'
             {
-            match("trace_nb_edge("); 
+            match("trace_link"); 
 
 
 
@@ -194,10 +190,10 @@ public class AsptLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:21:7: ( 'trace_nb_node(' )
-            // Aspt.g:21:9: 'trace_nb_node('
+            // Aspt.g:21:7: ( 'trace_model' )
+            // Aspt.g:21:9: 'trace_model'
             {
-            match("trace_nb_node("); 
+            match("trace_model"); 
 
 
 
@@ -217,10 +213,10 @@ public class AsptLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:22:7: ( 'trace_nb_prop(' )
-            // Aspt.g:22:9: 'trace_nb_prop('
+            // Aspt.g:22:7: ( 'trace_nb_edge' )
+            // Aspt.g:22:9: 'trace_nb_edge'
             {
-            match("trace_nb_prop("); 
+            match("trace_nb_edge"); 
 
 
 
@@ -240,10 +236,10 @@ public class AsptLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:23:7: ( 'trace_node(' )
-            // Aspt.g:23:9: 'trace_node('
+            // Aspt.g:23:7: ( 'trace_nb_node' )
+            // Aspt.g:23:9: 'trace_nb_node'
             {
-            match("trace_node("); 
+            match("trace_nb_node"); 
 
 
 
@@ -263,10 +259,10 @@ public class AsptLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:24:7: ( 'trace_prop(' )
-            // Aspt.g:24:9: 'trace_prop('
+            // Aspt.g:24:7: ( 'trace_nb_prop' )
+            // Aspt.g:24:9: 'trace_nb_prop'
             {
-            match("trace_prop("); 
+            match("trace_nb_prop"); 
 
 
 
@@ -281,16 +277,62 @@ public class AsptLexer extends Lexer {
     }
     // $ANTLR end "T__20"
 
+    // $ANTLR start "T__21"
+    public final void mT__21() throws RecognitionException {
+        try {
+            int _type = T__21;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // Aspt.g:25:7: ( 'trace_node' )
+            // Aspt.g:25:9: 'trace_node'
+            {
+            match("trace_node"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__21"
+
+    // $ANTLR start "T__22"
+    public final void mT__22() throws RecognitionException {
+        try {
+            int _type = T__22;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // Aspt.g:26:7: ( 'trace_prop' )
+            // Aspt.g:26:9: 'trace_prop'
+            {
+            match("trace_prop"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__22"
+
     // $ANTLR start "IDENTIFIER"
     public final void mIDENTIFIER() throws RecognitionException {
         try {
             int _type = IDENTIFIER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:3098:11: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '-' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '/' | '.' | '@' )* ) )
-            // Aspt.g:3099:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '-' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '/' | '.' | '@' )* )
+            // Aspt.g:3322:11: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '-' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '/' | '.' | '@' )* ) )
+            // Aspt.g:3323:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '-' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '/' | '.' | '@' )* )
             {
-            // Aspt.g:3099:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '-' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '/' | '.' | '@' )* )
-            // Aspt.g:3099:3: ( 'A' .. 'Z' | 'a' .. 'z' | '-' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '/' | '.' | '@' )*
+            // Aspt.g:3323:2: ( ( 'A' .. 'Z' | 'a' .. 'z' | '-' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '/' | '.' | '@' )* )
+            // Aspt.g:3323:3: ( 'A' .. 'Z' | 'a' .. 'z' | '-' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '/' | '.' | '@' )*
             {
             if ( input.LA(1)=='-'||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -302,7 +344,7 @@ public class AsptLexer extends Lexer {
             }
 
 
-            // Aspt.g:3099:35: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '/' | '.' | '@' )*
+            // Aspt.g:3323:35: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '-' | '_' | '/' | '.' | '@' )*
             loop1:
             do {
                 int alt1=2;
@@ -355,8 +397,8 @@ public class AsptLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:3101:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
-            // Aspt.g:3102:2: ( ( ' ' | '\\t' | '\\f' ) )
+            // Aspt.g:3325:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
+            // Aspt.g:3326:2: ( ( ' ' | '\\t' | '\\f' ) )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -386,13 +428,13 @@ public class AsptLexer extends Lexer {
         try {
             int _type = LINEBREAK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:3105:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
-            // Aspt.g:3106:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Aspt.g:3329:10: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
+            // Aspt.g:3330:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
             {
-            // Aspt.g:3106:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // Aspt.g:3106:3: ( '\\r\\n' | '\\r' | '\\n' )
+            // Aspt.g:3330:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Aspt.g:3330:3: ( '\\r\\n' | '\\r' | '\\n' )
             {
-            // Aspt.g:3106:3: ( '\\r\\n' | '\\r' | '\\n' )
+            // Aspt.g:3330:3: ( '\\r\\n' | '\\r' | '\\n' )
             int alt2=3;
             int LA2_0 = input.LA(1);
 
@@ -418,7 +460,7 @@ public class AsptLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // Aspt.g:3106:4: '\\r\\n'
+                    // Aspt.g:3330:4: '\\r\\n'
                     {
                     match("\r\n"); 
 
@@ -427,14 +469,14 @@ public class AsptLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Aspt.g:3106:13: '\\r'
+                    // Aspt.g:3330:13: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // Aspt.g:3106:20: '\\n'
+                    // Aspt.g:3330:20: '\\n'
                     {
                     match('\n'); 
 
@@ -465,10 +507,10 @@ public class AsptLexer extends Lexer {
         try {
             int _type = INTEGER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:3109:8: ( ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) )
-            // Aspt.g:3110:2: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // Aspt.g:3333:8: ( ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) )
+            // Aspt.g:3334:2: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             {
-            // Aspt.g:3110:2: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // Aspt.g:3334:2: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -487,9 +529,9 @@ public class AsptLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // Aspt.g:3110:3: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
+                    // Aspt.g:3334:3: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
                     {
-                    // Aspt.g:3110:3: ( '-' )?
+                    // Aspt.g:3334:3: ( '-' )?
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -498,7 +540,7 @@ public class AsptLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // Aspt.g:3110:4: '-'
+                            // Aspt.g:3334:4: '-'
                             {
                             match('-'); 
 
@@ -518,7 +560,7 @@ public class AsptLexer extends Lexer {
                     }
 
 
-                    // Aspt.g:3110:19: ( '0' .. '9' )*
+                    // Aspt.g:3334:19: ( '0' .. '9' )*
                     loop4:
                     do {
                         int alt4=2;
@@ -555,7 +597,7 @@ public class AsptLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Aspt.g:3110:31: '0'
+                    // Aspt.g:3334:31: '0'
                     {
                     match('0'); 
 
@@ -581,13 +623,13 @@ public class AsptLexer extends Lexer {
         try {
             int _type = FLOAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:3112:6: ( ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ ) )
-            // Aspt.g:3113:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
+            // Aspt.g:3336:6: ( ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ ) )
+            // Aspt.g:3337:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
             {
-            // Aspt.g:3113:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
-            // Aspt.g:3113:3: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
+            // Aspt.g:3337:2: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
+            // Aspt.g:3337:3: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
             {
-            // Aspt.g:3113:3: ( '-' )?
+            // Aspt.g:3337:3: ( '-' )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -596,7 +638,7 @@ public class AsptLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // Aspt.g:3113:4: '-'
+                    // Aspt.g:3337:4: '-'
                     {
                     match('-'); 
 
@@ -606,7 +648,7 @@ public class AsptLexer extends Lexer {
             }
 
 
-            // Aspt.g:3113:9: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // Aspt.g:3337:9: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -625,7 +667,7 @@ public class AsptLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // Aspt.g:3113:10: ( '1' .. '9' ) ( '0' .. '9' )*
+                    // Aspt.g:3337:10: ( '1' .. '9' ) ( '0' .. '9' )*
                     {
                     if ( (input.LA(1) >= '1' && input.LA(1) <= '9') ) {
                         input.consume();
@@ -637,7 +679,7 @@ public class AsptLexer extends Lexer {
                     }
 
 
-                    // Aspt.g:3113:21: ( '0' .. '9' )*
+                    // Aspt.g:3337:21: ( '0' .. '9' )*
                     loop7:
                     do {
                         int alt7=2;
@@ -674,7 +716,7 @@ public class AsptLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Aspt.g:3113:35: '0'
+                    // Aspt.g:3337:35: '0'
                     {
                     match('0'); 
 
@@ -686,7 +728,7 @@ public class AsptLexer extends Lexer {
 
             match('.'); 
 
-            // Aspt.g:3113:44: ( '0' .. '9' )+
+            // Aspt.g:3337:44: ( '0' .. '9' )+
             int cnt9=0;
             loop9:
             do {
@@ -746,17 +788,17 @@ public class AsptLexer extends Lexer {
         try {
             int _type = SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:3116:11: ( ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
-            // Aspt.g:3117:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Aspt.g:3340:11: ( ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
+            // Aspt.g:3341:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
             {
-            // Aspt.g:3117:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
-            // Aspt.g:3117:3: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Aspt.g:3341:2: ( '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Aspt.g:3341:3: '//' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             {
             match("//"); 
 
 
 
-            // Aspt.g:3117:7: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Aspt.g:3341:7: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             loop10:
             do {
                 int alt10=2;
@@ -811,21 +853,21 @@ public class AsptLexer extends Lexer {
         try {
             int _type = QUOTED_34_34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Aspt.g:3120:13: ( ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) ) )
-            // Aspt.g:3121:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Aspt.g:3344:13: ( ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) ) )
+            // Aspt.g:3345:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
             {
-            // Aspt.g:3121:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
-            // Aspt.g:3121:3: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
+            // Aspt.g:3345:2: ( ( '\"' ) (~ ( '\"' ) )* ( '\"' ) )
+            // Aspt.g:3345:3: ( '\"' ) (~ ( '\"' ) )* ( '\"' )
             {
-            // Aspt.g:3121:3: ( '\"' )
-            // Aspt.g:3121:4: '\"'
+            // Aspt.g:3345:3: ( '\"' )
+            // Aspt.g:3345:4: '\"'
             {
             match('\"'); 
 
             }
 
 
-            // Aspt.g:3121:8: (~ ( '\"' ) )*
+            // Aspt.g:3345:8: (~ ( '\"' ) )*
             loop11:
             do {
                 int alt11=2;
@@ -859,8 +901,8 @@ public class AsptLexer extends Lexer {
             } while (true);
 
 
-            // Aspt.g:3121:17: ( '\"' )
-            // Aspt.g:3121:18: '\"'
+            // Aspt.g:3345:17: ( '\"' )
+            // Aspt.g:3345:18: '\"'
             {
             match('\"'); 
 
@@ -882,8 +924,8 @@ public class AsptLexer extends Lexer {
     // $ANTLR end "QUOTED_34_34"
 
     public void mTokens() throws RecognitionException {
-        // Aspt.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | IDENTIFIER | WHITESPACE | LINEBREAK | INTEGER | FLOAT | SL_COMMENT | QUOTED_34_34 )
-        int alt12=17;
+        // Aspt.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | IDENTIFIER | WHITESPACE | LINEBREAK | INTEGER | FLOAT | SL_COMMENT | QUOTED_34_34 )
+        int alt12=19;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
@@ -967,55 +1009,71 @@ public class AsptLexer extends Lexer {
                 }
                 break;
             case 11 :
-                // Aspt.g:1:70: IDENTIFIER
+                // Aspt.g:1:70: T__21
+                {
+                mT__21(); 
+
+
+                }
+                break;
+            case 12 :
+                // Aspt.g:1:76: T__22
+                {
+                mT__22(); 
+
+
+                }
+                break;
+            case 13 :
+                // Aspt.g:1:82: IDENTIFIER
                 {
                 mIDENTIFIER(); 
 
 
                 }
                 break;
-            case 12 :
-                // Aspt.g:1:81: WHITESPACE
+            case 14 :
+                // Aspt.g:1:93: WHITESPACE
                 {
                 mWHITESPACE(); 
 
 
                 }
                 break;
-            case 13 :
-                // Aspt.g:1:92: LINEBREAK
+            case 15 :
+                // Aspt.g:1:104: LINEBREAK
                 {
                 mLINEBREAK(); 
 
 
                 }
                 break;
-            case 14 :
-                // Aspt.g:1:102: INTEGER
+            case 16 :
+                // Aspt.g:1:114: INTEGER
                 {
                 mINTEGER(); 
 
 
                 }
                 break;
-            case 15 :
-                // Aspt.g:1:110: FLOAT
+            case 17 :
+                // Aspt.g:1:122: FLOAT
                 {
                 mFLOAT(); 
 
 
                 }
                 break;
-            case 16 :
-                // Aspt.g:1:116: SL_COMMENT
+            case 18 :
+                // Aspt.g:1:128: SL_COMMENT
                 {
                 mSL_COMMENT(); 
 
 
                 }
                 break;
-            case 17 :
-                // Aspt.g:1:127: QUOTED_34_34
+            case 19 :
+                // Aspt.g:1:139: QUOTED_34_34
                 {
                 mQUOTED_34_34(); 
 
@@ -1030,62 +1088,63 @@ public class AsptLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\3\uffff\2\7\3\uffff\2\20\2\uffff\3\7\1\20\2\uffff\40\7\2\uffff"+
-        "\4\7\3\uffff\6\7\3\uffff";
+        "\5\uffff\2\11\3\uffff\2\22\2\uffff\3\11\1\22\2\uffff\30\11\1\64"+
+        "\1\65\4\11\1\72\1\73\2\uffff\1\74\3\11\3\uffff\3\11\1\103\1\104"+
+        "\1\105\3\uffff";
     static final String DFA12_eofS =
-        "\104\uffff";
+        "\106\uffff";
     static final String DFA12_minS =
-        "\1\11\2\uffff\1\162\1\60\3\uffff\2\56\2\uffff\1\141\3\56\2\uffff"+
+        "\1\11\4\uffff\1\162\1\60\3\uffff\2\56\2\uffff\1\141\3\56\2\uffff"+
         "\1\143\1\56\1\60\1\145\1\60\1\137\1\145\1\144\1\151\1\157\1\142"+
         "\1\162\1\147\1\156\1\144\1\137\1\144\1\157\1\145\1\153\3\145\1\160"+
-        "\2\50\1\154\1\144\1\157\1\162\2\50\2\uffff\1\50\1\147\1\144\1\157"+
-        "\3\uffff\2\145\1\160\3\50\3\uffff";
+        "\2\55\1\154\1\144\1\157\1\162\2\55\2\uffff\1\55\1\147\1\144\1\157"+
+        "\3\uffff\2\145\1\160\3\55\3\uffff";
     static final String DFA12_maxS =
-        "\1\172\2\uffff\1\162\1\71\3\uffff\1\71\1\56\2\uffff\1\141\1\71\1"+
+        "\1\172\4\uffff\1\162\1\71\3\uffff\1\71\1\56\2\uffff\1\141\1\71\1"+
         "\56\1\71\2\uffff\1\143\2\71\1\145\1\71\1\137\1\160\1\144\1\151\2"+
         "\157\1\162\1\147\1\156\1\144\1\137\1\144\1\157\1\145\1\153\1\145"+
-        "\1\160\1\145\1\160\2\50\1\154\1\144\1\157\1\162\2\50\2\uffff\1\50"+
-        "\1\147\1\144\1\157\3\uffff\2\145\1\160\3\50\3\uffff";
+        "\1\160\1\145\1\160\2\172\1\154\1\144\1\157\1\162\2\172\2\uffff\1"+
+        "\172\1\147\1\144\1\157\3\uffff\2\145\1\160\3\172\3\uffff";
     static final String DFA12_acceptS =
-        "\1\uffff\1\1\1\2\2\uffff\1\14\1\15\1\13\2\uffff\1\20\1\21\4\uffff"+
-        "\1\16\1\17\40\uffff\1\3\1\4\4\uffff\1\11\1\12\1\5\6\uffff\1\6\1"+
-        "\7\1\10";
+        "\1\uffff\1\1\1\2\1\3\1\4\2\uffff\1\16\1\17\1\15\2\uffff\1\22\1\23"+
+        "\4\uffff\1\20\1\21\40\uffff\1\5\1\6\4\uffff\1\13\1\14\1\7\6\uffff"+
+        "\1\10\1\11\1\12";
     static final String DFA12_specialS =
-        "\104\uffff}>";
+        "\106\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\1\5\1\6\1\uffff\1\5\1\6\22\uffff\1\5\1\uffff\1\13\6\uffff\1"+
-            "\1\2\uffff\1\2\1\4\1\uffff\1\12\1\11\11\10\7\uffff\32\7\4\uffff"+
-            "\1\7\1\uffff\23\7\1\3\6\7",
-            "",
-            "",
-            "\1\14",
-            "\1\16\11\15",
+            "\1\7\1\10\1\uffff\1\7\1\10\22\uffff\1\7\1\uffff\1\15\5\uffff"+
+            "\1\1\1\2\2\uffff\1\3\1\6\1\4\1\14\1\13\11\12\7\uffff\32\11\4"+
+            "\uffff\1\11\1\uffff\23\11\1\5\6\11",
             "",
             "",
             "",
-            "\1\21\1\uffff\12\17",
-            "\1\21",
+            "",
+            "\1\16",
+            "\1\20\11\17",
             "",
             "",
-            "\1\22",
-            "\1\24\1\uffff\12\23",
+            "",
+            "\1\23\1\uffff\12\21",
+            "\1\23",
+            "",
+            "",
             "\1\24",
-            "\1\21\1\uffff\12\17",
+            "\1\26\1\uffff\12\25",
+            "\1\26",
+            "\1\23\1\uffff\12\21",
             "",
             "",
-            "\1\25",
-            "\1\24\1\uffff\12\23",
-            "\12\26",
             "\1\27",
-            "\12\26",
-            "\1\30",
-            "\1\31\6\uffff\1\32\1\33\1\34\1\uffff\1\35",
-            "\1\36",
-            "\1\37",
+            "\1\26\1\uffff\12\25",
+            "\12\30",
+            "\1\31",
+            "\12\30",
+            "\1\32",
+            "\1\33\6\uffff\1\34\1\35\1\36\1\uffff\1\37",
             "\1\40",
-            "\1\41\14\uffff\1\42",
-            "\1\43",
-            "\1\44",
+            "\1\41",
+            "\1\42",
+            "\1\43\14\uffff\1\44",
             "\1\45",
             "\1\46",
             "\1\47",
@@ -1094,32 +1153,34 @@ public class AsptLexer extends Lexer {
             "\1\52",
             "\1\53",
             "\1\54",
-            "\1\55\10\uffff\1\56\1\uffff\1\57",
-            "\1\60",
-            "\1\61",
+            "\1\55",
+            "\1\56",
+            "\1\57\10\uffff\1\60\1\uffff\1\61",
             "\1\62",
             "\1\63",
-            "\1\64",
-            "\1\65",
+            "\15\11\6\uffff\33\11\4\uffff\1\11\1\uffff\32\11",
+            "\15\11\6\uffff\33\11\4\uffff\1\11\1\uffff\32\11",
             "\1\66",
             "\1\67",
             "\1\70",
             "\1\71",
+            "\15\11\6\uffff\33\11\4\uffff\1\11\1\uffff\32\11",
+            "\15\11\6\uffff\33\11\4\uffff\1\11\1\uffff\32\11",
             "",
             "",
-            "\1\72",
-            "\1\73",
-            "\1\74",
+            "\15\11\6\uffff\33\11\4\uffff\1\11\1\uffff\32\11",
             "\1\75",
-            "",
-            "",
-            "",
             "\1\76",
             "\1\77",
+            "",
+            "",
+            "",
             "\1\100",
             "\1\101",
             "\1\102",
-            "\1\103",
+            "\15\11\6\uffff\33\11\4\uffff\1\11\1\uffff\32\11",
+            "\15\11\6\uffff\33\11\4\uffff\1\11\1\uffff\32\11",
+            "\15\11\6\uffff\33\11\4\uffff\1\11\1\uffff\32\11",
             "",
             "",
             ""
@@ -1155,7 +1216,7 @@ public class AsptLexer extends Lexer {
             this.transition = DFA12_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | IDENTIFIER | WHITESPACE | LINEBREAK | INTEGER | FLOAT | SL_COMMENT | QUOTED_34_34 );";
+            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | IDENTIFIER | WHITESPACE | LINEBREAK | INTEGER | FLOAT | SL_COMMENT | QUOTED_34_34 );";
         }
     }
  

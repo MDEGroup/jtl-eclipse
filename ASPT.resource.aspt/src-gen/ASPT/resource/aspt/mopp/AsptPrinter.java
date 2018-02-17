@@ -158,7 +158,10 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		java.io.PrintWriter out1 = null;
 		java.util.Map<String, Integer> printCountingMap1 = null;
 		// DEFINITION PART BEGINS (CsString)
-		out.print("trace_model(");
+		out.print("trace_model");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("(");
 		out.print(" ");
 		// DEFINITION PART BEGINS (PlaceholderInQuotes)
 		count = printCountingMap.get("ID");
@@ -188,8 +191,14 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 			printCountingMap.put("MMS", count - 1);
 		}
 		// DEFINITION PART BEGINS (CsString)
-		out.print(").");
+		out.print(")");
 		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print(".");
+		out.print(" ");
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
 		// DEFINITION PART BEGINS (CompoundDefinition)
 		iterate = true;
 		while (iterate) {
@@ -262,6 +271,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 	
 	
 	public void print_ASPT_TraceNode(ASPT.TraceNode element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
@@ -280,7 +290,10 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// print collected hidden tokens
 		int count;
 		// DEFINITION PART BEGINS (CsString)
-		out.print("trace_node(");
+		out.print("trace_node");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("(");
 		out.print(" ");
 		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("metamodel");
@@ -340,12 +353,19 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 			printCountingMap.put("type", count - 1);
 		}
 		// DEFINITION PART BEGINS (CsString)
-		out.print(").");
+		out.print(")");
 		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print(".");
+		out.print(" ");
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
 	}
 	
 	
 	public void print_ASPT_TraceProp(ASPT.TraceProp element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
@@ -370,7 +390,10 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// print collected hidden tokens
 		int count;
 		// DEFINITION PART BEGINS (CsString)
-		out.print("trace_prop(");
+		out.print("trace_prop");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("(");
 		out.print(" ");
 		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("metamodel");
@@ -475,12 +498,19 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 			printCountingMap.put("value", count - 1);
 		}
 		// DEFINITION PART BEGINS (CsString)
-		out.print(").");
+		out.print(")");
 		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print(".");
+		out.print(" ");
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
 	}
 	
 	
 	public void print_ASPT_TraceEdge(ASPT.TraceEdge element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
@@ -507,7 +537,10 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// print collected hidden tokens
 		int count;
 		// DEFINITION PART BEGINS (CsString)
-		out.print("trace_edge(");
+		out.print("trace_edge");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("(");
 		out.print(" ");
 		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("metamodel");
@@ -627,12 +660,19 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 			printCountingMap.put("idtx", count - 1);
 		}
 		// DEFINITION PART BEGINS (CsString)
-		out.print(").");
+		out.print(")");
 		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print(".");
+		out.print(" ");
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
 	}
 	
 	
 	public void print_ASPT_TraceNbEdge(ASPT.TraceNbEdge element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
@@ -659,7 +699,10 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// print collected hidden tokens
 		int count;
 		// DEFINITION PART BEGINS (CsString)
-		out.print("trace_nb_edge(");
+		out.print("trace_nb_edge");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("(");
 		out.print(" ");
 		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("metamodel");
@@ -779,12 +822,19 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 			printCountingMap.put("idtx", count - 1);
 		}
 		// DEFINITION PART BEGINS (CsString)
-		out.print(").");
+		out.print(")");
 		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print(".");
+		out.print(" ");
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
 	}
 	
 	
 	public void print_ASPT_TraceNbProp(ASPT.TraceNbProp element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
@@ -809,7 +859,10 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// print collected hidden tokens
 		int count;
 		// DEFINITION PART BEGINS (CsString)
-		out.print("trace_nb_prop(");
+		out.print("trace_nb_prop");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("(");
 		out.print(" ");
 		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("metamodel");
@@ -914,12 +967,19 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 			printCountingMap.put("value", count - 1);
 		}
 		// DEFINITION PART BEGINS (CsString)
-		out.print(").");
+		out.print(")");
 		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print(".");
+		out.print(" ");
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
 	}
 	
 	
 	public void print_ASPT_TraceNbNode(ASPT.TraceNbNode element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
@@ -938,7 +998,10 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// print collected hidden tokens
 		int count;
 		// DEFINITION PART BEGINS (CsString)
-		out.print("trace_nb_node(");
+		out.print("trace_nb_node");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("(");
 		out.print(" ");
 		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("metamodel");
@@ -998,12 +1061,19 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 			printCountingMap.put("type", count - 1);
 		}
 		// DEFINITION PART BEGINS (CsString)
-		out.print(").");
+		out.print(")");
 		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print(".");
+		out.print(" ");
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
 	}
 	
 	
 	public void print_ASPT_TraceLink(ASPT.TraceLink element, String outertab, java.io.PrintWriter out) {
+		String localtab = outertab;
 		// The printCountingMap contains a mapping from feature names to the number of
 		// remaining elements that still need to be printed. The map is initialized with
 		// the number of elements stored in each structural feature. For lists this is the
@@ -1024,7 +1094,10 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// print collected hidden tokens
 		int count;
 		// DEFINITION PART BEGINS (CsString)
-		out.print("trace_link(");
+		out.print("trace_link");
+		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print("(");
 		out.print(" ");
 		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("metamodel");
@@ -1099,8 +1172,14 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 			printCountingMap.put("relation", count - 1);
 		}
 		// DEFINITION PART BEGINS (CsString)
-		out.print(").");
+		out.print(")");
 		out.print(" ");
+		// DEFINITION PART BEGINS (CsString)
+		out.print(".");
+		out.print(" ");
+		// DEFINITION PART BEGINS (LineBreak)
+		out.println();
+		out.print(localtab);
 	}
 	
 	

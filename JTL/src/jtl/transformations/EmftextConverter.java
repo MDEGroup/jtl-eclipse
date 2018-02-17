@@ -6,14 +6,13 @@ import java.io.OutputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import jtl.utils.Files;
-
-import org.eclipse.emf.ecore.EPackage;
 
 /**
  * Perform model2text or text2model transformations using
@@ -23,6 +22,7 @@ public class EmftextConverter {
 
 	private static String ASPMM_URI = "http://jtl.univaq.it/aspmm";
 	private static String ASPM_URI = "http://jtl.univaq.it/aspm";
+	private static String ASPT_URI = "http://jtl.univaq.it/aspt";
 	private static String ASP_URI = "http://jtl.univaq.it/asp";
 
 	/**
@@ -128,6 +128,10 @@ public class EmftextConverter {
 				// ASPMM
 				resource = createDslResource(rs, location, "ASPMM");
 
+			} else if (root instanceof ASPT.impl.TraceModelImpl) {
+				// ASPT
+				resource = createDslResource(rs, location, "ASPT");
+
 			} else if (root instanceof JTL.JTL.impl.TransformationImpl) {
 				// JTLMM
 				resource = createDslResource(rs, location, "JTL");
@@ -196,6 +200,13 @@ public class EmftextConverter {
 				EPackage.Registry.INSTANCE.put(ASPM_URI, ASPM.ASPMPackage.eINSTANCE);
 			}
 			return "aspm";
+		} else if (file.endsWith(".aspt.ecore")) {
+			if (!(EPackage.Registry.INSTANCE.getEPackage(ASPT_URI)
+					instanceof ASPT.impl.ASPTPackageImpl)) {
+				EPackage.Registry.INSTANCE.remove(ASPT_URI);
+				EPackage.Registry.INSTANCE.put(ASPT_URI, ASPT.ASPTPackage.eINSTANCE);
+			}
+			return "aspt";
 		} else if (file.endsWith(".asp.ecore")) {
 			if (!(EPackage.Registry.INSTANCE.getEPackage(ASP_URI)
 					instanceof ASP.impl.ASPPackageImpl)) {

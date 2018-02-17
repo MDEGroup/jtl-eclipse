@@ -162,6 +162,10 @@
                           property="org.eclipse.core.resources.name"
                           value="*.aspmm">
                     </test>
+                    <test
+                          property="org.eclipse.core.resources.name"
+                          value="*.aspt">
+                    </test>
 					<test
                           property="org.eclipse.core.resources.name"
                           value="*.jtl">

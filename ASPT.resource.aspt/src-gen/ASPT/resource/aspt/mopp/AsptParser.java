@@ -13,7 +13,7 @@ import java.util.HashMap;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class AsptParser extends AsptANTLRParserBase {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "FLOAT", "IDENTIFIER", "INTEGER", "LINEBREAK", "QUOTED_34_34", "SL_COMMENT", "WHITESPACE", "').'", "','", "'trace_edge('", "'trace_link('", "'trace_model('", "'trace_nb_edge('", "'trace_nb_node('", "'trace_nb_prop('", "'trace_node('", "'trace_prop('"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "FLOAT", "IDENTIFIER", "INTEGER", "LINEBREAK", "QUOTED_34_34", "SL_COMMENT", "WHITESPACE", "'('", "')'", "','", "'.'", "'trace_edge'", "'trace_link'", "'trace_model'", "'trace_nb_edge'", "'trace_nb_node'", "'trace_nb_prop'", "'trace_node'", "'trace_prop'"
     };
 
     public static final int EOF=-1;
@@ -27,6 +27,8 @@ public class AsptParser extends AsptANTLRParserBase {
     public static final int T__18=18;
     public static final int T__19=19;
     public static final int T__20=20;
+    public static final int T__21=21;
+    public static final int T__22=22;
     public static final int FLOAT=4;
     public static final int IDENTIFIER=5;
     public static final int INTEGER=6;
@@ -385,7 +387,7 @@ public class AsptParser extends AsptANTLRParserBase {
     				break;
     			}
     		}
-    		int followSetID = 102;
+    		int followSetID = 118;
     		int i;
     		for (i = tokenIndexOfLastCompleteElement; i < tokenStream.size(); i++) {
     			org.antlr.runtime3_4_0.CommonToken nextToken = (org.antlr.runtime3_4_0.CommonToken) tokenStream.get(i);
@@ -613,7 +615,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceModel"
-    // Aspt.g:536:1: parse_ASPT_TraceModel returns [ASPT.TraceModel element = null] : a0= 'trace_model(' (a1= QUOTED_34_34 ) a2= ',' (a3= IDENTIFIER ) a4= ').' ( ( (a5_0= parse_ASPT_TraceElement ) | (a6_0= parse_ASPT_TraceLink ) ) )* ;
+    // Aspt.g:536:1: parse_ASPT_TraceModel returns [ASPT.TraceModel element = null] : a0= 'trace_model' a1= '(' (a2= QUOTED_34_34 ) a3= ',' (a4= IDENTIFIER ) a5= ')' a6= '.' ( ( (a7_0= parse_ASPT_TraceElement ) | (a8_0= parse_ASPT_TraceLink ) ) )* ;
     public final ASPT.TraceModel parse_ASPT_TraceModel() throws RecognitionException {
         ASPT.TraceModel element =  null;
 
@@ -624,9 +626,11 @@ public class AsptParser extends AsptANTLRParserBase {
         Token a2=null;
         Token a3=null;
         Token a4=null;
-        ASPT.TraceElement a5_0 =null;
+        Token a5=null;
+        Token a6=null;
+        ASPT.TraceElement a7_0 =null;
 
-        ASPT.TraceLink a6_0 =null;
+        ASPT.TraceLink a8_0 =null;
 
 
 
@@ -634,10 +638,10 @@ public class AsptParser extends AsptANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 2) ) { return element; }
 
-            // Aspt.g:539:2: (a0= 'trace_model(' (a1= QUOTED_34_34 ) a2= ',' (a3= IDENTIFIER ) a4= ').' ( ( (a5_0= parse_ASPT_TraceElement ) | (a6_0= parse_ASPT_TraceLink ) ) )* )
-            // Aspt.g:540:2: a0= 'trace_model(' (a1= QUOTED_34_34 ) a2= ',' (a3= IDENTIFIER ) a4= ').' ( ( (a5_0= parse_ASPT_TraceElement ) | (a6_0= parse_ASPT_TraceLink ) ) )*
+            // Aspt.g:539:2: (a0= 'trace_model' a1= '(' (a2= QUOTED_34_34 ) a3= ',' (a4= IDENTIFIER ) a5= ')' a6= '.' ( ( (a7_0= parse_ASPT_TraceElement ) | (a8_0= parse_ASPT_TraceLink ) ) )* )
+            // Aspt.g:540:2: a0= 'trace_model' a1= '(' (a2= QUOTED_34_34 ) a3= ',' (a4= IDENTIFIER ) a5= ')' a6= '.' ( ( (a7_0= parse_ASPT_TraceElement ) | (a8_0= parse_ASPT_TraceLink ) ) )*
             {
-            a0=(Token)match(input,15,FOLLOW_15_in_parse_ASPT_TraceModel115); if (state.failed) return element;
+            a0=(Token)match(input,17,FOLLOW_17_in_parse_ASPT_TraceModel115); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -654,10 +658,27 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[1]);
             	}
 
-            // Aspt.g:554:2: (a1= QUOTED_34_34 )
-            // Aspt.g:555:3: a1= QUOTED_34_34
+            a1=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceModel129); if (state.failed) return element;
+
+            if ( state.backtracking==0 ) {
+            		if (element == null) {
+            			element = ASPT.ASPTFactory.eINSTANCE.createTraceModel();
+            			startIncompleteElement(element);
+            		}
+            		collectHiddenTokens(element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_0_0_0_1, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+            	}
+
+            if ( state.backtracking==0 ) {
+            		// expected elements (follow set)
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[2]);
+            	}
+
+            // Aspt.g:568:2: (a2= QUOTED_34_34 )
+            // Aspt.g:569:3: a2= QUOTED_34_34
             {
-            a1=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceModel133); if (state.failed) return element;
+            a2=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceModel147); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -667,14 +688,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceModel();
             				startIncompleteElement(element);
             			}
-            			if (a1 != null) {
+            			if (a2 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_MODEL__ID), result);
+            				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_MODEL__ID), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -683,8 +704,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_0_0_0_1, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_0_0_0_2, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
             			}
             		}
 
@@ -693,10 +714,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[2]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[3]);
             	}
 
-            a2=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceModel154); if (state.failed) return element;
+            a3=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceModel168); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -704,19 +725,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_0_0_0_2, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_0_0_0_3, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[3]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[4]);
             	}
 
-            // Aspt.g:604:2: (a3= IDENTIFIER )
-            // Aspt.g:605:3: a3= IDENTIFIER
+            // Aspt.g:618:2: (a4= IDENTIFIER )
+            // Aspt.g:619:3: a4= IDENTIFIER
             {
-            a3=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceModel172); if (state.failed) return element;
+            a4=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceModel186); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -726,14 +747,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceModel();
             				startIncompleteElement(element);
             			}
-            			if (a3 != null) {
+            			if (a4 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_MODEL__MMS), result);
+            				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_MODEL__MMS), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -742,8 +763,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_0_0_0_3, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_0_0_0_4, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
             			}
             		}
 
@@ -752,10 +773,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[4]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[5]);
             	}
 
-            a4=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceModel193); if (state.failed) return element;
+            a5=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceModel207); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -763,81 +784,122 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_0_0_0_4, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_0_0_0_5, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[5]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[6]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[6]);
+            	}
+
+            a6=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceModel221); if (state.failed) return element;
+
+            if ( state.backtracking==0 ) {
+            		if (element == null) {
+            			element = ASPT.ASPTFactory.eINSTANCE.createTraceModel();
+            			startIncompleteElement(element);
+            		}
+            		collectHiddenTokens(element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_0_0_0_6, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
+            	}
+
+            if ( state.backtracking==0 ) {
+            		// expected elements (follow set)
             		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[7]);
             		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[8]);
             		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[9]);
             		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[10]);
             		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[11]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[12]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[13]);
             	}
 
-            // Aspt.g:660:2: ( ( (a5_0= parse_ASPT_TraceElement ) | (a6_0= parse_ASPT_TraceLink ) ) )*
+            // Aspt.g:688:2: ( ( (a7_0= parse_ASPT_TraceElement ) | (a8_0= parse_ASPT_TraceLink ) ) )*
             loop2:
             do {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( ((LA2_0 >= 13 && LA2_0 <= 14)||(LA2_0 >= 16 && LA2_0 <= 20)) ) {
+                if ( ((LA2_0 >= 15 && LA2_0 <= 16)||(LA2_0 >= 18 && LA2_0 <= 22)) ) {
                     alt2=1;
                 }
 
 
                 switch (alt2) {
             	case 1 :
-            	    // Aspt.g:661:3: ( (a5_0= parse_ASPT_TraceElement ) | (a6_0= parse_ASPT_TraceLink ) )
+            	    // Aspt.g:689:3: ( (a7_0= parse_ASPT_TraceElement ) | (a8_0= parse_ASPT_TraceLink ) )
             	    {
-            	    // Aspt.g:661:3: ( (a5_0= parse_ASPT_TraceElement ) | (a6_0= parse_ASPT_TraceLink ) )
+            	    // Aspt.g:689:3: ( (a7_0= parse_ASPT_TraceElement ) | (a8_0= parse_ASPT_TraceLink ) )
             	    int alt1=2;
             	    int LA1_0 = input.LA(1);
 
-            	    if ( (LA1_0==13||(LA1_0 >= 16 && LA1_0 <= 20)) ) {
+            	    if ( (LA1_0==15||(LA1_0 >= 18 && LA1_0 <= 22)) ) {
             	        alt1=1;
             	    }
-            	    else if ( (LA1_0==14) ) {
+            	    else if ( (LA1_0==16) ) {
             	        int LA1_2 = input.LA(2);
 
-            	        if ( (LA1_2==IDENTIFIER) ) {
+            	        if ( (LA1_2==11) ) {
             	            int LA1_3 = input.LA(3);
 
-            	            if ( (LA1_3==12) ) {
+            	            if ( (LA1_3==IDENTIFIER) ) {
             	                int LA1_4 = input.LA(4);
 
-            	                if ( (LA1_4==INTEGER) ) {
+            	                if ( (LA1_4==13) ) {
             	                    int LA1_5 = input.LA(5);
 
-            	                    if ( (LA1_5==12) ) {
+            	                    if ( (LA1_5==INTEGER) ) {
             	                        int LA1_6 = input.LA(6);
 
-            	                        if ( (LA1_6==QUOTED_34_34) ) {
+            	                        if ( (LA1_6==13) ) {
             	                            int LA1_7 = input.LA(7);
 
-            	                            if ( (LA1_7==12) ) {
+            	                            if ( (LA1_7==QUOTED_34_34) ) {
             	                                int LA1_8 = input.LA(8);
 
-            	                                if ( (LA1_8==IDENTIFIER) ) {
+            	                                if ( (LA1_8==13) ) {
             	                                    int LA1_9 = input.LA(9);
 
-            	                                    if ( (LA1_9==12) ) {
+            	                                    if ( (LA1_9==IDENTIFIER) ) {
             	                                        int LA1_10 = input.LA(10);
 
-            	                                        if ( (LA1_10==QUOTED_34_34) ) {
+            	                                        if ( (LA1_10==13) ) {
             	                                            int LA1_11 = input.LA(11);
 
-            	                                            if ( (LA1_11==11) ) {
+            	                                            if ( (LA1_11==QUOTED_34_34) ) {
             	                                                int LA1_12 = input.LA(12);
 
-            	                                                if ( (synpred1_Aspt()) ) {
-            	                                                    alt1=1;
-            	                                                }
-            	                                                else if ( (true) ) {
-            	                                                    alt1=2;
+            	                                                if ( (LA1_12==12) ) {
+            	                                                    int LA1_13 = input.LA(13);
+
+            	                                                    if ( (LA1_13==14) ) {
+            	                                                        int LA1_14 = input.LA(14);
+
+            	                                                        if ( (synpred1_Aspt()) ) {
+            	                                                            alt1=1;
+            	                                                        }
+            	                                                        else if ( (true) ) {
+            	                                                            alt1=2;
+            	                                                        }
+            	                                                        else {
+            	                                                            if (state.backtracking>0) {state.failed=true; return element;}
+            	                                                            NoViableAltException nvae =
+            	                                                                new NoViableAltException("", 1, 14, input);
+
+            	                                                            throw nvae;
+
+            	                                                        }
+            	                                                    }
+            	                                                    else {
+            	                                                        if (state.backtracking>0) {state.failed=true; return element;}
+            	                                                        NoViableAltException nvae =
+            	                                                            new NoViableAltException("", 1, 13, input);
+
+            	                                                        throw nvae;
+
+            	                                                    }
             	                                                }
             	                                                else {
             	                                                    if (state.backtracking>0) {state.failed=true; return element;}
@@ -948,13 +1010,13 @@ public class AsptParser extends AsptANTLRParserBase {
             	    }
             	    switch (alt1) {
             	        case 1 :
-            	            // Aspt.g:662:4: (a5_0= parse_ASPT_TraceElement )
+            	            // Aspt.g:690:4: (a7_0= parse_ASPT_TraceElement )
             	            {
-            	            // Aspt.g:662:4: (a5_0= parse_ASPT_TraceElement )
-            	            // Aspt.g:663:5: a5_0= parse_ASPT_TraceElement
+            	            // Aspt.g:690:4: (a7_0= parse_ASPT_TraceElement )
+            	            // Aspt.g:691:5: a7_0= parse_ASPT_TraceElement
             	            {
-            	            pushFollow(FOLLOW_parse_ASPT_TraceElement_in_parse_ASPT_TraceModel222);
-            	            a5_0=parse_ASPT_TraceElement();
+            	            pushFollow(FOLLOW_parse_ASPT_TraceElement_in_parse_ASPT_TraceModel250);
+            	            a7_0=parse_ASPT_TraceElement();
 
             	            state._fsp--;
             	            if (state.failed) return element;
@@ -967,15 +1029,15 @@ public class AsptParser extends AsptANTLRParserBase {
             	            						element = ASPT.ASPTFactory.eINSTANCE.createTraceModel();
             	            						startIncompleteElement(element);
             	            					}
-            	            					if (a5_0 != null) {
-            	            						if (a5_0 != null) {
-            	            							Object value = a5_0;
+            	            					if (a7_0 != null) {
+            	            						if (a7_0 != null) {
+            	            							Object value = a7_0;
             	            							addObjectToList(element, ASPT.ASPTPackage.TRACE_MODEL__TRACEELEMENTS, value);
             	            							completedElement(value, true);
             	            						}
             	            						collectHiddenTokens(element);
-            	            						retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_0_0_0_5_0_0_0, a5_0, true);
-            	            						copyLocalizationInfos(a5_0, element);
+            	            						retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_0_0_0_8_0_0_0, a7_0, true);
+            	            						copyLocalizationInfos(a7_0, element);
             	            					}
             	            				}
 
@@ -984,25 +1046,25 @@ public class AsptParser extends AsptANTLRParserBase {
 
             	            if ( state.backtracking==0 ) {
             	            				// expected elements (follow set)
-            	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[12]);
-            	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[13]);
             	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[14]);
             	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[15]);
             	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[16]);
             	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[17]);
             	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[18]);
+            	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[19]);
+            	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[20]);
             	            			}
 
             	            }
             	            break;
             	        case 2 :
-            	            // Aspt.g:695:8: (a6_0= parse_ASPT_TraceLink )
+            	            // Aspt.g:723:8: (a8_0= parse_ASPT_TraceLink )
             	            {
-            	            // Aspt.g:695:8: (a6_0= parse_ASPT_TraceLink )
-            	            // Aspt.g:696:5: a6_0= parse_ASPT_TraceLink
+            	            // Aspt.g:723:8: (a8_0= parse_ASPT_TraceLink )
+            	            // Aspt.g:724:5: a8_0= parse_ASPT_TraceLink
             	            {
-            	            pushFollow(FOLLOW_parse_ASPT_TraceLink_in_parse_ASPT_TraceModel264);
-            	            a6_0=parse_ASPT_TraceLink();
+            	            pushFollow(FOLLOW_parse_ASPT_TraceLink_in_parse_ASPT_TraceModel292);
+            	            a8_0=parse_ASPT_TraceLink();
 
             	            state._fsp--;
             	            if (state.failed) return element;
@@ -1015,15 +1077,15 @@ public class AsptParser extends AsptANTLRParserBase {
             	            						element = ASPT.ASPTFactory.eINSTANCE.createTraceModel();
             	            						startIncompleteElement(element);
             	            					}
-            	            					if (a6_0 != null) {
-            	            						if (a6_0 != null) {
-            	            							Object value = a6_0;
+            	            					if (a8_0 != null) {
+            	            						if (a8_0 != null) {
+            	            							Object value = a8_0;
             	            							addObjectToList(element, ASPT.ASPTPackage.TRACE_MODEL__TRACELINKS, value);
             	            							completedElement(value, true);
             	            						}
             	            						collectHiddenTokens(element);
-            	            						retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_0_0_0_5_0_1_0, a6_0, true);
-            	            						copyLocalizationInfos(a6_0, element);
+            	            						retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_0_0_0_8_0_1_0, a8_0, true);
+            	            						copyLocalizationInfos(a8_0, element);
             	            					}
             	            				}
 
@@ -1032,13 +1094,13 @@ public class AsptParser extends AsptANTLRParserBase {
 
             	            if ( state.backtracking==0 ) {
             	            				// expected elements (follow set)
-            	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[19]);
-            	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[20]);
             	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[21]);
             	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[22]);
             	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[23]);
             	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[24]);
             	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[25]);
+            	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[26]);
+            	            				addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[27]);
             	            			}
 
             	            }
@@ -1058,13 +1120,13 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[26]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[27]);
             		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[28]);
             		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[29]);
             		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[30]);
             		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[31]);
             		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[32]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[33]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[34]);
             	}
 
             }
@@ -1087,7 +1149,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceNode"
-    // Aspt.g:742:1: parse_ASPT_TraceNode returns [ASPT.TraceNode element = null] : (a0= 'trace_node(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= IDENTIFIER ) a8= ').' |c0= parse_ASPT_TraceNbNode );
+    // Aspt.g:770:1: parse_ASPT_TraceNode returns [ASPT.TraceNode element = null] : (a0= 'trace_node' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ')' a10= '.' |c0= parse_ASPT_TraceNbNode );
     public final ASPT.TraceNode parse_ASPT_TraceNode() throws RecognitionException {
         ASPT.TraceNode element =  null;
 
@@ -1102,6 +1164,8 @@ public class AsptParser extends AsptANTLRParserBase {
         Token a6=null;
         Token a7=null;
         Token a8=null;
+        Token a9=null;
+        Token a10=null;
         ASPT.TraceNbNode c0 =null;
 
 
@@ -1110,14 +1174,14 @@ public class AsptParser extends AsptANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 3) ) { return element; }
 
-            // Aspt.g:745:2: (a0= 'trace_node(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= IDENTIFIER ) a8= ').' |c0= parse_ASPT_TraceNbNode )
+            // Aspt.g:773:2: (a0= 'trace_node' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ')' a10= '.' |c0= parse_ASPT_TraceNbNode )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==19) ) {
+            if ( (LA3_0==21) ) {
                 alt3=1;
             }
-            else if ( (LA3_0==17) ) {
+            else if ( (LA3_0==19) ) {
                 alt3=2;
             }
             else {
@@ -1130,9 +1194,9 @@ public class AsptParser extends AsptANTLRParserBase {
             }
             switch (alt3) {
                 case 1 :
-                    // Aspt.g:746:2: a0= 'trace_node(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= IDENTIFIER ) a8= ').'
+                    // Aspt.g:774:2: a0= 'trace_node' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ')' a10= '.'
                     {
-                    a0=(Token)match(input,19,FOLLOW_19_in_parse_ASPT_TraceNode320); if (state.failed) return element;
+                    a0=(Token)match(input,21,FOLLOW_21_in_parse_ASPT_TraceNode348); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1146,13 +1210,30 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[33]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[35]);
                     	}
 
-                    // Aspt.g:760:2: (a1= IDENTIFIER )
-                    // Aspt.g:761:3: a1= IDENTIFIER
+                    a1=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceNode362); if (state.failed) return element;
+
+                    if ( state.backtracking==0 ) {
+                    		if (element == null) {
+                    			element = ASPT.ASPTFactory.eINSTANCE.createTraceNode();
+                    			startIncompleteElement(element);
+                    		}
+                    		collectHiddenTokens(element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_1, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+                    	}
+
+                    if ( state.backtracking==0 ) {
+                    		// expected elements (follow set)
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[36]);
+                    	}
+
+                    // Aspt.g:802:2: (a2= IDENTIFIER )
+                    // Aspt.g:803:3: a2= IDENTIFIER
                     {
-                    a1=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNode338); if (state.failed) return element;
+                    a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNode380); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1162,14 +1243,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceNode();
                     				startIncompleteElement(element);
                     			}
-                    			if (a1 != null) {
+                    			if (a2 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__METAMODEL), result);
+                    				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__METAMODEL), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -1178,8 +1259,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_1, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_2, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
                     			}
                     		}
 
@@ -1188,10 +1269,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[34]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[37]);
                     	}
 
-                    a2=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNode359); if (state.failed) return element;
+                    a3=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNode401); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1199,19 +1280,19 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_2, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_3, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[35]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[38]);
                     	}
 
-                    // Aspt.g:810:2: (a3= INTEGER )
-                    // Aspt.g:811:3: a3= INTEGER
+                    // Aspt.g:852:2: (a4= INTEGER )
+                    // Aspt.g:853:3: a4= INTEGER
                     {
-                    a3=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNode377); if (state.failed) return element;
+                    a4=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNode419); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1221,14 +1302,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceNode();
                     				startIncompleteElement(element);
                     			}
-                    			if (a3 != null) {
+                    			if (a4 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__ID), result);
+                    				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__ID), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -1237,8 +1318,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_3, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_4, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
                     			}
                     		}
 
@@ -1247,10 +1328,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[36]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[39]);
                     	}
 
-                    a4=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNode398); if (state.failed) return element;
+                    a5=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNode440); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1258,19 +1339,19 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_4, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_5, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[37]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[40]);
                     	}
 
-                    // Aspt.g:860:2: (a5= QUOTED_34_34 )
-                    // Aspt.g:861:3: a5= QUOTED_34_34
+                    // Aspt.g:902:2: (a6= QUOTED_34_34 )
+                    // Aspt.g:903:3: a6= QUOTED_34_34
                     {
-                    a5=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNode416); if (state.failed) return element;
+                    a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNode458); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1280,14 +1361,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceNode();
                     				startIncompleteElement(element);
                     			}
-                    			if (a5 != null) {
+                    			if (a6 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__IDX), result);
+                    				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__IDX), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -1296,8 +1377,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_5, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_6, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a6, element);
                     			}
                     		}
 
@@ -1306,10 +1387,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[38]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[41]);
                     	}
 
-                    a6=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNode437); if (state.failed) return element;
+                    a7=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNode479); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1317,19 +1398,19 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_6, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_7, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a7, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[39]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[42]);
                     	}
 
-                    // Aspt.g:910:2: (a7= IDENTIFIER )
-                    // Aspt.g:911:3: a7= IDENTIFIER
+                    // Aspt.g:952:2: (a8= IDENTIFIER )
+                    // Aspt.g:953:3: a8= IDENTIFIER
                     {
-                    a7=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNode455); if (state.failed) return element;
+                    a8=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNode497); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1339,14 +1420,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceNode();
                     				startIncompleteElement(element);
                     			}
-                    			if (a7 != null) {
+                    			if (a8 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__TYPE), result);
+                    				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__TYPE), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a8).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -1355,8 +1436,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_7, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_8, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a8, element);
                     			}
                     		}
 
@@ -1365,10 +1446,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[40]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[43]);
                     	}
 
-                    a8=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceNode476); if (state.failed) return element;
+                    a9=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNode518); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1376,27 +1457,44 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_8, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a8, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_9, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a9, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[41]);
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[42]);
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[43]);
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[44]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[44]);
+                    	}
+
+                    a10=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceNode532); if (state.failed) return element;
+
+                    if ( state.backtracking==0 ) {
+                    		if (element == null) {
+                    			element = ASPT.ASPTFactory.eINSTANCE.createTraceNode();
+                    			startIncompleteElement(element);
+                    		}
+                    		collectHiddenTokens(element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_1_0_0_10, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a10, element);
+                    	}
+
+                    if ( state.backtracking==0 ) {
+                    		// expected elements (follow set)
                     		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[45]);
                     		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[46]);
                     		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[47]);
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[48]);
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[49]);
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[50]);
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[51]);
                     	}
 
                     }
                     break;
                 case 2 :
-                    // Aspt.g:968:2: c0= parse_ASPT_TraceNbNode
+                    // Aspt.g:1024:2: c0= parse_ASPT_TraceNbNode
                     {
-                    pushFollow(FOLLOW_parse_ASPT_TraceNbNode_in_parse_ASPT_TraceNode495);
+                    pushFollow(FOLLOW_parse_ASPT_TraceNbNode_in_parse_ASPT_TraceNode551);
                     c0=parse_ASPT_TraceNbNode();
 
                     state._fsp--;
@@ -1426,7 +1524,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceProp"
-    // Aspt.g:972:1: parse_ASPT_TraceProp returns [ASPT.TraceProp element = null] : (a0= 'trace_prop(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= INTEGER ) a8= ',' (a9= QUOTED_34_34 ) a10= ',' (a11= IDENTIFIER ) a12= ',' (a13= QUOTED_34_34 ) a14= ').' |c0= parse_ASPT_TraceNbProp );
+    // Aspt.g:1028:1: parse_ASPT_TraceProp returns [ASPT.TraceProp element = null] : (a0= 'trace_prop' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= INTEGER ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= IDENTIFIER ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.' |c0= parse_ASPT_TraceNbProp );
     public final ASPT.TraceProp parse_ASPT_TraceProp() throws RecognitionException {
         ASPT.TraceProp element =  null;
 
@@ -1447,6 +1545,8 @@ public class AsptParser extends AsptANTLRParserBase {
         Token a12=null;
         Token a13=null;
         Token a14=null;
+        Token a15=null;
+        Token a16=null;
         ASPT.TraceNbProp c0 =null;
 
 
@@ -1455,14 +1555,14 @@ public class AsptParser extends AsptANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 4) ) { return element; }
 
-            // Aspt.g:975:2: (a0= 'trace_prop(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= INTEGER ) a8= ',' (a9= QUOTED_34_34 ) a10= ',' (a11= IDENTIFIER ) a12= ',' (a13= QUOTED_34_34 ) a14= ').' |c0= parse_ASPT_TraceNbProp )
+            // Aspt.g:1031:2: (a0= 'trace_prop' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= INTEGER ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= IDENTIFIER ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.' |c0= parse_ASPT_TraceNbProp )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
-            if ( (LA4_0==20) ) {
+            if ( (LA4_0==22) ) {
                 alt4=1;
             }
-            else if ( (LA4_0==18) ) {
+            else if ( (LA4_0==20) ) {
                 alt4=2;
             }
             else {
@@ -1475,9 +1575,9 @@ public class AsptParser extends AsptANTLRParserBase {
             }
             switch (alt4) {
                 case 1 :
-                    // Aspt.g:976:2: a0= 'trace_prop(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= INTEGER ) a8= ',' (a9= QUOTED_34_34 ) a10= ',' (a11= IDENTIFIER ) a12= ',' (a13= QUOTED_34_34 ) a14= ').'
+                    // Aspt.g:1032:2: a0= 'trace_prop' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= INTEGER ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= IDENTIFIER ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.'
                     {
-                    a0=(Token)match(input,20,FOLLOW_20_in_parse_ASPT_TraceProp520); if (state.failed) return element;
+                    a0=(Token)match(input,22,FOLLOW_22_in_parse_ASPT_TraceProp576); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1491,13 +1591,30 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[48]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[52]);
                     	}
 
-                    // Aspt.g:990:2: (a1= IDENTIFIER )
-                    // Aspt.g:991:3: a1= IDENTIFIER
+                    a1=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceProp590); if (state.failed) return element;
+
+                    if ( state.backtracking==0 ) {
+                    		if (element == null) {
+                    			element = ASPT.ASPTFactory.eINSTANCE.createTraceProp();
+                    			startIncompleteElement(element);
+                    		}
+                    		collectHiddenTokens(element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_1, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+                    	}
+
+                    if ( state.backtracking==0 ) {
+                    		// expected elements (follow set)
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[53]);
+                    	}
+
+                    // Aspt.g:1060:2: (a2= IDENTIFIER )
+                    // Aspt.g:1061:3: a2= IDENTIFIER
                     {
-                    a1=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceProp538); if (state.failed) return element;
+                    a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceProp608); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1507,14 +1624,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceProp();
                     				startIncompleteElement(element);
                     			}
-                    			if (a1 != null) {
+                    			if (a2 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__METAMODEL), result);
+                    				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__METAMODEL), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -1523,8 +1640,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_1, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_2, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
                     			}
                     		}
 
@@ -1533,10 +1650,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[49]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[54]);
                     	}
 
-                    a2=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceProp559); if (state.failed) return element;
+                    a3=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceProp629); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1544,19 +1661,19 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_2, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_3, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[50]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[55]);
                     	}
 
-                    // Aspt.g:1040:2: (a3= INTEGER )
-                    // Aspt.g:1041:3: a3= INTEGER
+                    // Aspt.g:1110:2: (a4= INTEGER )
+                    // Aspt.g:1111:3: a4= INTEGER
                     {
-                    a3=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceProp577); if (state.failed) return element;
+                    a4=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceProp647); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1566,14 +1683,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceProp();
                     				startIncompleteElement(element);
                     			}
-                    			if (a3 != null) {
+                    			if (a4 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__ID), result);
+                    				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__ID), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -1582,8 +1699,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_3, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_4, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
                     			}
                     		}
 
@@ -1592,10 +1709,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[51]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[56]);
                     	}
 
-                    a4=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceProp598); if (state.failed) return element;
+                    a5=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceProp668); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1603,19 +1720,19 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_4, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_5, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[52]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[57]);
                     	}
 
-                    // Aspt.g:1090:2: (a5= QUOTED_34_34 )
-                    // Aspt.g:1091:3: a5= QUOTED_34_34
+                    // Aspt.g:1160:2: (a6= QUOTED_34_34 )
+                    // Aspt.g:1161:3: a6= QUOTED_34_34
                     {
-                    a5=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp616); if (state.failed) return element;
+                    a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp686); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1625,14 +1742,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceProp();
                     				startIncompleteElement(element);
                     			}
-                    			if (a5 != null) {
+                    			if (a6 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDX), result);
+                    				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDX), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -1641,8 +1758,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_5, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_6, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a6, element);
                     			}
                     		}
 
@@ -1651,10 +1768,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[53]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[58]);
                     	}
 
-                    a6=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceProp637); if (state.failed) return element;
+                    a7=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceProp707); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1662,19 +1779,19 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_6, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_7, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a7, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[54]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[59]);
                     	}
 
-                    // Aspt.g:1140:2: (a7= INTEGER )
-                    // Aspt.g:1141:3: a7= INTEGER
+                    // Aspt.g:1210:2: (a8= INTEGER )
+                    // Aspt.g:1211:3: a8= INTEGER
                     {
-                    a7=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceProp655); if (state.failed) return element;
+                    a8=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceProp725); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1684,14 +1801,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceProp();
                     				startIncompleteElement(element);
                     			}
-                    			if (a7 != null) {
+                    			if (a8 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDP), result);
+                    				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDP), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a8).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -1700,8 +1817,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_7, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_8, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a8, element);
                     			}
                     		}
 
@@ -1710,10 +1827,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[55]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[60]);
                     	}
 
-                    a8=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceProp676); if (state.failed) return element;
+                    a9=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceProp746); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1721,19 +1838,19 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_8, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a8, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_9, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a9, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[56]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[61]);
                     	}
 
-                    // Aspt.g:1190:2: (a9= QUOTED_34_34 )
-                    // Aspt.g:1191:3: a9= QUOTED_34_34
+                    // Aspt.g:1260:2: (a10= QUOTED_34_34 )
+                    // Aspt.g:1261:3: a10= QUOTED_34_34
                     {
-                    a9=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp694); if (state.failed) return element;
+                    a10=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp764); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1743,14 +1860,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceProp();
                     				startIncompleteElement(element);
                     			}
-                    			if (a9 != null) {
+                    			if (a10 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a9.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDPX), result);
+                    				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDPX), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a9).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a9).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a9).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a9).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a10).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a10).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a10).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a10).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -1759,8 +1876,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_9, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a9, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_10, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a10, element);
                     			}
                     		}
 
@@ -1769,10 +1886,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[57]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[62]);
                     	}
 
-                    a10=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceProp715); if (state.failed) return element;
+                    a11=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceProp785); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1780,19 +1897,19 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_10, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a10, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_11, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a11, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[58]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[63]);
                     	}
 
-                    // Aspt.g:1240:2: (a11= IDENTIFIER )
-                    // Aspt.g:1241:3: a11= IDENTIFIER
+                    // Aspt.g:1310:2: (a12= IDENTIFIER )
+                    // Aspt.g:1311:3: a12= IDENTIFIER
                     {
-                    a11=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceProp733); if (state.failed) return element;
+                    a12=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceProp803); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1802,14 +1919,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceProp();
                     				startIncompleteElement(element);
                     			}
-                    			if (a11 != null) {
+                    			if (a12 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a11.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__TYPE), result);
+                    				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__TYPE), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a11).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a11).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a11).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a11).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a12).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a12).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a12).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a12).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -1818,8 +1935,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_11, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a11, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_12, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a12, element);
                     			}
                     		}
 
@@ -1828,10 +1945,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[59]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[64]);
                     	}
 
-                    a12=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceProp754); if (state.failed) return element;
+                    a13=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceProp824); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1839,19 +1956,19 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_12, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a12, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_13, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a13, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[60]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[65]);
                     	}
 
-                    // Aspt.g:1290:2: (a13= QUOTED_34_34 )
-                    // Aspt.g:1291:3: a13= QUOTED_34_34
+                    // Aspt.g:1360:2: (a14= QUOTED_34_34 )
+                    // Aspt.g:1361:3: a14= QUOTED_34_34
                     {
-                    a13=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp772); if (state.failed) return element;
+                    a14=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp842); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1861,14 +1978,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceProp();
                     				startIncompleteElement(element);
                     			}
-                    			if (a13 != null) {
+                    			if (a14 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a13.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__VALUE), result);
+                    				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__VALUE), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a13).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a13).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a13).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a13).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a14).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a14).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a14).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a14).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -1877,8 +1994,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_13, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a13, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_14, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a14, element);
                     			}
                     		}
 
@@ -1887,10 +2004,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[61]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[66]);
                     	}
 
-                    a14=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceProp793); if (state.failed) return element;
+                    a15=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceProp863); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1898,27 +2015,44 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_14, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a14, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_15, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a15, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[62]);
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[63]);
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[64]);
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[65]);
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[66]);
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[67]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[67]);
+                    	}
+
+                    a16=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceProp877); if (state.failed) return element;
+
+                    if ( state.backtracking==0 ) {
+                    		if (element == null) {
+                    			element = ASPT.ASPTFactory.eINSTANCE.createTraceProp();
+                    			startIncompleteElement(element);
+                    		}
+                    		collectHiddenTokens(element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_2_0_0_16, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a16, element);
+                    	}
+
+                    if ( state.backtracking==0 ) {
+                    		// expected elements (follow set)
                     		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[68]);
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[69]);
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[70]);
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[71]);
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[72]);
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[73]);
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[74]);
                     	}
 
                     }
                     break;
                 case 2 :
-                    // Aspt.g:1348:2: c0= parse_ASPT_TraceNbProp
+                    // Aspt.g:1432:2: c0= parse_ASPT_TraceNbProp
                     {
-                    pushFollow(FOLLOW_parse_ASPT_TraceNbProp_in_parse_ASPT_TraceProp812);
+                    pushFollow(FOLLOW_parse_ASPT_TraceNbProp_in_parse_ASPT_TraceProp896);
                     c0=parse_ASPT_TraceNbProp();
 
                     state._fsp--;
@@ -1948,7 +2082,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceEdge"
-    // Aspt.g:1352:1: parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null] : (a0= 'trace_edge(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= IDENTIFIER ) a8= ',' (a9= INTEGER ) a10= ',' (a11= QUOTED_34_34 ) a12= ',' (a13= INTEGER ) a14= ',' (a15= QUOTED_34_34 ) a16= ').' |c0= parse_ASPT_TraceNbEdge );
+    // Aspt.g:1436:1: parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null] : (a0= 'trace_edge' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ',' (a10= INTEGER ) a11= ',' (a12= QUOTED_34_34 ) a13= ',' (a14= INTEGER ) a15= ',' (a16= QUOTED_34_34 ) a17= ')' a18= '.' |c0= parse_ASPT_TraceNbEdge );
     public final ASPT.TraceEdge parse_ASPT_TraceEdge() throws RecognitionException {
         ASPT.TraceEdge element =  null;
 
@@ -1971,6 +2105,8 @@ public class AsptParser extends AsptANTLRParserBase {
         Token a14=null;
         Token a15=null;
         Token a16=null;
+        Token a17=null;
+        Token a18=null;
         ASPT.TraceNbEdge c0 =null;
 
 
@@ -1979,14 +2115,14 @@ public class AsptParser extends AsptANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 5) ) { return element; }
 
-            // Aspt.g:1355:2: (a0= 'trace_edge(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= IDENTIFIER ) a8= ',' (a9= INTEGER ) a10= ',' (a11= QUOTED_34_34 ) a12= ',' (a13= INTEGER ) a14= ',' (a15= QUOTED_34_34 ) a16= ').' |c0= parse_ASPT_TraceNbEdge )
+            // Aspt.g:1439:2: (a0= 'trace_edge' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ',' (a10= INTEGER ) a11= ',' (a12= QUOTED_34_34 ) a13= ',' (a14= INTEGER ) a15= ',' (a16= QUOTED_34_34 ) a17= ')' a18= '.' |c0= parse_ASPT_TraceNbEdge )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==13) ) {
+            if ( (LA5_0==15) ) {
                 alt5=1;
             }
-            else if ( (LA5_0==16) ) {
+            else if ( (LA5_0==18) ) {
                 alt5=2;
             }
             else {
@@ -1999,9 +2135,9 @@ public class AsptParser extends AsptANTLRParserBase {
             }
             switch (alt5) {
                 case 1 :
-                    // Aspt.g:1356:2: a0= 'trace_edge(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= IDENTIFIER ) a8= ',' (a9= INTEGER ) a10= ',' (a11= QUOTED_34_34 ) a12= ',' (a13= INTEGER ) a14= ',' (a15= QUOTED_34_34 ) a16= ').'
+                    // Aspt.g:1440:2: a0= 'trace_edge' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ',' (a10= INTEGER ) a11= ',' (a12= QUOTED_34_34 ) a13= ',' (a14= INTEGER ) a15= ',' (a16= QUOTED_34_34 ) a17= ')' a18= '.'
                     {
-                    a0=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceEdge837); if (state.failed) return element;
+                    a0=(Token)match(input,15,FOLLOW_15_in_parse_ASPT_TraceEdge921); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2015,13 +2151,30 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[69]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[75]);
                     	}
 
-                    // Aspt.g:1370:2: (a1= IDENTIFIER )
-                    // Aspt.g:1371:3: a1= IDENTIFIER
+                    a1=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceEdge935); if (state.failed) return element;
+
+                    if ( state.backtracking==0 ) {
+                    		if (element == null) {
+                    			element = ASPT.ASPTFactory.eINSTANCE.createTraceEdge();
+                    			startIncompleteElement(element);
+                    		}
+                    		collectHiddenTokens(element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_1, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+                    	}
+
+                    if ( state.backtracking==0 ) {
+                    		// expected elements (follow set)
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[76]);
+                    	}
+
+                    // Aspt.g:1468:2: (a2= IDENTIFIER )
+                    // Aspt.g:1469:3: a2= IDENTIFIER
                     {
-                    a1=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceEdge855); if (state.failed) return element;
+                    a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceEdge953); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2031,14 +2184,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceEdge();
                     				startIncompleteElement(element);
                     			}
-                    			if (a1 != null) {
+                    			if (a2 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__METAMODEL), result);
+                    				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__METAMODEL), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -2047,8 +2200,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_1, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_2, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
                     			}
                     		}
 
@@ -2057,10 +2210,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[70]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[77]);
                     	}
 
-                    a2=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceEdge876); if (state.failed) return element;
+                    a3=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceEdge974); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2068,19 +2221,19 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_2, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_3, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[71]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[78]);
                     	}
 
-                    // Aspt.g:1420:2: (a3= INTEGER )
-                    // Aspt.g:1421:3: a3= INTEGER
+                    // Aspt.g:1518:2: (a4= INTEGER )
+                    // Aspt.g:1519:3: a4= INTEGER
                     {
-                    a3=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceEdge894); if (state.failed) return element;
+                    a4=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceEdge992); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2090,14 +2243,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceEdge();
                     				startIncompleteElement(element);
                     			}
-                    			if (a3 != null) {
+                    			if (a4 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__ID), result);
+                    				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__ID), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -2106,8 +2259,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_3, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_4, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
                     			}
                     		}
 
@@ -2116,10 +2269,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[72]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[79]);
                     	}
 
-                    a4=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceEdge915); if (state.failed) return element;
+                    a5=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceEdge1013); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2127,19 +2280,19 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_4, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_5, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[73]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[80]);
                     	}
 
-                    // Aspt.g:1470:2: (a5= QUOTED_34_34 )
-                    // Aspt.g:1471:3: a5= QUOTED_34_34
+                    // Aspt.g:1568:2: (a6= QUOTED_34_34 )
+                    // Aspt.g:1569:3: a6= QUOTED_34_34
                     {
-                    a5=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge933); if (state.failed) return element;
+                    a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge1031); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2149,14 +2302,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceEdge();
                     				startIncompleteElement(element);
                     			}
-                    			if (a5 != null) {
+                    			if (a6 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDX), result);
+                    				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDX), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -2165,8 +2318,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_5, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_6, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a6, element);
                     			}
                     		}
 
@@ -2175,10 +2328,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[74]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[81]);
                     	}
 
-                    a6=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceEdge954); if (state.failed) return element;
+                    a7=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceEdge1052); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2186,19 +2339,19 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_6, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_7, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a7, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[75]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[82]);
                     	}
 
-                    // Aspt.g:1520:2: (a7= IDENTIFIER )
-                    // Aspt.g:1521:3: a7= IDENTIFIER
+                    // Aspt.g:1618:2: (a8= IDENTIFIER )
+                    // Aspt.g:1619:3: a8= IDENTIFIER
                     {
-                    a7=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceEdge972); if (state.failed) return element;
+                    a8=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceEdge1070); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2208,14 +2361,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceEdge();
                     				startIncompleteElement(element);
                     			}
-                    			if (a7 != null) {
+                    			if (a8 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__TYPE), result);
+                    				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__TYPE), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a8).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -2224,8 +2377,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_7, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_8, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a8, element);
                     			}
                     		}
 
@@ -2234,10 +2387,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[76]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[83]);
                     	}
 
-                    a8=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceEdge993); if (state.failed) return element;
+                    a9=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceEdge1091); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2245,19 +2398,19 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_8, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a8, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_9, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a9, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[77]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[84]);
                     	}
 
-                    // Aspt.g:1570:2: (a9= INTEGER )
-                    // Aspt.g:1571:3: a9= INTEGER
+                    // Aspt.g:1668:2: (a10= INTEGER )
+                    // Aspt.g:1669:3: a10= INTEGER
                     {
-                    a9=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceEdge1011); if (state.failed) return element;
+                    a10=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceEdge1109); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2267,14 +2420,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceEdge();
                     				startIncompleteElement(element);
                     			}
-                    			if (a9 != null) {
+                    			if (a10 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a9.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDS), result);
+                    				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDS), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a9).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a9).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a9).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a9).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a10).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a10).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a10).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a10).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -2283,8 +2436,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_9, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a9, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_10, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a10, element);
                     			}
                     		}
 
@@ -2293,10 +2446,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[78]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[85]);
                     	}
 
-                    a10=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceEdge1032); if (state.failed) return element;
+                    a11=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceEdge1130); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2304,19 +2457,19 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_10, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a10, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_11, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a11, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[79]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[86]);
                     	}
 
-                    // Aspt.g:1620:2: (a11= QUOTED_34_34 )
-                    // Aspt.g:1621:3: a11= QUOTED_34_34
+                    // Aspt.g:1718:2: (a12= QUOTED_34_34 )
+                    // Aspt.g:1719:3: a12= QUOTED_34_34
                     {
-                    a11=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge1050); if (state.failed) return element;
+                    a12=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge1148); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2326,14 +2479,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceEdge();
                     				startIncompleteElement(element);
                     			}
-                    			if (a11 != null) {
+                    			if (a12 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a11.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDSX), result);
+                    				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDSX), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a11).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a11).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a11).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a11).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a12).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a12).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a12).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a12).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -2342,8 +2495,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_11, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a11, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_12, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a12, element);
                     			}
                     		}
 
@@ -2352,10 +2505,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[80]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[87]);
                     	}
 
-                    a12=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceEdge1071); if (state.failed) return element;
+                    a13=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceEdge1169); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2363,19 +2516,19 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_12, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a12, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_13, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a13, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[81]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[88]);
                     	}
 
-                    // Aspt.g:1670:2: (a13= INTEGER )
-                    // Aspt.g:1671:3: a13= INTEGER
+                    // Aspt.g:1768:2: (a14= INTEGER )
+                    // Aspt.g:1769:3: a14= INTEGER
                     {
-                    a13=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceEdge1089); if (state.failed) return element;
+                    a14=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceEdge1187); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2385,14 +2538,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceEdge();
                     				startIncompleteElement(element);
                     			}
-                    			if (a13 != null) {
+                    			if (a14 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a13.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDT), result);
+                    				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDT), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a13).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a13).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a13).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a13).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a14).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a14).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a14).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a14).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -2401,8 +2554,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_13, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a13, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_14, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a14, element);
                     			}
                     		}
 
@@ -2411,10 +2564,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[82]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[89]);
                     	}
 
-                    a14=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceEdge1110); if (state.failed) return element;
+                    a15=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceEdge1208); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2422,19 +2575,19 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_14, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a14, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_15, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a15, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[83]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[90]);
                     	}
 
-                    // Aspt.g:1720:2: (a15= QUOTED_34_34 )
-                    // Aspt.g:1721:3: a15= QUOTED_34_34
+                    // Aspt.g:1818:2: (a16= QUOTED_34_34 )
+                    // Aspt.g:1819:3: a16= QUOTED_34_34
                     {
-                    a15=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge1128); if (state.failed) return element;
+                    a16=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge1226); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2444,14 +2597,14 @@ public class AsptParser extends AsptANTLRParserBase {
                     				element = ASPT.ASPTFactory.eINSTANCE.createTraceEdge();
                     				startIncompleteElement(element);
                     			}
-                    			if (a15 != null) {
+                    			if (a16 != null) {
                     				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-                    				tokenResolver.resolve(a15.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDTX), result);
+                    				tokenResolver.resolve(a16.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDTX), result);
                     				Object resolvedObject = result.getResolvedToken();
                     				if (resolvedObject == null) {
-                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a15).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a15).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a15).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a15).getStopIndex());
+                    					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a16).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a16).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a16).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a16).getStopIndex());
                     				}
                     				java.lang.String resolved = (java.lang.String) resolvedObject;
                     				if (resolved != null) {
@@ -2460,8 +2613,8 @@ public class AsptParser extends AsptANTLRParserBase {
                     					completedElement(value, false);
                     				}
                     				collectHiddenTokens(element);
-                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_15, resolved, true);
-                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a15, element);
+                    				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_16, resolved, true);
+                    				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a16, element);
                     			}
                     		}
 
@@ -2470,10 +2623,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[84]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[91]);
                     	}
 
-                    a16=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceEdge1149); if (state.failed) return element;
+                    a17=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceEdge1247); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2481,27 +2634,44 @@ public class AsptParser extends AsptANTLRParserBase {
                     			startIncompleteElement(element);
                     		}
                     		collectHiddenTokens(element);
-                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_16, null, true);
-                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a16, element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_17, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a17, element);
                     	}
 
                     if ( state.backtracking==0 ) {
                     		// expected elements (follow set)
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[85]);
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[86]);
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[87]);
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[88]);
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[89]);
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[90]);
-                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[91]);
+                    		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[92]);
+                    	}
+
+                    a18=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceEdge1261); if (state.failed) return element;
+
+                    if ( state.backtracking==0 ) {
+                    		if (element == null) {
+                    			element = ASPT.ASPTFactory.eINSTANCE.createTraceEdge();
+                    			startIncompleteElement(element);
+                    		}
+                    		collectHiddenTokens(element);
+                    		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_3_0_0_18, null, true);
+                    		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a18, element);
+                    	}
+
+                    if ( state.backtracking==0 ) {
+                    		// expected elements (follow set)
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[93]);
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[94]);
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[95]);
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[96]);
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[97]);
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[98]);
+                    		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[99]);
                     	}
 
                     }
                     break;
                 case 2 :
-                    // Aspt.g:1778:2: c0= parse_ASPT_TraceNbEdge
+                    // Aspt.g:1890:2: c0= parse_ASPT_TraceNbEdge
                     {
-                    pushFollow(FOLLOW_parse_ASPT_TraceNbEdge_in_parse_ASPT_TraceEdge1168);
+                    pushFollow(FOLLOW_parse_ASPT_TraceNbEdge_in_parse_ASPT_TraceEdge1280);
                     c0=parse_ASPT_TraceNbEdge();
 
                     state._fsp--;
@@ -2531,7 +2701,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceNbEdge"
-    // Aspt.g:1782:1: parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null] : a0= 'trace_nb_edge(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= IDENTIFIER ) a8= ',' (a9= INTEGER ) a10= ',' (a11= QUOTED_34_34 ) a12= ',' (a13= INTEGER ) a14= ',' (a15= QUOTED_34_34 ) a16= ').' ;
+    // Aspt.g:1894:1: parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null] : a0= 'trace_nb_edge' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ',' (a10= INTEGER ) a11= ',' (a12= QUOTED_34_34 ) a13= ',' (a14= INTEGER ) a15= ',' (a16= QUOTED_34_34 ) a17= ')' a18= '.' ;
     public final ASPT.TraceNbEdge parse_ASPT_TraceNbEdge() throws RecognitionException {
         ASPT.TraceNbEdge element =  null;
 
@@ -2554,16 +2724,18 @@ public class AsptParser extends AsptANTLRParserBase {
         Token a14=null;
         Token a15=null;
         Token a16=null;
+        Token a17=null;
+        Token a18=null;
 
 
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 6) ) { return element; }
 
-            // Aspt.g:1785:2: (a0= 'trace_nb_edge(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= IDENTIFIER ) a8= ',' (a9= INTEGER ) a10= ',' (a11= QUOTED_34_34 ) a12= ',' (a13= INTEGER ) a14= ',' (a15= QUOTED_34_34 ) a16= ').' )
-            // Aspt.g:1786:2: a0= 'trace_nb_edge(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= IDENTIFIER ) a8= ',' (a9= INTEGER ) a10= ',' (a11= QUOTED_34_34 ) a12= ',' (a13= INTEGER ) a14= ',' (a15= QUOTED_34_34 ) a16= ').'
+            // Aspt.g:1897:2: (a0= 'trace_nb_edge' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ',' (a10= INTEGER ) a11= ',' (a12= QUOTED_34_34 ) a13= ',' (a14= INTEGER ) a15= ',' (a16= QUOTED_34_34 ) a17= ')' a18= '.' )
+            // Aspt.g:1898:2: a0= 'trace_nb_edge' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ',' (a10= INTEGER ) a11= ',' (a12= QUOTED_34_34 ) a13= ',' (a14= INTEGER ) a15= ',' (a16= QUOTED_34_34 ) a17= ')' a18= '.'
             {
-            a0=(Token)match(input,16,FOLLOW_16_in_parse_ASPT_TraceNbEdge1193); if (state.failed) return element;
+            a0=(Token)match(input,18,FOLLOW_18_in_parse_ASPT_TraceNbEdge1305); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -2577,13 +2749,30 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[92]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[100]);
             	}
 
-            // Aspt.g:1800:2: (a1= IDENTIFIER )
-            // Aspt.g:1801:3: a1= IDENTIFIER
+            a1=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceNbEdge1319); if (state.failed) return element;
+
+            if ( state.backtracking==0 ) {
+            		if (element == null) {
+            			element = ASPT.ASPTFactory.eINSTANCE.createTraceNbEdge();
+            			startIncompleteElement(element);
+            		}
+            		collectHiddenTokens(element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_1, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+            	}
+
+            if ( state.backtracking==0 ) {
+            		// expected elements (follow set)
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[101]);
+            	}
+
+            // Aspt.g:1926:2: (a2= IDENTIFIER )
+            // Aspt.g:1927:3: a2= IDENTIFIER
             {
-            a1=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbEdge1211); if (state.failed) return element;
+            a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbEdge1337); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -2593,14 +2782,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbEdge();
             				startIncompleteElement(element);
             			}
-            			if (a1 != null) {
+            			if (a2 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__METAMODEL), result);
+            				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__METAMODEL), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -2609,8 +2798,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_1, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_2, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
             			}
             		}
 
@@ -2619,10 +2808,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[93]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[102]);
             	}
 
-            a2=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbEdge1232); if (state.failed) return element;
+            a3=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbEdge1358); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -2630,19 +2819,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_2, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_3, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[94]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[103]);
             	}
 
-            // Aspt.g:1850:2: (a3= INTEGER )
-            // Aspt.g:1851:3: a3= INTEGER
+            // Aspt.g:1976:2: (a4= INTEGER )
+            // Aspt.g:1977:3: a4= INTEGER
             {
-            a3=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1250); if (state.failed) return element;
+            a4=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1376); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -2652,14 +2841,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbEdge();
             				startIncompleteElement(element);
             			}
-            			if (a3 != null) {
+            			if (a4 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__ID), result);
+            				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__ID), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -2668,8 +2857,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_3, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_4, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
             			}
             		}
 
@@ -2678,10 +2867,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[95]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[104]);
             	}
 
-            a4=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbEdge1271); if (state.failed) return element;
+            a5=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbEdge1397); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -2689,19 +2878,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_4, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_5, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[96]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[105]);
             	}
 
-            // Aspt.g:1900:2: (a5= QUOTED_34_34 )
-            // Aspt.g:1901:3: a5= QUOTED_34_34
+            // Aspt.g:2026:2: (a6= QUOTED_34_34 )
+            // Aspt.g:2027:3: a6= QUOTED_34_34
             {
-            a5=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1289); if (state.failed) return element;
+            a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1415); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -2711,14 +2900,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbEdge();
             				startIncompleteElement(element);
             			}
-            			if (a5 != null) {
+            			if (a6 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDX), result);
+            				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDX), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -2727,8 +2916,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_5, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_6, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a6, element);
             			}
             		}
 
@@ -2737,10 +2926,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[97]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[106]);
             	}
 
-            a6=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbEdge1310); if (state.failed) return element;
+            a7=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbEdge1436); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -2748,19 +2937,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_6, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_7, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a7, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[98]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[107]);
             	}
 
-            // Aspt.g:1950:2: (a7= IDENTIFIER )
-            // Aspt.g:1951:3: a7= IDENTIFIER
+            // Aspt.g:2076:2: (a8= IDENTIFIER )
+            // Aspt.g:2077:3: a8= IDENTIFIER
             {
-            a7=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbEdge1328); if (state.failed) return element;
+            a8=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbEdge1454); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -2770,14 +2959,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbEdge();
             				startIncompleteElement(element);
             			}
-            			if (a7 != null) {
+            			if (a8 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__TYPE), result);
+            				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__TYPE), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a8).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -2786,8 +2975,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_7, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_8, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a8, element);
             			}
             		}
 
@@ -2796,10 +2985,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[99]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[108]);
             	}
 
-            a8=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbEdge1349); if (state.failed) return element;
+            a9=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbEdge1475); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -2807,19 +2996,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_8, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a8, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_9, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a9, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[100]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[109]);
             	}
 
-            // Aspt.g:2000:2: (a9= INTEGER )
-            // Aspt.g:2001:3: a9= INTEGER
+            // Aspt.g:2126:2: (a10= INTEGER )
+            // Aspt.g:2127:3: a10= INTEGER
             {
-            a9=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1367); if (state.failed) return element;
+            a10=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1493); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -2829,14 +3018,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbEdge();
             				startIncompleteElement(element);
             			}
-            			if (a9 != null) {
+            			if (a10 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a9.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDS), result);
+            				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDS), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a9).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a9).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a9).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a9).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a10).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a10).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a10).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a10).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -2845,8 +3034,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_9, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a9, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_10, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a10, element);
             			}
             		}
 
@@ -2855,10 +3044,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[101]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[110]);
             	}
 
-            a10=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbEdge1388); if (state.failed) return element;
+            a11=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbEdge1514); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -2866,19 +3055,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_10, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a10, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_11, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a11, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[102]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[111]);
             	}
 
-            // Aspt.g:2050:2: (a11= QUOTED_34_34 )
-            // Aspt.g:2051:3: a11= QUOTED_34_34
+            // Aspt.g:2176:2: (a12= QUOTED_34_34 )
+            // Aspt.g:2177:3: a12= QUOTED_34_34
             {
-            a11=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1406); if (state.failed) return element;
+            a12=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1532); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -2888,14 +3077,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbEdge();
             				startIncompleteElement(element);
             			}
-            			if (a11 != null) {
+            			if (a12 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a11.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDSX), result);
+            				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDSX), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a11).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a11).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a11).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a11).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a12).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a12).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a12).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a12).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -2904,8 +3093,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_11, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a11, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_12, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a12, element);
             			}
             		}
 
@@ -2914,10 +3103,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[103]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[112]);
             	}
 
-            a12=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbEdge1427); if (state.failed) return element;
+            a13=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbEdge1553); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -2925,19 +3114,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_12, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a12, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_13, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a13, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[104]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[113]);
             	}
 
-            // Aspt.g:2100:2: (a13= INTEGER )
-            // Aspt.g:2101:3: a13= INTEGER
+            // Aspt.g:2226:2: (a14= INTEGER )
+            // Aspt.g:2227:3: a14= INTEGER
             {
-            a13=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1445); if (state.failed) return element;
+            a14=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1571); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -2947,14 +3136,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbEdge();
             				startIncompleteElement(element);
             			}
-            			if (a13 != null) {
+            			if (a14 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a13.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDT), result);
+            				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDT), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a13).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a13).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a13).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a13).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a14).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a14).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a14).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a14).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -2963,8 +3152,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_13, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a13, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_14, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a14, element);
             			}
             		}
 
@@ -2973,10 +3162,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[105]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[114]);
             	}
 
-            a14=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbEdge1466); if (state.failed) return element;
+            a15=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbEdge1592); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -2984,19 +3173,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_14, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a14, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_15, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a15, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[106]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[115]);
             	}
 
-            // Aspt.g:2150:2: (a15= QUOTED_34_34 )
-            // Aspt.g:2151:3: a15= QUOTED_34_34
+            // Aspt.g:2276:2: (a16= QUOTED_34_34 )
+            // Aspt.g:2277:3: a16= QUOTED_34_34
             {
-            a15=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1484); if (state.failed) return element;
+            a16=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1610); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3006,14 +3195,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbEdge();
             				startIncompleteElement(element);
             			}
-            			if (a15 != null) {
+            			if (a16 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a15.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDTX), result);
+            				tokenResolver.resolve(a16.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDTX), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a15).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a15).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a15).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a15).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a16).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a16).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a16).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a16).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -3022,8 +3211,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_15, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a15, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_16, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a16, element);
             			}
             		}
 
@@ -3032,10 +3221,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[107]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[116]);
             	}
 
-            a16=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceNbEdge1505); if (state.failed) return element;
+            a17=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbEdge1631); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3043,19 +3232,36 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_16, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a16, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_17, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a17, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[108]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[109]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[110]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[111]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[112]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[113]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[114]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[117]);
+            	}
+
+            a18=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceNbEdge1645); if (state.failed) return element;
+
+            if ( state.backtracking==0 ) {
+            		if (element == null) {
+            			element = ASPT.ASPTFactory.eINSTANCE.createTraceNbEdge();
+            			startIncompleteElement(element);
+            		}
+            		collectHiddenTokens(element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_4_0_0_18, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a18, element);
+            	}
+
+            if ( state.backtracking==0 ) {
+            		// expected elements (follow set)
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[118]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[119]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[120]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[121]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[122]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[123]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[124]);
             	}
 
             }
@@ -3078,7 +3284,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceNbProp"
-    // Aspt.g:2208:1: parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null] : a0= 'trace_nb_prop(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= INTEGER ) a8= ',' (a9= QUOTED_34_34 ) a10= ',' (a11= IDENTIFIER ) a12= ',' (a13= QUOTED_34_34 ) a14= ').' ;
+    // Aspt.g:2348:1: parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null] : a0= 'trace_nb_prop' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= INTEGER ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= IDENTIFIER ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.' ;
     public final ASPT.TraceNbProp parse_ASPT_TraceNbProp() throws RecognitionException {
         ASPT.TraceNbProp element =  null;
 
@@ -3099,16 +3305,18 @@ public class AsptParser extends AsptANTLRParserBase {
         Token a12=null;
         Token a13=null;
         Token a14=null;
+        Token a15=null;
+        Token a16=null;
 
 
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 7) ) { return element; }
 
-            // Aspt.g:2211:2: (a0= 'trace_nb_prop(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= INTEGER ) a8= ',' (a9= QUOTED_34_34 ) a10= ',' (a11= IDENTIFIER ) a12= ',' (a13= QUOTED_34_34 ) a14= ').' )
-            // Aspt.g:2212:2: a0= 'trace_nb_prop(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= INTEGER ) a8= ',' (a9= QUOTED_34_34 ) a10= ',' (a11= IDENTIFIER ) a12= ',' (a13= QUOTED_34_34 ) a14= ').'
+            // Aspt.g:2351:2: (a0= 'trace_nb_prop' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= INTEGER ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= IDENTIFIER ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.' )
+            // Aspt.g:2352:2: a0= 'trace_nb_prop' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= INTEGER ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= IDENTIFIER ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.'
             {
-            a0=(Token)match(input,18,FOLLOW_18_in_parse_ASPT_TraceNbProp1534); if (state.failed) return element;
+            a0=(Token)match(input,20,FOLLOW_20_in_parse_ASPT_TraceNbProp1674); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3122,13 +3330,30 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[115]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[125]);
             	}
 
-            // Aspt.g:2226:2: (a1= IDENTIFIER )
-            // Aspt.g:2227:3: a1= IDENTIFIER
+            a1=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceNbProp1688); if (state.failed) return element;
+
+            if ( state.backtracking==0 ) {
+            		if (element == null) {
+            			element = ASPT.ASPTFactory.eINSTANCE.createTraceNbProp();
+            			startIncompleteElement(element);
+            		}
+            		collectHiddenTokens(element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_1, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+            	}
+
+            if ( state.backtracking==0 ) {
+            		// expected elements (follow set)
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[126]);
+            	}
+
+            // Aspt.g:2380:2: (a2= IDENTIFIER )
+            // Aspt.g:2381:3: a2= IDENTIFIER
             {
-            a1=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbProp1552); if (state.failed) return element;
+            a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbProp1706); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3138,14 +3363,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbProp();
             				startIncompleteElement(element);
             			}
-            			if (a1 != null) {
+            			if (a2 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__METAMODEL), result);
+            				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__METAMODEL), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -3154,8 +3379,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_1, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_2, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
             			}
             		}
 
@@ -3164,10 +3389,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[116]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[127]);
             	}
 
-            a2=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbProp1573); if (state.failed) return element;
+            a3=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbProp1727); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3175,19 +3400,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_2, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_3, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[117]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[128]);
             	}
 
-            // Aspt.g:2276:2: (a3= INTEGER )
-            // Aspt.g:2277:3: a3= INTEGER
+            // Aspt.g:2430:2: (a4= INTEGER )
+            // Aspt.g:2431:3: a4= INTEGER
             {
-            a3=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbProp1591); if (state.failed) return element;
+            a4=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbProp1745); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3197,14 +3422,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbProp();
             				startIncompleteElement(element);
             			}
-            			if (a3 != null) {
+            			if (a4 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__ID), result);
+            				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__ID), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -3213,8 +3438,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_3, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_4, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
             			}
             		}
 
@@ -3223,10 +3448,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[118]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[129]);
             	}
 
-            a4=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbProp1612); if (state.failed) return element;
+            a5=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbProp1766); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3234,19 +3459,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_4, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_5, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[119]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[130]);
             	}
 
-            // Aspt.g:2326:2: (a5= QUOTED_34_34 )
-            // Aspt.g:2327:3: a5= QUOTED_34_34
+            // Aspt.g:2480:2: (a6= QUOTED_34_34 )
+            // Aspt.g:2481:3: a6= QUOTED_34_34
             {
-            a5=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1630); if (state.failed) return element;
+            a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1784); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3256,14 +3481,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbProp();
             				startIncompleteElement(element);
             			}
-            			if (a5 != null) {
+            			if (a6 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDX), result);
+            				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDX), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -3272,8 +3497,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_5, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_6, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a6, element);
             			}
             		}
 
@@ -3282,10 +3507,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[120]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[131]);
             	}
 
-            a6=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbProp1651); if (state.failed) return element;
+            a7=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbProp1805); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3293,19 +3518,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_6, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_7, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a7, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[121]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[132]);
             	}
 
-            // Aspt.g:2376:2: (a7= INTEGER )
-            // Aspt.g:2377:3: a7= INTEGER
+            // Aspt.g:2530:2: (a8= INTEGER )
+            // Aspt.g:2531:3: a8= INTEGER
             {
-            a7=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbProp1669); if (state.failed) return element;
+            a8=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbProp1823); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3315,14 +3540,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbProp();
             				startIncompleteElement(element);
             			}
-            			if (a7 != null) {
+            			if (a8 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDP), result);
+            				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDP), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a8).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -3331,8 +3556,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_7, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_8, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a8, element);
             			}
             		}
 
@@ -3341,10 +3566,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[122]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[133]);
             	}
 
-            a8=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbProp1690); if (state.failed) return element;
+            a9=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbProp1844); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3352,19 +3577,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_8, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a8, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_9, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a9, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[123]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[134]);
             	}
 
-            // Aspt.g:2426:2: (a9= QUOTED_34_34 )
-            // Aspt.g:2427:3: a9= QUOTED_34_34
+            // Aspt.g:2580:2: (a10= QUOTED_34_34 )
+            // Aspt.g:2581:3: a10= QUOTED_34_34
             {
-            a9=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1708); if (state.failed) return element;
+            a10=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1862); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3374,14 +3599,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbProp();
             				startIncompleteElement(element);
             			}
-            			if (a9 != null) {
+            			if (a10 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a9.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDPX), result);
+            				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDPX), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a9).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a9).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a9).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a9).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a10).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a10).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a10).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a10).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -3390,8 +3615,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_9, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a9, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_10, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a10, element);
             			}
             		}
 
@@ -3400,10 +3625,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[124]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[135]);
             	}
 
-            a10=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbProp1729); if (state.failed) return element;
+            a11=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbProp1883); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3411,19 +3636,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_10, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a10, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_11, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a11, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[125]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[136]);
             	}
 
-            // Aspt.g:2476:2: (a11= IDENTIFIER )
-            // Aspt.g:2477:3: a11= IDENTIFIER
+            // Aspt.g:2630:2: (a12= IDENTIFIER )
+            // Aspt.g:2631:3: a12= IDENTIFIER
             {
-            a11=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbProp1747); if (state.failed) return element;
+            a12=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbProp1901); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3433,14 +3658,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbProp();
             				startIncompleteElement(element);
             			}
-            			if (a11 != null) {
+            			if (a12 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a11.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__TYPE), result);
+            				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__TYPE), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a11).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a11).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a11).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a11).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a12).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a12).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a12).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a12).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -3449,8 +3674,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_11, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a11, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_12, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a12, element);
             			}
             		}
 
@@ -3459,10 +3684,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[126]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[137]);
             	}
 
-            a12=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbProp1768); if (state.failed) return element;
+            a13=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbProp1922); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3470,19 +3695,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_12, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a12, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_13, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a13, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[127]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[138]);
             	}
 
-            // Aspt.g:2526:2: (a13= QUOTED_34_34 )
-            // Aspt.g:2527:3: a13= QUOTED_34_34
+            // Aspt.g:2680:2: (a14= QUOTED_34_34 )
+            // Aspt.g:2681:3: a14= QUOTED_34_34
             {
-            a13=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1786); if (state.failed) return element;
+            a14=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1940); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3492,14 +3717,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbProp();
             				startIncompleteElement(element);
             			}
-            			if (a13 != null) {
+            			if (a14 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a13.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__VALUE), result);
+            				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__VALUE), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a13).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a13).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a13).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a13).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a14).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a14).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a14).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a14).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -3508,8 +3733,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_13, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a13, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_14, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a14, element);
             			}
             		}
 
@@ -3518,10 +3743,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[128]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[139]);
             	}
 
-            a14=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceNbProp1807); if (state.failed) return element;
+            a15=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbProp1961); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3529,19 +3754,36 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_14, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a14, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_15, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a15, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[129]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[130]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[131]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[132]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[133]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[134]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[135]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[140]);
+            	}
+
+            a16=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceNbProp1975); if (state.failed) return element;
+
+            if ( state.backtracking==0 ) {
+            		if (element == null) {
+            			element = ASPT.ASPTFactory.eINSTANCE.createTraceNbProp();
+            			startIncompleteElement(element);
+            		}
+            		collectHiddenTokens(element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_5_0_0_16, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a16, element);
+            	}
+
+            if ( state.backtracking==0 ) {
+            		// expected elements (follow set)
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[141]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[142]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[143]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[144]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[145]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[146]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[147]);
             	}
 
             }
@@ -3564,7 +3806,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceNbNode"
-    // Aspt.g:2584:1: parse_ASPT_TraceNbNode returns [ASPT.TraceNbNode element = null] : a0= 'trace_nb_node(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= IDENTIFIER ) a8= ').' ;
+    // Aspt.g:2752:1: parse_ASPT_TraceNbNode returns [ASPT.TraceNbNode element = null] : a0= 'trace_nb_node' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ')' a10= '.' ;
     public final ASPT.TraceNbNode parse_ASPT_TraceNbNode() throws RecognitionException {
         ASPT.TraceNbNode element =  null;
 
@@ -3579,16 +3821,18 @@ public class AsptParser extends AsptANTLRParserBase {
         Token a6=null;
         Token a7=null;
         Token a8=null;
+        Token a9=null;
+        Token a10=null;
 
 
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 8) ) { return element; }
 
-            // Aspt.g:2587:2: (a0= 'trace_nb_node(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= IDENTIFIER ) a8= ').' )
-            // Aspt.g:2588:2: a0= 'trace_nb_node(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= IDENTIFIER ) a8= ').'
+            // Aspt.g:2755:2: (a0= 'trace_nb_node' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ')' a10= '.' )
+            // Aspt.g:2756:2: a0= 'trace_nb_node' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ')' a10= '.'
             {
-            a0=(Token)match(input,17,FOLLOW_17_in_parse_ASPT_TraceNbNode1836); if (state.failed) return element;
+            a0=(Token)match(input,19,FOLLOW_19_in_parse_ASPT_TraceNbNode2004); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3602,13 +3846,30 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[136]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[148]);
             	}
 
-            // Aspt.g:2602:2: (a1= IDENTIFIER )
-            // Aspt.g:2603:3: a1= IDENTIFIER
+            a1=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceNbNode2018); if (state.failed) return element;
+
+            if ( state.backtracking==0 ) {
+            		if (element == null) {
+            			element = ASPT.ASPTFactory.eINSTANCE.createTraceNbNode();
+            			startIncompleteElement(element);
+            		}
+            		collectHiddenTokens(element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_1, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+            	}
+
+            if ( state.backtracking==0 ) {
+            		// expected elements (follow set)
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[149]);
+            	}
+
+            // Aspt.g:2784:2: (a2= IDENTIFIER )
+            // Aspt.g:2785:3: a2= IDENTIFIER
             {
-            a1=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbNode1854); if (state.failed) return element;
+            a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbNode2036); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3618,14 +3879,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbNode();
             				startIncompleteElement(element);
             			}
-            			if (a1 != null) {
+            			if (a2 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__METAMODEL), result);
+            				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__METAMODEL), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -3634,8 +3895,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_1, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_2, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
             			}
             		}
 
@@ -3644,10 +3905,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[137]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[150]);
             	}
 
-            a2=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbNode1875); if (state.failed) return element;
+            a3=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbNode2057); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3655,19 +3916,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_2, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_3, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[138]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[151]);
             	}
 
-            // Aspt.g:2652:2: (a3= INTEGER )
-            // Aspt.g:2653:3: a3= INTEGER
+            // Aspt.g:2834:2: (a4= INTEGER )
+            // Aspt.g:2835:3: a4= INTEGER
             {
-            a3=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbNode1893); if (state.failed) return element;
+            a4=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbNode2075); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3677,14 +3938,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbNode();
             				startIncompleteElement(element);
             			}
-            			if (a3 != null) {
+            			if (a4 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__ID), result);
+            				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__ID), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -3693,8 +3954,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_3, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_4, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
             			}
             		}
 
@@ -3703,10 +3964,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[139]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[152]);
             	}
 
-            a4=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbNode1914); if (state.failed) return element;
+            a5=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbNode2096); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3714,19 +3975,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_4, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_5, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[140]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[153]);
             	}
 
-            // Aspt.g:2702:2: (a5= QUOTED_34_34 )
-            // Aspt.g:2703:3: a5= QUOTED_34_34
+            // Aspt.g:2884:2: (a6= QUOTED_34_34 )
+            // Aspt.g:2885:3: a6= QUOTED_34_34
             {
-            a5=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbNode1932); if (state.failed) return element;
+            a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbNode2114); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3736,14 +3997,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbNode();
             				startIncompleteElement(element);
             			}
-            			if (a5 != null) {
+            			if (a6 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__IDX), result);
+            				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__IDX), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -3752,8 +4013,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_5, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_6, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a6, element);
             			}
             		}
 
@@ -3762,10 +4023,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[141]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[154]);
             	}
 
-            a6=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbNode1953); if (state.failed) return element;
+            a7=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbNode2135); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3773,19 +4034,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_6, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_7, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a7, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[142]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[155]);
             	}
 
-            // Aspt.g:2752:2: (a7= IDENTIFIER )
-            // Aspt.g:2753:3: a7= IDENTIFIER
+            // Aspt.g:2934:2: (a8= IDENTIFIER )
+            // Aspt.g:2935:3: a8= IDENTIFIER
             {
-            a7=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbNode1971); if (state.failed) return element;
+            a8=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbNode2153); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3795,14 +4056,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceNbNode();
             				startIncompleteElement(element);
             			}
-            			if (a7 != null) {
+            			if (a8 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__TYPE), result);
+            				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__TYPE), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a8).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -3811,8 +4072,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_7, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_8, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a8, element);
             			}
             		}
 
@@ -3821,10 +4082,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[143]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[156]);
             	}
 
-            a8=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceNbNode1992); if (state.failed) return element;
+            a9=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbNode2174); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3832,19 +4093,36 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_8, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a8, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_9, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a9, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[144]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[145]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[146]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[147]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[148]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[149]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[150]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[157]);
+            	}
+
+            a10=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceNbNode2188); if (state.failed) return element;
+
+            if ( state.backtracking==0 ) {
+            		if (element == null) {
+            			element = ASPT.ASPTFactory.eINSTANCE.createTraceNbNode();
+            			startIncompleteElement(element);
+            		}
+            		collectHiddenTokens(element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_6_0_0_10, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a10, element);
+            	}
+
+            if ( state.backtracking==0 ) {
+            		// expected elements (follow set)
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[158]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[159]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[160]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[161]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[162]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[163]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[164]);
             	}
 
             }
@@ -3867,7 +4145,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceLink"
-    // Aspt.g:2810:1: parse_ASPT_TraceLink returns [ASPT.TraceLink element = null] : a0= 'trace_link(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= IDENTIFIER ) a8= ',' (a9= QUOTED_34_34 ) a10= ').' ;
+    // Aspt.g:3006:1: parse_ASPT_TraceLink returns [ASPT.TraceLink element = null] : a0= 'trace_link' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ',' (a10= QUOTED_34_34 ) a11= ')' a12= '.' ;
     public final ASPT.TraceLink parse_ASPT_TraceLink() throws RecognitionException {
         ASPT.TraceLink element =  null;
 
@@ -3884,16 +4162,18 @@ public class AsptParser extends AsptANTLRParserBase {
         Token a8=null;
         Token a9=null;
         Token a10=null;
+        Token a11=null;
+        Token a12=null;
 
 
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 9) ) { return element; }
 
-            // Aspt.g:2813:2: (a0= 'trace_link(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= IDENTIFIER ) a8= ',' (a9= QUOTED_34_34 ) a10= ').' )
-            // Aspt.g:2814:2: a0= 'trace_link(' (a1= IDENTIFIER ) a2= ',' (a3= INTEGER ) a4= ',' (a5= QUOTED_34_34 ) a6= ',' (a7= IDENTIFIER ) a8= ',' (a9= QUOTED_34_34 ) a10= ').'
+            // Aspt.g:3009:2: (a0= 'trace_link' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ',' (a10= QUOTED_34_34 ) a11= ')' a12= '.' )
+            // Aspt.g:3010:2: a0= 'trace_link' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ',' (a10= QUOTED_34_34 ) a11= ')' a12= '.'
             {
-            a0=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceLink2021); if (state.failed) return element;
+            a0=(Token)match(input,16,FOLLOW_16_in_parse_ASPT_TraceLink2217); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3907,13 +4187,30 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[151]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[165]);
             	}
 
-            // Aspt.g:2828:2: (a1= IDENTIFIER )
-            // Aspt.g:2829:3: a1= IDENTIFIER
+            a1=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceLink2231); if (state.failed) return element;
+
+            if ( state.backtracking==0 ) {
+            		if (element == null) {
+            			element = ASPT.ASPTFactory.eINSTANCE.createTraceLink();
+            			startIncompleteElement(element);
+            		}
+            		collectHiddenTokens(element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_1, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a1, element);
+            	}
+
+            if ( state.backtracking==0 ) {
+            		// expected elements (follow set)
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[166]);
+            	}
+
+            // Aspt.g:3038:2: (a2= IDENTIFIER )
+            // Aspt.g:3039:3: a2= IDENTIFIER
             {
-            a1=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceLink2039); if (state.failed) return element;
+            a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceLink2249); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3923,14 +4220,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceLink();
             				startIncompleteElement(element);
             			}
-            			if (a1 != null) {
+            			if (a2 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__METAMODEL), result);
+            				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__METAMODEL), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a1).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a2).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -3939,8 +4236,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_1, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a1, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_2, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a2, element);
             			}
             		}
 
@@ -3949,10 +4246,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[152]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[167]);
             	}
 
-            a2=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceLink2060); if (state.failed) return element;
+            a3=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceLink2270); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3960,19 +4257,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_2, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a2, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_3, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a3, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[153]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[168]);
             	}
 
-            // Aspt.g:2878:2: (a3= INTEGER )
-            // Aspt.g:2879:3: a3= INTEGER
+            // Aspt.g:3088:2: (a4= INTEGER )
+            // Aspt.g:3089:3: a4= INTEGER
             {
-            a3=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceLink2078); if (state.failed) return element;
+            a4=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceLink2288); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3982,14 +4279,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceLink();
             				startIncompleteElement(element);
             			}
-            			if (a3 != null) {
+            			if (a4 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__ID), result);
+            				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__ID), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a3).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a4).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -3998,8 +4295,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_3, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a3, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_4, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a4, element);
             			}
             		}
 
@@ -4008,10 +4305,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[154]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[169]);
             	}
 
-            a4=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceLink2099); if (state.failed) return element;
+            a5=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceLink2309); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4019,19 +4316,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_4, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a4, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_5, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a5, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[155]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[170]);
             	}
 
-            // Aspt.g:2928:2: (a5= QUOTED_34_34 )
-            // Aspt.g:2929:3: a5= QUOTED_34_34
+            // Aspt.g:3138:2: (a6= QUOTED_34_34 )
+            // Aspt.g:3139:3: a6= QUOTED_34_34
             {
-            a5=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceLink2117); if (state.failed) return element;
+            a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceLink2327); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4041,14 +4338,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceLink();
             				startIncompleteElement(element);
             			}
-            			if (a5 != null) {
+            			if (a6 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDX), result);
+            				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDX), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a5).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a6).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -4057,8 +4354,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_5, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a5, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_6, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a6, element);
             			}
             		}
 
@@ -4067,10 +4364,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[156]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[171]);
             	}
 
-            a6=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceLink2138); if (state.failed) return element;
+            a7=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceLink2348); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4078,19 +4375,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_6, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a6, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_7, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a7, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[157]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[172]);
             	}
 
-            // Aspt.g:2978:2: (a7= IDENTIFIER )
-            // Aspt.g:2979:3: a7= IDENTIFIER
+            // Aspt.g:3188:2: (a8= IDENTIFIER )
+            // Aspt.g:3189:3: a8= IDENTIFIER
             {
-            a7=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceLink2156); if (state.failed) return element;
+            a8=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceLink2366); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4100,14 +4397,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceLink();
             				startIncompleteElement(element);
             			}
-            			if (a7 != null) {
+            			if (a8 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__TYPE), result);
+            				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__TYPE), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a7).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a8).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -4116,8 +4413,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_7, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a7, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_8, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a8, element);
             			}
             		}
 
@@ -4126,10 +4423,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[158]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[173]);
             	}
 
-            a8=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceLink2177); if (state.failed) return element;
+            a9=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceLink2387); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4137,19 +4434,19 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_8, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a8, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_9, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a9, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[159]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[174]);
             	}
 
-            // Aspt.g:3028:2: (a9= QUOTED_34_34 )
-            // Aspt.g:3029:3: a9= QUOTED_34_34
+            // Aspt.g:3238:2: (a10= QUOTED_34_34 )
+            // Aspt.g:3239:3: a10= QUOTED_34_34
             {
-            a9=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceLink2195); if (state.failed) return element;
+            a10=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceLink2405); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4159,14 +4456,14 @@ public class AsptParser extends AsptANTLRParserBase {
             				element = ASPT.ASPTFactory.eINSTANCE.createTraceLink();
             				startIncompleteElement(element);
             			}
-            			if (a9 != null) {
+            			if (a10 != null) {
             				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-            				tokenResolver.resolve(a9.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__RELATION), result);
+            				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__RELATION), result);
             				Object resolvedObject = result.getResolvedToken();
             				if (resolvedObject == null) {
-            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a9).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a9).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a9).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a9).getStopIndex());
+            					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a10).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a10).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a10).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a10).getStopIndex());
             				}
             				java.lang.String resolved = (java.lang.String) resolvedObject;
             				if (resolved != null) {
@@ -4175,8 +4472,8 @@ public class AsptParser extends AsptANTLRParserBase {
             					completedElement(value, false);
             				}
             				collectHiddenTokens(element);
-            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_9, resolved, true);
-            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a9, element);
+            				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_10, resolved, true);
+            				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a10, element);
             			}
             		}
 
@@ -4185,10 +4482,10 @@ public class AsptParser extends AsptANTLRParserBase {
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[160]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[175]);
             	}
 
-            a10=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceLink2216); if (state.failed) return element;
+            a11=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceLink2426); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4196,19 +4493,36 @@ public class AsptParser extends AsptANTLRParserBase {
             			startIncompleteElement(element);
             		}
             		collectHiddenTokens(element);
-            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_10, null, true);
-            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a10, element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_11, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a11, element);
             	}
 
             if ( state.backtracking==0 ) {
             		// expected elements (follow set)
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[161]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[162]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[163]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[164]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[165]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[166]);
-            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[167]);
+            		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[176]);
+            	}
+
+            a12=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceLink2440); if (state.failed) return element;
+
+            if ( state.backtracking==0 ) {
+            		if (element == null) {
+            			element = ASPT.ASPTFactory.eINSTANCE.createTraceLink();
+            			startIncompleteElement(element);
+            		}
+            		collectHiddenTokens(element);
+            		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_12, null, true);
+            		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a12, element);
+            	}
+
+            if ( state.backtracking==0 ) {
+            		// expected elements (follow set)
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[177]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[178]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[179]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[180]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[181]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[182]);
+            		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[183]);
             	}
 
             }
@@ -4231,7 +4545,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceElement"
-    // Aspt.g:3086:1: parse_ASPT_TraceElement returns [ASPT.TraceElement element = null] : (c0= parse_ASPT_TraceNode |c1= parse_ASPT_TraceProp |c2= parse_ASPT_TraceEdge |c3= parse_ASPT_TraceNbEdge |c4= parse_ASPT_TraceNbProp |c5= parse_ASPT_TraceNbNode |c6= parse_ASPT_TraceLink );
+    // Aspt.g:3310:1: parse_ASPT_TraceElement returns [ASPT.TraceElement element = null] : (c0= parse_ASPT_TraceNode |c1= parse_ASPT_TraceProp |c2= parse_ASPT_TraceEdge |c3= parse_ASPT_TraceNbEdge |c4= parse_ASPT_TraceNbProp |c5= parse_ASPT_TraceNbNode |c6= parse_ASPT_TraceLink );
     public final ASPT.TraceElement parse_ASPT_TraceElement() throws RecognitionException {
         ASPT.TraceElement element =  null;
 
@@ -4255,47 +4569,71 @@ public class AsptParser extends AsptANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 10) ) { return element; }
 
-            // Aspt.g:3087:2: (c0= parse_ASPT_TraceNode |c1= parse_ASPT_TraceProp |c2= parse_ASPT_TraceEdge |c3= parse_ASPT_TraceNbEdge |c4= parse_ASPT_TraceNbProp |c5= parse_ASPT_TraceNbNode |c6= parse_ASPT_TraceLink )
+            // Aspt.g:3311:2: (c0= parse_ASPT_TraceNode |c1= parse_ASPT_TraceProp |c2= parse_ASPT_TraceEdge |c3= parse_ASPT_TraceNbEdge |c4= parse_ASPT_TraceNbProp |c5= parse_ASPT_TraceNbNode |c6= parse_ASPT_TraceLink )
             int alt6=7;
             switch ( input.LA(1) ) {
-            case 19:
+            case 21:
                 {
                 alt6=1;
                 }
                 break;
-            case 17:
+            case 19:
                 {
                 int LA6_2 = input.LA(2);
 
-                if ( (LA6_2==IDENTIFIER) ) {
+                if ( (LA6_2==11) ) {
                     int LA6_8 = input.LA(3);
 
-                    if ( (LA6_8==12) ) {
+                    if ( (LA6_8==IDENTIFIER) ) {
                         int LA6_11 = input.LA(4);
 
-                        if ( (LA6_11==INTEGER) ) {
+                        if ( (LA6_11==13) ) {
                             int LA6_14 = input.LA(5);
 
-                            if ( (LA6_14==12) ) {
+                            if ( (LA6_14==INTEGER) ) {
                                 int LA6_17 = input.LA(6);
 
-                                if ( (LA6_17==QUOTED_34_34) ) {
+                                if ( (LA6_17==13) ) {
                                     int LA6_20 = input.LA(7);
 
-                                    if ( (LA6_20==12) ) {
+                                    if ( (LA6_20==QUOTED_34_34) ) {
                                         int LA6_23 = input.LA(8);
 
-                                        if ( (LA6_23==IDENTIFIER) ) {
+                                        if ( (LA6_23==13) ) {
                                             int LA6_26 = input.LA(9);
 
-                                            if ( (LA6_26==11) ) {
+                                            if ( (LA6_26==IDENTIFIER) ) {
                                                 int LA6_29 = input.LA(10);
 
-                                                if ( (synpred6_Aspt()) ) {
-                                                    alt6=1;
-                                                }
-                                                else if ( (synpred11_Aspt()) ) {
-                                                    alt6=6;
+                                                if ( (LA6_29==12) ) {
+                                                    int LA6_32 = input.LA(11);
+
+                                                    if ( (LA6_32==14) ) {
+                                                        int LA6_35 = input.LA(12);
+
+                                                        if ( (synpred6_Aspt()) ) {
+                                                            alt6=1;
+                                                        }
+                                                        else if ( (synpred11_Aspt()) ) {
+                                                            alt6=6;
+                                                        }
+                                                        else {
+                                                            if (state.backtracking>0) {state.failed=true; return element;}
+                                                            NoViableAltException nvae =
+                                                                new NoViableAltException("", 6, 35, input);
+
+                                                            throw nvae;
+
+                                                        }
+                                                    }
+                                                    else {
+                                                        if (state.backtracking>0) {state.failed=true; return element;}
+                                                        NoViableAltException nvae =
+                                                            new NoViableAltException("", 6, 32, input);
+
+                                                        throw nvae;
+
+                                                    }
                                                 }
                                                 else {
                                                     if (state.backtracking>0) {state.failed=true; return element;}
@@ -4379,67 +4717,91 @@ public class AsptParser extends AsptANTLRParserBase {
                 }
                 }
                 break;
-            case 20:
+            case 22:
                 {
                 alt6=2;
                 }
                 break;
-            case 18:
+            case 20:
                 {
                 int LA6_4 = input.LA(2);
 
-                if ( (LA6_4==IDENTIFIER) ) {
+                if ( (LA6_4==11) ) {
                     int LA6_9 = input.LA(3);
 
-                    if ( (LA6_9==12) ) {
+                    if ( (LA6_9==IDENTIFIER) ) {
                         int LA6_12 = input.LA(4);
 
-                        if ( (LA6_12==INTEGER) ) {
+                        if ( (LA6_12==13) ) {
                             int LA6_15 = input.LA(5);
 
-                            if ( (LA6_15==12) ) {
+                            if ( (LA6_15==INTEGER) ) {
                                 int LA6_18 = input.LA(6);
 
-                                if ( (LA6_18==QUOTED_34_34) ) {
+                                if ( (LA6_18==13) ) {
                                     int LA6_21 = input.LA(7);
 
-                                    if ( (LA6_21==12) ) {
+                                    if ( (LA6_21==QUOTED_34_34) ) {
                                         int LA6_24 = input.LA(8);
 
-                                        if ( (LA6_24==INTEGER) ) {
+                                        if ( (LA6_24==13) ) {
                                             int LA6_27 = input.LA(9);
 
-                                            if ( (LA6_27==12) ) {
+                                            if ( (LA6_27==INTEGER) ) {
                                                 int LA6_30 = input.LA(10);
 
-                                                if ( (LA6_30==QUOTED_34_34) ) {
+                                                if ( (LA6_30==13) ) {
                                                     int LA6_33 = input.LA(11);
 
-                                                    if ( (LA6_33==12) ) {
-                                                        int LA6_35 = input.LA(12);
+                                                    if ( (LA6_33==QUOTED_34_34) ) {
+                                                        int LA6_36 = input.LA(12);
 
-                                                        if ( (LA6_35==IDENTIFIER) ) {
-                                                            int LA6_37 = input.LA(13);
+                                                        if ( (LA6_36==13) ) {
+                                                            int LA6_39 = input.LA(13);
 
-                                                            if ( (LA6_37==12) ) {
-                                                                int LA6_39 = input.LA(14);
+                                                            if ( (LA6_39==IDENTIFIER) ) {
+                                                                int LA6_41 = input.LA(14);
 
-                                                                if ( (LA6_39==QUOTED_34_34) ) {
-                                                                    int LA6_41 = input.LA(15);
+                                                                if ( (LA6_41==13) ) {
+                                                                    int LA6_43 = input.LA(15);
 
-                                                                    if ( (LA6_41==11) ) {
-                                                                        int LA6_43 = input.LA(16);
+                                                                    if ( (LA6_43==QUOTED_34_34) ) {
+                                                                        int LA6_45 = input.LA(16);
 
-                                                                        if ( (synpred7_Aspt()) ) {
-                                                                            alt6=2;
-                                                                        }
-                                                                        else if ( (synpred10_Aspt()) ) {
-                                                                            alt6=5;
+                                                                        if ( (LA6_45==12) ) {
+                                                                            int LA6_47 = input.LA(17);
+
+                                                                            if ( (LA6_47==14) ) {
+                                                                                int LA6_49 = input.LA(18);
+
+                                                                                if ( (synpred7_Aspt()) ) {
+                                                                                    alt6=2;
+                                                                                }
+                                                                                else if ( (synpred10_Aspt()) ) {
+                                                                                    alt6=5;
+                                                                                }
+                                                                                else {
+                                                                                    if (state.backtracking>0) {state.failed=true; return element;}
+                                                                                    NoViableAltException nvae =
+                                                                                        new NoViableAltException("", 6, 49, input);
+
+                                                                                    throw nvae;
+
+                                                                                }
+                                                                            }
+                                                                            else {
+                                                                                if (state.backtracking>0) {state.failed=true; return element;}
+                                                                                NoViableAltException nvae =
+                                                                                    new NoViableAltException("", 6, 47, input);
+
+                                                                                throw nvae;
+
+                                                                            }
                                                                         }
                                                                         else {
                                                                             if (state.backtracking>0) {state.failed=true; return element;}
                                                                             NoViableAltException nvae =
-                                                                                new NoViableAltException("", 6, 43, input);
+                                                                                new NoViableAltException("", 6, 45, input);
 
                                                                             throw nvae;
 
@@ -4448,7 +4810,7 @@ public class AsptParser extends AsptANTLRParserBase {
                                                                     else {
                                                                         if (state.backtracking>0) {state.failed=true; return element;}
                                                                         NoViableAltException nvae =
-                                                                            new NoViableAltException("", 6, 41, input);
+                                                                            new NoViableAltException("", 6, 43, input);
 
                                                                         throw nvae;
 
@@ -4457,7 +4819,7 @@ public class AsptParser extends AsptANTLRParserBase {
                                                                 else {
                                                                     if (state.backtracking>0) {state.failed=true; return element;}
                                                                     NoViableAltException nvae =
-                                                                        new NoViableAltException("", 6, 39, input);
+                                                                        new NoViableAltException("", 6, 41, input);
 
                                                                     throw nvae;
 
@@ -4466,7 +4828,7 @@ public class AsptParser extends AsptANTLRParserBase {
                                                             else {
                                                                 if (state.backtracking>0) {state.failed=true; return element;}
                                                                 NoViableAltException nvae =
-                                                                    new NoViableAltException("", 6, 37, input);
+                                                                    new NoViableAltException("", 6, 39, input);
 
                                                                 throw nvae;
 
@@ -4475,7 +4837,7 @@ public class AsptParser extends AsptANTLRParserBase {
                                                         else {
                                                             if (state.backtracking>0) {state.failed=true; return element;}
                                                             NoViableAltException nvae =
-                                                                new NoViableAltException("", 6, 35, input);
+                                                                new NoViableAltException("", 6, 36, input);
 
                                                             throw nvae;
 
@@ -4572,73 +4934,97 @@ public class AsptParser extends AsptANTLRParserBase {
                 }
                 }
                 break;
-            case 13:
+            case 15:
                 {
                 alt6=3;
                 }
                 break;
-            case 16:
+            case 18:
                 {
                 int LA6_6 = input.LA(2);
 
-                if ( (LA6_6==IDENTIFIER) ) {
+                if ( (LA6_6==11) ) {
                     int LA6_10 = input.LA(3);
 
-                    if ( (LA6_10==12) ) {
+                    if ( (LA6_10==IDENTIFIER) ) {
                         int LA6_13 = input.LA(4);
 
-                        if ( (LA6_13==INTEGER) ) {
+                        if ( (LA6_13==13) ) {
                             int LA6_16 = input.LA(5);
 
-                            if ( (LA6_16==12) ) {
+                            if ( (LA6_16==INTEGER) ) {
                                 int LA6_19 = input.LA(6);
 
-                                if ( (LA6_19==QUOTED_34_34) ) {
+                                if ( (LA6_19==13) ) {
                                     int LA6_22 = input.LA(7);
 
-                                    if ( (LA6_22==12) ) {
+                                    if ( (LA6_22==QUOTED_34_34) ) {
                                         int LA6_25 = input.LA(8);
 
-                                        if ( (LA6_25==IDENTIFIER) ) {
+                                        if ( (LA6_25==13) ) {
                                             int LA6_28 = input.LA(9);
 
-                                            if ( (LA6_28==12) ) {
+                                            if ( (LA6_28==IDENTIFIER) ) {
                                                 int LA6_31 = input.LA(10);
 
-                                                if ( (LA6_31==INTEGER) ) {
+                                                if ( (LA6_31==13) ) {
                                                     int LA6_34 = input.LA(11);
 
-                                                    if ( (LA6_34==12) ) {
-                                                        int LA6_36 = input.LA(12);
+                                                    if ( (LA6_34==INTEGER) ) {
+                                                        int LA6_37 = input.LA(12);
 
-                                                        if ( (LA6_36==QUOTED_34_34) ) {
-                                                            int LA6_38 = input.LA(13);
+                                                        if ( (LA6_37==13) ) {
+                                                            int LA6_40 = input.LA(13);
 
-                                                            if ( (LA6_38==12) ) {
-                                                                int LA6_40 = input.LA(14);
+                                                            if ( (LA6_40==QUOTED_34_34) ) {
+                                                                int LA6_42 = input.LA(14);
 
-                                                                if ( (LA6_40==INTEGER) ) {
-                                                                    int LA6_42 = input.LA(15);
+                                                                if ( (LA6_42==13) ) {
+                                                                    int LA6_44 = input.LA(15);
 
-                                                                    if ( (LA6_42==12) ) {
-                                                                        int LA6_44 = input.LA(16);
+                                                                    if ( (LA6_44==INTEGER) ) {
+                                                                        int LA6_46 = input.LA(16);
 
-                                                                        if ( (LA6_44==QUOTED_34_34) ) {
-                                                                            int LA6_46 = input.LA(17);
+                                                                        if ( (LA6_46==13) ) {
+                                                                            int LA6_48 = input.LA(17);
 
-                                                                            if ( (LA6_46==11) ) {
-                                                                                int LA6_47 = input.LA(18);
+                                                                            if ( (LA6_48==QUOTED_34_34) ) {
+                                                                                int LA6_50 = input.LA(18);
 
-                                                                                if ( (synpred8_Aspt()) ) {
-                                                                                    alt6=3;
-                                                                                }
-                                                                                else if ( (synpred9_Aspt()) ) {
-                                                                                    alt6=4;
+                                                                                if ( (LA6_50==12) ) {
+                                                                                    int LA6_52 = input.LA(19);
+
+                                                                                    if ( (LA6_52==14) ) {
+                                                                                        int LA6_53 = input.LA(20);
+
+                                                                                        if ( (synpred8_Aspt()) ) {
+                                                                                            alt6=3;
+                                                                                        }
+                                                                                        else if ( (synpred9_Aspt()) ) {
+                                                                                            alt6=4;
+                                                                                        }
+                                                                                        else {
+                                                                                            if (state.backtracking>0) {state.failed=true; return element;}
+                                                                                            NoViableAltException nvae =
+                                                                                                new NoViableAltException("", 6, 53, input);
+
+                                                                                            throw nvae;
+
+                                                                                        }
+                                                                                    }
+                                                                                    else {
+                                                                                        if (state.backtracking>0) {state.failed=true; return element;}
+                                                                                        NoViableAltException nvae =
+                                                                                            new NoViableAltException("", 6, 52, input);
+
+                                                                                        throw nvae;
+
+                                                                                    }
                                                                                 }
                                                                                 else {
                                                                                     if (state.backtracking>0) {state.failed=true; return element;}
                                                                                     NoViableAltException nvae =
-                                                                                        new NoViableAltException("", 6, 47, input);
+                                                                                        new NoViableAltException("", 6, 50, input);
 
                                                                                     throw nvae;
 
@@ -4647,7 +5033,7 @@ public class AsptParser extends AsptANTLRParserBase {
                                                                             else {
                                                                                 if (state.backtracking>0) {state.failed=true; return element;}
                                                                                 NoViableAltException nvae =
-                                                                                    new NoViableAltException("", 6, 46, input);
+                                                                                    new NoViableAltException("", 6, 48, input);
 
                                                                                 throw nvae;
 
@@ -4656,7 +5042,7 @@ public class AsptParser extends AsptANTLRParserBase {
                                                                         else {
                                                                             if (state.backtracking>0) {state.failed=true; return element;}
                                                                             NoViableAltException nvae =
-                                                                                new NoViableAltException("", 6, 44, input);
+                                                                                new NoViableAltException("", 6, 46, input);
 
                                                                             throw nvae;
 
@@ -4665,7 +5051,7 @@ public class AsptParser extends AsptANTLRParserBase {
                                                                     else {
                                                                         if (state.backtracking>0) {state.failed=true; return element;}
                                                                         NoViableAltException nvae =
-                                                                            new NoViableAltException("", 6, 42, input);
+                                                                            new NoViableAltException("", 6, 44, input);
 
                                                                         throw nvae;
 
@@ -4674,7 +5060,7 @@ public class AsptParser extends AsptANTLRParserBase {
                                                                 else {
                                                                     if (state.backtracking>0) {state.failed=true; return element;}
                                                                     NoViableAltException nvae =
-                                                                        new NoViableAltException("", 6, 40, input);
+                                                                        new NoViableAltException("", 6, 42, input);
 
                                                                     throw nvae;
 
@@ -4683,7 +5069,7 @@ public class AsptParser extends AsptANTLRParserBase {
                                                             else {
                                                                 if (state.backtracking>0) {state.failed=true; return element;}
                                                                 NoViableAltException nvae =
-                                                                    new NoViableAltException("", 6, 38, input);
+                                                                    new NoViableAltException("", 6, 40, input);
 
                                                                 throw nvae;
 
@@ -4692,7 +5078,7 @@ public class AsptParser extends AsptANTLRParserBase {
                                                         else {
                                                             if (state.backtracking>0) {state.failed=true; return element;}
                                                             NoViableAltException nvae =
-                                                                new NoViableAltException("", 6, 36, input);
+                                                                new NoViableAltException("", 6, 37, input);
 
                                                             throw nvae;
 
@@ -4789,7 +5175,7 @@ public class AsptParser extends AsptANTLRParserBase {
                 }
                 }
                 break;
-            case 14:
+            case 16:
                 {
                 alt6=7;
                 }
@@ -4805,9 +5191,9 @@ public class AsptParser extends AsptANTLRParserBase {
 
             switch (alt6) {
                 case 1 :
-                    // Aspt.g:3088:2: c0= parse_ASPT_TraceNode
+                    // Aspt.g:3312:2: c0= parse_ASPT_TraceNode
                     {
-                    pushFollow(FOLLOW_parse_ASPT_TraceNode_in_parse_ASPT_TraceElement2241);
+                    pushFollow(FOLLOW_parse_ASPT_TraceNode_in_parse_ASPT_TraceElement2465);
                     c0=parse_ASPT_TraceNode();
 
                     state._fsp--;
@@ -4818,9 +5204,9 @@ public class AsptParser extends AsptANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Aspt.g:3089:4: c1= parse_ASPT_TraceProp
+                    // Aspt.g:3313:4: c1= parse_ASPT_TraceProp
                     {
-                    pushFollow(FOLLOW_parse_ASPT_TraceProp_in_parse_ASPT_TraceElement2251);
+                    pushFollow(FOLLOW_parse_ASPT_TraceProp_in_parse_ASPT_TraceElement2475);
                     c1=parse_ASPT_TraceProp();
 
                     state._fsp--;
@@ -4831,9 +5217,9 @@ public class AsptParser extends AsptANTLRParserBase {
                     }
                     break;
                 case 3 :
-                    // Aspt.g:3090:4: c2= parse_ASPT_TraceEdge
+                    // Aspt.g:3314:4: c2= parse_ASPT_TraceEdge
                     {
-                    pushFollow(FOLLOW_parse_ASPT_TraceEdge_in_parse_ASPT_TraceElement2261);
+                    pushFollow(FOLLOW_parse_ASPT_TraceEdge_in_parse_ASPT_TraceElement2485);
                     c2=parse_ASPT_TraceEdge();
 
                     state._fsp--;
@@ -4844,9 +5230,9 @@ public class AsptParser extends AsptANTLRParserBase {
                     }
                     break;
                 case 4 :
-                    // Aspt.g:3091:4: c3= parse_ASPT_TraceNbEdge
+                    // Aspt.g:3315:4: c3= parse_ASPT_TraceNbEdge
                     {
-                    pushFollow(FOLLOW_parse_ASPT_TraceNbEdge_in_parse_ASPT_TraceElement2271);
+                    pushFollow(FOLLOW_parse_ASPT_TraceNbEdge_in_parse_ASPT_TraceElement2495);
                     c3=parse_ASPT_TraceNbEdge();
 
                     state._fsp--;
@@ -4857,9 +5243,9 @@ public class AsptParser extends AsptANTLRParserBase {
                     }
                     break;
                 case 5 :
-                    // Aspt.g:3092:4: c4= parse_ASPT_TraceNbProp
+                    // Aspt.g:3316:4: c4= parse_ASPT_TraceNbProp
                     {
-                    pushFollow(FOLLOW_parse_ASPT_TraceNbProp_in_parse_ASPT_TraceElement2281);
+                    pushFollow(FOLLOW_parse_ASPT_TraceNbProp_in_parse_ASPT_TraceElement2505);
                     c4=parse_ASPT_TraceNbProp();
 
                     state._fsp--;
@@ -4870,9 +5256,9 @@ public class AsptParser extends AsptANTLRParserBase {
                     }
                     break;
                 case 6 :
-                    // Aspt.g:3093:4: c5= parse_ASPT_TraceNbNode
+                    // Aspt.g:3317:4: c5= parse_ASPT_TraceNbNode
                     {
-                    pushFollow(FOLLOW_parse_ASPT_TraceNbNode_in_parse_ASPT_TraceElement2291);
+                    pushFollow(FOLLOW_parse_ASPT_TraceNbNode_in_parse_ASPT_TraceElement2515);
                     c5=parse_ASPT_TraceNbNode();
 
                     state._fsp--;
@@ -4883,9 +5269,9 @@ public class AsptParser extends AsptANTLRParserBase {
                     }
                     break;
                 case 7 :
-                    // Aspt.g:3094:4: c6= parse_ASPT_TraceLink
+                    // Aspt.g:3318:4: c6= parse_ASPT_TraceLink
                     {
-                    pushFollow(FOLLOW_parse_ASPT_TraceLink_in_parse_ASPT_TraceElement2301);
+                    pushFollow(FOLLOW_parse_ASPT_TraceLink_in_parse_ASPT_TraceElement2525);
                     c6=parse_ASPT_TraceLink();
 
                     state._fsp--;
@@ -4914,17 +5300,17 @@ public class AsptParser extends AsptANTLRParserBase {
 
     // $ANTLR start synpred1_Aspt
     public final void synpred1_Aspt_fragment() throws RecognitionException {
-        ASPT.TraceElement a5_0 =null;
+        ASPT.TraceElement a7_0 =null;
 
 
-        // Aspt.g:662:4: ( (a5_0= parse_ASPT_TraceElement ) )
-        // Aspt.g:662:4: (a5_0= parse_ASPT_TraceElement )
+        // Aspt.g:690:4: ( (a7_0= parse_ASPT_TraceElement ) )
+        // Aspt.g:690:4: (a7_0= parse_ASPT_TraceElement )
         {
-        // Aspt.g:662:4: (a5_0= parse_ASPT_TraceElement )
-        // Aspt.g:663:5: a5_0= parse_ASPT_TraceElement
+        // Aspt.g:690:4: (a7_0= parse_ASPT_TraceElement )
+        // Aspt.g:691:5: a7_0= parse_ASPT_TraceElement
         {
-        pushFollow(FOLLOW_parse_ASPT_TraceElement_in_synpred1_Aspt222);
-        a5_0=parse_ASPT_TraceElement();
+        pushFollow(FOLLOW_parse_ASPT_TraceElement_in_synpred1_Aspt250);
+        a7_0=parse_ASPT_TraceElement();
 
         state._fsp--;
         if (state.failed) return ;
@@ -4942,10 +5328,10 @@ public class AsptParser extends AsptANTLRParserBase {
         ASPT.TraceNode c0 =null;
 
 
-        // Aspt.g:3088:2: (c0= parse_ASPT_TraceNode )
-        // Aspt.g:3088:2: c0= parse_ASPT_TraceNode
+        // Aspt.g:3312:2: (c0= parse_ASPT_TraceNode )
+        // Aspt.g:3312:2: c0= parse_ASPT_TraceNode
         {
-        pushFollow(FOLLOW_parse_ASPT_TraceNode_in_synpred6_Aspt2241);
+        pushFollow(FOLLOW_parse_ASPT_TraceNode_in_synpred6_Aspt2465);
         c0=parse_ASPT_TraceNode();
 
         state._fsp--;
@@ -4961,10 +5347,10 @@ public class AsptParser extends AsptANTLRParserBase {
         ASPT.TraceProp c1 =null;
 
 
-        // Aspt.g:3089:4: (c1= parse_ASPT_TraceProp )
-        // Aspt.g:3089:4: c1= parse_ASPT_TraceProp
+        // Aspt.g:3313:4: (c1= parse_ASPT_TraceProp )
+        // Aspt.g:3313:4: c1= parse_ASPT_TraceProp
         {
-        pushFollow(FOLLOW_parse_ASPT_TraceProp_in_synpred7_Aspt2251);
+        pushFollow(FOLLOW_parse_ASPT_TraceProp_in_synpred7_Aspt2475);
         c1=parse_ASPT_TraceProp();
 
         state._fsp--;
@@ -4980,10 +5366,10 @@ public class AsptParser extends AsptANTLRParserBase {
         ASPT.TraceEdge c2 =null;
 
 
-        // Aspt.g:3090:4: (c2= parse_ASPT_TraceEdge )
-        // Aspt.g:3090:4: c2= parse_ASPT_TraceEdge
+        // Aspt.g:3314:4: (c2= parse_ASPT_TraceEdge )
+        // Aspt.g:3314:4: c2= parse_ASPT_TraceEdge
         {
-        pushFollow(FOLLOW_parse_ASPT_TraceEdge_in_synpred8_Aspt2261);
+        pushFollow(FOLLOW_parse_ASPT_TraceEdge_in_synpred8_Aspt2485);
         c2=parse_ASPT_TraceEdge();
 
         state._fsp--;
@@ -4999,10 +5385,10 @@ public class AsptParser extends AsptANTLRParserBase {
         ASPT.TraceNbEdge c3 =null;
 
 
-        // Aspt.g:3091:4: (c3= parse_ASPT_TraceNbEdge )
-        // Aspt.g:3091:4: c3= parse_ASPT_TraceNbEdge
+        // Aspt.g:3315:4: (c3= parse_ASPT_TraceNbEdge )
+        // Aspt.g:3315:4: c3= parse_ASPT_TraceNbEdge
         {
-        pushFollow(FOLLOW_parse_ASPT_TraceNbEdge_in_synpred9_Aspt2271);
+        pushFollow(FOLLOW_parse_ASPT_TraceNbEdge_in_synpred9_Aspt2495);
         c3=parse_ASPT_TraceNbEdge();
 
         state._fsp--;
@@ -5018,10 +5404,10 @@ public class AsptParser extends AsptANTLRParserBase {
         ASPT.TraceNbProp c4 =null;
 
 
-        // Aspt.g:3092:4: (c4= parse_ASPT_TraceNbProp )
-        // Aspt.g:3092:4: c4= parse_ASPT_TraceNbProp
+        // Aspt.g:3316:4: (c4= parse_ASPT_TraceNbProp )
+        // Aspt.g:3316:4: c4= parse_ASPT_TraceNbProp
         {
-        pushFollow(FOLLOW_parse_ASPT_TraceNbProp_in_synpred10_Aspt2281);
+        pushFollow(FOLLOW_parse_ASPT_TraceNbProp_in_synpred10_Aspt2505);
         c4=parse_ASPT_TraceNbProp();
 
         state._fsp--;
@@ -5037,10 +5423,10 @@ public class AsptParser extends AsptANTLRParserBase {
         ASPT.TraceNbNode c5 =null;
 
 
-        // Aspt.g:3093:4: (c5= parse_ASPT_TraceNbNode )
-        // Aspt.g:3093:4: c5= parse_ASPT_TraceNbNode
+        // Aspt.g:3317:4: (c5= parse_ASPT_TraceNbNode )
+        // Aspt.g:3317:4: c5= parse_ASPT_TraceNbNode
         {
-        pushFollow(FOLLOW_parse_ASPT_TraceNbNode_in_synpred11_Aspt2291);
+        pushFollow(FOLLOW_parse_ASPT_TraceNbNode_in_synpred11_Aspt2515);
         c5=parse_ASPT_TraceNbNode();
 
         state._fsp--;
@@ -5157,122 +5543,138 @@ public class AsptParser extends AsptANTLRParserBase {
 
     public static final BitSet FOLLOW_parse_ASPT_TraceModel_in_start82 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_start89 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_parse_ASPT_TraceModel115 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceModel133 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceModel154 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceModel172 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceModel193 = new BitSet(new long[]{0x00000000001F6002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceElement_in_parse_ASPT_TraceModel222 = new BitSet(new long[]{0x00000000001F6002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceLink_in_parse_ASPT_TraceModel264 = new BitSet(new long[]{0x00000000001F6002L});
-    public static final BitSet FOLLOW_19_in_parse_ASPT_TraceNode320 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNode338 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNode359 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNode377 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNode398 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNode416 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNode437 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNode455 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceNode476 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceNbNode_in_parse_ASPT_TraceNode495 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_parse_ASPT_TraceProp520 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceProp538 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceProp559 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceProp577 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceProp598 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp616 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceProp637 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceProp655 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceProp676 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp694 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceProp715 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceProp733 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceProp754 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp772 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceProp793 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceNbProp_in_parse_ASPT_TraceProp812 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceEdge837 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceEdge855 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceEdge876 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceEdge894 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceEdge915 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge933 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceEdge954 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceEdge972 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceEdge993 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceEdge1011 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceEdge1032 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge1050 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceEdge1071 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceEdge1089 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceEdge1110 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge1128 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceEdge1149 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceNbEdge_in_parse_ASPT_TraceEdge1168 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_parse_ASPT_TraceNbEdge1193 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbEdge1211 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbEdge1232 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1250 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbEdge1271 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1289 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbEdge1310 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbEdge1328 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbEdge1349 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1367 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbEdge1388 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1406 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbEdge1427 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1445 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbEdge1466 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1484 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceNbEdge1505 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_parse_ASPT_TraceNbProp1534 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbProp1552 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbProp1573 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbProp1591 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbProp1612 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1630 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbProp1651 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbProp1669 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbProp1690 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1708 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbProp1729 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbProp1747 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbProp1768 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1786 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceNbProp1807 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_parse_ASPT_TraceNbNode1836 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbNode1854 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbNode1875 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbNode1893 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbNode1914 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbNode1932 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbNode1953 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbNode1971 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceNbNode1992 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceLink2021 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceLink2039 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceLink2060 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceLink2078 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceLink2099 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceLink2117 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceLink2138 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceLink2156 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceLink2177 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceLink2195 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceLink2216 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceNode_in_parse_ASPT_TraceElement2241 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceProp_in_parse_ASPT_TraceElement2251 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceEdge_in_parse_ASPT_TraceElement2261 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceNbEdge_in_parse_ASPT_TraceElement2271 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceNbProp_in_parse_ASPT_TraceElement2281 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceNbNode_in_parse_ASPT_TraceElement2291 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceLink_in_parse_ASPT_TraceElement2301 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceElement_in_synpred1_Aspt222 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceNode_in_synpred6_Aspt2241 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceProp_in_synpred7_Aspt2251 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceEdge_in_synpred8_Aspt2261 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceNbEdge_in_synpred9_Aspt2271 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceNbProp_in_synpred10_Aspt2281 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceNbNode_in_synpred11_Aspt2291 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_parse_ASPT_TraceModel115 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceModel129 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceModel147 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceModel168 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceModel186 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceModel207 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceModel221 = new BitSet(new long[]{0x00000000007D8002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceElement_in_parse_ASPT_TraceModel250 = new BitSet(new long[]{0x00000000007D8002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceLink_in_parse_ASPT_TraceModel292 = new BitSet(new long[]{0x00000000007D8002L});
+    public static final BitSet FOLLOW_21_in_parse_ASPT_TraceNode348 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceNode362 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNode380 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNode401 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNode419 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNode440 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNode458 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNode479 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNode497 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNode518 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceNode532 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceNbNode_in_parse_ASPT_TraceNode551 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_parse_ASPT_TraceProp576 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceProp590 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceProp608 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceProp629 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceProp647 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceProp668 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp686 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceProp707 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceProp725 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceProp746 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp764 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceProp785 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceProp803 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceProp824 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp842 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceProp863 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceProp877 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceNbProp_in_parse_ASPT_TraceProp896 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_parse_ASPT_TraceEdge921 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceEdge935 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceEdge953 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceEdge974 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceEdge992 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceEdge1013 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge1031 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceEdge1052 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceEdge1070 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceEdge1091 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceEdge1109 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceEdge1130 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge1148 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceEdge1169 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceEdge1187 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceEdge1208 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge1226 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceEdge1247 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceEdge1261 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceNbEdge_in_parse_ASPT_TraceEdge1280 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_parse_ASPT_TraceNbEdge1305 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceNbEdge1319 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbEdge1337 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbEdge1358 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1376 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbEdge1397 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1415 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbEdge1436 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbEdge1454 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbEdge1475 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1493 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbEdge1514 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1532 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbEdge1553 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1571 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbEdge1592 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1610 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbEdge1631 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceNbEdge1645 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_parse_ASPT_TraceNbProp1674 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceNbProp1688 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbProp1706 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbProp1727 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbProp1745 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbProp1766 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1784 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbProp1805 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbProp1823 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbProp1844 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1862 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbProp1883 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbProp1901 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbProp1922 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1940 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbProp1961 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceNbProp1975 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_parse_ASPT_TraceNbNode2004 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceNbNode2018 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbNode2036 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbNode2057 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbNode2075 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbNode2096 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbNode2114 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbNode2135 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbNode2153 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbNode2174 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceNbNode2188 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_parse_ASPT_TraceLink2217 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceLink2231 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceLink2249 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceLink2270 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceLink2288 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceLink2309 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceLink2327 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceLink2348 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceLink2366 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceLink2387 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceLink2405 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceLink2426 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceLink2440 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceNode_in_parse_ASPT_TraceElement2465 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceProp_in_parse_ASPT_TraceElement2475 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceEdge_in_parse_ASPT_TraceElement2485 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceNbEdge_in_parse_ASPT_TraceElement2495 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceNbProp_in_parse_ASPT_TraceElement2505 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceNbNode_in_parse_ASPT_TraceElement2515 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceLink_in_parse_ASPT_TraceElement2525 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceElement_in_synpred1_Aspt250 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceNode_in_synpred6_Aspt2465 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceProp_in_synpred7_Aspt2475 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceEdge_in_synpred8_Aspt2485 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceNbEdge_in_synpred9_Aspt2495 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceNbProp_in_synpred10_Aspt2505 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceNbNode_in_synpred11_Aspt2515 = new BitSet(new long[]{0x0000000000000002L});
 
 }
