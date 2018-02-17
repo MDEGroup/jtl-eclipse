@@ -182,7 +182,7 @@ public abstract class AbstractASPSolver {
 		ArrayList<String> modelsFiles = new ArrayList<String>();
 		for (int c = 0; engine.hasMoreModel(); c++) {
 			Path modelPath = Paths.get(target.getPath(), source + ((c>0) ? c : "") + ".aspm");
-			Path traceModelPath = Paths.get(target.getPath(), source + ((c>0) ? c : "") + "_trace.aspm");
+			Path traceModelPath = Paths.get(target.getPath(), source + ((c>0) ? c : "") + "_trace.aspt");
 			Model model = engine.nextModel();
 			emptyModel = true;
 			emptyTraceModel = true;
@@ -206,6 +206,10 @@ public abstract class AbstractASPSolver {
 					// Wait until the first trace atom
 					// to set the trace model not empty
 					if (emptyTraceModel && atomName.startsWith("trace_")) {
+						atoms.put("trace_nodex", atoms.get("trace_nodex") +
+								String.format("trace_model(\"%s%d\", %s).%n", source, c,
+								atom.getArguments().get(0).toString()
+								.replaceFirst("x_(\\w+)_target", "x_$1")));
 						emptyTraceModel = false;
 					}
 
