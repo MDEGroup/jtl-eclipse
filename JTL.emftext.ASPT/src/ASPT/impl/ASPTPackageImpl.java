@@ -4,17 +4,17 @@ package ASPT.impl;
 
 import ASPT.ASPTFactory;
 import ASPT.ASPTPackage;
-import ASPT.DataType;
-import ASPT.Entity;
-import ASPT.EntityModel;
-import ASPT.Feature;
-import ASPT.FeatureKind;
-import ASPT.NamedElement;
-import ASPT.Type;
-
+import ASPT.TraceEdge;
+import ASPT.TraceElement;
+import ASPT.TraceLink;
+import ASPT.TraceModel;
+import ASPT.TraceNbEdge;
+import ASPT.TraceNbNode;
+import ASPT.TraceNbProp;
+import ASPT.TraceNode;
+import ASPT.TraceProp;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -32,49 +32,63 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass namedElementEClass = null;
+	private EClass traceModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass typeEClass = null;
+	private EClass traceLinkEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass dataTypeEClass = null;
+	private EClass traceElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass entityEClass = null;
+	private EClass traceNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass entityModelEClass = null;
+	private EClass tracePropEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass featureEClass = null;
+	private EClass traceEdgeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum featureKindEEnum = null;
+	private EClass traceNbNodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass traceNbPropEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass traceNbEdgeEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -142,8 +156,8 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getNamedElement() {
-		return namedElementEClass;
+	public EClass getTraceModel() {
+		return traceModelEClass;
 	}
 
 	/**
@@ -151,8 +165,8 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getNamedElement_Name() {
-		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
+	public EReference getTraceModel_Tracelinks() {
+		return (EReference)traceModelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -160,8 +174,8 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getType() {
-		return typeEClass;
+	public EReference getTraceModel_Traceelements() {
+		return (EReference)traceModelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -169,8 +183,8 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getDataType() {
-		return dataTypeEClass;
+	public EAttribute getTraceModel_ID() {
+		return (EAttribute)traceModelEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -178,8 +192,8 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getEntity() {
-		return entityEClass;
+	public EAttribute getTraceModel_MMS() {
+		return (EAttribute)traceModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -187,8 +201,8 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEntity_Abstract() {
-		return (EAttribute)entityEClass.getEStructuralFeatures().get(0);
+	public EClass getTraceLink() {
+		return traceLinkEClass;
 	}
 
 	/**
@@ -196,8 +210,8 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEntity_Features() {
-		return (EReference)entityEClass.getEStructuralFeatures().get(1);
+	public EAttribute getTraceLink_Relation() {
+		return (EAttribute)traceLinkEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -205,8 +219,8 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getEntityModel() {
-		return entityModelEClass;
+	public EClass getTraceElement() {
+		return traceElementEClass;
 	}
 
 	/**
@@ -214,8 +228,8 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEntityModel_Types() {
-		return (EReference)entityModelEClass.getEStructuralFeatures().get(0);
+	public EAttribute getTraceElement_Metamodel() {
+		return (EAttribute)traceElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -223,8 +237,8 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFeature() {
-		return featureEClass;
+	public EAttribute getTraceElement_Id() {
+		return (EAttribute)traceElementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -232,8 +246,8 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFeature_Kind() {
-		return (EAttribute)featureEClass.getEStructuralFeatures().get(0);
+	public EAttribute getTraceElement_Idx() {
+		return (EAttribute)traceElementEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -241,8 +255,8 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFeature_Type() {
-		return (EReference)featureEClass.getEStructuralFeatures().get(1);
+	public EAttribute getTraceElement_Type() {
+		return (EAttribute)traceElementEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -250,8 +264,116 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getFeatureKind() {
-		return featureKindEEnum;
+	public EClass getTraceNode() {
+		return traceNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTraceProp() {
+		return tracePropEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTraceProp_Idp() {
+		return (EAttribute)tracePropEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTraceProp_Idpx() {
+		return (EAttribute)tracePropEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTraceProp_Value() {
+		return (EAttribute)tracePropEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTraceEdge() {
+		return traceEdgeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTraceEdge_Ids() {
+		return (EAttribute)traceEdgeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTraceEdge_Idsx() {
+		return (EAttribute)traceEdgeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTraceEdge_Idt() {
+		return (EAttribute)traceEdgeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTraceEdge_Idtx() {
+		return (EAttribute)traceEdgeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTraceNbNode() {
+		return traceNbNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTraceNbProp() {
+		return traceNbPropEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTraceNbEdge() {
+		return traceNbEdgeEClass;
 	}
 
 	/**
@@ -282,26 +404,39 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		namedElementEClass = createEClass(NAMED_ELEMENT);
-		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+		traceModelEClass = createEClass(TRACE_MODEL);
+		createEReference(traceModelEClass, TRACE_MODEL__TRACELINKS);
+		createEReference(traceModelEClass, TRACE_MODEL__TRACEELEMENTS);
+		createEAttribute(traceModelEClass, TRACE_MODEL__ID);
+		createEAttribute(traceModelEClass, TRACE_MODEL__MMS);
 
-		typeEClass = createEClass(TYPE);
+		traceLinkEClass = createEClass(TRACE_LINK);
+		createEAttribute(traceLinkEClass, TRACE_LINK__RELATION);
 
-		dataTypeEClass = createEClass(DATA_TYPE);
+		traceElementEClass = createEClass(TRACE_ELEMENT);
+		createEAttribute(traceElementEClass, TRACE_ELEMENT__METAMODEL);
+		createEAttribute(traceElementEClass, TRACE_ELEMENT__ID);
+		createEAttribute(traceElementEClass, TRACE_ELEMENT__IDX);
+		createEAttribute(traceElementEClass, TRACE_ELEMENT__TYPE);
 
-		entityEClass = createEClass(ENTITY);
-		createEAttribute(entityEClass, ENTITY__ABSTRACT);
-		createEReference(entityEClass, ENTITY__FEATURES);
+		traceNodeEClass = createEClass(TRACE_NODE);
 
-		entityModelEClass = createEClass(ENTITY_MODEL);
-		createEReference(entityModelEClass, ENTITY_MODEL__TYPES);
+		tracePropEClass = createEClass(TRACE_PROP);
+		createEAttribute(tracePropEClass, TRACE_PROP__IDP);
+		createEAttribute(tracePropEClass, TRACE_PROP__IDPX);
+		createEAttribute(tracePropEClass, TRACE_PROP__VALUE);
 
-		featureEClass = createEClass(FEATURE);
-		createEAttribute(featureEClass, FEATURE__KIND);
-		createEReference(featureEClass, FEATURE__TYPE);
+		traceEdgeEClass = createEClass(TRACE_EDGE);
+		createEAttribute(traceEdgeEClass, TRACE_EDGE__IDS);
+		createEAttribute(traceEdgeEClass, TRACE_EDGE__IDSX);
+		createEAttribute(traceEdgeEClass, TRACE_EDGE__IDT);
+		createEAttribute(traceEdgeEClass, TRACE_EDGE__IDTX);
 
-		// Create enums
-		featureKindEEnum = createEEnum(FEATURE_KIND);
+		traceNbNodeEClass = createEClass(TRACE_NB_NODE);
+
+		traceNbPropEClass = createEClass(TRACE_NB_PROP);
+
+		traceNbEdgeEClass = createEClass(TRACE_NB_EDGE);
 	}
 
 	/**
@@ -332,35 +467,48 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		typeEClass.getESuperTypes().add(this.getNamedElement());
-		dataTypeEClass.getESuperTypes().add(this.getType());
-		entityEClass.getESuperTypes().add(this.getType());
-		featureEClass.getESuperTypes().add(this.getNamedElement());
+		traceLinkEClass.getESuperTypes().add(this.getTraceElement());
+		traceNodeEClass.getESuperTypes().add(this.getTraceElement());
+		tracePropEClass.getESuperTypes().add(this.getTraceElement());
+		traceEdgeEClass.getESuperTypes().add(this.getTraceElement());
+		traceNbNodeEClass.getESuperTypes().add(this.getTraceNode());
+		traceNbPropEClass.getESuperTypes().add(this.getTraceProp());
+		traceNbEdgeEClass.getESuperTypes().add(this.getTraceEdge());
 
-		// Initialize classes and features; add operations and parameters
-		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		// Initialize classes, features, and operations; add parameters
+		initEClass(traceModelEClass, TraceModel.class, "TraceModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTraceModel_Tracelinks(), this.getTraceLink(), null, "tracelinks", null, 0, -1, TraceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTraceModel_Traceelements(), this.getTraceElement(), null, "traceelements", null, 0, -1, TraceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTraceModel_ID(), ecorePackage.getEString(), "ID", null, 0, 1, TraceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTraceModel_MMS(), ecorePackage.getEString(), "MMS", null, 0, 1, TraceModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(traceLinkEClass, TraceLink.class, "TraceLink", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTraceLink_Relation(), ecorePackage.getEString(), "relation", null, 0, 1, TraceLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(traceElementEClass, TraceElement.class, "TraceElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTraceElement_Metamodel(), ecorePackage.getEString(), "metamodel", null, 0, 1, TraceElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTraceElement_Id(), ecorePackage.getEString(), "id", null, 0, 1, TraceElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTraceElement_Idx(), ecorePackage.getEString(), "idx", null, 0, 1, TraceElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTraceElement_Type(), ecorePackage.getEString(), "type", null, 0, 1, TraceElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEntity_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 1, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEntity_Features(), this.getFeature(), null, "features", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(traceNodeEClass, TraceNode.class, "TraceNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(entityModelEClass, EntityModel.class, "EntityModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEntityModel_Types(), this.getType(), null, "types", null, 0, -1, EntityModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(tracePropEClass, TraceProp.class, "TraceProp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTraceProp_Idp(), ecorePackage.getEString(), "idp", null, 0, 1, TraceProp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTraceProp_Idpx(), ecorePackage.getEString(), "idpx", null, 0, 1, TraceProp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTraceProp_Value(), ecorePackage.getEString(), "value", null, 0, 1, TraceProp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(featureEClass, Feature.class, "Feature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFeature_Kind(), this.getFeatureKind(), "kind", null, 1, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFeature_Type(), this.getType(), null, "type", null, 1, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(traceEdgeEClass, TraceEdge.class, "TraceEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTraceEdge_Ids(), ecorePackage.getEString(), "ids", null, 0, 1, TraceEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTraceEdge_Idsx(), ecorePackage.getEString(), "idsx", null, 0, 1, TraceEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTraceEdge_Idt(), ecorePackage.getEString(), "idt", null, 0, 1, TraceEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTraceEdge_Idtx(), ecorePackage.getEString(), "idtx", null, 0, 1, TraceEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		// Initialize enums and add enum literals
-		initEEnum(featureKindEEnum, FeatureKind.class, "FeatureKind");
-		addEEnumLiteral(featureKindEEnum, FeatureKind.ATTRIBUTE);
-		addEEnumLiteral(featureKindEEnum, FeatureKind.REFERENCE);
-		addEEnumLiteral(featureKindEEnum, FeatureKind.CONTAINMENT);
+		initEClass(traceNbNodeEClass, TraceNbNode.class, "TraceNbNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(traceNbPropEClass, TraceNbProp.class, "TraceNbProp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(traceNbEdgeEClass, TraceNbEdge.class, "TraceNbEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

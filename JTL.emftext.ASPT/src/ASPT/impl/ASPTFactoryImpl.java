@@ -5,7 +5,6 @@ package ASPT.impl;
 import ASPT.*;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -57,10 +56,15 @@ public class ASPTFactoryImpl extends EFactoryImpl implements ASPTFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ASPTPackage.DATA_TYPE: return createDataType();
-			case ASPTPackage.ENTITY: return createEntity();
-			case ASPTPackage.ENTITY_MODEL: return createEntityModel();
-			case ASPTPackage.FEATURE: return createFeature();
+			case ASPTPackage.TRACE_MODEL: return createTraceModel();
+			case ASPTPackage.TRACE_LINK: return createTraceLink();
+			case ASPTPackage.TRACE_ELEMENT: return createTraceElement();
+			case ASPTPackage.TRACE_NODE: return createTraceNode();
+			case ASPTPackage.TRACE_PROP: return createTraceProp();
+			case ASPTPackage.TRACE_EDGE: return createTraceEdge();
+			case ASPTPackage.TRACE_NB_NODE: return createTraceNbNode();
+			case ASPTPackage.TRACE_NB_PROP: return createTraceNbProp();
+			case ASPTPackage.TRACE_NB_EDGE: return createTraceNbEdge();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -71,14 +75,9 @@ public class ASPTFactoryImpl extends EFactoryImpl implements ASPTFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Object createFromString(EDataType eDataType, String initialValue) {
-		switch (eDataType.getClassifierID()) {
-			case ASPTPackage.FEATURE_KIND:
-				return createFeatureKindFromString(eDataType, initialValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
+	public TraceModel createTraceModel() {
+		TraceModelImpl traceModel = new TraceModelImpl();
+		return traceModel;
 	}
 
 	/**
@@ -86,14 +85,9 @@ public class ASPTFactoryImpl extends EFactoryImpl implements ASPTFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public String convertToString(EDataType eDataType, Object instanceValue) {
-		switch (eDataType.getClassifierID()) {
-			case ASPTPackage.FEATURE_KIND:
-				return convertFeatureKindToString(eDataType, instanceValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
+	public TraceLink createTraceLink() {
+		TraceLinkImpl traceLink = new TraceLinkImpl();
+		return traceLink;
 	}
 
 	/**
@@ -101,9 +95,9 @@ public class ASPTFactoryImpl extends EFactoryImpl implements ASPTFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataType createDataType() {
-		DataTypeImpl dataType = new DataTypeImpl();
-		return dataType;
+	public TraceElement createTraceElement() {
+		TraceElementImpl traceElement = new TraceElementImpl();
+		return traceElement;
 	}
 
 	/**
@@ -111,9 +105,9 @@ public class ASPTFactoryImpl extends EFactoryImpl implements ASPTFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Entity createEntity() {
-		EntityImpl entity = new EntityImpl();
-		return entity;
+	public TraceNode createTraceNode() {
+		TraceNodeImpl traceNode = new TraceNodeImpl();
+		return traceNode;
 	}
 
 	/**
@@ -121,9 +115,9 @@ public class ASPTFactoryImpl extends EFactoryImpl implements ASPTFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EntityModel createEntityModel() {
-		EntityModelImpl entityModel = new EntityModelImpl();
-		return entityModel;
+	public TraceProp createTraceProp() {
+		TracePropImpl traceProp = new TracePropImpl();
+		return traceProp;
 	}
 
 	/**
@@ -131,9 +125,9 @@ public class ASPTFactoryImpl extends EFactoryImpl implements ASPTFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Feature createFeature() {
-		FeatureImpl feature = new FeatureImpl();
-		return feature;
+	public TraceEdge createTraceEdge() {
+		TraceEdgeImpl traceEdge = new TraceEdgeImpl();
+		return traceEdge;
 	}
 
 	/**
@@ -141,10 +135,9 @@ public class ASPTFactoryImpl extends EFactoryImpl implements ASPTFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FeatureKind createFeatureKindFromString(EDataType eDataType, String initialValue) {
-		FeatureKind result = FeatureKind.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
+	public TraceNbNode createTraceNbNode() {
+		TraceNbNodeImpl traceNbNode = new TraceNbNodeImpl();
+		return traceNbNode;
 	}
 
 	/**
@@ -152,8 +145,19 @@ public class ASPTFactoryImpl extends EFactoryImpl implements ASPTFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertFeatureKindToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
+	public TraceNbProp createTraceNbProp() {
+		TraceNbPropImpl traceNbProp = new TraceNbPropImpl();
+		return traceNbProp;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TraceNbEdge createTraceNbEdge() {
+		TraceNbEdgeImpl traceNbEdge = new TraceNbEdgeImpl();
+		return traceNbEdge;
 	}
 
 	/**

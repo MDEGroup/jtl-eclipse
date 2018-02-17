@@ -3,24 +3,24 @@
 package ASPT.impl;
 
 import ASPT.ASPTPackage;
-import ASPT.DataType;
+import ASPT.TraceNbEdge;
 
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Data Type</b></em>'.
+ * An implementation of the model object '<em><b>Trace Nb Edge</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class DataTypeImpl extends TypeImpl implements DataType {
+public class TraceNbEdgeImpl extends TraceEdgeImpl implements TraceNbEdge {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DataTypeImpl() {
+	protected TraceNbEdgeImpl() {
 		super();
 	}
 
@@ -31,7 +31,7 @@ public class DataTypeImpl extends TypeImpl implements DataType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ASPTPackage.Literals.DATA_TYPE;
+		return ASPTPackage.Literals.TRACE_NB_EDGE;
 	}
 
-} //DataTypeImpl
+} //TraceNbEdgeImpl

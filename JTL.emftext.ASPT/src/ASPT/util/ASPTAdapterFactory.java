@@ -68,28 +68,40 @@ public class ASPTAdapterFactory extends AdapterFactoryImpl {
 	protected ASPTSwitch<Adapter> modelSwitch =
 		new ASPTSwitch<Adapter>() {
 			@Override
-			public Adapter caseNamedElement(NamedElement object) {
-				return createNamedElementAdapter();
+			public Adapter caseTraceModel(TraceModel object) {
+				return createTraceModelAdapter();
 			}
 			@Override
-			public Adapter caseType(Type object) {
-				return createTypeAdapter();
+			public Adapter caseTraceLink(TraceLink object) {
+				return createTraceLinkAdapter();
 			}
 			@Override
-			public Adapter caseDataType(DataType object) {
-				return createDataTypeAdapter();
+			public Adapter caseTraceElement(TraceElement object) {
+				return createTraceElementAdapter();
 			}
 			@Override
-			public Adapter caseEntity(Entity object) {
-				return createEntityAdapter();
+			public Adapter caseTraceNode(TraceNode object) {
+				return createTraceNodeAdapter();
 			}
 			@Override
-			public Adapter caseEntityModel(EntityModel object) {
-				return createEntityModelAdapter();
+			public Adapter caseTraceProp(TraceProp object) {
+				return createTracePropAdapter();
 			}
 			@Override
-			public Adapter caseFeature(Feature object) {
-				return createFeatureAdapter();
+			public Adapter caseTraceEdge(TraceEdge object) {
+				return createTraceEdgeAdapter();
+			}
+			@Override
+			public Adapter caseTraceNbNode(TraceNbNode object) {
+				return createTraceNbNodeAdapter();
+			}
+			@Override
+			public Adapter caseTraceNbProp(TraceNbProp object) {
+				return createTraceNbPropAdapter();
+			}
+			@Override
+			public Adapter caseTraceNbEdge(TraceNbEdge object) {
+				return createTraceNbEdgeAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -112,86 +124,128 @@ public class ASPTAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link ASPT.NamedElement <em>Named Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link ASPT.TraceModel <em>Trace Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see ASPT.NamedElement
+	 * @see ASPT.TraceModel
 	 * @generated
 	 */
-	public Adapter createNamedElementAdapter() {
+	public Adapter createTraceModelAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link ASPT.Type <em>Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link ASPT.TraceLink <em>Trace Link</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see ASPT.Type
+	 * @see ASPT.TraceLink
 	 * @generated
 	 */
-	public Adapter createTypeAdapter() {
+	public Adapter createTraceLinkAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link ASPT.DataType <em>Data Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link ASPT.TraceElement <em>Trace Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see ASPT.DataType
+	 * @see ASPT.TraceElement
 	 * @generated
 	 */
-	public Adapter createDataTypeAdapter() {
+	public Adapter createTraceElementAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link ASPT.Entity <em>Entity</em>}'.
+	 * Creates a new adapter for an object of class '{@link ASPT.TraceNode <em>Trace Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see ASPT.Entity
+	 * @see ASPT.TraceNode
 	 * @generated
 	 */
-	public Adapter createEntityAdapter() {
+	public Adapter createTraceNodeAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link ASPT.EntityModel <em>Entity Model</em>}'.
+	 * Creates a new adapter for an object of class '{@link ASPT.TraceProp <em>Trace Prop</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see ASPT.EntityModel
+	 * @see ASPT.TraceProp
 	 * @generated
 	 */
-	public Adapter createEntityModelAdapter() {
+	public Adapter createTracePropAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link ASPT.Feature <em>Feature</em>}'.
+	 * Creates a new adapter for an object of class '{@link ASPT.TraceEdge <em>Trace Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see ASPT.Feature
+	 * @see ASPT.TraceEdge
 	 * @generated
 	 */
-	public Adapter createFeatureAdapter() {
+	public Adapter createTraceEdgeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ASPT.TraceNbNode <em>Trace Nb Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ASPT.TraceNbNode
+	 * @generated
+	 */
+	public Adapter createTraceNbNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ASPT.TraceNbProp <em>Trace Nb Prop</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ASPT.TraceNbProp
+	 * @generated
+	 */
+	public Adapter createTraceNbPropAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link ASPT.TraceNbEdge <em>Trace Nb Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see ASPT.TraceNbEdge
+	 * @generated
+	 */
+	public Adapter createTraceNbEdgeAdapter() {
 		return null;
 	}
 

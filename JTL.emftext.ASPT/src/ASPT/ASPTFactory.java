@@ -22,40 +22,85 @@ public interface ASPTFactory extends EFactory {
 	ASPTFactory eINSTANCE = ASPT.impl.ASPTFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Data Type</em>'.
+	 * Returns a new object of class '<em>Trace Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Type</em>'.
+	 * @return a new object of class '<em>Trace Model</em>'.
 	 * @generated
 	 */
-	DataType createDataType();
+	TraceModel createTraceModel();
 
 	/**
-	 * Returns a new object of class '<em>Entity</em>'.
+	 * Returns a new object of class '<em>Trace Link</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Entity</em>'.
+	 * @return a new object of class '<em>Trace Link</em>'.
 	 * @generated
 	 */
-	Entity createEntity();
+	TraceLink createTraceLink();
 
 	/**
-	 * Returns a new object of class '<em>Entity Model</em>'.
+	 * Returns a new object of class '<em>Trace Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Entity Model</em>'.
+	 * @return a new object of class '<em>Trace Element</em>'.
 	 * @generated
 	 */
-	EntityModel createEntityModel();
+	TraceElement createTraceElement();
 
 	/**
-	 * Returns a new object of class '<em>Feature</em>'.
+	 * Returns a new object of class '<em>Trace Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Feature</em>'.
+	 * @return a new object of class '<em>Trace Node</em>'.
 	 * @generated
 	 */
-	Feature createFeature();
+	TraceNode createTraceNode();
+
+	/**
+	 * Returns a new object of class '<em>Trace Prop</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Trace Prop</em>'.
+	 * @generated
+	 */
+	TraceProp createTraceProp();
+
+	/**
+	 * Returns a new object of class '<em>Trace Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Trace Edge</em>'.
+	 * @generated
+	 */
+	TraceEdge createTraceEdge();
+
+	/**
+	 * Returns a new object of class '<em>Trace Nb Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Trace Nb Node</em>'.
+	 * @generated
+	 */
+	TraceNbNode createTraceNbNode();
+
+	/**
+	 * Returns a new object of class '<em>Trace Nb Prop</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Trace Nb Prop</em>'.
+	 * @generated
+	 */
+	TraceNbProp createTraceNbProp();
+
+	/**
+	 * Returns a new object of class '<em>Trace Nb Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Trace Nb Edge</em>'.
+	 * @generated
+	 */
+	TraceNbEdge createTraceNbEdge();
 
 	/**
 	 * Returns the package supported by this factory.

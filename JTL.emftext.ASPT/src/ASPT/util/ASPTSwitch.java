@@ -66,45 +66,67 @@ public class ASPTSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case ASPTPackage.NAMED_ELEMENT: {
-				NamedElement namedElement = (NamedElement)theEObject;
-				T result = caseNamedElement(namedElement);
+			case ASPTPackage.TRACE_MODEL: {
+				TraceModel traceModel = (TraceModel)theEObject;
+				T result = caseTraceModel(traceModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ASPTPackage.TYPE: {
-				Type type = (Type)theEObject;
-				T result = caseType(type);
-				if (result == null) result = caseNamedElement(type);
+			case ASPTPackage.TRACE_LINK: {
+				TraceLink traceLink = (TraceLink)theEObject;
+				T result = caseTraceLink(traceLink);
+				if (result == null) result = caseTraceElement(traceLink);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ASPTPackage.DATA_TYPE: {
-				DataType dataType = (DataType)theEObject;
-				T result = caseDataType(dataType);
-				if (result == null) result = caseType(dataType);
-				if (result == null) result = caseNamedElement(dataType);
+			case ASPTPackage.TRACE_ELEMENT: {
+				TraceElement traceElement = (TraceElement)theEObject;
+				T result = caseTraceElement(traceElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ASPTPackage.ENTITY: {
-				Entity entity = (Entity)theEObject;
-				T result = caseEntity(entity);
-				if (result == null) result = caseType(entity);
-				if (result == null) result = caseNamedElement(entity);
+			case ASPTPackage.TRACE_NODE: {
+				TraceNode traceNode = (TraceNode)theEObject;
+				T result = caseTraceNode(traceNode);
+				if (result == null) result = caseTraceElement(traceNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ASPTPackage.ENTITY_MODEL: {
-				EntityModel entityModel = (EntityModel)theEObject;
-				T result = caseEntityModel(entityModel);
+			case ASPTPackage.TRACE_PROP: {
+				TraceProp traceProp = (TraceProp)theEObject;
+				T result = caseTraceProp(traceProp);
+				if (result == null) result = caseTraceElement(traceProp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ASPTPackage.FEATURE: {
-				Feature feature = (Feature)theEObject;
-				T result = caseFeature(feature);
-				if (result == null) result = caseNamedElement(feature);
+			case ASPTPackage.TRACE_EDGE: {
+				TraceEdge traceEdge = (TraceEdge)theEObject;
+				T result = caseTraceEdge(traceEdge);
+				if (result == null) result = caseTraceElement(traceEdge);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ASPTPackage.TRACE_NB_NODE: {
+				TraceNbNode traceNbNode = (TraceNbNode)theEObject;
+				T result = caseTraceNbNode(traceNbNode);
+				if (result == null) result = caseTraceNode(traceNbNode);
+				if (result == null) result = caseTraceElement(traceNbNode);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ASPTPackage.TRACE_NB_PROP: {
+				TraceNbProp traceNbProp = (TraceNbProp)theEObject;
+				T result = caseTraceNbProp(traceNbProp);
+				if (result == null) result = caseTraceProp(traceNbProp);
+				if (result == null) result = caseTraceElement(traceNbProp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ASPTPackage.TRACE_NB_EDGE: {
+				TraceNbEdge traceNbEdge = (TraceNbEdge)theEObject;
+				T result = caseTraceNbEdge(traceNbEdge);
+				if (result == null) result = caseTraceEdge(traceNbEdge);
+				if (result == null) result = caseTraceElement(traceNbEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -113,92 +135,137 @@ public class ASPTSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Trace Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Trace Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNamedElement(NamedElement object) {
+	public T caseTraceModel(TraceModel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Trace Link</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Trace Link</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseType(Type object) {
+	public T caseTraceLink(TraceLink object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Data Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Trace Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Data Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Trace Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDataType(DataType object) {
+	public T caseTraceElement(TraceElement object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Entity</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Trace Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Entity</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Trace Node</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEntity(Entity object) {
+	public T caseTraceNode(TraceNode object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Entity Model</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Trace Prop</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Entity Model</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Trace Prop</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEntityModel(EntityModel object) {
+	public T caseTraceProp(TraceProp object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Feature</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Trace Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Feature</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Trace Edge</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFeature(Feature object) {
+	public T caseTraceEdge(TraceEdge object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Trace Nb Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Trace Nb Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTraceNbNode(TraceNbNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Trace Nb Prop</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Trace Nb Prop</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTraceNbProp(TraceNbProp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Trace Nb Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Trace Nb Edge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTraceNbEdge(TraceNbEdge object) {
 		return null;
 	}
 

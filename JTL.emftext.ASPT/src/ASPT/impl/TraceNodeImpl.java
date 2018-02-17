@@ -3,24 +3,24 @@
 package ASPT.impl;
 
 import ASPT.ASPTPackage;
-import ASPT.Type;
+import ASPT.TraceNode;
 
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Type</b></em>'.
+ * An implementation of the model object '<em><b>Trace Node</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public abstract class TypeImpl extends NamedElementImpl implements Type {
+public class TraceNodeImpl extends TraceElementImpl implements TraceNode {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TypeImpl() {
+	protected TraceNodeImpl() {
 		super();
 	}
 
@@ -31,7 +31,7 @@ public abstract class TypeImpl extends NamedElementImpl implements Type {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ASPTPackage.Literals.TYPE;
+		return ASPTPackage.Literals.TRACE_NODE;
 	}
 
-} //TypeImpl
+} //TraceNodeImpl
