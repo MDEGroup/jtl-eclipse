@@ -38,9 +38,10 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 	private Text sourcemText;
 	private Text targetmText;
 	private Text transfText;
+	private Spinner limitSpinner;
 	private Button tracesCheck;
-	private Button chainCheck;
 	private Text tracesText;
+	private Button chainCheck;
 	private Combo chainCombo;
 	private Spinner chainLimitSpinner;
 	private ArrayList<Control> tracesControls = new ArrayList<Control>();
@@ -184,6 +185,16 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
         	}
         });
 
+        // Target models limit
+        final Label limitLabel = new Label(transfGroup, SWT.NONE);
+        limitLabel.setText("Limit the number of generated models:");
+        limitLabel.setLayoutData(
+        		new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+        limitSpinner = new Spinner(transfGroup, SWT.BORDER);
+        limitSpinner.setToolTipText("0 = no limit");
+        limitSpinner.setMinimum(0);
+        limitSpinner.addModifyListener(modTextListener);
+
         // Traces model
         tracesCheck = new Button(transfGroup, SWT.CHECK);
         tracesCheck.setText("Provide a trace model");
@@ -299,6 +310,8 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 				.getAttribute(LaunchConfigurationAttributes.TARGETM_TEXT, ""));
 			transfText.setText(configuration
 				.getAttribute(LaunchConfigurationAttributes.TRANSF_TEXT, ""));
+			limitSpinner.setSelection(configuration
+					.getAttribute(LaunchConfigurationAttributes.TRANSF_LIMIT, 0));
 			tracesText.setText(configuration
 					.getAttribute(LaunchConfigurationAttributes.TRACE_TEXT, ""));
 			tracesCheck.setSelection(configuration
@@ -329,6 +342,8 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 				targetmText.getText());
 		configuration.setAttribute(LaunchConfigurationAttributes.TRANSF_TEXT,
 				transfText.getText());
+		configuration.setAttribute(LaunchConfigurationAttributes.TRANSF_LIMIT,
+				limitSpinner.getSelection());
 		configuration.setAttribute(LaunchConfigurationAttributes.TRACE_TEXT,
 				tracesText.getText());
 		configuration.setAttribute(LaunchConfigurationAttributes.TRACE_CHECK,

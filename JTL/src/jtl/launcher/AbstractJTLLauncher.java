@@ -66,6 +66,9 @@ public abstract class AbstractJTLLauncher {
 	// Traces model file
 	protected File tracesFile;
 
+	// Limit the number of output models (0 = no limit)
+	protected int targetModelsLimit = 0;
+
 	// Next transformation in the chain
 	protected String chainTransformation;
 
@@ -161,6 +164,14 @@ public abstract class AbstractJTLLauncher {
 	}
 
 	/**
+	 * Sets a limit on the number of generated target models.
+	 * @param limit Limit on the number of generated models
+	 */
+	public void setTargetModelsLimit(final int limit) {
+		this.targetModelsLimit = limit;
+	}
+
+	/**
 	 * Sets the name of the next transformation in the chain.
 	 * @param name Name of the next transformation
 	 */
@@ -212,10 +223,16 @@ public abstract class AbstractJTLLauncher {
 		transfFile = new File(getASPFilename());
 
 		// Run the solver
-		final ArrayList<String> modelsFiles =
+		ArrayList<String> modelsFiles =
 				runSolver(transfFile, targetmFolder, sourcemFile);
 
 		if (modelsFiles != null && modelsFiles.size() > 0) {
+			// Limit the number of target models
+			if (targetModelsLimit > 0) {
+				modelsFiles = new ArrayList<String>(modelsFiles.subList(0,
+						(targetModelsLimit > modelsFiles.size()) ? modelsFiles.size() : targetModelsLimit));
+			}
+
 			// Process target models
 			final ArrayList<String> targetFiles =
 					processTargetModels(modelsFiles, targetmmFile);
@@ -227,6 +244,8 @@ public abstract class AbstractJTLLauncher {
 
 				runChainTransformation(targetFiles);
 			}
+		} else if (modelsFiles == null) {
+			// TODO alert the user there are no output models
 		}
 
 		// Clean
@@ -445,8 +464,6 @@ public abstract class AbstractJTLLauncher {
 	protected ArrayList<String> processTargetModels(
 			final ArrayList<String> modelsFiles,
 			final File targetmmFile) {
-
-		// FIXME check modelsFiles for null and alert the user
 
 		// Register the ASPm metamodel
 		try {

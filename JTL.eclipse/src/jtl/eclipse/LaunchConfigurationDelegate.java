@@ -111,6 +111,12 @@ public class LaunchConfigurationDelegate
 			return;
 		}
 
+		// Target models limit
+		if (configuration.getAttribute(LaunchConfigurationAttributes.TRANSF_LIMIT, 0) > 0) {
+			launcher.setTargetModelsLimit(
+					configuration.getAttribute(LaunchConfigurationAttributes.TRANSF_LIMIT, 0));
+		}
+
 		// Set the chained trasformation, if needed
 		if (configuration.getAttribute(LaunchConfigurationAttributes.CHAIN_CHECK, false)) {
 			launcher.setChainTransformation(
