@@ -40,3 +40,11 @@ ASP-based transformation engine.
 
 `JTL.eclipse`:  
 OSGi Eclipse Equinox integration plug-in.
+
+
+##### On MacOS
+If you get the error *Library not loaded: /usr/local/lib/libltdl.7.dylib*:
+```
+$ brew install libtool --universal
+$ brew link libtool
+```
