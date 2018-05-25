@@ -8,23 +8,15 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package it.univaq.jtl.atl.aspm2mm;
+package it.univaq.jtl.atl.tracemodel2aspt;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
-import java.util.logging.StreamHandler;
+import java.util.Map.Entry;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -32,14 +24,8 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.m2m.atl.common.ATLExecutionException;
 import org.eclipse.m2m.atl.core.ATLCoreException;
 import org.eclipse.m2m.atl.core.IExtractor;
@@ -49,17 +35,14 @@ import org.eclipse.m2m.atl.core.IReferenceModel;
 import org.eclipse.m2m.atl.core.ModelFactory;
 import org.eclipse.m2m.atl.core.emf.EMFExtractor;
 import org.eclipse.m2m.atl.core.emf.EMFInjector;
-import org.eclipse.m2m.atl.core.emf.EMFModel;
 import org.eclipse.m2m.atl.core.emf.EMFModelFactory;
-import org.eclipse.m2m.atl.core.emf.EMFReferenceModel;
 import org.eclipse.m2m.atl.core.launch.ILauncher;
-import org.eclipse.m2m.atl.engine.compiler.AtlCompiler;
 import org.eclipse.m2m.atl.engine.emfvm.launch.EMFVMLauncher;
 
 /**
- * Entry point of the 'ASPm2MMGenerator' transformation module.
+ * Entry point of the 'TraceModel2ASPT' transformation module.
  */
-public class ASPm2MMGenerator {
+public class TraceModel2ASPT {
 
 	/**
 	 * The property file. Stores module list, the metamodel and library locations.
@@ -73,12 +56,11 @@ public class ASPm2MMGenerator {
 	 */
 	protected IModel inModel;
 
+	/**
+	 * The OUT model.
+	 * @generated
+	 */
 	protected IModel outModel;
-
-	protected InputStream generated;
-
-	protected String mmOut;
-	protected String mmOutName;
 
 	/**
 	 * The main method.
@@ -89,54 +71,13 @@ public class ASPm2MMGenerator {
 	 */
 	public static void main(String[] args) {
 		try {
-			if (args.length < 3) {
-				System.out.println("Arguments not valid : {OUT_metamodel_path, IN_model_path, OUT_model_oath}.");
+			if (args.length < 2) {
+				System.out.println("Arguments not valid : {IN_model_path, OUT_model_path}.");
 			} else {
-				ASPm2MMGenerator runner = new ASPm2MMGenerator();
+				TraceModel2ASPT runner = new TraceModel2ASPT();
 				runner.loadModels(args[0]);
-				runner.mmOut = args[0];
-
-				// The generated transformation
-
-				// Since ATL is printing the generated transformation
-                // to Standard Error we need to intercept it adding
-                // a handler to the logger registered by ATL
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                Logger logger = Logger.getLogger("org.eclipse.m2m.atl");
-                logger.setUseParentHandlers(false);
-                Handler handler = new StreamHandler(baos, new SimpleFormatter());
-                logger.addHandler(handler);
-                PrintStream err = System.err;
-                System.setErr(new PrintStream(new ByteArrayOutputStream()));
-
-                // Run the HOT
-                runner.doASPm2MMGenerator(new NullProgressMonitor());
-
-                // Flush the handler before we can use the OutputStream
-                handler.flush();
-
-                // Remove log output in order to keep only the generated transformation
-                runner.generated = new ByteArrayInputStream(baos.toString().replaceFirst("(?s).+?(?=--)", "").getBytes());
-
-                // Unregister the handler
-                handler.setLevel(Level.OFF);
-                logger.removeHandler(handler);
-                System.setErr(err);
-
-				// Detect the root element in the input metamodel
-				// in order to get the URI for the injector
-				EObject mmRoot = new ResourceSetImpl().getResource(URI.createURI(args[0]), true).getContents().get(0);
-				EStructuralFeature name = mmRoot.eClass().getEStructuralFeature("name");
-				runner.mmOutName = mmRoot.eGet(name).toString();
-
-				// Load the models to apply the generated transformation
-				runner.genLoadModels(args[1]);
-
-				// Launch the generated transformation
-				runner.doASPm2MM(new NullProgressMonitor());
-
-				// Save the target model of the generated transformation
-				runner.saveModels(args[2]);
+				runner.doTraceModel2ASPT(new NullProgressMonitor());
+				runner.saveModels(args[1]);
 			}
 		} catch (ATLCoreException e) {
 			e.printStackTrace();
@@ -152,9 +93,9 @@ public class ASPm2MMGenerator {
 	 *
 	 * @generated
 	 */
-	public ASPm2MMGenerator() throws IOException {
+	public TraceModel2ASPT() throws IOException {
 		properties = new Properties();
-		properties.load(getFileURL("ASPm2MMGenerator.properties").openStream());
+		properties.load(getFileURL("TraceModel2ASPT.properties").openStream());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 	}
 
@@ -171,53 +112,28 @@ public class ASPm2MMGenerator {
 	public void loadModels(String inModelPath) throws ATLCoreException {
 		ModelFactory factory = new EMFModelFactory();
 		IInjector injector = new EMFInjector();
-		IReferenceModel ecoreMetamodel = factory.getMetametamodel();
-		this.inModel = factory.newModel(ecoreMetamodel);
+	 	IReferenceModel tracemodelMetamodel = factory.newReferenceModel();
+		injector.inject(tracemodelMetamodel, getMetamodelUri("TraceModel"));
+	 	IReferenceModel asptMetamodel = factory.newReferenceModel();
+		injector.inject(asptMetamodel, getMetamodelUri("ASPT"));
+		this.inModel = factory.newModel(tracemodelMetamodel);
 		injector.inject(inModel, inModelPath);
+		this.outModel = factory.newModel(asptMetamodel);
 	}
 
-	public void genLoadModels(String inModelPath) throws ATLCoreException {
-		ModelFactory factory = new EMFModelFactory();
-		ModelFactory xmifactory = new EMFModelFactory() {
-			@Override
-			public IModel newModel(IReferenceModel referenceModel) {
-				return new EMFModel((EMFReferenceModel)referenceModel, this) {
-					@Override
-					public Object newElement(Object metaElement) {
-						Resource mainResource = getResource();
-						if (mainResource == null) {
-							mainResource = new XMIResourceImpl(URI.createURI("new-model")) {
-								@Override
-								protected boolean useUUIDs() {
-									return true;
-								}
-							};
-							setResource(mainResource);
-						}
-						EClass ec = (EClass)metaElement;
-						EObject ret = null;
-						ret = ec.getEPackage().getEFactoryInstance().create(ec);
-						mainResource.getContents().add(ret);
-						return ret;
-					}
-				};
-			}
-		};
-		IInjector injector = new EMFInjector();
-		IReferenceModel mmMetamodel = factory.newReferenceModel();
-		injector.inject(mmMetamodel, this.mmOut);
-		IReferenceModel aspmMetamodel = factory.newReferenceModel();
-		injector.inject(aspmMetamodel, getMetamodelUri("ASPm"));
-		this.inModel = factory.newModel(aspmMetamodel);
-		injector.inject(inModel, inModelPath);
-		this.outModel = xmifactory.newModel(mmMetamodel);
-	}
-
+	/**
+	 * Save the output and input/output models.
+	 *
+	 * @param outModelPath
+	 *            the OUT model path
+	 * @throws ATLCoreException
+	 *             if a problem occurs while saving models
+	 *
+	 * @generated
+	 */
 	public void saveModels(String outModelPath) throws ATLCoreException {
 		IExtractor extractor = new EMFExtractor();
-		HashMap<String, Object> options = new HashMap<String, Object>();
-		options.put(XMLResource.OPTION_SCHEMA_LOCATION, true);
-		extractor.extract(outModel, outModelPath, options);
+		extractor.extract(outModel, outModelPath);
 	}
 
 	/**
@@ -234,26 +150,13 @@ public class ASPm2MMGenerator {
 	 *
 	 * @generated
 	 */
-	public Object doASPm2MMGenerator(IProgressMonitor monitor) throws ATLCoreException, IOException, ATLExecutionException {
+	public Object doTraceModel2ASPT(IProgressMonitor monitor) throws ATLCoreException, IOException, ATLExecutionException {
 		ILauncher launcher = new EMFVMLauncher();
 		Map<String, Object> launcherOptions = getOptions();
 		launcher.initialize(launcherOptions);
-		launcher.addInModel(inModel, "IN", "ECORE");
+		launcher.addInModel(inModel, "IN", "TraceModel");
+		launcher.addOutModel(outModel, "OUT", "ASPT");
 		return launcher.launch("run", monitor, launcherOptions, (Object[]) getModulesList());
-	}
-
-	public Object doASPm2MM(IProgressMonitor monitor) throws ATLCoreException, IOException, ATLExecutionException {
-		ILauncher launcher = new EMFVMLauncher();
-		launcher.initialize(new HashMap<String,Object>());
-		launcher.addInModel(inModel, "IN", "ASPm");
-		launcher.addOutModel(outModel, "OUT", this.mmOutName);
-
-		// Compile the generated transformation
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		AtlCompiler.compile(this.generated, out);
-		ByteArrayInputStream asm = new ByteArrayInputStream(out.toByteArray());
-
-		return launcher.launch("run", monitor, new HashMap<String,Object>(), new Object[]{asm});
 	}
 
 	/**
@@ -268,7 +171,7 @@ public class ASPm2MMGenerator {
 	 */
 	protected InputStream[] getModulesList() throws IOException {
 		InputStream[] modules = null;
-		String modulesList = properties.getProperty("ASPm2MMGenerator.modules");
+		String modulesList = properties.getProperty("TraceModel2ASPT.modules");
 		if (modulesList != null) {
 			String[] moduleNames = modulesList.split(",");
 			modules = new InputStream[moduleNames.length];
@@ -290,7 +193,7 @@ public class ASPm2MMGenerator {
 	 * @generated
 	 */
 	public String getMetamodelUri(String metamodelName) {
-		String uriString = properties.getProperty("ASPm2MMGenerator.metamodels." + metamodelName);
+		String uriString = properties.getProperty("TraceModel2ASPT.metamodels." + metamodelName);
 		try {
 			new EMFModelFactory().getResourceSet().getResource(URI.createURI(uriString), true);
 		} catch (Exception e) {
@@ -309,7 +212,7 @@ public class ASPm2MMGenerator {
 	 * @generated
 	 */
 	protected InputStream getLibraryAsStream(String libraryName) throws IOException {
-		return getFileURL(properties.getProperty("ASPm2MMGenerator.libraries." + libraryName)).openStream();
+		return getFileURL(properties.getProperty("TraceModel2ASPT.libraries." + libraryName)).openStream();
 	}
 
 	/**
@@ -322,8 +225,8 @@ public class ASPm2MMGenerator {
 	protected Map<String, Object> getOptions() {
 		Map<String, Object> options = new HashMap<String, Object>();
 		for (Entry<Object, Object> entry : properties.entrySet()) {
-			if (entry.getKey().toString().startsWith("ASPm2MMGenerator.options.")) {
-				options.put(entry.getKey().toString().replaceFirst("ASPm2MMGenerator.options.", ""),
+			if (entry.getKey().toString().startsWith("TraceModel2ASPT.options.")) {
+				options.put(entry.getKey().toString().replaceFirst("TraceModel2ASPT.options.", ""),
 				entry.getValue().toString());
 			}
 		}
@@ -344,14 +247,14 @@ public class ASPm2MMGenerator {
 	protected static URL getFileURL(String fileName) throws IOException {
 		final URL fileURL;
 		if (isEclipseRunning()) {
-			URL resourceURL = ASPm2MMGenerator.class.getResource(fileName);
+			URL resourceURL = TraceModel2ASPT.class.getResource(fileName);
 			if (resourceURL != null) {
 				fileURL = FileLocator.toFileURL(resourceURL);
 			} else {
 				fileURL = null;
 			}
 		} else {
-			fileURL = ASPm2MMGenerator.class.getResource(fileName);
+			fileURL = TraceModel2ASPT.class.getResource(fileName);
 		}
 		if (fileURL == null) {
 			throw new IOException("'" + fileName + "' not found");

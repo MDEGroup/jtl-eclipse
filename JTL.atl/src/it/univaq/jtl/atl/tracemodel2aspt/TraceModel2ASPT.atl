@@ -1,0 +1,187 @@
+---------------------------------------------------------------------------------------------------
+-- Create a model of ASP traces from a traces model
+---------------------------------------------------------------------------------------------------
+
+module TraceModel2ASPT;
+create OUT : ASPT from IN : TraceModel;
+
+---------------------------------------------------------------------------------------------------
+--                                            HELPERS
+---------------------------------------------------------------------------------------------------
+helper def: tracemodel : TraceModel!TraceModel = OclUndefined;
+
+helper context String def: normalize() : String = 'x_' + self;
+
+helper context TraceModel!TraceLinkEnd def: getMetamodel() : String =
+    self.traceElement.eClass().getEPackage().name.normalize();
+
+helper context TraceModel!TraceLink def: isNode() : Boolean =
+    self.leftLinkEnd.first().traceElement
+	 .eClass().name = self.leftLinkEnd.first().type;
+
+helper context TraceModel!TraceLink def: isProp() : Boolean =
+    self.leftLinkEnd.first().traceElement.eClass().getEAllAttributes()
+	 ->select(e | e.name = self.leftLinkEnd.first().type).notEmpty();
+
+helper context TraceModel!TraceLink def: isEdge() : Boolean =
+    self.leftLinkEnd.first().traceElement.eClass().getEAllReferences()
+	 ->select(e | e.name = self.leftLinkEnd.first().type).notEmpty();
+
+---------------------------------------------------------------------------------------------------
+--                                          CALLED RULES
+---------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------
+--                                           LAZY RULES
+---------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------
+--                                         MATCHED RULES
+---------------------------------------------------------------------------------------------------
+rule TraceModel2TraceModel {
+	from
+		s : TraceModel!TraceModel
+	to
+		t : ASPT!TraceModel (
+			ID <- s.name,
+			MMS <- TraceModel!TraceLink.allInstancesFrom('IN')
+					.first().leftLinkEnd.first().getMetamodel()
+		)
+	do { thisModule.tracemodel <- t; }
+}
+
+rule TraceLink2TraceLink {
+	from
+		s : TraceModel!TraceLink (not s.isPartial and not s.isNonInjective)
+    using {
+		leftlink : TraceModel!TraceLinkEnd = s.leftLinkEnd->first();
+		rightlink : TraceModel!TraceLinkEnd = s.rightLinkEnd->first(); }
+	to
+		left : ASPT!TraceLink (
+		    id <- s.id,
+		    idx <- s.idx,
+		    idref <- s.idref,
+		    idrefx <- s.idrefx,
+		    metamodel <- leftlink.getMetamodel(),
+		    relation <- s.trule,
+		    type <- leftlink.type.normalize()
+		),
+		right : ASPT!TraceLink (
+		    id <- s.id,
+		    idx <- s.idx,
+		    idref <- s.idref,
+		    idrefx <- s.idrefx,
+		    metamodel <- rightlink.getMetamodel(),
+		    relation <- s.trule,
+		    type <- rightlink.type.normalize()
+		)
+	do { thisModule.tracemodel.tracelinks <- Sequence{left, right}; }
+}
+
+rule TraceLink2TraceNode {
+	from
+		s : TraceModel!TraceLink (s.isPartial and s.isNode())
+    using { linkend : TraceModel!TraceLinkEnd = s.leftLinkEnd->first(); }
+	to
+		t : ASPT!TraceNode (
+		    metamodel <- linkend.getMetamodel(),
+		    id <- s.id,
+		    idx <- s.idx,
+		    -- idx <- linkend.traceElement.__xmiID__.normalize(),
+		    type <- linkend.type.normalize()
+		)
+	do { thisModule.tracemodel.tracelinks <- t; }
+}
+
+rule TraceLink2TraceProp {
+	from
+		s : TraceModel!TraceLink (s.isPartial and s.isProp())
+    using { linkend : TraceModel!TraceLinkEnd = s.leftLinkEnd->first(); }
+	to
+		t : ASPT!TraceProp (
+		    metamodel <- linkend.getMetamodel(),
+		    id <- s.id,
+		    idx <- s.idx,
+		    idp <- s.ids,
+		    idpx <- s.idsx,
+		    -- idpx <- linkend.traceElement.__xmiID__.normalize(),
+		    type <- linkend.type.normalize(),
+		    value <- linkend.traceElement.eGet(
+		        linkend.traceElement.eClass().getEStructuralFeature(linkend.type))
+		        .normalize()
+		)
+	do { thisModule.tracemodel.tracelinks <- t; }
+}
+
+rule TraceLink2TraceEdge {
+	from
+		s : TraceModel!TraceLink (s.isPartial and s.isEdge())
+    using { linkend : TraceModel!TraceLinkEnd = s.leftLinkEnd->first(); }
+	to
+		t : ASPT!TraceEdge (
+		    metamodel <- linkend.getMetamodel(),
+		    id <- s.id,
+		    idx <- s.idx,
+		    ids <- s.ids,
+		    idsx <- s.idsx,
+		    -- idsx <- linkend.traceElement.__xmiID__.normalize(),
+		    idt <- s.idt,
+		    idtx <- s.idtx,
+		    type <- linkend.type.normalize()
+		)
+	do { thisModule.tracemodel.tracelinks <- t; }
+}
+
+rule TraceLink2TraceNbNode {
+	from
+		s : TraceModel!TraceLink (s.isNonInjective and s.isNode())
+    using { linkend : TraceModel!TraceLinkEnd = s.leftLinkEnd->first(); }
+	to
+		t : ASPT!TraceNbNode (
+		    metamodel <- linkend.getMetamodel(),
+		    id <- s.id,
+		    idx <- s.idx,
+		    -- idx <- linkend.traceElement.__xmiID__.normalize(),
+		    type <- linkend.type.normalize()
+		)
+	do { thisModule.tracemodel.tracelinks <- t; }
+}
+
+rule TraceLink2TraceNbProp {
+	from
+		s : TraceModel!TraceLink (s.isNonInjective and s.isProp())
+    using { linkend : TraceModel!TraceLinkEnd = s.leftLinkEnd->first(); }
+	to
+		t : ASPT!TraceNbProp (
+		    metamodel <- linkend.getMetamodel(),
+		    id <- s.id,
+		    idx <- s.idx,
+		    idp <- s.ids,
+		    idpx <- s.idsx,
+		    -- idpx <- linkend.traceElement.__xmiID__.normalize(),
+		    type <- linkend.type.normalize(),
+		    value <- linkend.traceElement.eGet(
+		        linkend.traceElement.eClass().getEStructuralFeature(linkend.type))
+		        .normalize()
+		)
+	do { thisModule.tracemodel.tracelinks <- t; }
+}
+
+rule TraceLink2TraceNbEdge {
+	from
+		s : TraceModel!TraceLink (s.isNonInjective and s.isEdge())
+    using { linkend : TraceModel!TraceLinkEnd = s.leftLinkEnd->first(); }
+	to
+		t : ASPT!TraceNbEdge (
+		    metamodel <- linkend.getMetamodel(),
+		    id <- s.id,
+		    idx <- s.idx,
+		    ids <- s.ids,
+		    idsx <- s.idsx,
+		    -- idsx <- linkend.traceElement.__xmiID__.normalize(),
+		    idt <- s.idt,
+		    idtx <- s.idtx,
+		    type <- linkend.type.normalize()
+		)
+	do { thisModule.tracemodel.tracelinks <- t; }
+}

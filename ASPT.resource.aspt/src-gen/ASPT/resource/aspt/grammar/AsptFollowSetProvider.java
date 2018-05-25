@@ -12,7 +12,7 @@ package ASPT.resource.aspt.grammar;
  */
 public class AsptFollowSetProvider {
 	
-	public final static ASPT.resource.aspt.IAsptExpectedElement TERMINALS[] = new ASPT.resource.aspt.IAsptExpectedElement[114];
+	public final static ASPT.resource.aspt.IAsptExpectedElement TERMINALS[] = new ASPT.resource.aspt.IAsptExpectedElement[118];
 	
 	public final static org.eclipse.emf.ecore.EStructuralFeature[] FEATURES = new org.eclipse.emf.ecore.EStructuralFeature[1];
 	
@@ -134,7 +134,11 @@ public class AsptFollowSetProvider {
 		TERMINALS[110] = new ASPT.resource.aspt.mopp.AsptExpectedCsString(ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_9);
 		TERMINALS[111] = new ASPT.resource.aspt.mopp.AsptExpectedStructuralFeature(ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_10);
 		TERMINALS[112] = new ASPT.resource.aspt.mopp.AsptExpectedCsString(ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_11);
-		TERMINALS[113] = new ASPT.resource.aspt.mopp.AsptExpectedCsString(ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_12);
+		TERMINALS[113] = new ASPT.resource.aspt.mopp.AsptExpectedStructuralFeature(ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_12);
+		TERMINALS[114] = new ASPT.resource.aspt.mopp.AsptExpectedCsString(ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_13);
+		TERMINALS[115] = new ASPT.resource.aspt.mopp.AsptExpectedStructuralFeature(ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_14);
+		TERMINALS[116] = new ASPT.resource.aspt.mopp.AsptExpectedCsString(ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_15);
+		TERMINALS[117] = new ASPT.resource.aspt.mopp.AsptExpectedCsString(ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_16);
 	}
 	
 	public static void initializeTerminals() {
@@ -389,13 +393,17 @@ public class AsptFollowSetProvider {
 		TERMINALS[110].addFollower(TERMINALS[111], EMPTY_LINK_ARRAY);
 		TERMINALS[111].addFollower(TERMINALS[112], EMPTY_LINK_ARRAY);
 		TERMINALS[112].addFollower(TERMINALS[113], EMPTY_LINK_ARRAY);
-		TERMINALS[113].addFollower(TERMINALS[7], new ASPT.resource.aspt.mopp.AsptContainedFeature[] {new ASPT.resource.aspt.mopp.AsptContainedFeature(ASPT.ASPTPackage.eINSTANCE.getTraceNode(), FEATURES[0]), });
-		TERMINALS[113].addFollower(TERMINALS[8], new ASPT.resource.aspt.mopp.AsptContainedFeature[] {new ASPT.resource.aspt.mopp.AsptContainedFeature(ASPT.ASPTPackage.eINSTANCE.getTraceProp(), FEATURES[0]), });
-		TERMINALS[113].addFollower(TERMINALS[9], new ASPT.resource.aspt.mopp.AsptContainedFeature[] {new ASPT.resource.aspt.mopp.AsptContainedFeature(ASPT.ASPTPackage.eINSTANCE.getTraceEdge(), FEATURES[0]), });
-		TERMINALS[113].addFollower(TERMINALS[10], new ASPT.resource.aspt.mopp.AsptContainedFeature[] {new ASPT.resource.aspt.mopp.AsptContainedFeature(ASPT.ASPTPackage.eINSTANCE.getTraceNbEdge(), FEATURES[0]), });
-		TERMINALS[113].addFollower(TERMINALS[11], new ASPT.resource.aspt.mopp.AsptContainedFeature[] {new ASPT.resource.aspt.mopp.AsptContainedFeature(ASPT.ASPTPackage.eINSTANCE.getTraceNbProp(), FEATURES[0]), });
-		TERMINALS[113].addFollower(TERMINALS[12], new ASPT.resource.aspt.mopp.AsptContainedFeature[] {new ASPT.resource.aspt.mopp.AsptContainedFeature(ASPT.ASPTPackage.eINSTANCE.getTraceNbNode(), FEATURES[0]), });
-		TERMINALS[113].addFollower(TERMINALS[13], new ASPT.resource.aspt.mopp.AsptContainedFeature[] {new ASPT.resource.aspt.mopp.AsptContainedFeature(ASPT.ASPTPackage.eINSTANCE.getTraceLink(), FEATURES[0]), });
+		TERMINALS[113].addFollower(TERMINALS[114], EMPTY_LINK_ARRAY);
+		TERMINALS[114].addFollower(TERMINALS[115], EMPTY_LINK_ARRAY);
+		TERMINALS[115].addFollower(TERMINALS[116], EMPTY_LINK_ARRAY);
+		TERMINALS[116].addFollower(TERMINALS[117], EMPTY_LINK_ARRAY);
+		TERMINALS[117].addFollower(TERMINALS[7], new ASPT.resource.aspt.mopp.AsptContainedFeature[] {new ASPT.resource.aspt.mopp.AsptContainedFeature(ASPT.ASPTPackage.eINSTANCE.getTraceNode(), FEATURES[0]), });
+		TERMINALS[117].addFollower(TERMINALS[8], new ASPT.resource.aspt.mopp.AsptContainedFeature[] {new ASPT.resource.aspt.mopp.AsptContainedFeature(ASPT.ASPTPackage.eINSTANCE.getTraceProp(), FEATURES[0]), });
+		TERMINALS[117].addFollower(TERMINALS[9], new ASPT.resource.aspt.mopp.AsptContainedFeature[] {new ASPT.resource.aspt.mopp.AsptContainedFeature(ASPT.ASPTPackage.eINSTANCE.getTraceEdge(), FEATURES[0]), });
+		TERMINALS[117].addFollower(TERMINALS[10], new ASPT.resource.aspt.mopp.AsptContainedFeature[] {new ASPT.resource.aspt.mopp.AsptContainedFeature(ASPT.ASPTPackage.eINSTANCE.getTraceNbEdge(), FEATURES[0]), });
+		TERMINALS[117].addFollower(TERMINALS[11], new ASPT.resource.aspt.mopp.AsptContainedFeature[] {new ASPT.resource.aspt.mopp.AsptContainedFeature(ASPT.ASPTPackage.eINSTANCE.getTraceNbProp(), FEATURES[0]), });
+		TERMINALS[117].addFollower(TERMINALS[12], new ASPT.resource.aspt.mopp.AsptContainedFeature[] {new ASPT.resource.aspt.mopp.AsptContainedFeature(ASPT.ASPTPackage.eINSTANCE.getTraceNbNode(), FEATURES[0]), });
+		TERMINALS[117].addFollower(TERMINALS[13], new ASPT.resource.aspt.mopp.AsptContainedFeature[] {new ASPT.resource.aspt.mopp.AsptContainedFeature(ASPT.ASPTPackage.eINSTANCE.getTraceLink(), FEATURES[0]), });
 	}
 	
 	public static void wire() {

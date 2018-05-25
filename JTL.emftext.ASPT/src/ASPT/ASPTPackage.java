@@ -239,13 +239,31 @@ public interface ASPTPackage extends EPackage {
 	int TRACE_LINK__RELATION = TRACE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Idref</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_LINK__IDREF = TRACE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Idrefx</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_LINK__IDREFX = TRACE_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Trace Link</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRACE_LINK_FEATURE_COUNT = TRACE_ELEMENT_FEATURE_COUNT + 1;
+	int TRACE_LINK_FEATURE_COUNT = TRACE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Trace Link</em>' class.
@@ -843,6 +861,28 @@ public interface ASPTPackage extends EPackage {
 	EAttribute getTraceLink_Relation();
 
 	/**
+	 * Returns the meta object for the attribute '{@link ASPT.TraceLink#getIdref <em>Idref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Idref</em>'.
+	 * @see ASPT.TraceLink#getIdref()
+	 * @see #getTraceLink()
+	 * @generated
+	 */
+	EAttribute getTraceLink_Idref();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ASPT.TraceLink#getIdrefx <em>Idrefx</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Idrefx</em>'.
+	 * @see ASPT.TraceLink#getIdrefx()
+	 * @see #getTraceLink()
+	 * @generated
+	 */
+	EAttribute getTraceLink_Idrefx();
+
+	/**
 	 * Returns the meta object for class '{@link ASPT.TraceElement <em>Trace Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1114,6 +1154,22 @@ public interface ASPTPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TRACE_LINK__RELATION = eINSTANCE.getTraceLink_Relation();
+
+		/**
+		 * The meta object literal for the '<em><b>Idref</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRACE_LINK__IDREF = eINSTANCE.getTraceLink_Idref();
+
+		/**
+		 * The meta object literal for the '<em><b>Idrefx</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRACE_LINK__IDREFX = eINSTANCE.getTraceLink_Idrefx();
 
 		/**
 		 * The meta object literal for the '{@link ASPT.impl.TraceElementImpl <em>Trace Element</em>}' class.

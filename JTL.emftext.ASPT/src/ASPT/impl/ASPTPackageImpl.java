@@ -219,6 +219,24 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTraceLink_Idref() {
+		return (EAttribute)traceLinkEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTraceLink_Idrefx() {
+		return (EAttribute)traceLinkEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTraceElement() {
 		return traceElementEClass;
 	}
@@ -412,6 +430,8 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 
 		traceLinkEClass = createEClass(TRACE_LINK);
 		createEAttribute(traceLinkEClass, TRACE_LINK__RELATION);
+		createEAttribute(traceLinkEClass, TRACE_LINK__IDREF);
+		createEAttribute(traceLinkEClass, TRACE_LINK__IDREFX);
 
 		traceElementEClass = createEClass(TRACE_ELEMENT);
 		createEAttribute(traceElementEClass, TRACE_ELEMENT__METAMODEL);
@@ -484,6 +504,8 @@ public class ASPTPackageImpl extends EPackageImpl implements ASPTPackage {
 
 		initEClass(traceLinkEClass, TraceLink.class, "TraceLink", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTraceLink_Relation(), ecorePackage.getEString(), "relation", null, 0, 1, TraceLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTraceLink_Idref(), ecorePackage.getEString(), "idref", null, 0, 1, TraceLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTraceLink_Idrefx(), ecorePackage.getEString(), "idrefx", null, 0, 1, TraceLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(traceElementEClass, TraceElement.class, "TraceElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTraceElement_Metamodel(), ecorePackage.getEString(), "metamodel", null, 0, 1, TraceElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

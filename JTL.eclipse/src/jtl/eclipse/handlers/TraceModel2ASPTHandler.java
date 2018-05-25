@@ -1,6 +1,3 @@
-/**
- *
- */
 package jtl.eclipse.handlers;
 
 import java.io.File;
@@ -19,14 +16,14 @@ import org.eclipse.m2m.atl.core.ATLCoreException;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import jtl.transformations.Ecore2ASPmm;
+import jtl.transformations.TraceModel2ASPT;
 
 /**
- * Eclipse handler for Ecore2ASPmm transformations.
+ * Eclipse handler for TraceModel2ASPT transformations.
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
-public class Ecore2ASPmmHandler extends AbstractHandler {
+public class TraceModel2ASPTHandler extends AbstractHandler {
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
@@ -47,7 +44,7 @@ public class Ecore2ASPmmHandler extends AbstractHandler {
 		// Perform the transformation
 		String targetFile;
 		try {
-			targetFile = Ecore2ASPmm.runTransformation(
+			targetFile = TraceModel2ASPT.runTransformation(
 					new File(file.getFullPath().toOSString()));
 		} catch (IOException | ATLCoreException e1) {
 			MessageDialog.openInformation(window.getShell(),
@@ -65,13 +62,22 @@ public class Ecore2ASPmmHandler extends AbstractHandler {
 			e.printStackTrace();
 		}
 
-		MessageDialog.openInformation(
-				window.getShell(),
-				"ATL Transformation",
-				String.format("%s\nconverted to\n%s.",
-						file.getFullPath(), targetFile));
+		if (targetFile != null) {
+			MessageDialog.openInformation(
+					window.getShell(),
+					"ATL Transformation",
+					String.format("%s\nconverted to\n%s.",
+							file.getFullPath(), targetFile));
 
-		return null;
+			return null;
+		} else {
+			// Sorry, this is not a JTL model
+			MessageDialog.openInformation(
+					window.getShell(),
+					"ATL Transformation",
+					"The source model must be a JTL model.");
+			return null;
+		}
 	}
 
 }

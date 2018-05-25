@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link ASPT.impl.TraceLinkImpl#getRelation <em>Relation</em>}</li>
+ *   <li>{@link ASPT.impl.TraceLinkImpl#getIdref <em>Idref</em>}</li>
+ *   <li>{@link ASPT.impl.TraceLinkImpl#getIdrefx <em>Idrefx</em>}</li>
  * </ul>
  *
  * @generated
@@ -44,6 +46,46 @@ public class TraceLinkImpl extends TraceElementImpl implements TraceLink {
 	 * @ordered
 	 */
 	protected String relation = RELATION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getIdref() <em>Idref</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIdref()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String IDREF_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getIdref() <em>Idref</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIdref()
+	 * @generated
+	 * @ordered
+	 */
+	protected String idref = IDREF_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getIdrefx() <em>Idrefx</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIdrefx()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String IDREFX_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getIdrefx() <em>Idrefx</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIdrefx()
+	 * @generated
+	 * @ordered
+	 */
+	protected String idrefx = IDREFX_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -90,11 +132,57 @@ public class TraceLinkImpl extends TraceElementImpl implements TraceLink {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getIdref() {
+		return idref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIdref(String newIdref) {
+		String oldIdref = idref;
+		idref = newIdref;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ASPTPackage.TRACE_LINK__IDREF, oldIdref, idref));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getIdrefx() {
+		return idrefx;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIdrefx(String newIdrefx) {
+		String oldIdrefx = idrefx;
+		idrefx = newIdrefx;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ASPTPackage.TRACE_LINK__IDREFX, oldIdrefx, idrefx));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ASPTPackage.TRACE_LINK__RELATION:
 				return getRelation();
+			case ASPTPackage.TRACE_LINK__IDREF:
+				return getIdref();
+			case ASPTPackage.TRACE_LINK__IDREFX:
+				return getIdrefx();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,6 +197,12 @@ public class TraceLinkImpl extends TraceElementImpl implements TraceLink {
 		switch (featureID) {
 			case ASPTPackage.TRACE_LINK__RELATION:
 				setRelation((String)newValue);
+				return;
+			case ASPTPackage.TRACE_LINK__IDREF:
+				setIdref((String)newValue);
+				return;
+			case ASPTPackage.TRACE_LINK__IDREFX:
+				setIdrefx((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -125,6 +219,12 @@ public class TraceLinkImpl extends TraceElementImpl implements TraceLink {
 			case ASPTPackage.TRACE_LINK__RELATION:
 				setRelation(RELATION_EDEFAULT);
 				return;
+			case ASPTPackage.TRACE_LINK__IDREF:
+				setIdref(IDREF_EDEFAULT);
+				return;
+			case ASPTPackage.TRACE_LINK__IDREFX:
+				setIdrefx(IDREFX_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -139,6 +239,10 @@ public class TraceLinkImpl extends TraceElementImpl implements TraceLink {
 		switch (featureID) {
 			case ASPTPackage.TRACE_LINK__RELATION:
 				return RELATION_EDEFAULT == null ? relation != null : !RELATION_EDEFAULT.equals(relation);
+			case ASPTPackage.TRACE_LINK__IDREF:
+				return IDREF_EDEFAULT == null ? idref != null : !IDREF_EDEFAULT.equals(idref);
+			case ASPTPackage.TRACE_LINK__IDREFX:
+				return IDREFX_EDEFAULT == null ? idrefx != null : !IDREFX_EDEFAULT.equals(idrefx);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -155,6 +259,10 @@ public class TraceLinkImpl extends TraceElementImpl implements TraceLink {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (relation: ");
 		result.append(relation);
+		result.append(", idref: ");
+		result.append(idref);
+		result.append(", idrefx: ");
+		result.append(idrefx);
 		result.append(')');
 		return result.toString();
 	}

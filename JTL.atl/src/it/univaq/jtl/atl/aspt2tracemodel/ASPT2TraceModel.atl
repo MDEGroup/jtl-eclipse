@@ -1,0 +1,193 @@
+---------------------------------------------------------------------------------------------------
+-- Create a traces model from a model of ASP traces
+---------------------------------------------------------------------------------------------------
+
+module ASPT2TraceModel;
+create OUT : TraceModel from IN : ASPT, Source : ECORE, Target: ECORE;
+
+---------------------------------------------------------------------------------------------------
+--                                            HELPERS
+---------------------------------------------------------------------------------------------------
+helper def: tracemodel : TraceModel!TraceModel = OclUndefined;
+
+helper def: mms : String = ASPT!TraceModel.allInstancesFrom('IN').first().MMS;
+
+helper context String def: denormalize() : String = self.regexReplaceAll('^x_', '');
+
+helper context String def: getObjectByIDref(idref : String) : ECORE!EObject =
+    ECORE!EObject.allInstancesFrom(self)->select(e | e.__xmiID__ = idref.denormalize())->first();
+
+helper context String def: getObjectByASPIDref(idref : String) : ECORE!EObject =
+    if self.getObjectByIDref(idref).oclIsUndefined() then
+    	ECORE!EObject.allInstancesFrom(self)
+    		->select(e | e.__xmiID__.split('-').at(1).split('_').at(3) = idref.denormalize())->first()
+    else self.getObjectByIDref(idref) endif;
+
+helper context String def: getTraceLinkEndName(obj : ECORE!EObject) : String =
+    if obj.oclType().name <> self then obj.oclType().name + '.' + self else self endif;
+
+helper context String def: getTraceLinkName(link : TraceModel!TraceLink) : String =
+    self.denormalize().getTraceLinkEndName(link.leftLinkEnd->first().traceElement) + '_' + link.id;
+
+---------------------------------------------------------------------------------------------------
+--                                          CALLED RULES
+---------------------------------------------------------------------------------------------------
+rule TraceLink2TraceLinkEnd(link : ASPT!TraceLink, model : String) {
+    to
+    	t : TraceModel!TraceLinkEnd (
+    	    type <- link.type.denormalize(),
+    	    traceElement <- model.getObjectByASPIDref(link.idrefx),
+    	    name <- t.type.getTraceLinkEndName(t.traceElement)
+    	)
+   	do { t; }
+}
+
+rule TraceElement2TraceLinkEnd(link : ASPT!TraceElement, type : String) {
+    to
+    	t : TraceModel!TraceLinkEnd (
+    	    type <- link.type.denormalize(),
+    	    traceElement <- 'Source'.getObjectByASPIDref(
+       	        if type = 'node' then link.idx			-- node
+      	        else if type = 'prop' then link.idpx	-- prop
+       	        else link.idsx endif endif				-- edge
+       	    ),
+    	    name <- t.type.getTraceLinkEndName(t.traceElement)
+    	)
+   	do { t; }
+}
+
+---------------------------------------------------------------------------------------------------
+--                                         MATCHED RULES
+---------------------------------------------------------------------------------------------------
+rule TraceModel2TraceModel {
+    from
+    	s : ASPT!TraceModel
+    to
+    	t : TraceModel!TraceModel (
+    	    name <- s.ID
+    	)
+    do { thisModule.tracemodel <- t; }
+}
+
+rule TraceLinks2TraceLink {
+    from
+    	s : ASPT!TraceLink (s.metamodel = thisModule.mms)
+    to
+    	t : TraceModel!TraceLink (
+    		id <- s.id,
+    		idx <- s.idx,
+    		idref <- s.idref,
+    		idrefx <- s.idrefx,
+    	    name <- s.relation + '_' + s.id,
+    	    trule <- s.relation,
+    		isPartial <- false,
+    		isNonInjective <- false,
+    		leftLinkEnd <- thisModule.TraceLink2TraceLinkEnd(s, 'Source'),
+    		rightLinkEnd <- thisModule.TraceLink2TraceLinkEnd(
+    		    ASPT!TraceLink.allInstancesFrom('IN')
+    				->select(l | l.id = s.id and l <> s).first(), 'Target')
+    	)
+    do { thisModule.tracemodel.traceLinks <- t; }
+}
+
+rule TraceNode2TraceLink {
+    from
+    	s : ASPT!TraceNode (s.oclIsTypeOf(ASPT!TraceNode))
+    to
+    	t : TraceModel!TraceLink (
+    		id <- s.id,
+    		idx <- s.idx,
+    		isPartial <- true,
+    		isNonInjective <- false,
+    	    leftLinkEnd <- thisModule.TraceElement2TraceLinkEnd(s, 'node'),
+    	    name <- s.type.getTraceLinkName(t)
+    	)
+    do { thisModule.tracemodel.traceLinks <- t; }
+}
+
+rule TraceProp2TraceLink {
+    from
+    	s : ASPT!TraceProp (s.oclIsTypeOf(ASPT!TraceProp))
+    to
+    	t : TraceModel!TraceLink (
+    		id <- s.id,
+    		idx <- s.idx,
+    		ids <- s.idp,
+    		idsx <- s.idpx,
+    		isPartial <- true,
+    		isNonInjective <- false,
+    	    leftLinkEnd <- thisModule.TraceElement2TraceLinkEnd(s, 'prop'),
+    	    name <- s.type.getTraceLinkName(t)
+    	)
+    do { thisModule.tracemodel.traceLinks <- t; }
+}
+
+rule TraceEdge2TraceLink {
+    from
+    	s : ASPT!TraceEdge (s.oclIsTypeOf(ASPT!TraceEdge))
+    to
+    	t : TraceModel!TraceLink (
+    		id <- s.id,
+    		idx <- s.idx,
+    		ids <- s.ids,
+    		idsx <- s.idsx,
+    		idt <- s.idt,
+    		idtx <- s.idtx,
+    		isPartial <- true,
+    		isNonInjective <- false,
+    	    leftLinkEnd <- thisModule.TraceElement2TraceLinkEnd(s, 'edge'),
+    	    name <- s.type.getTraceLinkName(t)
+    	)
+    do { thisModule.tracemodel.traceLinks <- t; }
+}
+
+rule TraceNbNode2TraceLink {
+    from
+    	s : ASPT!TraceNbNode (s.oclIsTypeOf(ASPT!TraceNbNode))
+    to
+    	t : TraceModel!TraceLink (
+    		id <- s.id,
+    		idx <- s.idx,
+    		isPartial <- false,
+    		isNonInjective <- true,
+    	    leftLinkEnd <- thisModule.TraceElement2TraceLinkEnd(s, 'node'),
+    	    name <- s.type.getTraceLinkName(t)
+    	)
+    do { thisModule.tracemodel.traceLinks <- t; }
+}
+
+rule TraceNbProp2TraceLink {
+    from
+    	s : ASPT!TraceNbProp (s.oclIsTypeOf(ASPT!TraceNbProp))
+    to
+    	t : TraceModel!TraceLink (
+    		id <- s.id,
+    		idx <- s.idx,
+    		ids <- s.idp,
+    		idsx <- s.idpx,
+    		isPartial <- false,
+    		isNonInjective <- true,
+    	    leftLinkEnd <- thisModule.TraceElement2TraceLinkEnd(s, 'prop'),
+    	    name <- s.type.getTraceLinkName(t)
+    	)
+    do { thisModule.tracemodel.traceLinks <- t; }
+}
+
+rule TraceNbEdge2TraceLink {
+    from
+    	s : ASPT!TraceNbEdge (s.oclIsTypeOf(ASPT!TraceNbEdge))
+    to
+    	t : TraceModel!TraceLink (
+    		id <- s.id,
+    		idx <- s.idx,
+    		ids <- s.ids,
+    		idsx <- s.idsx,
+    		idt <- s.idt,
+    		idtx <- s.idtx,
+    		isPartial <- false,
+    		isNonInjective <- true,
+    	    leftLinkEnd <- thisModule.TraceElement2TraceLinkEnd(s, 'edge'),
+    	    name <- s.type.getTraceLinkName(t)
+    	)
+    do { thisModule.tracemodel.traceLinks <- t; }
+}

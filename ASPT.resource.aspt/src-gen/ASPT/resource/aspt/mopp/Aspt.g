@@ -352,7 +352,7 @@ options {
 				break;
 			}
 		}
-		int followSetID = 118;
+		int followSetID = 122;
 		int i;
 		for (i = tokenIndexOfLastCompleteElement; i < tokenStream.size(); i++) {
 			org.antlr.runtime3_4_0.CommonToken nextToken = (org.antlr.runtime3_4_0.CommonToken) tokenStream.get(i);
@@ -3186,7 +3186,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 	}
 	
 	(
-		a8 = IDENTIFIER		
+		a8 = INTEGER		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -3196,10 +3196,10 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 				startIncompleteElement(element);
 			}
 			if (a8 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__TYPE), result);
+				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREF), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
 					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a8).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a8).getStopIndex());
@@ -3207,7 +3207,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
 					Object value = resolved;
-					element.eSet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__TYPE), value);
+					element.eSet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREF), value);
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
@@ -3249,7 +3249,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
-				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__RELATION), result);
+				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREFX), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
 					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a10).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a10).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a10).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a10).getStopIndex());
@@ -3257,7 +3257,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
 					Object value = resolved;
-					element.eSet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__RELATION), value);
+					element.eSet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREFX), value);
 					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
@@ -3271,7 +3271,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[175]);
 	}
 	
-	a11 = ')' {
+	a11 = ',' {
 		if (element == null) {
 			element = ASPT.ASPTFactory.eINSTANCE.createTraceLink();
 			startIncompleteElement(element);
@@ -3285,24 +3285,124 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[176]);
 	}
 	
-	a12 = '.' {
+	(
+		a12 = IDENTIFIER		
+		{
+			if (terminateParsing) {
+				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
+			}
+			if (element == null) {
+				element = ASPT.ASPTFactory.eINSTANCE.createTraceLink();
+				startIncompleteElement(element);
+			}
+			if (a12 != null) {
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				tokenResolver.setOptions(getOptions());
+				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
+				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__TYPE), result);
+				Object resolvedObject = result.getResolvedToken();
+				if (resolvedObject == null) {
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a12).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a12).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a12).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a12).getStopIndex());
+				}
+				java.lang.String resolved = (java.lang.String) resolvedObject;
+				if (resolved != null) {
+					Object value = resolved;
+					element.eSet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__TYPE), value);
+					completedElement(value, false);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_12, resolved, true);
+				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a12, element);
+			}
+		}
+	)
+	{
+		// expected elements (follow set)
+		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[177]);
+	}
+	
+	a13 = ',' {
 		if (element == null) {
 			element = ASPT.ASPTFactory.eINSTANCE.createTraceLink();
 			startIncompleteElement(element);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_12, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a12, element);
+		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_13, null, true);
+		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a13, element);
 	}
 	{
 		// expected elements (follow set)
-		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[177]);
-		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[178]);
-		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[179]);
-		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[180]);
+		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[178]);
+	}
+	
+	(
+		a14 = QUOTED_34_34		
+		{
+			if (terminateParsing) {
+				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
+			}
+			if (element == null) {
+				element = ASPT.ASPTFactory.eINSTANCE.createTraceLink();
+				startIncompleteElement(element);
+			}
+			if (a14 != null) {
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				tokenResolver.setOptions(getOptions());
+				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
+				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__RELATION), result);
+				Object resolvedObject = result.getResolvedToken();
+				if (resolvedObject == null) {
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_4_0.CommonToken) a14).getLine(), ((org.antlr.runtime3_4_0.CommonToken) a14).getCharPositionInLine(), ((org.antlr.runtime3_4_0.CommonToken) a14).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) a14).getStopIndex());
+				}
+				java.lang.String resolved = (java.lang.String) resolvedObject;
+				if (resolved != null) {
+					Object value = resolved;
+					element.eSet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__RELATION), value);
+					completedElement(value, false);
+				}
+				collectHiddenTokens(element);
+				retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_14, resolved, true);
+				copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken) a14, element);
+			}
+		}
+	)
+	{
+		// expected elements (follow set)
+		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[179]);
+	}
+	
+	a15 = ')' {
+		if (element == null) {
+			element = ASPT.ASPTFactory.eINSTANCE.createTraceLink();
+			startIncompleteElement(element);
+		}
+		collectHiddenTokens(element);
+		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_15, null, true);
+		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a15, element);
+	}
+	{
+		// expected elements (follow set)
+		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[180]);
+	}
+	
+	a16 = '.' {
+		if (element == null) {
+			element = ASPT.ASPTFactory.eINSTANCE.createTraceLink();
+			startIncompleteElement(element);
+		}
+		collectHiddenTokens(element);
+		retrieveLayoutInformation(element, ASPT.resource.aspt.grammar.AsptGrammarInformationProvider.ASPT_7_0_0_16, null, true);
+		copyLocalizationInfos((org.antlr.runtime3_4_0.CommonToken)a16, element);
+	}
+	{
+		// expected elements (follow set)
 		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[181]);
 		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[182]);
 		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[183]);
+		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[184]);
+		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[185]);
+		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[186]);
+		addExpectedElement(ASPT.ASPTPackage.eINSTANCE.getTraceModel(), ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[187]);
 	}
 	
 ;

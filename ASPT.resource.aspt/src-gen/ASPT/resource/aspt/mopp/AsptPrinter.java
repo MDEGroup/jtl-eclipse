@@ -1079,7 +1079,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(5);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(7);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__METAMODEL));
 		printCountingMap.put("metamodel", temp == null ? 0 : 1);
@@ -1091,6 +1091,10 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		printCountingMap.put("type", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__RELATION));
 		printCountingMap.put("relation", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREF));
+		printCountingMap.put("idref", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREFX));
+		printCountingMap.put("idrefx", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
 		// DEFINITION PART BEGINS (CsString)
@@ -1140,6 +1144,36 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 				out.print(" ");
 			}
 			printCountingMap.put("idx", count - 1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print(",");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		count = printCountingMap.get("idref");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREF));
+			if (o != null) {
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREF), element));
+				out.print(" ");
+			}
+			printCountingMap.put("idref", count - 1);
+		}
+		// DEFINITION PART BEGINS (CsString)
+		out.print(",");
+		out.print(" ");
+		// DEFINITION PART BEGINS (PlaceholderInQuotes)
+		count = printCountingMap.get("idrefx");
+		if (count > 0) {
+			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREFX));
+			if (o != null) {
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				resolver.setOptions(getOptions());
+				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREFX), element));
+				out.print(" ");
+			}
+			printCountingMap.put("idrefx", count - 1);
 		}
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");

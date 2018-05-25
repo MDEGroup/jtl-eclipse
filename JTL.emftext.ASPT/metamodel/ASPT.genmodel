@@ -14,6 +14,8 @@
     </genClasses>
     <genClasses ecoreClass="ASPT.ecore#//TraceLink">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceLink/relation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceLink/idref"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceLink/idrefx"/>
     </genClasses>
     <genClasses ecoreClass="ASPT.ecore#//TraceElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASPT.ecore#//TraceElement/metamodel"/>

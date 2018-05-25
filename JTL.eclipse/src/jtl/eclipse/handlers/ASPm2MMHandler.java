@@ -56,7 +56,7 @@ public class ASPm2MMHandler extends AbstractHandler {
 		    window.getShell(),
 		    new WorkbenchLabelProvider(),
 		    new BaseWorkbenchContentProvider());
-		dialog.setMessage("Metamodel selection");
+		dialog.setTitle("Metamodel selection");
 		dialog.setMessage("Select a metamodel for this model:");
 		dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
 		dialog.setAllowMultiple(false);
@@ -98,7 +98,7 @@ public class ASPm2MMHandler extends AbstractHandler {
 			return null;
 		}
 
-		// Refresth the Project Explorer to show the new file
+		// Refresh the Project Explorer to show the new file
 		try {
 			((IResource) element).getProject()
 					.refreshLocal(IResource.DEPTH_INFINITE, null);

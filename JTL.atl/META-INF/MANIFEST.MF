@@ -15,6 +15,8 @@ Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
 Bundle-Vendor: JTL
 Export-Package: it.univaq.jtl.atl.aspm2mm,
+ it.univaq.jtl.atl.aspt2tracemodel,
  it.univaq.jtl.atl.ecore2aspmm,
  it.univaq.jtl.atl.jtl2asp,
- it.univaq.jtl.atl.mm2aspm
+ it.univaq.jtl.atl.mm2aspm,
+ it.univaq.jtl.atl.tracemodel2aspt

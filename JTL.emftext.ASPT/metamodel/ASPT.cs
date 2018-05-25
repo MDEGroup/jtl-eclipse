@@ -25,5 +25,5 @@ RULES {
 	TraceNbEdge ::= "trace_nb_edge" "(" metamodel[] "," id[INTEGER] "," idx['"','"'] "," type[] "," ids[INTEGER] "," idsx['"','"'] "," idt[INTEGER] "," idtx['"','"'] ")" "." !0;
 	TraceNbProp ::= "trace_nb_prop" "(" metamodel[] "," id[INTEGER] "," idx['"','"'] "," idp[INTEGER] "," idpx['"','"'] "," type[] "," value['"','"'] ")" "." !0;
 	TraceNbNode ::= "trace_nb_node" "(" metamodel[] "," id[INTEGER] "," idx['"','"'] "," type[] ")" "." !0;
-	TraceLink ::= "trace_link" "(" metamodel[] "," id[INTEGER] "," idx['"','"'] "," type[] "," relation['"','"'] ")" "." !0;
+	TraceLink ::= "trace_link" "(" metamodel[] "," id[INTEGER] "," idx['"','"'] "," idref[INTEGER] "," idrefx['"','"'] "," type[] "," relation['"','"'] ")" "." !0;
 }

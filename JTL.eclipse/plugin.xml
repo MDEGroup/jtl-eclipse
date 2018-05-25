@@ -37,6 +37,16 @@
             id="JTL.commands.registermetamodel"
             name="Register Metamodel">
       </command>
+      <command
+            categoryId="JTL.commands.actions"
+            id="JTL.commands.aspt2tracemodel"
+            name="ASPT to TraceModel">
+      </command>
+      <command
+            categoryId="JTL.commands.actions"
+            id="JTL.commands.tracemodel2aspt"
+            name="TraceModel to ASPT">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -59,6 +69,14 @@
       <handler
             class="jtl.eclipse.handlers.ASPm2MMHandler"
             commandId="JTL.commands.aspm2mm">
+      </handler>
+      <handler
+            class="jtl.eclipse.handlers.ASPT2TraceModelHandler"
+            commandId="JTL.commands.aspt2tracemodel">
+      </handler>
+      <handler
+            class="jtl.eclipse.handlers.TraceModel2ASPTHandler"
+            commandId="JTL.commands.tracemodel2aspt">
       </handler>
       <handler
             class="jtl.eclipse.handlers.RegisterMetamodelHandler"
@@ -110,6 +128,48 @@
                     <test
                           property="org.eclipse.core.resources.name"
                           value="*.ecore">
+                    </test>
+                </adapt>
+              </iterate>
+          	</visibleWhen>
+          </command>
+
+          <!-- Command menu for ATL Transformation (ASPT to TraceModel) -->
+          <command
+    		  commandId="JTL.commands.aspt2tracemodel"
+        	  id="JTL.menus.aspt2tracemodel"
+          	  label="Convert ASPT to TraceModel">
+          	<visibleWhen
+          		checkEnabled="false">
+          	  <iterate
+          	  	  ifEmpty="false"
+          	      operator="or">
+          	    <adapt
+          	        type="org.eclipse.core.resources.IFile">
+                    <test
+                          property="org.eclipse.core.resources.name"
+                          value="*.ecore">
+                    </test>
+                </adapt>
+              </iterate>
+          	</visibleWhen>
+          </command>
+
+          <!-- Command menu for ATL Transformation (TraceModel to ASPT) -->
+          <command
+    		  commandId="JTL.commands.tracemodel2aspt"
+        	  id="JTL.menus.tracemodel2aspt"
+          	  label="Convert TraceModel to ASPT">
+          	<visibleWhen
+          		checkEnabled="false">
+          	  <iterate
+          	  	  ifEmpty="false"
+          	      operator="or">
+          	    <adapt
+          	        type="org.eclipse.core.resources.IFile">
+                    <test
+                          property="org.eclipse.core.resources.name"
+                          value="*.xmi">
                     </test>
                 </adapt>
               </iterate>

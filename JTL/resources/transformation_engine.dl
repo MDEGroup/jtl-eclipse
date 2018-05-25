@@ -34,7 +34,9 @@ is_metaedge_non_bijective_related(MMS,Name1,NodeSourceS,NodeTargetS) :-
 	MMS!=mmt,Name1!=Name2.
 											  
 trace_edgex(MMS,IDx,ID,Name,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget) :- 
-        edge(MMS,IDx,ID,Name,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget), not is_metaedge_related(MMS,Name,NodeSource,NodeTarget),
+        edge(MMS,IDx,ID,Name,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget),
+        not is_metaedge_related(MMS,Name,NodeSource,NodeTarget),
+        not is_metaedge_non_bijective_related(MMS,Name,NodeSource,NodeTarget),
         node(MMS,IDNodeSourcex,IDNodeSource,NodeSource),node(MMS,IDNodeTargetx,IDNodeTarget,NodeTarget),MMS!=mmt.
 trace_edgex(MMS,IDx,ID,Name,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget) :- 
 		edge(MMS,IDx,ID,Name,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarget),
@@ -65,30 +67,30 @@ trace_nb_propx(MMS,IDx,ID,IDmcx,IDmc,Name,Value) :- prop(MMS,IDx,ID,IDmcx,IDmc,N
 
 %%%%%%%%genero i trace links%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-trace_linkx(MMS,ID,IDx,Node,R) :-
+trace_linkx(MMS,ID,IDx,ID,IDx,Node,R) :-
     relation_node(R,MMS,Node,X), relation_node(R,mmt,Node2,Y),
     node(MMS,ID,IDx,Node), nodex(mmt,ID,IDx,Node2),
     MMS!=mmt.
-trace_linkx(mmt,ID,IDx,Node2,R) :-
+trace_linkx(mmt,ID,IDx,ID,IDx,Node2,R) :-
     relation_node(R,MMS,Node,X), relation_node(R,mmt,Node2,Y),
     node(MMS,ID,IDx,Node), nodex(mmt,ID,IDx,Node2),
     MMS!=mmt.
-trace_linkx(MMS,ID,IDx,Prop,R) :-
+trace_linkx(MMS,ID,IDx,IDp,IDpx,Prop,R) :-
     relation_prop(R,MMS,Prop,Node,X), relation_prop(R,mmt,Prop2,Node2,Y),
     prop(MMS,ID,IDx,IDp,IDpx,Prop,Value), node(MMS,IDp,IDpx,Node),
     propx(mmt,ID,IDx,IDp,IDpx,Prop2,Value), nodex(mmt,IDp,IDpx,Node2),
     MMS!=mmt.
-trace_linkx(mmt,ID,IDx,Prop2,R) :-
+trace_linkx(mmt,ID,IDx,IDp,IDpx,Prop2,R) :-
     relation_prop(R,MMS,Prop,Node,X), relation_prop(R,mmt,Prop2,Node2,Y),
     prop(MMS,ID,IDx,IDp,IDpx,Prop,Value), node(MMS,IDp,IDpx,Node),
     propx(mmt,ID,IDx,IDp,IDpx,Prop2,Value), nodex(mmt,IDp,IDpx,Node2),
     MMS!=mmt.
-trace_linkx(MMS,ID,IDx,Edge,R) :-
+trace_linkx(MMS,ID,IDx,IDS,IDSx,Edge,R) :-
     relation_edge(R,MMS,Edge,NodeSource,NodeTarget,X), relation_edge(R,mmt,Edge2,NodeSource2,NodeTarget2,Y),
     edge(MMS,ID,IDx,Edge,IDS,IDSx,IDT,IDTx), node(MMS,IDS,IDSx,NodeSource), node(MMS,IDT,IDTx,NodeTarget),
     edgex(mmt,ID,IDx,Edge2,IDS,IDSx,IDT,IDTx), nodex(mmt,IDS,IDSx,NodeSource2), nodex(mmt,IDT,IDTx,NodeTarget2),
     MMS!=mmt.
-trace_linkx(mmt,ID,IDx,Edge2,R) :-
+trace_linkx(mmt,ID,IDx,IDS,IDSx,Edge2,R) :-
     relation_edge(R,MMS,Edge,NodeSource,NodeTarget,X), relation_edge(R,mmt,Edge2,NodeSource2,NodeTarget2,Y),
     edge(MMS,ID,IDx,Edge,IDS,IDSx,IDT,IDTx), node(MMS,IDS,IDSx,NodeSource), node(MMS,IDT,IDTx,NodeTarget),
     edgex(mmt,ID,IDx,Edge2,IDS,IDSx,IDT,IDTx), nodex(mmt,IDS,IDSx,NodeSource2), nodex(mmt,IDT,IDTx,NodeTarget2),
