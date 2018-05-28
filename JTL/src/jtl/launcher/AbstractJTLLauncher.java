@@ -387,11 +387,7 @@ public abstract class AbstractJTLLauncher {
 	 */
 	protected void generateTransformation(final String targetmmName) {
 		// JTL text to model (EMFText)
-		emftextTextToModel(transfFile, "\n%%% TRANSFORMATION %%%\n");
-
-		// Generate the filename for the newly created Ecore transformation file
-		final File ecoreASPFile = new File(Files.addFileExtension(
-				Files.removeFileExtension(transfFile.getPath()), "jtl.ecore"));
+		final File ecoreASPFile = emftextTextToModel(transfFile);
 
 		// JTL to ASP Ecore (ATL)
 		File transfASPFile;
@@ -417,10 +413,8 @@ public abstract class AbstractJTLLauncher {
 		// Remove an extra newline after the first comment in constraints
 		tmpStr = tmpStr.replaceFirst("(relation_.*\n\n% .*\n)\n", "$1");
 
-		// Append the target metamodel fact mmt= to the contraints
-		//tmpStr = setTransformationDirection(tmpStr);
+		writeASP("\n%%% TRANSFORMATION %%%\n" + tmpStr);
 
-		writeASP(tmpStr);
 		// Remove the temporary created file
 		removeFile(transfASPFile);
 
@@ -480,21 +474,15 @@ public abstract class AbstractJTLLauncher {
 			File targetFile = new File(target);
 
 			// Convert the ASP target models (text2model)
-			new EmftextConverter().convert(targetFile);
-			targetFile = new File(target + ".ecore");
+			targetFile = emftextTextToModel(targetFile);
 
 			// ASPm to Ecore (ATL generated from HOT)
-			try {
-				final String xmiFilename = ASPm2MM.runTransformation(targetmmFile, targetFile);
+			final String xmiFilename = modelASPmToEcore(targetmmFile, targetFile);
 
-				// Add the generated file to the list of processed models files
-				targetFiles.add(xmiFilename);
-			} catch (IOException | ATLCoreException e) {
-				System.out.println("Unable to perform the Target Model ASPm to Ecore transformation:");
-				e.printStackTrace();
-			} finally {
-				removeFile(targetFile);
-			}
+			// Add the generated file to the list of processed models files
+			targetFiles.add(xmiFilename);
+
+			removeFile(targetFile);
 		}
 
 		return targetFiles;
@@ -581,8 +569,8 @@ public abstract class AbstractJTLLauncher {
 
 	/**
 	 * Ecore to ASPm (ATL generated from HOT).
-	 * @param metamodelFile IFile of the metamodel
-	 * @param modelFile IFile of the model
+	 * @param metamodelFile File of the metamodel
+	 * @param modelFile File of the model
 	 * @return Path to the converted file
 	 */
 	protected String modelEcoreToASPm(final File metamodelFile, final File modelFile) {
@@ -601,10 +589,30 @@ public abstract class AbstractJTLLauncher {
 	}
 
 	/**
+	 * ASPm to Ecore (ATL generated from HOT).
+	 * @param metamodelFile File of the metamodel
+	 * @param modelFile File of the model
+	 * @return Path to the converted file
+	 */
+	protected String modelASPmToEcore(final File metamodelFile, final File modelFile) {
+		String mEcoreFile;
+		try {
+			mEcoreFile = ASPm2MM.runTransformation(metamodelFile, modelFile);
+		} catch (IOException | ATLCoreException e) {
+			System.out.println(
+					"Unable to perform the ASPm to Ecore transformation: " +
+					modelFile.getPath());
+			e.printStackTrace();
+			return null;
+		}
+		return mEcoreFile;
+	}
+
+	/**
 	 * EMFText Model to Text
 	 * @param modelFile Path of the model to convert
 	 * @param comment Comment to write before the produced ASP
-	 * @return IFile of the converted file
+	 * @return File of the converted file
 	 */
 	protected File emftextModelToText(
 			final String modelFile, final String comment) {
@@ -623,7 +631,7 @@ public abstract class AbstractJTLLauncher {
 	 * @param modelname Name of the model to replace
 	 * @param replace Replacement text for the model name
 	 * @param asp OutputStream containing the ASP program
-	 * @return IFile of the converted file
+	 * @return File of the converted file
 	 */
 	protected File emftextModelToText(
 			final String modelFile,
@@ -654,15 +662,12 @@ public abstract class AbstractJTLLauncher {
 
 	/**
 	 * EMFText Text to Model
-	 * @param textFile IFile of the text file
-	 * @param comment Comment to write before he produced ASP
+	 * @param textFile File of the text file
+	 * @param comment Comment to write before the produced ASP
+	 * @return File of the converted file
 	 */
-	protected void emftextTextToModel(
-			final File textFile, final String comment) {
-		if (comment != null) {
-			writeASP(comment);
-		}
-		new EmftextConverter().convert(textFile);
+	protected File emftextTextToModel(final File textFile) {
+		return new File(new EmftextConverter().convert(textFile));
 	}
 
 	/**

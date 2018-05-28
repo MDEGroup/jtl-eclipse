@@ -2,6 +2,8 @@ package jtl.launcher;
 
 import java.io.File;
 
+import jtl.transformations.ASPm2MM;
+
 public abstract class AbstractExogenousLauncher extends AbstractJTLLauncher {
 
 	/**
@@ -80,6 +82,8 @@ public abstract class AbstractExogenousLauncher extends AbstractJTLLauncher {
 	public void processSourceModel() {
 		// Ecore to ASPm (ATL generated from HOT)
 		final String sourcemASPm = modelEcoreToASPm(sourcemmFile, sourcemFile);
+		// Transform ASPm back to Ecore to store the generated ASP ID in the original model
+		modelASPmToEcore(sourcemmFile, new File(sourcemASPm));
 		// ASPm model to text (EMFText)
 		final File sourcemASPmFile =
 					emftextModelToText(sourcemASPm, "\n%%% SOURCE MODEL %%%\n");
