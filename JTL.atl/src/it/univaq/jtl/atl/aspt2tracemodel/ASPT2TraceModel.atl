@@ -75,9 +75,6 @@ rule TraceLinks2TraceLink {
     to
     	t : TraceModel!TraceLink (
     		id <- s.id,
-    		idx <- s.idx,
-    		idref <- s.idref,
-    		idrefx <- s.idrefx,
     	    name <- s.relation + '_' + s.id,
     	    trule <- s.relation,
     		isPartial <- false,
@@ -96,7 +93,6 @@ rule TraceNode2TraceLink {
     to
     	t : TraceModel!TraceLink (
     		id <- s.id,
-    		idx <- s.idx,
     		isPartial <- true,
     		isNonInjective <- false,
     	    leftLinkEnd <- thisModule.TraceElement2TraceLinkEnd(s, 'node'),
@@ -111,9 +107,6 @@ rule TraceProp2TraceLink {
     to
     	t : TraceModel!TraceLink (
     		id <- s.id,
-    		idx <- s.idx,
-    		ids <- s.idp,
-    		idsx <- s.idpx,
     		isPartial <- true,
     		isNonInjective <- false,
     	    leftLinkEnd <- thisModule.TraceElement2TraceLinkEnd(s, 'prop'),
@@ -128,11 +121,6 @@ rule TraceEdge2TraceLink {
     to
     	t : TraceModel!TraceLink (
     		id <- s.id,
-    		idx <- s.idx,
-    		ids <- s.ids,
-    		idsx <- s.idsx,
-    		idt <- s.idt,
-    		idtx <- s.idtx,
     		isPartial <- true,
     		isNonInjective <- false,
     	    leftLinkEnd <- thisModule.TraceElement2TraceLinkEnd(s, 'edge'),
@@ -147,7 +135,6 @@ rule TraceNbNode2TraceLink {
     to
     	t : TraceModel!TraceLink (
     		id <- s.id,
-    		idx <- s.idx,
     		isPartial <- false,
     		isNonInjective <- true,
     	    leftLinkEnd <- thisModule.TraceElement2TraceLinkEnd(s, 'node'),
@@ -162,9 +149,6 @@ rule TraceNbProp2TraceLink {
     to
     	t : TraceModel!TraceLink (
     		id <- s.id,
-    		idx <- s.idx,
-    		ids <- s.idp,
-    		idsx <- s.idpx,
     		isPartial <- false,
     		isNonInjective <- true,
     	    leftLinkEnd <- thisModule.TraceElement2TraceLinkEnd(s, 'prop'),
@@ -179,11 +163,6 @@ rule TraceNbEdge2TraceLink {
     to
     	t : TraceModel!TraceLink (
     		id <- s.id,
-    		idx <- s.idx,
-    		ids <- s.ids,
-    		idsx <- s.idsx,
-    		idt <- s.idt,
-    		idtx <- s.idtx,
     		isPartial <- false,
     		isNonInjective <- true,
     	    leftLinkEnd <- thisModule.TraceElement2TraceLinkEnd(s, 'edge'),

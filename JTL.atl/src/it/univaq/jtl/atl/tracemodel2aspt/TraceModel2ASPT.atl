@@ -12,20 +12,60 @@ helper def: tracemodel : TraceModel!TraceModel = OclUndefined;
 
 helper context String def: normalize() : String = 'x_' + self;
 
-helper context TraceModel!TraceLinkEnd def: getMetamodel() : String =
+helper context TraceModel!TraceLinkEnd def : getMetamodel() : String =
     self.traceElement.eClass().getEPackage().name.normalize();
 
-helper context TraceModel!TraceLink def: isNode() : Boolean =
+helper context TraceModel!TraceLink def : isNode() : Boolean =
     self.leftLinkEnd.first().traceElement
 	 .eClass().name = self.leftLinkEnd.first().type;
 
-helper context TraceModel!TraceLink def: isProp() : Boolean =
+helper context TraceModel!TraceLink def : isProp() : Boolean =
     self.leftLinkEnd.first().traceElement.eClass().getEAllAttributes()
 	 ->select(e | e.name = self.leftLinkEnd.first().type).notEmpty();
 
-helper context TraceModel!TraceLink def: isEdge() : Boolean =
+helper context TraceModel!TraceLink def : isEdge() : Boolean =
     self.leftLinkEnd.first().traceElement.eClass().getEAllReferences()
 	 ->select(e | e.name = self.leftLinkEnd.first().type).notEmpty();
+
+helper context String def : getId() : String = self.split('_').at(2);
+
+helper context String def : getIdTrace() : String =
+    self.split('_').at(3).regexReplaceAll('^([^/])','/$0');
+
+helper def : getNodeId(s:TraceModel!EObject) : String = 
+	s.__xmiID__.split('-').at(1).getId();
+
+helper def : getNodeIdTrace(s:TraceModel!EObject) : String = 
+	if (s.__xmiID__.split('-').at(1).split('_').size()=3) then
+		s.__xmiID__.split('-').at(1).getIdTrace() else '/' endif.normalize();
+
+helper context String def : getSerializedString(name:String) : String =
+	if (self.indexOf(name + '_') <> -1) then
+		self.split('-')->select(s | s.contains(name + '_')).first()
+	else '' endif;
+
+helper context String def : getSerializedStringById(id:String) : String =
+	if (self.indexOf('_' + id + '_') <> -1) then
+		self.split('-')->select(s | s.contains('_' + id + '_')).first()
+	else '' endif;
+
+helper def : getFeatureId(s:TraceModel!EObject, name:String) : String =
+	s.__xmiID__.getSerializedString(name).getId();
+
+helper def : getFeatureIdTrace(s:TraceModel!EObject, name:String) : String =
+	s.__xmiID__.getSerializedString(name).getIdTrace();
+
+helper def : getFeatureIdTraceById(s:TraceModel!EObject, id:String) : String =
+	s.__xmiID__.getSerializedStringById(id).getIdTrace().normalize();
+
+helper def : getFeatureIdTargetById(s:TraceModel!EObject, id:String) : String =
+	s.__xmiID__.getSerializedStringById(id).split('_').at(1).split('t').last();
+
+helper def : getFeatureIdTraceTargetById(id:String) : String =
+    thisModule.getNodeIdTrace(
+    	TraceModel!TraceLink.allInstancesFrom('IN')->collect(e|e.leftLinkEnd)->flatten()
+    		->collect(e|e.traceElement)
+    		->select(e|thisModule.getNodeId(e) = id).first());
 
 ---------------------------------------------------------------------------------------------------
 --                                          CALLED RULES
@@ -59,18 +99,18 @@ rule TraceLink2TraceLink {
 	to
 		left : ASPT!TraceLink (
 		    id <- s.id,
-		    idx <- s.idx,
-		    idref <- s.idref,
-		    idrefx <- s.idrefx,
+		    idx <- thisModule.getFeatureIdTraceById(leftlink.traceElement, s.id),
+		    idref <- thisModule.getNodeId(leftlink.traceElement),
+		    idrefx <- thisModule.getNodeIdTrace(leftlink.traceElement),
 		    metamodel <- leftlink.getMetamodel(),
 		    relation <- s.trule,
 		    type <- leftlink.type.normalize()
 		),
 		right : ASPT!TraceLink (
 		    id <- s.id,
-		    idx <- s.idx,
-		    idref <- s.idref,
-		    idrefx <- s.idrefx,
+		    idx <- thisModule.getFeatureIdTraceById(rightlink.traceElement, s.id),
+		    idref <- thisModule.getNodeId(rightlink.traceElement),
+		    idrefx <- thisModule.getNodeIdTrace(rightlink.traceElement),
 		    metamodel <- rightlink.getMetamodel(),
 		    relation <- s.trule,
 		    type <- rightlink.type.normalize()
@@ -86,8 +126,7 @@ rule TraceLink2TraceNode {
 		t : ASPT!TraceNode (
 		    metamodel <- linkend.getMetamodel(),
 		    id <- s.id,
-		    idx <- s.idx,
-		    -- idx <- linkend.traceElement.__xmiID__.normalize(),
+		    idx <- thisModule.getNodeIdTrace(linkend.traceElement),
 		    type <- linkend.type.normalize()
 		)
 	do { thisModule.tracemodel.tracelinks <- t; }
@@ -101,10 +140,9 @@ rule TraceLink2TraceProp {
 		t : ASPT!TraceProp (
 		    metamodel <- linkend.getMetamodel(),
 		    id <- s.id,
-		    idx <- s.idx,
-		    idp <- s.ids,
-		    idpx <- s.idsx,
-		    -- idpx <- linkend.traceElement.__xmiID__.normalize(),
+		    idx <- thisModule.getFeatureIdTraceById(linkend.traceElement, s.id),
+		    idp <- thisModule.getNodeId(linkend.traceElement),
+		    idpx <- thisModule.getNodeIdTrace(linkend.traceElement),
 		    type <- linkend.type.normalize(),
 		    value <- linkend.traceElement.eGet(
 		        linkend.traceElement.eClass().getEStructuralFeature(linkend.type))
@@ -121,12 +159,12 @@ rule TraceLink2TraceEdge {
 		t : ASPT!TraceEdge (
 		    metamodel <- linkend.getMetamodel(),
 		    id <- s.id,
-		    idx <- s.idx,
-		    ids <- s.ids,
-		    idsx <- s.idsx,
-		    -- idsx <- linkend.traceElement.__xmiID__.normalize(),
-		    idt <- s.idt,
-		    idtx <- s.idtx,
+		    idx <- thisModule.getFeatureIdTraceById(linkend.traceElement, s.id),
+		    ids <- thisModule.getNodeId(linkend.traceElement),
+		    idsx <- thisModule.getNodeIdTrace(linkend.traceElement),
+		    idt <- thisModule.getFeatureIdTargetById(linkend.traceElement, s.id),
+		    idtx <- thisModule.getFeatureIdTraceTargetById(
+		        thisModule.getFeatureIdTargetById(linkend.traceElement, s.id)),
 		    type <- linkend.type.normalize()
 		)
 	do { thisModule.tracemodel.tracelinks <- t; }
@@ -140,8 +178,7 @@ rule TraceLink2TraceNbNode {
 		t : ASPT!TraceNbNode (
 		    metamodel <- linkend.getMetamodel(),
 		    id <- s.id,
-		    idx <- s.idx,
-		    -- idx <- linkend.traceElement.__xmiID__.normalize(),
+		    idx <- thisModule.getNodeIdTrace(linkend.traceElement),
 		    type <- linkend.type.normalize()
 		)
 	do { thisModule.tracemodel.tracelinks <- t; }
@@ -155,10 +192,9 @@ rule TraceLink2TraceNbProp {
 		t : ASPT!TraceNbProp (
 		    metamodel <- linkend.getMetamodel(),
 		    id <- s.id,
-		    idx <- s.idx,
-		    idp <- s.ids,
-		    idpx <- s.idsx,
-		    -- idpx <- linkend.traceElement.__xmiID__.normalize(),
+		    idx <- thisModule.getFeatureIdTraceById(linkend.traceElement, s.id),
+		    idp <- thisModule.getNodeId(linkend.traceElement),
+		    idpx <- thisModule.getNodeIdTrace(linkend.traceElement),
 		    type <- linkend.type.normalize(),
 		    value <- linkend.traceElement.eGet(
 		        linkend.traceElement.eClass().getEStructuralFeature(linkend.type))
@@ -175,12 +211,12 @@ rule TraceLink2TraceNbEdge {
 		t : ASPT!TraceNbEdge (
 		    metamodel <- linkend.getMetamodel(),
 		    id <- s.id,
-		    idx <- s.idx,
-		    ids <- s.ids,
-		    idsx <- s.idsx,
-		    -- idsx <- linkend.traceElement.__xmiID__.normalize(),
-		    idt <- s.idt,
-		    idtx <- s.idtx,
+		    idx <- thisModule.getFeatureIdTraceById(linkend.traceElement, s.id),
+		    ids <- thisModule.getNodeId(linkend.traceElement),
+		    idsx <- thisModule.getNodeIdTrace(linkend.traceElement),
+		    idt <- thisModule.getFeatureIdTargetById(linkend.traceElement, s.id),
+		    idtx <- thisModule.getFeatureIdTraceTargetById(
+		        thisModule.getFeatureIdTargetById(linkend.traceElement, s.id)),
 		    type <- linkend.type.normalize()
 		)
 	do { thisModule.tracemodel.tracelinks <- t; }
