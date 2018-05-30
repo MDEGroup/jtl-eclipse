@@ -189,8 +189,6 @@ public class TraceModel2ASPT {
 	 * @param metamodelName
 	 *            the metamodel name
 	 * @return the metamodel URI
-	 *
-	 * @generated
 	 */
 	public String getMetamodelUri(String metamodelName) {
 		String uriString = properties.getProperty("TraceModel2ASPT.metamodels." + metamodelName);
@@ -226,7 +224,7 @@ public class TraceModel2ASPT {
 		Map<String, Object> options = new HashMap<String, Object>();
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			if (entry.getKey().toString().startsWith("TraceModel2ASPT.options.")) {
-				options.put(entry.getKey().toString().replaceFirst("TraceModel2ASPT.options.", ""),
+				options.put(entry.getKey().toString().replaceFirst("TraceModel2ASPT.options.", ""), 
 				entry.getValue().toString());
 			}
 		}

@@ -85,7 +85,6 @@ public class ASPm2MMGenerator {
 	 *
 	 * @param args
 	 *            are the arguments
-	 * @generated
 	 */
 	public static void main(String[] args) {
 		try {
@@ -286,8 +285,6 @@ public class ASPm2MMGenerator {
 	 * @param metamodelName
 	 *            the metamodel name
 	 * @return the metamodel URI
-	 *
-	 * @generated
 	 */
 	public String getMetamodelUri(String metamodelName) {
 		String uriString = properties.getProperty("ASPm2MMGenerator.metamodels." + metamodelName);
@@ -323,7 +320,7 @@ public class ASPm2MMGenerator {
 		Map<String, Object> options = new HashMap<String, Object>();
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			if (entry.getKey().toString().startsWith("ASPm2MMGenerator.options.")) {
-				options.put(entry.getKey().toString().replaceFirst("ASPm2MMGenerator.options.", ""),
+				options.put(entry.getKey().toString().replaceFirst("ASPm2MMGenerator.options.", ""), 
 				entry.getValue().toString());
 			}
 		}

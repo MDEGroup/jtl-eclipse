@@ -191,8 +191,6 @@ public class JTL2ASP {
 	 * @param metamodelName
 	 *            the metamodel name
 	 * @return the metamodel URI
-	 *
-	 * @generated
 	 */
 	protected String getMetamodelUri(String metamodelName) {
 		String uriString = properties.getProperty("JTL2ASP.metamodels." + metamodelName);
@@ -228,7 +226,7 @@ public class JTL2ASP {
 		Map<String, Object> options = new HashMap<String, Object>();
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			if (entry.getKey().toString().startsWith("JTL2ASP.options.")) {
-				options.put(entry.getKey().toString().replaceFirst("JTL2ASP.options.", ""),
+				options.put(entry.getKey().toString().replaceFirst("JTL2ASP.options.", ""), 
 				entry.getValue().toString());
 			}
 		}

@@ -188,8 +188,6 @@ public class Ecore2ASPmm {
 	 * @param metamodelName
 	 *            the metamodel name
 	 * @return the metamodel URI
-	 *
-	 * @generated
 	 */
 	public String getMetamodelUri(String metamodelName) {
 		String uriString = properties.getProperty("Ecore2ASPmm.metamodels." + metamodelName);
@@ -225,7 +223,7 @@ public class Ecore2ASPmm {
 		Map<String, Object> options = new HashMap<String, Object>();
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			if (entry.getKey().toString().startsWith("Ecore2ASPmm.options.")) {
-				options.put(entry.getKey().toString().replaceFirst("Ecore2ASPmm.options.", ""),
+				options.put(entry.getKey().toString().replaceFirst("Ecore2ASPmm.options.", ""), 
 				entry.getValue().toString());
 			}
 		}
