@@ -32,6 +32,7 @@ import org.eclipse.m2m.atl.core.ATLCoreException;
 import jaspwrapper.exception.JASPException;
 import jtl.solver.ASPSolver;
 import jtl.solver.AbstractASPSolver;
+import jtl.transformations.ASPT2TraceModel;
 import jtl.transformations.ASPm2MM;
 import jtl.transformations.Ecore2ASPmm;
 import jtl.transformations.EmftextConverter;
@@ -236,6 +237,9 @@ public abstract class AbstractJTLLauncher {
 			// Process target models
 			final ArrayList<String> targetFiles =
 					processTargetModels(modelsFiles, targetmmFile);
+
+			// Process target trace models
+			processTargetTraceModels(modelsFiles);
 
 			// Run the next transformation in the chain
 			if (this.chainTransformation != null &&
@@ -471,21 +475,70 @@ public abstract class AbstractJTLLauncher {
 		// Process target models
 		ArrayList<String> targetFiles = new ArrayList<String>();
 		for (String target : modelsFiles) {
-			File targetFile = new File(target);
+			// Distinguish target models from trace models
+			if (target.endsWith(".aspm")) {
+				final File targetFile = new File(target);
 
-			// Convert the ASP target models (text2model)
-			targetFile = emftextTextToModel(targetFile);
+				// Convert the ASP target models (text2model)
+				final File targetFileModel = emftextTextToModel(targetFile);
 
-			// ASPm to Ecore (ATL generated from HOT)
-			final String xmiFilename = modelASPmToEcore(targetmmFile, targetFile);
+				// ASPm to Ecore (ATL generated from HOT)
+				final String xmiFilename = modelASPmToEcore(targetmmFile, targetFileModel);
 
-			// Add the generated file to the list of processed models files
-			targetFiles.add(xmiFilename);
+				// Add the generated file to the list of processed models files
+				targetFiles.add(xmiFilename);
 
-			removeFile(targetFile);
+				removeFile(targetFile);
+				removeFile(targetFileModel);
+			}
 		}
 
 		return targetFiles;
+	}
+
+	/**
+	 * Process the ASPT target trace models.
+	 * @param modelsFiles list of generated target files
+	 * @return list of the target trace models files after processing
+	 */
+	protected ArrayList<String> processTargetTraceModels(
+			final ArrayList<String> modelsFiles) {
+
+		// Register the ASPT metamodel
+		try {
+			RegisterMetamodel.registerMetamodel(new File(
+					new it.univaq.jtl.atl.aspt2tracemodel.ASPT2TraceModel()
+						.getMetamodelUri("ASPT")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// Process trace  models
+		ArrayList<String> traceFiles = new ArrayList<String>();
+		for (String trace : modelsFiles) {
+			// Distinguish trace models from target models
+			if (trace.endsWith(".aspt")) {
+				final File traceFile = new File(trace);
+
+				// Convert the ASP trace models (text2model)
+				final File traceFileModel = emftextTextToModel(traceFile);
+
+				// ASPT to Ecore
+				// The name of the trace model has the "_trace.aspt" suffix.
+				// This is why we need to remove the last 11 chars and replace them
+				// with ".xmi" to get the name of the corresponding target model.
+				final String xmiFilename = modelASPTToEcore(traceFileModel, sourcemFile,
+						new File(trace.substring(0, trace.length() - 11) + ".xmi"));
+
+				// Add the generated file to the list of processed trace files
+				traceFiles.add(xmiFilename);
+
+				removeFile(traceFile);
+				removeFile(traceFileModel);
+			}
+		}
+
+		return traceFiles;
 	}
 
 	/**
@@ -601,6 +654,28 @@ public abstract class AbstractJTLLauncher {
 		} catch (IOException | ATLCoreException e) {
 			System.out.println(
 					"Unable to perform the ASPm to Ecore transformation: " +
+					modelFile.getPath());
+			e.printStackTrace();
+			return null;
+		}
+		return mEcoreFile;
+	}
+
+	/**
+	 * ASPT to Ecore.
+	 * @param modelFile File of the model
+	 * @return Path to the converted file
+	 */
+	protected String modelASPTToEcore(
+			final File modelFile,
+			final File source,
+			final File target) {
+		String mEcoreFile;
+		try {
+			mEcoreFile = ASPT2TraceModel.runTransformation(modelFile, source, target);
+		} catch (IOException | ATLCoreException e) {
+			System.out.println(
+					"Unable to perform the ASPT to Ecore transformation: " +
 					modelFile.getPath());
 			e.printStackTrace();
 			return null;

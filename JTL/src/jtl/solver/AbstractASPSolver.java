@@ -235,10 +235,12 @@ public abstract class AbstractASPSolver {
 					}
 				}
 			}
+
 			// Avoid writing empty trace model files
 			if (!emptyTraceModel) {
 
-				// TODO add the trace file to the list of generated files when text2model will be ready
+				// Add the trace file to the list of generated files
+				modelsFiles.add(traceModelPath.toString());
 
 				// Open the trace file for writing
 				try (BufferedWriter writer = Files.newBufferedWriter(

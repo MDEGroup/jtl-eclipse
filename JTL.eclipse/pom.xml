@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>JTL.eclipse</groupId>
   <artifactId>JTL.eclipse</artifactId>
-  <version>0.2.0-SNAPSHOT</version>
+  <version>0.2.1-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
   
   <parent>
