@@ -73,7 +73,7 @@ public abstract class AbstractEndogenousLauncher extends AbstractJTLLauncher {
 							sourcemmName,
 							sourcemmName + "_target",
 							asp);
-		// Remove the temporary created file
+		// Remove the temporarily created file
 		removeFile(targetmmASPmmFile);
 
 		return sourcemmName;
@@ -96,7 +96,23 @@ public abstract class AbstractEndogenousLauncher extends AbstractJTLLauncher {
 							sourcemmName,
 							sourcemmName + "_source",
 							asp);
-		// Remove the temporary created file
+		// Remove the temporarily created file
 		removeFile(sourcemASPmFile);
+	}
+
+	/**
+	 * Process the traces model to generate the corresponding ASP code.
+	 */
+	@Override
+	public void processTracesModel() {
+		if (tracesFile == null) return;
+		// Ecore to ASPT (ATL)
+		final String traceASPm = modelEcoreToASPT(tracesFile);
+		// ASPT model to text (EMFText)
+		emftextModelToText(traceASPm,
+						"\n%%% TRACE MODEL %%%\n",
+						sourcemmName,
+						sourcemmName + "_source",
+						asp);
 	}
 }

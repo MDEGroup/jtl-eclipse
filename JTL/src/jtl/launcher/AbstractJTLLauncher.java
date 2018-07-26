@@ -39,6 +39,7 @@ import jtl.transformations.EmftextConverter;
 import jtl.transformations.JTL2ASP;
 import jtl.transformations.MM2ASPm;
 import jtl.transformations.RegisterMetamodel;
+import jtl.transformations.TraceModel2ASPT;
 import jtl.utils.Files;
 
 public abstract class AbstractJTLLauncher {
@@ -271,6 +272,11 @@ public abstract class AbstractJTLLauncher {
 	 * Process the source model to generate the corresponding ASP code.
 	 */
 	public abstract void processSourceModel();
+
+	/**
+	 * Process the traces model to generate the corresponding ASP code.
+	 */
+	public abstract void processTracesModel();
 
 	/**
 	 * Check if the files involved in the transformation
@@ -542,29 +548,6 @@ public abstract class AbstractJTLLauncher {
 	}
 
 	/**
-	 * Process the traces model.
-	 */
-	protected void processTracesModel() {
-		if (tracesFile == null) return;
-		final String tracesFilePath = tracesFile.getPath();
-
-		// Copy the entire file in the ASP output
-		try (BufferedReader br = new BufferedReader(new FileReader(tracesFilePath))) {
-			String line;
-			writeASP("\n%%% TRACE MODEL %%%\n");
-			while ((line = br.readLine()) != null) {
-				writeASP(line + "\n");
-			}
-		} catch (FileNotFoundException e) {
-			System.out.println("File not found: " + tracesFilePath);
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("Unable to read the file: " + tracesFilePath);
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Runs the next transformation in the chain.
 	 * @param targetFiles List of files to use as input
 	 *        of the chained transformation
@@ -639,6 +622,25 @@ public abstract class AbstractJTLLauncher {
 			return null;
 		}
 		return mASPmFile;
+	}
+
+	/**
+	 * Ecore to ASPT
+	 * @param modelFile File of the trace model
+	 * @return Path to the converted file
+	 */
+	protected String modelEcoreToASPT(final File modelFile) {
+		String mASPTFile;
+		try {
+			mASPTFile = TraceModel2ASPT.runTransformation(modelFile);
+		} catch (IOException | ATLCoreException e) {
+			System.out.println(
+					"Unable to perform the Ecore to ASPT transformation: " +
+					modelFile.getPath());
+			e.printStackTrace();
+			return null;
+		}
+		return mASPTFile;
 	}
 
 	/**

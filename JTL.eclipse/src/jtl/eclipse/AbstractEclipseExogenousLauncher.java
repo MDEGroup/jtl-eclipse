@@ -79,4 +79,11 @@ public class AbstractEclipseExogenousLauncher extends AbstractEclipseJTLLauncher
 		launcher.processSourceModel();
 	}
 
+	/**
+	 * Process the traces model to generate the corresponding ASP code.
+	 */
+	@Override
+	public void processTracesModel() {
+		launcher.processTracesModel();
+	}
 }

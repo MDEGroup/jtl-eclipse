@@ -71,11 +71,11 @@ public class TraceModel2ASPTHandler extends AbstractHandler {
 
 			return null;
 		} else {
-			// Sorry, this is not a JTL model
+			// Sorry, this is not a trace model
 			MessageDialog.openInformation(
 					window.getShell(),
 					"ATL Transformation",
-					"The source model must be a JTL model.");
+					"The model must be a trace model.");
 			return null;
 		}
 	}

@@ -81,9 +81,9 @@ public class EmftextHandler extends AbstractHandler {
 						new it.univaq.jtl.atl.ecore2aspmm.Ecore2ASPmm()
 							.getMetamodelUri("ASPmm")));
 			} else if (extension.equals("aspt")) {
-				// FIXME change this after the integration of the MM2ASPT ATL transformation
 				RegisterMetamodel.registerMetamodel(new File(
-						"platform:/plugin/JTL.atl/metamodels/ASPT.ecore"));
+						new it.univaq.jtl.atl.tracemodel2aspt.TraceModel2ASPT()
+							.getMetamodelUri("ASPT")));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

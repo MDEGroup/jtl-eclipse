@@ -192,6 +192,8 @@ is_a_non_bijective_relation_with(N1,N2,N3):- relation_node(R, MMS, N1, X), relat
 
 :- edgex(mmt, IDe, IDex, Edge, IDs, IDsx, IDt1, IDtx1), 
    edgex(mmt, IDe, IDex, Edge, IDs, IDsx, IDt2, IDtx2), IDt1!=IDt2.
+:- edgex(mmt, IDe, IDex, Edge1, IDs1, IDsx1, IDt, IDtx), 
+   edgex(mmt, IDe, IDex, Edge2, IDs2, IDsx2, IDt, IDtx), IDs1!=IDs2.
 :- mapping_edge(mmt, IDe, IDex, Edge, IDS, IDSx, IDT, IDTx),  
 not edgex_mapped(mmt, IDe, IDex).
 edgex_mapped(mmt, IDe, IDex) :- edgex(mmt, IDe, IDex, Edge, IDS, IDSx, IDT, IDTx).
@@ -224,5 +226,6 @@ mapping_edge(MM,IDx,ID,Edge,IDNodeSourcex,IDNodeSource,IDNodeTargetx,IDNodeTarge
  
  :- nodex(MM,IDx,ID,Node2), trace_nb_node(MM,IDx,ID,Node), Node != Node2.
  :- edgex(MM,IDx,ID,Edge2,IDS,IDSx,IDT,IDTx), trace_nb_edge(MMS,IDx,ID,Edge,IDS2,IDS2x,IDT2,IDT2x), Edge!=Edge2.
+ :- edgex(MM,IDx,ID,Edge,IDS,IDSx,IDT,IDTx), trace_nb_edge(MMS,IDx,ID,Edge,IDS2,IDS2x,IDT,IDTx), IDS!=IDS2.
  %:- not nodex(MM,IDx,ID,Node), trace_nb_node(MM,IDx,ID,Node).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

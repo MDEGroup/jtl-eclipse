@@ -2,8 +2,6 @@ package jtl.launcher;
 
 import java.io.File;
 
-import jtl.transformations.ASPm2MM;
-
 public abstract class AbstractExogenousLauncher extends AbstractJTLLauncher {
 
 	/**
@@ -52,7 +50,7 @@ public abstract class AbstractExogenousLauncher extends AbstractJTLLauncher {
 		// ASPmm model to text (EMFText)
 		final File sourcemmASPmmFile =
 					emftextModelToText(sourcemmASPmm, "%%% SOURCE METAMODEL %%%\n");
-		// Remove the temporary created file
+		// Remove the temporarily created file
 		removeFile(sourcemmASPmmFile);
 	}
 
@@ -69,7 +67,7 @@ public abstract class AbstractExogenousLauncher extends AbstractJTLLauncher {
 		// ASPmm model to text (EMFText)
 		final File targetmmASPmmFile =
 				emftextModelToText(targetmmASPmm, "\n%%% TARGET METAMODEL %%%\n");
-		// Remove the temporary created file
+		// Remove the temporarily created file
 		removeFile(targetmmASPmmFile);
 
 		return targetmmName;
@@ -87,7 +85,22 @@ public abstract class AbstractExogenousLauncher extends AbstractJTLLauncher {
 		// ASPm model to text (EMFText)
 		final File sourcemASPmFile =
 					emftextModelToText(sourcemASPm, "\n%%% SOURCE MODEL %%%\n");
-		// Remove the temporary created file
+		// Remove the temporarily created file
 		removeFile(sourcemASPmFile);
+	}
+
+	/**
+	 * Process the traces model to generate the corresponding ASP code.
+	 */
+	@Override
+	public void processTracesModel() {
+		if (tracesFile == null) return;
+		// Ecore to ASPT (ATL)
+		final String traceASPm = modelEcoreToASPT(tracesFile);
+		// ASPT model to text (EMFText)
+		final File traceASPTFile =
+				emftextModelToText(traceASPm, "\n%%% TRACE MODEL %%%\n");
+		// Remove the temporarily created file
+		removeFile(traceASPTFile);
 	}
 }

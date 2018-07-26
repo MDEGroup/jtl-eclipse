@@ -129,7 +129,7 @@ rule TraceLink2TraceNode {
 		    idx <- thisModule.getNodeIdTrace(linkend.traceElement),
 		    type <- linkend.type.normalize()
 		)
-	do { thisModule.tracemodel.tracelinks <- t; }
+	do { thisModule.tracemodel.traceelements <- t; }
 }
 
 rule TraceLink2TraceProp {
@@ -148,7 +148,7 @@ rule TraceLink2TraceProp {
 		        linkend.traceElement.eClass().getEStructuralFeature(linkend.type))
 		        .normalize()
 		)
-	do { thisModule.tracemodel.tracelinks <- t; }
+	do { thisModule.tracemodel.traceelements <- t; }
 }
 
 rule TraceLink2TraceEdge {
@@ -167,7 +167,7 @@ rule TraceLink2TraceEdge {
 		        thisModule.getFeatureIdTargetById(linkend.traceElement, s.id)),
 		    type <- linkend.type.normalize()
 		)
-	do { thisModule.tracemodel.tracelinks <- t; }
+	do { thisModule.tracemodel.traceelements <- t; }
 }
 
 rule TraceLink2TraceNbNode {
@@ -181,7 +181,7 @@ rule TraceLink2TraceNbNode {
 		    idx <- thisModule.getNodeIdTrace(linkend.traceElement),
 		    type <- linkend.type.normalize()
 		)
-	do { thisModule.tracemodel.tracelinks <- t; }
+	do { thisModule.tracemodel.traceelements <- t; }
 }
 
 rule TraceLink2TraceNbProp {
@@ -200,7 +200,7 @@ rule TraceLink2TraceNbProp {
 		        linkend.traceElement.eClass().getEStructuralFeature(linkend.type))
 		        .normalize()
 		)
-	do { thisModule.tracemodel.tracelinks <- t; }
+	do { thisModule.tracemodel.traceelements <- t; }
 }
 
 rule TraceLink2TraceNbEdge {
@@ -219,5 +219,5 @@ rule TraceLink2TraceNbEdge {
 		        thisModule.getFeatureIdTargetById(linkend.traceElement, s.id)),
 		    type <- linkend.type.normalize()
 		)
-	do { thisModule.tracemodel.tracelinks <- t; }
+	do { thisModule.tracemodel.traceelements <- t; }
 }

@@ -31,12 +31,15 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 		"ASPM.resource.aspm.ui",
 		"ASPMM.resource.aspmm",
 		"ASPMM.resource.aspmm.ui",
+		"ASPT.resource.aspt",
+		"ASPT.resource.aspt.ui",
 		"JTL",
 		"JTL.atl",
 		"JTL.eclipse",
 		"JTL.emftext.ASP",
 		"JTL.emftext.ASPM",
 		"JTL.emftext.ASPMM",
+		"JTL.emftext.ASPT",
 		"JTL.emftext.JTL",
 		"JTL.resource.jtl",
 		"JTL.resource.jtl.ui",
@@ -88,23 +91,6 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 	@Override
 	protected AbstractASPSolver getSolver() {
 		return new ASPSolver();
-	}
-
-	/**
-	 * Process the traces model.
-	 */
-	@Override
-	protected void processTracesModel() {
-		if (tracesFile == null) return;
-
-		// Temporary replace the relative file path with the absolute one
-		final File tracesFileRelative = tracesFile;
-		tracesFile = new File(getAbsolutePath(tracesFile.getPath()));
-
-		super.processTracesModel();
-
-		// Restore the original path
-		tracesFile = tracesFileRelative;
 	}
 
 	/**
