@@ -90,10 +90,10 @@ public class LaunchShortcut implements ILaunchShortcut {
 						if (m.find()) {
 							workingCopy
 								.setAttribute(LaunchConfigurationAttributes.SOURCEMM_TEXT,
-										findMathingMetamodel(file.getProject(), m.group(1)));
+										findMatchingMetamodel(file.getProject(), m.group(1)));
 							workingCopy
 								.setAttribute(LaunchConfigurationAttributes.TARGETMM_TEXT,
-										findMathingMetamodel(file.getProject(), m.group(2)));
+										findMatchingMetamodel(file.getProject(), m.group(2)));
 						}
 					}
 				} catch (IOException e) {
@@ -123,13 +123,13 @@ public class LaunchShortcut implements ILaunchShortcut {
 	 * @param nsURI nsURI to find
 	 * @return path to the metamodel file
 	 */
-	private String findMathingMetamodel(final IContainer container, final String nsURI) {
+	private String findMatchingMetamodel(final IContainer container, final String nsURI) {
 		ResourceSet rs = new ResourceSetImpl();
 		try {
 			IResource [] members = container.members();
 			for (IResource member : members) {
 				if (member instanceof IContainer) {
-					return findMathingMetamodel((IContainer) member, nsURI);
+					return findMatchingMetamodel((IContainer) member, nsURI);
 				} else if (member instanceof IFile && member.getFileExtension().equals("ecore")) {
 					Resource mmResource = rs.getResource(
 							URI.createURI(member.getFullPath().toString()), true);
