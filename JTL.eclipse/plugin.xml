@@ -311,6 +311,12 @@
        modes="run"
        id="JTL.launchConfigurationType">
      </launchConfigurationType>
+     <launchConfigurationType
+       name="JTL for Traceability"
+       delegate="jtl.eclipse.LaunchConfigurationDelegateTraceability"
+       modes="run"
+       id="JTL.launchtraceConfigurationType">
+     </launchConfigurationType>
    </extension>
    
    <!-- Launch Configuration Tab Groups -->
@@ -319,6 +325,19 @@
        type="JTL.launchConfigurationType"
        class="jtl.eclipse.LaunchConfigurationTabGroup"
        id="JTL.launchConfigurationTabGroup">
+       <launchMode
+         mode="run"
+         description="Launch Mode Test Run">
+       </launchMode>
+     </launchConfigurationTabGroup>
+   </extension>
+
+   <!-- Launch Configuration Tab Groups Traceability -->
+   <extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+     <launchConfigurationTabGroup
+       type="JTL.launchtraceConfigurationType"
+       class="jtl.eclipse.LaunchConfigurationTabGroupTraceability"
+       id="JTL.launchtraceConfigurationTabGroup">
        <launchMode
          mode="run"
          description="Launch Mode Test Run">
@@ -355,6 +374,38 @@
          </enablement>
        </contextualLaunch>
        <configurationType id="JTL.launchConfigurationType" />
+     </shortcut>
+   </extension>
+
+   <!-- Launch Shortcut -->
+   <extension point="org.eclipse.debug.ui.launchShortcuts">
+     <shortcut
+       label="JTL for Traceability"
+       helpContextId="JTL.launchtrace"
+       modes="run"
+       class="jtl.eclipse.LaunchShortcutTraceability"
+       description="Launch a JTL transformation"
+       icon="/icons/jtl.gif"
+       id="JTL.launchtraceShortcut">
+	   <description description="Run JTL transformation" mode="run" />
+       <contextualLaunch>
+         <enablement>
+           <with variable="selection">
+             <count value="1" />
+             <iterate ifEmpty="false">
+               <adapt type="org.eclipse.core.resources.IFile">
+                 <or>
+                   <test property="org.eclipse.core.resources.name"
+                         value="*.jtl"/>
+                   <test property="org.eclipse.core.resources.name"
+                         value="*.dl"/>
+                 </or>
+               </adapt>
+             </iterate>
+           </with>
+         </enablement>
+       </contextualLaunch>
+       <configurationType id="JTL.launchtraceConfigurationType" />
      </shortcut>
    </extension>
 
