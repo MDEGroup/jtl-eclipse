@@ -23,6 +23,7 @@ import jaspwrapper.exec.Program;
 import jaspwrapper.exec.Solver;
 import jaspwrapper.items.Atom;
 import jaspwrapper.items.Model;
+import jtl.utils.WhereAmI;
 
 public abstract class AbstractASPSolver {
 
@@ -82,33 +83,17 @@ public abstract class AbstractASPSolver {
 	public ArrayList<String> run(final File aspFile, File target, File sourcem)
 			throws JASPException, IOException, URISyntaxException {
 
-		// Get the workspace full path
-		String wsPath = getWorkingDir();
+		// Get the working directory
+		final String wd = getWorkingDir();
 
-		// Check if the target folder exists
-		if (!Files.isDirectory(Paths.get(wsPath, target.getPath()))) {
-			// If the user provided a target file name
-			// set it as the source model file name
-			if (target.getPath().endsWith(".xmi")) {
-				final Path path = target.toPath();
-				final Path parent = path.getParent();
-				if (parent != null &&
-						Files.isDirectory(Paths.get(wsPath, parent.toString()))) {
-					sourcem = path.toFile();
-					target = parent.toFile();
-				} else {
-					System.err.println(wsPath + parent + " not a directory.");
-					return null;
-				}
-			} else {
-				System.err.println(wsPath + target + " not a directory.");
-				return null;
-			}
-		}
+		// Get the target output directory
+		final Path outputDir = getOutputDir(target);
 
-		// Remove the extension from the source model filename
-		final String source = sourcem.getName().substring(
-				0, sourcem.getName().lastIndexOf('.'));
+		// If the user provided a target file name
+		// set it as the base model file name and
+		// remove the file extension
+		final String basename = jtl.utils.Files.removeFileExtension(
+				(target.getPath().endsWith(".xmi")) ? target.getName() : sourcem.getName());
 
 		// Load the solver configuration
 		loadConfig();
@@ -181,8 +166,8 @@ public abstract class AbstractASPSolver {
 		boolean emptyTraceModel = true;
 		ArrayList<String> modelsFiles = new ArrayList<String>();
 		for (int c = 0; engine.hasMoreModel(); c++) {
-			Path modelPath = Paths.get(target.getPath(), source + ((c>0) ? c : "") + ".aspm");
-			Path traceModelPath = Paths.get(target.getPath(), source + ((c>0) ? c : "") + "_trace.aspt");
+			Path modelPath = Paths.get(outputDir.toString(), basename + ((c>0) ? c : "") + ".aspm");
+			Path traceModelPath = Paths.get(outputDir.toString(), basename + ((c>0) ? c : "") + "_trace.aspt");
 			Model model = engine.nextModel();
 			emptyModel = true;
 			emptyTraceModel = true;
@@ -197,7 +182,7 @@ public abstract class AbstractASPSolver {
 					// get the name of the target metamodel to use in model(_, _).
 					if (emptyModel && !atomName.startsWith("trace_")) {
 						atoms.put("nodex", atoms.get("nodex") +
-								String.format("model(\"%s%d\", %s).%n", source, c,
+								String.format("model(\"%s%d\", %s).%n", basename, c,
 								atom.getArguments().get(0).toString()
 								.replaceFirst("x_(\\w+)_target", "x_$1")));
 						emptyModel = false;
@@ -207,7 +192,7 @@ public abstract class AbstractASPSolver {
 					// to set the trace model not empty
 					if (emptyTraceModel && atomName.startsWith("trace_")) {
 						atoms.put("trace_nodex", atoms.get("trace_nodex") +
-								String.format("trace_model(\"%s%d\", %s).%n", source, c,
+								String.format("trace_model(\"%s%d\", %s).%n", basename, c,
 								atom.getArguments().get(0).toString()
 								.replaceFirst("x_(\\w+)_target", "x_$1")));
 						emptyTraceModel = false;
@@ -226,7 +211,7 @@ public abstract class AbstractASPSolver {
 
 				// Open the model file for writing
 				try (BufferedWriter writer = Files.newBufferedWriter(
-						Paths.get(wsPath, modelPath.toString()))) {
+						getAbsolutePath(modelPath, wd))) {
 					// Print atoms of the target model
 					for (Map.Entry<String, String> atomSet : atoms.entrySet()) {
 						if (!atomSet.getKey().startsWith("trace_")) {
@@ -244,7 +229,7 @@ public abstract class AbstractASPSolver {
 
 				// Open the trace file for writing
 				try (BufferedWriter writer = Files.newBufferedWriter(
-						Paths.get(wsPath, traceModelPath.toString()))) {
+						getAbsolutePath(traceModelPath, wd))) {
 					// Print atoms of the trace model
 					for (Map.Entry<String, String> atomSet : atoms.entrySet()) {
 						if (atomSet.getKey().startsWith("trace_")) {
@@ -286,5 +271,48 @@ public abstract class AbstractASPSolver {
 		atoms.put("trace_edgex", "");
 		atoms.put("trace_nb_edgex", "");
 		atoms.put("trace_linkx", "");
+	}
+
+	/**
+	 * Get the directory that will be used to store target models.
+	 * @param target Folder where generated models are created
+	 * @return target models directory
+	 */
+	private Path getOutputDir(final File target) {
+
+		String wd = getWorkingDir();
+
+		// If we have an absolute path inside Eclipse, prepend the workspace
+		// If we have an absolute path outside Eclipse, return it as it is
+		final Path targetPath = (target.isAbsolute() == WhereAmI.isEclipse()) ?
+				Paths.get(getWorkingDir(), target.getPath()) : target.toPath();
+
+		if (WhereAmI.isOSGI()) {
+			final Path fullPath = Paths.get(wd, target.toString());
+			if (Files.isDirectory(fullPath) && Files.isWritable(fullPath)) {
+				return target.toPath();
+			} else if (target.getPath().endsWith(".xmi")) {
+				return getOutputDir(target.getParentFile());
+			}
+		} else if (target.isAbsolute()) {
+			if (Files.isDirectory(target.toPath())) {
+				return target.toPath();
+			} else {
+				return target.getParentFile().toPath();
+			}
+		}
+
+		System.err.println(targetPath + " not a valid file or directory.");
+		return null;
+	}
+
+	/**
+	 * Build an absolute pathname that will work inside and outside Eclipse.
+	 * @param path
+	 * @param working directory
+	 * @return target model absolute pathname
+	 */
+	private Path getAbsolutePath(final Path path, final String wd) {
+		return (Files.isDirectory(path.getParent())) ? path : Paths.get(wd, path.toString());
 	}
 }

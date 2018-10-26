@@ -23,6 +23,22 @@ Require-Bundle: JTL.atl,
  ASPMM.resource.aspmm,
  ASPT.resource.aspt,
  JTL.resource.jtl,
- org.eclipse.m2m.atl.core
+ org.eclipse.m2m.atl.core,
+ org.junit,
+ org.junit.jupiter.api,
+ org.junit.jupiter.engine,
+ org.junit.jupiter.migrationsupport,
+ org.junit.jupiter.params,
+ org.junit.platform.commons,
+ org.junit.platform.engine,
+ org.junit.platform.launcher,
+ org.junit.platform.runner,
+ org.junit.platform.suite.api,
+ org.junit.vintage.engine,
+ org.hamcrest.core,
+ org.opentest4j,
+ org.apiguardian,
+ org.eclipse.m2m.atl.emftvm;bundle-version="3.8.0"
 Bundle-ClassPath: lib/jaspwrapper-0.9.jar,
  .
+Bundle-Activator: jtl.utils.Activator
