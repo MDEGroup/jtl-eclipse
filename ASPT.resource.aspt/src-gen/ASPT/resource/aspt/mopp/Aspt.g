@@ -566,7 +566,7 @@ parse_ASPT_TraceModel returns [ASPT.TraceModel element = null]
 	}
 	
 	(
-		a2 = QUOTED_34_34		
+		a2 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -576,7 +576,7 @@ parse_ASPT_TraceModel returns [ASPT.TraceModel element = null]
 				startIncompleteElement(element);
 			}
 			if (a2 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_MODEL__ID), result);
@@ -616,7 +616,7 @@ parse_ASPT_TraceModel returns [ASPT.TraceModel element = null]
 	}
 	
 	(
-		a4 = IDENTIFIER		
+		a4 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -626,7 +626,7 @@ parse_ASPT_TraceModel returns [ASPT.TraceModel element = null]
 				startIncompleteElement(element);
 			}
 			if (a4 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_MODEL__MMS), result);
@@ -800,7 +800,7 @@ parse_ASPT_TraceNode returns [ASPT.TraceNode element = null]
 	}
 	
 	(
-		a2 = IDENTIFIER		
+		a2 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -810,7 +810,7 @@ parse_ASPT_TraceNode returns [ASPT.TraceNode element = null]
 				startIncompleteElement(element);
 			}
 			if (a2 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__METAMODEL), result);
@@ -850,7 +850,7 @@ parse_ASPT_TraceNode returns [ASPT.TraceNode element = null]
 	}
 	
 	(
-		a4 = INTEGER		
+		a4 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -860,7 +860,7 @@ parse_ASPT_TraceNode returns [ASPT.TraceNode element = null]
 				startIncompleteElement(element);
 			}
 			if (a4 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__ID), result);
@@ -900,7 +900,7 @@ parse_ASPT_TraceNode returns [ASPT.TraceNode element = null]
 	}
 	
 	(
-		a6 = QUOTED_34_34		
+		a6 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -910,7 +910,7 @@ parse_ASPT_TraceNode returns [ASPT.TraceNode element = null]
 				startIncompleteElement(element);
 			}
 			if (a6 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__IDX), result);
@@ -950,7 +950,7 @@ parse_ASPT_TraceNode returns [ASPT.TraceNode element = null]
 	}
 	
 	(
-		a8 = IDENTIFIER		
+		a8 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -960,7 +960,7 @@ parse_ASPT_TraceNode returns [ASPT.TraceNode element = null]
 				startIncompleteElement(element);
 			}
 			if (a8 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__TYPE), result);
@@ -1058,7 +1058,7 @@ parse_ASPT_TraceProp returns [ASPT.TraceProp element = null]
 	}
 	
 	(
-		a2 = IDENTIFIER		
+		a2 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1068,7 +1068,7 @@ parse_ASPT_TraceProp returns [ASPT.TraceProp element = null]
 				startIncompleteElement(element);
 			}
 			if (a2 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__METAMODEL), result);
@@ -1108,7 +1108,7 @@ parse_ASPT_TraceProp returns [ASPT.TraceProp element = null]
 	}
 	
 	(
-		a4 = INTEGER		
+		a4 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1118,7 +1118,7 @@ parse_ASPT_TraceProp returns [ASPT.TraceProp element = null]
 				startIncompleteElement(element);
 			}
 			if (a4 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__ID), result);
@@ -1158,7 +1158,7 @@ parse_ASPT_TraceProp returns [ASPT.TraceProp element = null]
 	}
 	
 	(
-		a6 = QUOTED_34_34		
+		a6 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1168,7 +1168,7 @@ parse_ASPT_TraceProp returns [ASPT.TraceProp element = null]
 				startIncompleteElement(element);
 			}
 			if (a6 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDX), result);
@@ -1208,7 +1208,7 @@ parse_ASPT_TraceProp returns [ASPT.TraceProp element = null]
 	}
 	
 	(
-		a8 = INTEGER		
+		a8 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1218,7 +1218,7 @@ parse_ASPT_TraceProp returns [ASPT.TraceProp element = null]
 				startIncompleteElement(element);
 			}
 			if (a8 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDP), result);
@@ -1258,7 +1258,7 @@ parse_ASPT_TraceProp returns [ASPT.TraceProp element = null]
 	}
 	
 	(
-		a10 = QUOTED_34_34		
+		a10 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1268,7 +1268,7 @@ parse_ASPT_TraceProp returns [ASPT.TraceProp element = null]
 				startIncompleteElement(element);
 			}
 			if (a10 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDPX), result);
@@ -1308,7 +1308,7 @@ parse_ASPT_TraceProp returns [ASPT.TraceProp element = null]
 	}
 	
 	(
-		a12 = IDENTIFIER		
+		a12 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1318,7 +1318,7 @@ parse_ASPT_TraceProp returns [ASPT.TraceProp element = null]
 				startIncompleteElement(element);
 			}
 			if (a12 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__TYPE), result);
@@ -1358,7 +1358,7 @@ parse_ASPT_TraceProp returns [ASPT.TraceProp element = null]
 	}
 	
 	(
-		a14 = QUOTED_34_34		
+		a14 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1368,7 +1368,7 @@ parse_ASPT_TraceProp returns [ASPT.TraceProp element = null]
 				startIncompleteElement(element);
 			}
 			if (a14 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__VALUE), result);
@@ -1466,7 +1466,7 @@ parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null]
 	}
 	
 	(
-		a2 = IDENTIFIER		
+		a2 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1476,7 +1476,7 @@ parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null]
 				startIncompleteElement(element);
 			}
 			if (a2 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__METAMODEL), result);
@@ -1516,7 +1516,7 @@ parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null]
 	}
 	
 	(
-		a4 = INTEGER		
+		a4 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1526,7 +1526,7 @@ parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null]
 				startIncompleteElement(element);
 			}
 			if (a4 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__ID), result);
@@ -1566,7 +1566,7 @@ parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null]
 	}
 	
 	(
-		a6 = QUOTED_34_34		
+		a6 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1576,7 +1576,7 @@ parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null]
 				startIncompleteElement(element);
 			}
 			if (a6 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDX), result);
@@ -1616,7 +1616,7 @@ parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null]
 	}
 	
 	(
-		a8 = IDENTIFIER		
+		a8 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1626,7 +1626,7 @@ parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null]
 				startIncompleteElement(element);
 			}
 			if (a8 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__TYPE), result);
@@ -1666,7 +1666,7 @@ parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null]
 	}
 	
 	(
-		a10 = INTEGER		
+		a10 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1676,7 +1676,7 @@ parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null]
 				startIncompleteElement(element);
 			}
 			if (a10 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDS), result);
@@ -1716,7 +1716,7 @@ parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null]
 	}
 	
 	(
-		a12 = QUOTED_34_34		
+		a12 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1726,7 +1726,7 @@ parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null]
 				startIncompleteElement(element);
 			}
 			if (a12 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDSX), result);
@@ -1766,7 +1766,7 @@ parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null]
 	}
 	
 	(
-		a14 = INTEGER		
+		a14 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1776,7 +1776,7 @@ parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null]
 				startIncompleteElement(element);
 			}
 			if (a14 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDT), result);
@@ -1816,7 +1816,7 @@ parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null]
 	}
 	
 	(
-		a16 = QUOTED_34_34		
+		a16 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1826,7 +1826,7 @@ parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null]
 				startIncompleteElement(element);
 			}
 			if (a16 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a16.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDTX), result);
@@ -1924,7 +1924,7 @@ parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null]
 	}
 	
 	(
-		a2 = IDENTIFIER		
+		a2 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1934,7 +1934,7 @@ parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null]
 				startIncompleteElement(element);
 			}
 			if (a2 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__METAMODEL), result);
@@ -1974,7 +1974,7 @@ parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null]
 	}
 	
 	(
-		a4 = INTEGER		
+		a4 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -1984,7 +1984,7 @@ parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null]
 				startIncompleteElement(element);
 			}
 			if (a4 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__ID), result);
@@ -2024,7 +2024,7 @@ parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null]
 	}
 	
 	(
-		a6 = QUOTED_34_34		
+		a6 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2034,7 +2034,7 @@ parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null]
 				startIncompleteElement(element);
 			}
 			if (a6 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDX), result);
@@ -2074,7 +2074,7 @@ parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null]
 	}
 	
 	(
-		a8 = IDENTIFIER		
+		a8 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2084,7 +2084,7 @@ parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null]
 				startIncompleteElement(element);
 			}
 			if (a8 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__TYPE), result);
@@ -2124,7 +2124,7 @@ parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null]
 	}
 	
 	(
-		a10 = INTEGER		
+		a10 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2134,7 +2134,7 @@ parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null]
 				startIncompleteElement(element);
 			}
 			if (a10 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDS), result);
@@ -2174,7 +2174,7 @@ parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null]
 	}
 	
 	(
-		a12 = QUOTED_34_34		
+		a12 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2184,7 +2184,7 @@ parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null]
 				startIncompleteElement(element);
 			}
 			if (a12 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDSX), result);
@@ -2224,7 +2224,7 @@ parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null]
 	}
 	
 	(
-		a14 = INTEGER		
+		a14 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2234,7 +2234,7 @@ parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null]
 				startIncompleteElement(element);
 			}
 			if (a14 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDT), result);
@@ -2274,7 +2274,7 @@ parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null]
 	}
 	
 	(
-		a16 = QUOTED_34_34		
+		a16 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2284,7 +2284,7 @@ parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null]
 				startIncompleteElement(element);
 			}
 			if (a16 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a16.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDTX), result);
@@ -2378,7 +2378,7 @@ parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null]
 	}
 	
 	(
-		a2 = IDENTIFIER		
+		a2 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2388,7 +2388,7 @@ parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null]
 				startIncompleteElement(element);
 			}
 			if (a2 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__METAMODEL), result);
@@ -2428,7 +2428,7 @@ parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null]
 	}
 	
 	(
-		a4 = INTEGER		
+		a4 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2438,7 +2438,7 @@ parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null]
 				startIncompleteElement(element);
 			}
 			if (a4 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__ID), result);
@@ -2478,7 +2478,7 @@ parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null]
 	}
 	
 	(
-		a6 = QUOTED_34_34		
+		a6 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2488,7 +2488,7 @@ parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null]
 				startIncompleteElement(element);
 			}
 			if (a6 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDX), result);
@@ -2528,7 +2528,7 @@ parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null]
 	}
 	
 	(
-		a8 = INTEGER		
+		a8 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2538,7 +2538,7 @@ parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null]
 				startIncompleteElement(element);
 			}
 			if (a8 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDP), result);
@@ -2578,7 +2578,7 @@ parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null]
 	}
 	
 	(
-		a10 = QUOTED_34_34		
+		a10 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2588,7 +2588,7 @@ parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null]
 				startIncompleteElement(element);
 			}
 			if (a10 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDPX), result);
@@ -2628,7 +2628,7 @@ parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null]
 	}
 	
 	(
-		a12 = IDENTIFIER		
+		a12 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2638,7 +2638,7 @@ parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null]
 				startIncompleteElement(element);
 			}
 			if (a12 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__TYPE), result);
@@ -2678,7 +2678,7 @@ parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null]
 	}
 	
 	(
-		a14 = QUOTED_34_34		
+		a14 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2688,7 +2688,7 @@ parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null]
 				startIncompleteElement(element);
 			}
 			if (a14 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__VALUE), result);
@@ -2782,7 +2782,7 @@ parse_ASPT_TraceNbNode returns [ASPT.TraceNbNode element = null]
 	}
 	
 	(
-		a2 = IDENTIFIER		
+		a2 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2792,7 +2792,7 @@ parse_ASPT_TraceNbNode returns [ASPT.TraceNbNode element = null]
 				startIncompleteElement(element);
 			}
 			if (a2 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__METAMODEL), result);
@@ -2832,7 +2832,7 @@ parse_ASPT_TraceNbNode returns [ASPT.TraceNbNode element = null]
 	}
 	
 	(
-		a4 = INTEGER		
+		a4 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2842,7 +2842,7 @@ parse_ASPT_TraceNbNode returns [ASPT.TraceNbNode element = null]
 				startIncompleteElement(element);
 			}
 			if (a4 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__ID), result);
@@ -2882,7 +2882,7 @@ parse_ASPT_TraceNbNode returns [ASPT.TraceNbNode element = null]
 	}
 	
 	(
-		a6 = QUOTED_34_34		
+		a6 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2892,7 +2892,7 @@ parse_ASPT_TraceNbNode returns [ASPT.TraceNbNode element = null]
 				startIncompleteElement(element);
 			}
 			if (a6 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__IDX), result);
@@ -2932,7 +2932,7 @@ parse_ASPT_TraceNbNode returns [ASPT.TraceNbNode element = null]
 	}
 	
 	(
-		a8 = IDENTIFIER		
+		a8 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -2942,7 +2942,7 @@ parse_ASPT_TraceNbNode returns [ASPT.TraceNbNode element = null]
 				startIncompleteElement(element);
 			}
 			if (a8 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__TYPE), result);
@@ -3036,7 +3036,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 	}
 	
 	(
-		a2 = IDENTIFIER		
+		a2 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -3046,7 +3046,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 				startIncompleteElement(element);
 			}
 			if (a2 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__METAMODEL), result);
@@ -3086,7 +3086,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 	}
 	
 	(
-		a4 = INTEGER		
+		a4 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -3096,7 +3096,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 				startIncompleteElement(element);
 			}
 			if (a4 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__ID), result);
@@ -3136,7 +3136,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 	}
 	
 	(
-		a6 = QUOTED_34_34		
+		a6 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -3146,7 +3146,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 				startIncompleteElement(element);
 			}
 			if (a6 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDX), result);
@@ -3186,7 +3186,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 	}
 	
 	(
-		a8 = INTEGER		
+		a8 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -3196,7 +3196,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 				startIncompleteElement(element);
 			}
 			if (a8 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREF), result);
@@ -3236,7 +3236,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 	}
 	
 	(
-		a10 = QUOTED_34_34		
+		a10 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -3246,7 +3246,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 				startIncompleteElement(element);
 			}
 			if (a10 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREFX), result);
@@ -3286,7 +3286,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 	}
 	
 	(
-		a12 = IDENTIFIER		
+		a12 = TEXT		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -3296,7 +3296,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 				startIncompleteElement(element);
 			}
 			if (a12 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__TYPE), result);
@@ -3336,7 +3336,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 	}
 	
 	(
-		a14 = QUOTED_34_34		
+		a14 = QUOTED_34_34_92		
 		{
 			if (terminateParsing) {
 				throw new ASPT.resource.aspt.mopp.AsptTerminateParsingException();
@@ -3346,7 +3346,7 @@ parse_ASPT_TraceLink returns [ASPT.TraceLink element = null]
 				startIncompleteElement(element);
 			}
 			if (a14 != null) {
-				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				tokenResolver.setOptions(getOptions());
 				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
 				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__RELATION), result);
@@ -3419,29 +3419,18 @@ parse_ASPT_TraceElement returns [ASPT.TraceElement element = null]
 	
 ;
 
-IDENTIFIER:
-	(('A'..'Z' | 'a'..'z' | '-'| '_')('A'..'Z' | 'a'..'z' | '0'..'9' | '-'| '_' | '/' | '.' | '@' )*)
-;
-WHITESPACE:
-	((' ' | '\t' | '\f'))
-	{ _channel = 99; }
+TEXT:
+	(('A'..'Z'|'a'..'z'|'0'..'9'|'-'|'_'|'/'|'@'|'.'|':')+)
 ;
 LINEBREAK:
-	(('\r\n' | '\r' | '\n'))
+	(('\r\n'|'\r'|'\n'))
 	{ _channel = 99; }
 ;
-INTEGER:
-	(('-')?('1'..'9')('0'..'9')*|'0')
-;
-FLOAT:
-	(('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ )
+WHITESPACE:
+	((' '|'\t'|'\f'))
 	{ _channel = 99; }
 ;
-SL_COMMENT:
-	('//'(~('\n'|'\r'|'\uffff'))*)
-	{ _channel = 99; }
-;
-QUOTED_34_34:
-	(('"')(~('"'))*('"'))
+QUOTED_34_34_92:
+	(('"')(('\\''"')|('\\''\\')|(~('"'|'\\')))*('"'))
 ;
 

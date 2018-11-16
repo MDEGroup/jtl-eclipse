@@ -168,7 +168,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_MODEL__ID));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_MODEL__ID), element));
 				out.print(" ");
@@ -183,7 +183,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_MODEL__MMS));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_MODEL__MMS), element));
 				out.print(" ");
@@ -300,7 +300,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__METAMODEL));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__METAMODEL), element));
 				out.print(" ");
@@ -310,12 +310,12 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("id");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__ID));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__ID), element));
 				out.print(" ");
@@ -330,7 +330,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__IDX));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__IDX), element));
 				out.print(" ");
@@ -345,7 +345,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__TYPE));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__TYPE), element));
 				out.print(" ");
@@ -400,7 +400,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__METAMODEL));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__METAMODEL), element));
 				out.print(" ");
@@ -410,12 +410,12 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("id");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__ID));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__ID), element));
 				out.print(" ");
@@ -430,7 +430,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDX));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDX), element));
 				out.print(" ");
@@ -440,12 +440,12 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("idp");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDP));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDP), element));
 				out.print(" ");
@@ -460,7 +460,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDPX));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDPX), element));
 				out.print(" ");
@@ -475,7 +475,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__TYPE));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__TYPE), element));
 				out.print(" ");
@@ -490,7 +490,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__VALUE));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__VALUE), element));
 				out.print(" ");
@@ -547,7 +547,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__METAMODEL));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__METAMODEL), element));
 				out.print(" ");
@@ -557,12 +557,12 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("id");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__ID));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__ID), element));
 				out.print(" ");
@@ -577,7 +577,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDX));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDX), element));
 				out.print(" ");
@@ -592,7 +592,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__TYPE));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__TYPE), element));
 				out.print(" ");
@@ -602,12 +602,12 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("ids");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDS));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDS), element));
 				out.print(" ");
@@ -622,7 +622,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDSX));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDSX), element));
 				out.print(" ");
@@ -632,12 +632,12 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("idt");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDT));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDT), element));
 				out.print(" ");
@@ -652,7 +652,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDTX));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDTX), element));
 				out.print(" ");
@@ -709,7 +709,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__METAMODEL));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__METAMODEL), element));
 				out.print(" ");
@@ -719,12 +719,12 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("id");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__ID));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__ID), element));
 				out.print(" ");
@@ -739,7 +739,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDX));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDX), element));
 				out.print(" ");
@@ -754,7 +754,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__TYPE));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__TYPE), element));
 				out.print(" ");
@@ -764,12 +764,12 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("ids");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDS));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDS), element));
 				out.print(" ");
@@ -784,7 +784,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDSX));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDSX), element));
 				out.print(" ");
@@ -794,12 +794,12 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("idt");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDT));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDT), element));
 				out.print(" ");
@@ -814,7 +814,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDTX));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDTX), element));
 				out.print(" ");
@@ -869,7 +869,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__METAMODEL));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__METAMODEL), element));
 				out.print(" ");
@@ -879,12 +879,12 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("id");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__ID));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__ID), element));
 				out.print(" ");
@@ -899,7 +899,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDX));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDX), element));
 				out.print(" ");
@@ -909,12 +909,12 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("idp");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDP));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDP), element));
 				out.print(" ");
@@ -929,7 +929,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDPX));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDPX), element));
 				out.print(" ");
@@ -944,7 +944,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__TYPE));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__TYPE), element));
 				out.print(" ");
@@ -959,7 +959,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__VALUE));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__VALUE), element));
 				out.print(" ");
@@ -1008,7 +1008,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__METAMODEL));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__METAMODEL), element));
 				out.print(" ");
@@ -1018,12 +1018,12 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("id");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__ID));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__ID), element));
 				out.print(" ");
@@ -1038,7 +1038,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__IDX));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__IDX), element));
 				out.print(" ");
@@ -1053,7 +1053,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__TYPE));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__TYPE), element));
 				out.print(" ");
@@ -1108,7 +1108,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__METAMODEL));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__METAMODEL), element));
 				out.print(" ");
@@ -1118,12 +1118,12 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("id");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__ID));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__ID), element));
 				out.print(" ");
@@ -1138,7 +1138,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDX));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDX), element));
 				out.print(" ");
@@ -1148,12 +1148,12 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		// DEFINITION PART BEGINS (CsString)
 		out.print(",");
 		out.print(" ");
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+		// DEFINITION PART BEGINS (PlaceholderUsingDefaultToken)
 		count = printCountingMap.get("idref");
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREF));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREF), element));
 				out.print(" ");
@@ -1168,7 +1168,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREFX));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREFX), element));
 				out.print(" ");
@@ -1183,7 +1183,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__TYPE));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__TYPE), element));
 				out.print(" ");
@@ -1198,7 +1198,7 @@ public class AsptPrinter implements ASPT.resource.aspt.IAsptTextPrinter {
 		if (count > 0) {
 			Object o = element.eGet(element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__RELATION));
 			if (o != null) {
-				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+				ASPT.resource.aspt.IAsptTokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__RELATION), element));
 				out.print(" ");

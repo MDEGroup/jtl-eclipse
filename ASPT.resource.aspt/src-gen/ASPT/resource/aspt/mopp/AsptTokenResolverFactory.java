@@ -23,9 +23,8 @@ public class AsptTokenResolverFactory implements ASPT.resource.aspt.IAsptTokenRe
 	public AsptTokenResolverFactory() {
 		tokenName2TokenResolver = new java.util.LinkedHashMap<String, ASPT.resource.aspt.IAsptTokenResolver>();
 		featureName2CollectInTokenResolver = new java.util.LinkedHashMap<String, ASPT.resource.aspt.IAsptTokenResolver>();
-		registerTokenResolver("IDENTIFIER", new ASPT.resource.aspt.analysis.AsptIDENTIFIERTokenResolver());
-		registerTokenResolver("INTEGER", new ASPT.resource.aspt.analysis.AsptINTEGERTokenResolver());
-		registerTokenResolver("QUOTED_34_34", new ASPT.resource.aspt.analysis.AsptQUOTED_34_34TokenResolver());
+		registerTokenResolver("TEXT", new ASPT.resource.aspt.analysis.AsptTEXTTokenResolver());
+		registerTokenResolver("QUOTED_34_34_92", new ASPT.resource.aspt.analysis.AsptQUOTED_34_34_92TokenResolver());
 	}
 	
 	public ASPT.resource.aspt.IAsptTokenResolver createTokenResolver(String tokenName) {

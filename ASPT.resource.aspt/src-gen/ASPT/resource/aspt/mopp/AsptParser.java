@@ -13,10 +13,13 @@ import java.util.HashMap;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class AsptParser extends AsptANTLRParserBase {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "FLOAT", "IDENTIFIER", "INTEGER", "LINEBREAK", "QUOTED_34_34", "SL_COMMENT", "WHITESPACE", "'('", "')'", "','", "'.'", "'trace_edge'", "'trace_link'", "'trace_model'", "'trace_nb_edge'", "'trace_nb_node'", "'trace_nb_prop'", "'trace_node'", "'trace_prop'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "LINEBREAK", "QUOTED_34_34_92", "TEXT", "WHITESPACE", "'('", "')'", "','", "'.'", "'trace_edge'", "'trace_link'", "'trace_model'", "'trace_nb_edge'", "'trace_nb_node'", "'trace_nb_prop'", "'trace_node'", "'trace_prop'"
     };
 
     public static final int EOF=-1;
+    public static final int T__8=8;
+    public static final int T__9=9;
+    public static final int T__10=10;
     public static final int T__11=11;
     public static final int T__12=12;
     public static final int T__13=13;
@@ -26,16 +29,10 @@ public class AsptParser extends AsptANTLRParserBase {
     public static final int T__17=17;
     public static final int T__18=18;
     public static final int T__19=19;
-    public static final int T__20=20;
-    public static final int T__21=21;
-    public static final int T__22=22;
-    public static final int FLOAT=4;
-    public static final int IDENTIFIER=5;
-    public static final int INTEGER=6;
-    public static final int LINEBREAK=7;
-    public static final int QUOTED_34_34=8;
-    public static final int SL_COMMENT=9;
-    public static final int WHITESPACE=10;
+    public static final int LINEBREAK=4;
+    public static final int QUOTED_34_34_92=5;
+    public static final int TEXT=6;
+    public static final int WHITESPACE=7;
 
     // delegates
     public AsptANTLRParserBase[] getDelegates() {
@@ -615,7 +612,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceModel"
-    // Aspt.g:536:1: parse_ASPT_TraceModel returns [ASPT.TraceModel element = null] : a0= 'trace_model' a1= '(' (a2= QUOTED_34_34 ) a3= ',' (a4= IDENTIFIER ) a5= ')' a6= '.' ( ( (a7_0= parse_ASPT_TraceElement ) | (a8_0= parse_ASPT_TraceLink ) ) )* ;
+    // Aspt.g:536:1: parse_ASPT_TraceModel returns [ASPT.TraceModel element = null] : a0= 'trace_model' a1= '(' (a2= QUOTED_34_34_92 ) a3= ',' (a4= TEXT ) a5= ')' a6= '.' ( ( (a7_0= parse_ASPT_TraceElement ) | (a8_0= parse_ASPT_TraceLink ) ) )* ;
     public final ASPT.TraceModel parse_ASPT_TraceModel() throws RecognitionException {
         ASPT.TraceModel element =  null;
 
@@ -638,10 +635,10 @@ public class AsptParser extends AsptANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 2) ) { return element; }
 
-            // Aspt.g:539:2: (a0= 'trace_model' a1= '(' (a2= QUOTED_34_34 ) a3= ',' (a4= IDENTIFIER ) a5= ')' a6= '.' ( ( (a7_0= parse_ASPT_TraceElement ) | (a8_0= parse_ASPT_TraceLink ) ) )* )
-            // Aspt.g:540:2: a0= 'trace_model' a1= '(' (a2= QUOTED_34_34 ) a3= ',' (a4= IDENTIFIER ) a5= ')' a6= '.' ( ( (a7_0= parse_ASPT_TraceElement ) | (a8_0= parse_ASPT_TraceLink ) ) )*
+            // Aspt.g:539:2: (a0= 'trace_model' a1= '(' (a2= QUOTED_34_34_92 ) a3= ',' (a4= TEXT ) a5= ')' a6= '.' ( ( (a7_0= parse_ASPT_TraceElement ) | (a8_0= parse_ASPT_TraceLink ) ) )* )
+            // Aspt.g:540:2: a0= 'trace_model' a1= '(' (a2= QUOTED_34_34_92 ) a3= ',' (a4= TEXT ) a5= ')' a6= '.' ( ( (a7_0= parse_ASPT_TraceElement ) | (a8_0= parse_ASPT_TraceLink ) ) )*
             {
-            a0=(Token)match(input,17,FOLLOW_17_in_parse_ASPT_TraceModel115); if (state.failed) return element;
+            a0=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceModel115); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -658,7 +655,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[1]);
             	}
 
-            a1=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceModel129); if (state.failed) return element;
+            a1=(Token)match(input,8,FOLLOW_8_in_parse_ASPT_TraceModel129); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -675,10 +672,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[2]);
             	}
 
-            // Aspt.g:568:2: (a2= QUOTED_34_34 )
-            // Aspt.g:569:3: a2= QUOTED_34_34
+            // Aspt.g:568:2: (a2= QUOTED_34_34_92 )
+            // Aspt.g:569:3: a2= QUOTED_34_34_92
             {
-            a2=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceModel147); if (state.failed) return element;
+            a2=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceModel147); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -689,7 +686,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a2 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_MODEL__ID), result);
@@ -717,7 +714,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[3]);
             	}
 
-            a3=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceModel168); if (state.failed) return element;
+            a3=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceModel168); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -734,10 +731,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[4]);
             	}
 
-            // Aspt.g:618:2: (a4= IDENTIFIER )
-            // Aspt.g:619:3: a4= IDENTIFIER
+            // Aspt.g:618:2: (a4= TEXT )
+            // Aspt.g:619:3: a4= TEXT
             {
-            a4=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceModel186); if (state.failed) return element;
+            a4=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceModel186); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -748,7 +745,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a4 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_MODEL__MMS), result);
@@ -776,7 +773,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[5]);
             	}
 
-            a5=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceModel207); if (state.failed) return element;
+            a5=(Token)match(input,9,FOLLOW_9_in_parse_ASPT_TraceModel207); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -793,7 +790,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[6]);
             	}
 
-            a6=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceModel221); if (state.failed) return element;
+            a6=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceModel221); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -822,7 +819,7 @@ public class AsptParser extends AsptANTLRParserBase {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( ((LA2_0 >= 15 && LA2_0 <= 16)||(LA2_0 >= 18 && LA2_0 <= 22)) ) {
+                if ( ((LA2_0 >= 12 && LA2_0 <= 13)||(LA2_0 >= 15 && LA2_0 <= 19)) ) {
                     alt2=1;
                 }
 
@@ -835,58 +832,58 @@ public class AsptParser extends AsptANTLRParserBase {
             	    int alt1=2;
             	    int LA1_0 = input.LA(1);
 
-            	    if ( (LA1_0==15||(LA1_0 >= 18 && LA1_0 <= 22)) ) {
+            	    if ( (LA1_0==12||(LA1_0 >= 15 && LA1_0 <= 19)) ) {
             	        alt1=1;
             	    }
-            	    else if ( (LA1_0==16) ) {
+            	    else if ( (LA1_0==13) ) {
             	        int LA1_2 = input.LA(2);
 
-            	        if ( (LA1_2==11) ) {
+            	        if ( (LA1_2==8) ) {
             	            int LA1_3 = input.LA(3);
 
-            	            if ( (LA1_3==IDENTIFIER) ) {
+            	            if ( (LA1_3==TEXT) ) {
             	                int LA1_4 = input.LA(4);
 
-            	                if ( (LA1_4==13) ) {
+            	                if ( (LA1_4==10) ) {
             	                    int LA1_5 = input.LA(5);
 
-            	                    if ( (LA1_5==INTEGER) ) {
+            	                    if ( (LA1_5==TEXT) ) {
             	                        int LA1_6 = input.LA(6);
 
-            	                        if ( (LA1_6==13) ) {
+            	                        if ( (LA1_6==10) ) {
             	                            int LA1_7 = input.LA(7);
 
-            	                            if ( (LA1_7==QUOTED_34_34) ) {
+            	                            if ( (LA1_7==QUOTED_34_34_92) ) {
             	                                int LA1_8 = input.LA(8);
 
-            	                                if ( (LA1_8==13) ) {
+            	                                if ( (LA1_8==10) ) {
             	                                    int LA1_9 = input.LA(9);
 
-            	                                    if ( (LA1_9==INTEGER) ) {
+            	                                    if ( (LA1_9==TEXT) ) {
             	                                        int LA1_10 = input.LA(10);
 
-            	                                        if ( (LA1_10==13) ) {
+            	                                        if ( (LA1_10==10) ) {
             	                                            int LA1_11 = input.LA(11);
 
-            	                                            if ( (LA1_11==QUOTED_34_34) ) {
+            	                                            if ( (LA1_11==QUOTED_34_34_92) ) {
             	                                                int LA1_12 = input.LA(12);
 
-            	                                                if ( (LA1_12==13) ) {
+            	                                                if ( (LA1_12==10) ) {
             	                                                    int LA1_13 = input.LA(13);
 
-            	                                                    if ( (LA1_13==IDENTIFIER) ) {
+            	                                                    if ( (LA1_13==TEXT) ) {
             	                                                        int LA1_14 = input.LA(14);
 
-            	                                                        if ( (LA1_14==13) ) {
+            	                                                        if ( (LA1_14==10) ) {
             	                                                            int LA1_15 = input.LA(15);
 
-            	                                                            if ( (LA1_15==QUOTED_34_34) ) {
+            	                                                            if ( (LA1_15==QUOTED_34_34_92) ) {
             	                                                                int LA1_16 = input.LA(16);
 
-            	                                                                if ( (LA1_16==12) ) {
+            	                                                                if ( (LA1_16==9) ) {
             	                                                                    int LA1_17 = input.LA(17);
 
-            	                                                                    if ( (LA1_17==14) ) {
+            	                                                                    if ( (LA1_17==11) ) {
             	                                                                        int LA1_18 = input.LA(18);
 
             	                                                                        if ( (synpred1_Aspt()) ) {
@@ -1197,7 +1194,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceNode"
-    // Aspt.g:770:1: parse_ASPT_TraceNode returns [ASPT.TraceNode element = null] : (a0= 'trace_node' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ')' a10= '.' |c0= parse_ASPT_TraceNbNode );
+    // Aspt.g:770:1: parse_ASPT_TraceNode returns [ASPT.TraceNode element = null] : (a0= 'trace_node' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ')' a10= '.' |c0= parse_ASPT_TraceNbNode );
     public final ASPT.TraceNode parse_ASPT_TraceNode() throws RecognitionException {
         ASPT.TraceNode element =  null;
 
@@ -1222,14 +1219,14 @@ public class AsptParser extends AsptANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 3) ) { return element; }
 
-            // Aspt.g:773:2: (a0= 'trace_node' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ')' a10= '.' |c0= parse_ASPT_TraceNbNode )
+            // Aspt.g:773:2: (a0= 'trace_node' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ')' a10= '.' |c0= parse_ASPT_TraceNbNode )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==21) ) {
+            if ( (LA3_0==18) ) {
                 alt3=1;
             }
-            else if ( (LA3_0==19) ) {
+            else if ( (LA3_0==16) ) {
                 alt3=2;
             }
             else {
@@ -1242,9 +1239,9 @@ public class AsptParser extends AsptANTLRParserBase {
             }
             switch (alt3) {
                 case 1 :
-                    // Aspt.g:774:2: a0= 'trace_node' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ')' a10= '.'
+                    // Aspt.g:774:2: a0= 'trace_node' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ')' a10= '.'
                     {
-                    a0=(Token)match(input,21,FOLLOW_21_in_parse_ASPT_TraceNode348); if (state.failed) return element;
+                    a0=(Token)match(input,18,FOLLOW_18_in_parse_ASPT_TraceNode348); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1261,7 +1258,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[35]);
                     	}
 
-                    a1=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceNode362); if (state.failed) return element;
+                    a1=(Token)match(input,8,FOLLOW_8_in_parse_ASPT_TraceNode362); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1278,10 +1275,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[36]);
                     	}
 
-                    // Aspt.g:802:2: (a2= IDENTIFIER )
-                    // Aspt.g:803:3: a2= IDENTIFIER
+                    // Aspt.g:802:2: (a2= TEXT )
+                    // Aspt.g:803:3: a2= TEXT
                     {
-                    a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNode380); if (state.failed) return element;
+                    a2=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceNode380); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1292,7 +1289,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a2 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__METAMODEL), result);
@@ -1320,7 +1317,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[37]);
                     	}
 
-                    a3=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNode401); if (state.failed) return element;
+                    a3=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNode401); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1337,10 +1334,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[38]);
                     	}
 
-                    // Aspt.g:852:2: (a4= INTEGER )
-                    // Aspt.g:853:3: a4= INTEGER
+                    // Aspt.g:852:2: (a4= TEXT )
+                    // Aspt.g:853:3: a4= TEXT
                     {
-                    a4=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNode419); if (state.failed) return element;
+                    a4=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceNode419); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1351,7 +1348,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a4 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__ID), result);
@@ -1379,7 +1376,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[39]);
                     	}
 
-                    a5=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNode440); if (state.failed) return element;
+                    a5=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNode440); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1396,10 +1393,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[40]);
                     	}
 
-                    // Aspt.g:902:2: (a6= QUOTED_34_34 )
-                    // Aspt.g:903:3: a6= QUOTED_34_34
+                    // Aspt.g:902:2: (a6= QUOTED_34_34_92 )
+                    // Aspt.g:903:3: a6= QUOTED_34_34_92
                     {
-                    a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNode458); if (state.failed) return element;
+                    a6=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceNode458); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1410,7 +1407,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a6 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__IDX), result);
@@ -1438,7 +1435,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[41]);
                     	}
 
-                    a7=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNode479); if (state.failed) return element;
+                    a7=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNode479); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1455,10 +1452,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[42]);
                     	}
 
-                    // Aspt.g:952:2: (a8= IDENTIFIER )
-                    // Aspt.g:953:3: a8= IDENTIFIER
+                    // Aspt.g:952:2: (a8= TEXT )
+                    // Aspt.g:953:3: a8= TEXT
                     {
-                    a8=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNode497); if (state.failed) return element;
+                    a8=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceNode497); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1469,7 +1466,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a8 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NODE__TYPE), result);
@@ -1497,7 +1494,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[43]);
                     	}
 
-                    a9=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNode518); if (state.failed) return element;
+                    a9=(Token)match(input,9,FOLLOW_9_in_parse_ASPT_TraceNode518); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1514,7 +1511,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[44]);
                     	}
 
-                    a10=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceNode532); if (state.failed) return element;
+                    a10=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceNode532); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1572,7 +1569,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceProp"
-    // Aspt.g:1028:1: parse_ASPT_TraceProp returns [ASPT.TraceProp element = null] : (a0= 'trace_prop' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= INTEGER ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= IDENTIFIER ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.' |c0= parse_ASPT_TraceNbProp );
+    // Aspt.g:1028:1: parse_ASPT_TraceProp returns [ASPT.TraceProp element = null] : (a0= 'trace_prop' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= QUOTED_34_34_92 ) a11= ',' (a12= TEXT ) a13= ',' (a14= QUOTED_34_34_92 ) a15= ')' a16= '.' |c0= parse_ASPT_TraceNbProp );
     public final ASPT.TraceProp parse_ASPT_TraceProp() throws RecognitionException {
         ASPT.TraceProp element =  null;
 
@@ -1603,14 +1600,14 @@ public class AsptParser extends AsptANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 4) ) { return element; }
 
-            // Aspt.g:1031:2: (a0= 'trace_prop' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= INTEGER ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= IDENTIFIER ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.' |c0= parse_ASPT_TraceNbProp )
+            // Aspt.g:1031:2: (a0= 'trace_prop' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= QUOTED_34_34_92 ) a11= ',' (a12= TEXT ) a13= ',' (a14= QUOTED_34_34_92 ) a15= ')' a16= '.' |c0= parse_ASPT_TraceNbProp )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
-            if ( (LA4_0==22) ) {
+            if ( (LA4_0==19) ) {
                 alt4=1;
             }
-            else if ( (LA4_0==20) ) {
+            else if ( (LA4_0==17) ) {
                 alt4=2;
             }
             else {
@@ -1623,9 +1620,9 @@ public class AsptParser extends AsptANTLRParserBase {
             }
             switch (alt4) {
                 case 1 :
-                    // Aspt.g:1032:2: a0= 'trace_prop' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= INTEGER ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= IDENTIFIER ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.'
+                    // Aspt.g:1032:2: a0= 'trace_prop' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= QUOTED_34_34_92 ) a11= ',' (a12= TEXT ) a13= ',' (a14= QUOTED_34_34_92 ) a15= ')' a16= '.'
                     {
-                    a0=(Token)match(input,22,FOLLOW_22_in_parse_ASPT_TraceProp576); if (state.failed) return element;
+                    a0=(Token)match(input,19,FOLLOW_19_in_parse_ASPT_TraceProp576); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1642,7 +1639,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[52]);
                     	}
 
-                    a1=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceProp590); if (state.failed) return element;
+                    a1=(Token)match(input,8,FOLLOW_8_in_parse_ASPT_TraceProp590); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1659,10 +1656,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[53]);
                     	}
 
-                    // Aspt.g:1060:2: (a2= IDENTIFIER )
-                    // Aspt.g:1061:3: a2= IDENTIFIER
+                    // Aspt.g:1060:2: (a2= TEXT )
+                    // Aspt.g:1061:3: a2= TEXT
                     {
-                    a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceProp608); if (state.failed) return element;
+                    a2=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceProp608); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1673,7 +1670,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a2 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__METAMODEL), result);
@@ -1701,7 +1698,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[54]);
                     	}
 
-                    a3=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceProp629); if (state.failed) return element;
+                    a3=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceProp629); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1718,10 +1715,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[55]);
                     	}
 
-                    // Aspt.g:1110:2: (a4= INTEGER )
-                    // Aspt.g:1111:3: a4= INTEGER
+                    // Aspt.g:1110:2: (a4= TEXT )
+                    // Aspt.g:1111:3: a4= TEXT
                     {
-                    a4=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceProp647); if (state.failed) return element;
+                    a4=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceProp647); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1732,7 +1729,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a4 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__ID), result);
@@ -1760,7 +1757,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[56]);
                     	}
 
-                    a5=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceProp668); if (state.failed) return element;
+                    a5=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceProp668); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1777,10 +1774,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[57]);
                     	}
 
-                    // Aspt.g:1160:2: (a6= QUOTED_34_34 )
-                    // Aspt.g:1161:3: a6= QUOTED_34_34
+                    // Aspt.g:1160:2: (a6= QUOTED_34_34_92 )
+                    // Aspt.g:1161:3: a6= QUOTED_34_34_92
                     {
-                    a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp686); if (state.failed) return element;
+                    a6=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceProp686); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1791,7 +1788,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a6 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDX), result);
@@ -1819,7 +1816,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[58]);
                     	}
 
-                    a7=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceProp707); if (state.failed) return element;
+                    a7=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceProp707); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1836,10 +1833,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[59]);
                     	}
 
-                    // Aspt.g:1210:2: (a8= INTEGER )
-                    // Aspt.g:1211:3: a8= INTEGER
+                    // Aspt.g:1210:2: (a8= TEXT )
+                    // Aspt.g:1211:3: a8= TEXT
                     {
-                    a8=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceProp725); if (state.failed) return element;
+                    a8=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceProp725); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1850,7 +1847,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a8 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDP), result);
@@ -1878,7 +1875,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[60]);
                     	}
 
-                    a9=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceProp746); if (state.failed) return element;
+                    a9=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceProp746); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1895,10 +1892,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[61]);
                     	}
 
-                    // Aspt.g:1260:2: (a10= QUOTED_34_34 )
-                    // Aspt.g:1261:3: a10= QUOTED_34_34
+                    // Aspt.g:1260:2: (a10= QUOTED_34_34_92 )
+                    // Aspt.g:1261:3: a10= QUOTED_34_34_92
                     {
-                    a10=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp764); if (state.failed) return element;
+                    a10=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceProp764); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1909,7 +1906,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a10 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__IDPX), result);
@@ -1937,7 +1934,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[62]);
                     	}
 
-                    a11=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceProp785); if (state.failed) return element;
+                    a11=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceProp785); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -1954,10 +1951,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[63]);
                     	}
 
-                    // Aspt.g:1310:2: (a12= IDENTIFIER )
-                    // Aspt.g:1311:3: a12= IDENTIFIER
+                    // Aspt.g:1310:2: (a12= TEXT )
+                    // Aspt.g:1311:3: a12= TEXT
                     {
-                    a12=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceProp803); if (state.failed) return element;
+                    a12=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceProp803); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -1968,7 +1965,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a12 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__TYPE), result);
@@ -1996,7 +1993,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[64]);
                     	}
 
-                    a13=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceProp824); if (state.failed) return element;
+                    a13=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceProp824); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2013,10 +2010,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[65]);
                     	}
 
-                    // Aspt.g:1360:2: (a14= QUOTED_34_34 )
-                    // Aspt.g:1361:3: a14= QUOTED_34_34
+                    // Aspt.g:1360:2: (a14= QUOTED_34_34_92 )
+                    // Aspt.g:1361:3: a14= QUOTED_34_34_92
                     {
-                    a14=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp842); if (state.failed) return element;
+                    a14=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceProp842); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2027,7 +2024,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a14 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_PROP__VALUE), result);
@@ -2055,7 +2052,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[66]);
                     	}
 
-                    a15=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceProp863); if (state.failed) return element;
+                    a15=(Token)match(input,9,FOLLOW_9_in_parse_ASPT_TraceProp863); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2072,7 +2069,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[67]);
                     	}
 
-                    a16=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceProp877); if (state.failed) return element;
+                    a16=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceProp877); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2130,7 +2127,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceEdge"
-    // Aspt.g:1436:1: parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null] : (a0= 'trace_edge' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ',' (a10= INTEGER ) a11= ',' (a12= QUOTED_34_34 ) a13= ',' (a14= INTEGER ) a15= ',' (a16= QUOTED_34_34 ) a17= ')' a18= '.' |c0= parse_ASPT_TraceNbEdge );
+    // Aspt.g:1436:1: parse_ASPT_TraceEdge returns [ASPT.TraceEdge element = null] : (a0= 'trace_edge' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= TEXT ) a11= ',' (a12= QUOTED_34_34_92 ) a13= ',' (a14= TEXT ) a15= ',' (a16= QUOTED_34_34_92 ) a17= ')' a18= '.' |c0= parse_ASPT_TraceNbEdge );
     public final ASPT.TraceEdge parse_ASPT_TraceEdge() throws RecognitionException {
         ASPT.TraceEdge element =  null;
 
@@ -2163,14 +2160,14 @@ public class AsptParser extends AsptANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 5) ) { return element; }
 
-            // Aspt.g:1439:2: (a0= 'trace_edge' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ',' (a10= INTEGER ) a11= ',' (a12= QUOTED_34_34 ) a13= ',' (a14= INTEGER ) a15= ',' (a16= QUOTED_34_34 ) a17= ')' a18= '.' |c0= parse_ASPT_TraceNbEdge )
+            // Aspt.g:1439:2: (a0= 'trace_edge' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= TEXT ) a11= ',' (a12= QUOTED_34_34_92 ) a13= ',' (a14= TEXT ) a15= ',' (a16= QUOTED_34_34_92 ) a17= ')' a18= '.' |c0= parse_ASPT_TraceNbEdge )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==15) ) {
+            if ( (LA5_0==12) ) {
                 alt5=1;
             }
-            else if ( (LA5_0==18) ) {
+            else if ( (LA5_0==15) ) {
                 alt5=2;
             }
             else {
@@ -2183,9 +2180,9 @@ public class AsptParser extends AsptANTLRParserBase {
             }
             switch (alt5) {
                 case 1 :
-                    // Aspt.g:1440:2: a0= 'trace_edge' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ',' (a10= INTEGER ) a11= ',' (a12= QUOTED_34_34 ) a13= ',' (a14= INTEGER ) a15= ',' (a16= QUOTED_34_34 ) a17= ')' a18= '.'
+                    // Aspt.g:1440:2: a0= 'trace_edge' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= TEXT ) a11= ',' (a12= QUOTED_34_34_92 ) a13= ',' (a14= TEXT ) a15= ',' (a16= QUOTED_34_34_92 ) a17= ')' a18= '.'
                     {
-                    a0=(Token)match(input,15,FOLLOW_15_in_parse_ASPT_TraceEdge921); if (state.failed) return element;
+                    a0=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceEdge921); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2202,7 +2199,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[75]);
                     	}
 
-                    a1=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceEdge935); if (state.failed) return element;
+                    a1=(Token)match(input,8,FOLLOW_8_in_parse_ASPT_TraceEdge935); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2219,10 +2216,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[76]);
                     	}
 
-                    // Aspt.g:1468:2: (a2= IDENTIFIER )
-                    // Aspt.g:1469:3: a2= IDENTIFIER
+                    // Aspt.g:1468:2: (a2= TEXT )
+                    // Aspt.g:1469:3: a2= TEXT
                     {
-                    a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceEdge953); if (state.failed) return element;
+                    a2=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceEdge953); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2233,7 +2230,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a2 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__METAMODEL), result);
@@ -2261,7 +2258,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[77]);
                     	}
 
-                    a3=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceEdge974); if (state.failed) return element;
+                    a3=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceEdge974); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2278,10 +2275,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[78]);
                     	}
 
-                    // Aspt.g:1518:2: (a4= INTEGER )
-                    // Aspt.g:1519:3: a4= INTEGER
+                    // Aspt.g:1518:2: (a4= TEXT )
+                    // Aspt.g:1519:3: a4= TEXT
                     {
-                    a4=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceEdge992); if (state.failed) return element;
+                    a4=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceEdge992); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2292,7 +2289,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a4 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__ID), result);
@@ -2320,7 +2317,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[79]);
                     	}
 
-                    a5=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceEdge1013); if (state.failed) return element;
+                    a5=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceEdge1013); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2337,10 +2334,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[80]);
                     	}
 
-                    // Aspt.g:1568:2: (a6= QUOTED_34_34 )
-                    // Aspt.g:1569:3: a6= QUOTED_34_34
+                    // Aspt.g:1568:2: (a6= QUOTED_34_34_92 )
+                    // Aspt.g:1569:3: a6= QUOTED_34_34_92
                     {
-                    a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge1031); if (state.failed) return element;
+                    a6=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceEdge1031); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2351,7 +2348,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a6 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDX), result);
@@ -2379,7 +2376,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[81]);
                     	}
 
-                    a7=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceEdge1052); if (state.failed) return element;
+                    a7=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceEdge1052); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2396,10 +2393,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[82]);
                     	}
 
-                    // Aspt.g:1618:2: (a8= IDENTIFIER )
-                    // Aspt.g:1619:3: a8= IDENTIFIER
+                    // Aspt.g:1618:2: (a8= TEXT )
+                    // Aspt.g:1619:3: a8= TEXT
                     {
-                    a8=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceEdge1070); if (state.failed) return element;
+                    a8=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceEdge1070); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2410,7 +2407,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a8 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__TYPE), result);
@@ -2438,7 +2435,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[83]);
                     	}
 
-                    a9=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceEdge1091); if (state.failed) return element;
+                    a9=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceEdge1091); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2455,10 +2452,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[84]);
                     	}
 
-                    // Aspt.g:1668:2: (a10= INTEGER )
-                    // Aspt.g:1669:3: a10= INTEGER
+                    // Aspt.g:1668:2: (a10= TEXT )
+                    // Aspt.g:1669:3: a10= TEXT
                     {
-                    a10=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceEdge1109); if (state.failed) return element;
+                    a10=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceEdge1109); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2469,7 +2466,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a10 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDS), result);
@@ -2497,7 +2494,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[85]);
                     	}
 
-                    a11=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceEdge1130); if (state.failed) return element;
+                    a11=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceEdge1130); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2514,10 +2511,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[86]);
                     	}
 
-                    // Aspt.g:1718:2: (a12= QUOTED_34_34 )
-                    // Aspt.g:1719:3: a12= QUOTED_34_34
+                    // Aspt.g:1718:2: (a12= QUOTED_34_34_92 )
+                    // Aspt.g:1719:3: a12= QUOTED_34_34_92
                     {
-                    a12=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge1148); if (state.failed) return element;
+                    a12=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceEdge1148); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2528,7 +2525,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a12 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDSX), result);
@@ -2556,7 +2553,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[87]);
                     	}
 
-                    a13=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceEdge1169); if (state.failed) return element;
+                    a13=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceEdge1169); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2573,10 +2570,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[88]);
                     	}
 
-                    // Aspt.g:1768:2: (a14= INTEGER )
-                    // Aspt.g:1769:3: a14= INTEGER
+                    // Aspt.g:1768:2: (a14= TEXT )
+                    // Aspt.g:1769:3: a14= TEXT
                     {
-                    a14=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceEdge1187); if (state.failed) return element;
+                    a14=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceEdge1187); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2587,7 +2584,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a14 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDT), result);
@@ -2615,7 +2612,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[89]);
                     	}
 
-                    a15=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceEdge1208); if (state.failed) return element;
+                    a15=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceEdge1208); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2632,10 +2629,10 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[90]);
                     	}
 
-                    // Aspt.g:1818:2: (a16= QUOTED_34_34 )
-                    // Aspt.g:1819:3: a16= QUOTED_34_34
+                    // Aspt.g:1818:2: (a16= QUOTED_34_34_92 )
+                    // Aspt.g:1819:3: a16= QUOTED_34_34_92
                     {
-                    a16=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge1226); if (state.failed) return element;
+                    a16=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceEdge1226); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     			if (terminateParsing) {
@@ -2646,7 +2643,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     				startIncompleteElement(element);
                     			}
                     			if (a16 != null) {
-                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+                    				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
                     				tokenResolver.setOptions(getOptions());
                     				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
                     				tokenResolver.resolve(a16.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_EDGE__IDTX), result);
@@ -2674,7 +2671,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[91]);
                     	}
 
-                    a17=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceEdge1247); if (state.failed) return element;
+                    a17=(Token)match(input,9,FOLLOW_9_in_parse_ASPT_TraceEdge1247); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2691,7 +2688,7 @@ public class AsptParser extends AsptANTLRParserBase {
                     		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[92]);
                     	}
 
-                    a18=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceEdge1261); if (state.failed) return element;
+                    a18=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceEdge1261); if (state.failed) return element;
 
                     if ( state.backtracking==0 ) {
                     		if (element == null) {
@@ -2749,7 +2746,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceNbEdge"
-    // Aspt.g:1894:1: parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null] : a0= 'trace_nb_edge' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ',' (a10= INTEGER ) a11= ',' (a12= QUOTED_34_34 ) a13= ',' (a14= INTEGER ) a15= ',' (a16= QUOTED_34_34 ) a17= ')' a18= '.' ;
+    // Aspt.g:1894:1: parse_ASPT_TraceNbEdge returns [ASPT.TraceNbEdge element = null] : a0= 'trace_nb_edge' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= TEXT ) a11= ',' (a12= QUOTED_34_34_92 ) a13= ',' (a14= TEXT ) a15= ',' (a16= QUOTED_34_34_92 ) a17= ')' a18= '.' ;
     public final ASPT.TraceNbEdge parse_ASPT_TraceNbEdge() throws RecognitionException {
         ASPT.TraceNbEdge element =  null;
 
@@ -2780,10 +2777,10 @@ public class AsptParser extends AsptANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 6) ) { return element; }
 
-            // Aspt.g:1897:2: (a0= 'trace_nb_edge' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ',' (a10= INTEGER ) a11= ',' (a12= QUOTED_34_34 ) a13= ',' (a14= INTEGER ) a15= ',' (a16= QUOTED_34_34 ) a17= ')' a18= '.' )
-            // Aspt.g:1898:2: a0= 'trace_nb_edge' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ',' (a10= INTEGER ) a11= ',' (a12= QUOTED_34_34 ) a13= ',' (a14= INTEGER ) a15= ',' (a16= QUOTED_34_34 ) a17= ')' a18= '.'
+            // Aspt.g:1897:2: (a0= 'trace_nb_edge' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= TEXT ) a11= ',' (a12= QUOTED_34_34_92 ) a13= ',' (a14= TEXT ) a15= ',' (a16= QUOTED_34_34_92 ) a17= ')' a18= '.' )
+            // Aspt.g:1898:2: a0= 'trace_nb_edge' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= TEXT ) a11= ',' (a12= QUOTED_34_34_92 ) a13= ',' (a14= TEXT ) a15= ',' (a16= QUOTED_34_34_92 ) a17= ')' a18= '.'
             {
-            a0=(Token)match(input,18,FOLLOW_18_in_parse_ASPT_TraceNbEdge1305); if (state.failed) return element;
+            a0=(Token)match(input,15,FOLLOW_15_in_parse_ASPT_TraceNbEdge1305); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -2800,7 +2797,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[100]);
             	}
 
-            a1=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceNbEdge1319); if (state.failed) return element;
+            a1=(Token)match(input,8,FOLLOW_8_in_parse_ASPT_TraceNbEdge1319); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -2817,10 +2814,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[101]);
             	}
 
-            // Aspt.g:1926:2: (a2= IDENTIFIER )
-            // Aspt.g:1927:3: a2= IDENTIFIER
+            // Aspt.g:1926:2: (a2= TEXT )
+            // Aspt.g:1927:3: a2= TEXT
             {
-            a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbEdge1337); if (state.failed) return element;
+            a2=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceNbEdge1337); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -2831,7 +2828,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a2 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__METAMODEL), result);
@@ -2859,7 +2856,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[102]);
             	}
 
-            a3=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbEdge1358); if (state.failed) return element;
+            a3=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNbEdge1358); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -2876,10 +2873,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[103]);
             	}
 
-            // Aspt.g:1976:2: (a4= INTEGER )
-            // Aspt.g:1977:3: a4= INTEGER
+            // Aspt.g:1976:2: (a4= TEXT )
+            // Aspt.g:1977:3: a4= TEXT
             {
-            a4=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1376); if (state.failed) return element;
+            a4=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceNbEdge1376); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -2890,7 +2887,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a4 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__ID), result);
@@ -2918,7 +2915,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[104]);
             	}
 
-            a5=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbEdge1397); if (state.failed) return element;
+            a5=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNbEdge1397); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -2935,10 +2932,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[105]);
             	}
 
-            // Aspt.g:2026:2: (a6= QUOTED_34_34 )
-            // Aspt.g:2027:3: a6= QUOTED_34_34
+            // Aspt.g:2026:2: (a6= QUOTED_34_34_92 )
+            // Aspt.g:2027:3: a6= QUOTED_34_34_92
             {
-            a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1415); if (state.failed) return element;
+            a6=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceNbEdge1415); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -2949,7 +2946,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a6 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDX), result);
@@ -2977,7 +2974,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[106]);
             	}
 
-            a7=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbEdge1436); if (state.failed) return element;
+            a7=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNbEdge1436); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -2994,10 +2991,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[107]);
             	}
 
-            // Aspt.g:2076:2: (a8= IDENTIFIER )
-            // Aspt.g:2077:3: a8= IDENTIFIER
+            // Aspt.g:2076:2: (a8= TEXT )
+            // Aspt.g:2077:3: a8= TEXT
             {
-            a8=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbEdge1454); if (state.failed) return element;
+            a8=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceNbEdge1454); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3008,7 +3005,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a8 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__TYPE), result);
@@ -3036,7 +3033,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[108]);
             	}
 
-            a9=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbEdge1475); if (state.failed) return element;
+            a9=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNbEdge1475); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3053,10 +3050,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[109]);
             	}
 
-            // Aspt.g:2126:2: (a10= INTEGER )
-            // Aspt.g:2127:3: a10= INTEGER
+            // Aspt.g:2126:2: (a10= TEXT )
+            // Aspt.g:2127:3: a10= TEXT
             {
-            a10=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1493); if (state.failed) return element;
+            a10=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceNbEdge1493); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3067,7 +3064,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a10 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDS), result);
@@ -3095,7 +3092,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[110]);
             	}
 
-            a11=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbEdge1514); if (state.failed) return element;
+            a11=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNbEdge1514); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3112,10 +3109,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[111]);
             	}
 
-            // Aspt.g:2176:2: (a12= QUOTED_34_34 )
-            // Aspt.g:2177:3: a12= QUOTED_34_34
+            // Aspt.g:2176:2: (a12= QUOTED_34_34_92 )
+            // Aspt.g:2177:3: a12= QUOTED_34_34_92
             {
-            a12=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1532); if (state.failed) return element;
+            a12=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceNbEdge1532); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3126,7 +3123,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a12 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDSX), result);
@@ -3154,7 +3151,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[112]);
             	}
 
-            a13=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbEdge1553); if (state.failed) return element;
+            a13=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNbEdge1553); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3171,10 +3168,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[113]);
             	}
 
-            // Aspt.g:2226:2: (a14= INTEGER )
-            // Aspt.g:2227:3: a14= INTEGER
+            // Aspt.g:2226:2: (a14= TEXT )
+            // Aspt.g:2227:3: a14= TEXT
             {
-            a14=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1571); if (state.failed) return element;
+            a14=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceNbEdge1571); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3185,7 +3182,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a14 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDT), result);
@@ -3213,7 +3210,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[114]);
             	}
 
-            a15=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbEdge1592); if (state.failed) return element;
+            a15=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNbEdge1592); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3230,10 +3227,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[115]);
             	}
 
-            // Aspt.g:2276:2: (a16= QUOTED_34_34 )
-            // Aspt.g:2277:3: a16= QUOTED_34_34
+            // Aspt.g:2276:2: (a16= QUOTED_34_34_92 )
+            // Aspt.g:2277:3: a16= QUOTED_34_34_92
             {
-            a16=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1610); if (state.failed) return element;
+            a16=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceNbEdge1610); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3244,7 +3241,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a16 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a16.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_EDGE__IDTX), result);
@@ -3272,7 +3269,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[116]);
             	}
 
-            a17=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbEdge1631); if (state.failed) return element;
+            a17=(Token)match(input,9,FOLLOW_9_in_parse_ASPT_TraceNbEdge1631); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3289,7 +3286,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[117]);
             	}
 
-            a18=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceNbEdge1645); if (state.failed) return element;
+            a18=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceNbEdge1645); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3332,7 +3329,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceNbProp"
-    // Aspt.g:2348:1: parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null] : a0= 'trace_nb_prop' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= INTEGER ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= IDENTIFIER ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.' ;
+    // Aspt.g:2348:1: parse_ASPT_TraceNbProp returns [ASPT.TraceNbProp element = null] : a0= 'trace_nb_prop' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= QUOTED_34_34_92 ) a11= ',' (a12= TEXT ) a13= ',' (a14= QUOTED_34_34_92 ) a15= ')' a16= '.' ;
     public final ASPT.TraceNbProp parse_ASPT_TraceNbProp() throws RecognitionException {
         ASPT.TraceNbProp element =  null;
 
@@ -3361,10 +3358,10 @@ public class AsptParser extends AsptANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 7) ) { return element; }
 
-            // Aspt.g:2351:2: (a0= 'trace_nb_prop' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= INTEGER ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= IDENTIFIER ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.' )
-            // Aspt.g:2352:2: a0= 'trace_nb_prop' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= INTEGER ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= IDENTIFIER ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.'
+            // Aspt.g:2351:2: (a0= 'trace_nb_prop' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= QUOTED_34_34_92 ) a11= ',' (a12= TEXT ) a13= ',' (a14= QUOTED_34_34_92 ) a15= ')' a16= '.' )
+            // Aspt.g:2352:2: a0= 'trace_nb_prop' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= QUOTED_34_34_92 ) a11= ',' (a12= TEXT ) a13= ',' (a14= QUOTED_34_34_92 ) a15= ')' a16= '.'
             {
-            a0=(Token)match(input,20,FOLLOW_20_in_parse_ASPT_TraceNbProp1674); if (state.failed) return element;
+            a0=(Token)match(input,17,FOLLOW_17_in_parse_ASPT_TraceNbProp1674); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3381,7 +3378,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[125]);
             	}
 
-            a1=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceNbProp1688); if (state.failed) return element;
+            a1=(Token)match(input,8,FOLLOW_8_in_parse_ASPT_TraceNbProp1688); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3398,10 +3395,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[126]);
             	}
 
-            // Aspt.g:2380:2: (a2= IDENTIFIER )
-            // Aspt.g:2381:3: a2= IDENTIFIER
+            // Aspt.g:2380:2: (a2= TEXT )
+            // Aspt.g:2381:3: a2= TEXT
             {
-            a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbProp1706); if (state.failed) return element;
+            a2=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceNbProp1706); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3412,7 +3409,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a2 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__METAMODEL), result);
@@ -3440,7 +3437,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[127]);
             	}
 
-            a3=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbProp1727); if (state.failed) return element;
+            a3=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNbProp1727); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3457,10 +3454,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[128]);
             	}
 
-            // Aspt.g:2430:2: (a4= INTEGER )
-            // Aspt.g:2431:3: a4= INTEGER
+            // Aspt.g:2430:2: (a4= TEXT )
+            // Aspt.g:2431:3: a4= TEXT
             {
-            a4=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbProp1745); if (state.failed) return element;
+            a4=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceNbProp1745); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3471,7 +3468,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a4 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__ID), result);
@@ -3499,7 +3496,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[129]);
             	}
 
-            a5=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbProp1766); if (state.failed) return element;
+            a5=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNbProp1766); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3516,10 +3513,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[130]);
             	}
 
-            // Aspt.g:2480:2: (a6= QUOTED_34_34 )
-            // Aspt.g:2481:3: a6= QUOTED_34_34
+            // Aspt.g:2480:2: (a6= QUOTED_34_34_92 )
+            // Aspt.g:2481:3: a6= QUOTED_34_34_92
             {
-            a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1784); if (state.failed) return element;
+            a6=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceNbProp1784); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3530,7 +3527,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a6 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDX), result);
@@ -3558,7 +3555,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[131]);
             	}
 
-            a7=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbProp1805); if (state.failed) return element;
+            a7=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNbProp1805); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3575,10 +3572,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[132]);
             	}
 
-            // Aspt.g:2530:2: (a8= INTEGER )
-            // Aspt.g:2531:3: a8= INTEGER
+            // Aspt.g:2530:2: (a8= TEXT )
+            // Aspt.g:2531:3: a8= TEXT
             {
-            a8=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbProp1823); if (state.failed) return element;
+            a8=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceNbProp1823); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3589,7 +3586,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a8 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDP), result);
@@ -3617,7 +3614,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[133]);
             	}
 
-            a9=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbProp1844); if (state.failed) return element;
+            a9=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNbProp1844); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3634,10 +3631,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[134]);
             	}
 
-            // Aspt.g:2580:2: (a10= QUOTED_34_34 )
-            // Aspt.g:2581:3: a10= QUOTED_34_34
+            // Aspt.g:2580:2: (a10= QUOTED_34_34_92 )
+            // Aspt.g:2581:3: a10= QUOTED_34_34_92
             {
-            a10=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1862); if (state.failed) return element;
+            a10=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceNbProp1862); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3648,7 +3645,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a10 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__IDPX), result);
@@ -3676,7 +3673,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[135]);
             	}
 
-            a11=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbProp1883); if (state.failed) return element;
+            a11=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNbProp1883); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3693,10 +3690,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[136]);
             	}
 
-            // Aspt.g:2630:2: (a12= IDENTIFIER )
-            // Aspt.g:2631:3: a12= IDENTIFIER
+            // Aspt.g:2630:2: (a12= TEXT )
+            // Aspt.g:2631:3: a12= TEXT
             {
-            a12=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbProp1901); if (state.failed) return element;
+            a12=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceNbProp1901); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3707,7 +3704,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a12 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__TYPE), result);
@@ -3735,7 +3732,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[137]);
             	}
 
-            a13=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbProp1922); if (state.failed) return element;
+            a13=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNbProp1922); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3752,10 +3749,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[138]);
             	}
 
-            // Aspt.g:2680:2: (a14= QUOTED_34_34 )
-            // Aspt.g:2681:3: a14= QUOTED_34_34
+            // Aspt.g:2680:2: (a14= QUOTED_34_34_92 )
+            // Aspt.g:2681:3: a14= QUOTED_34_34_92
             {
-            a14=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1940); if (state.failed) return element;
+            a14=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceNbProp1940); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3766,7 +3763,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a14 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_PROP__VALUE), result);
@@ -3794,7 +3791,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[139]);
             	}
 
-            a15=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbProp1961); if (state.failed) return element;
+            a15=(Token)match(input,9,FOLLOW_9_in_parse_ASPT_TraceNbProp1961); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3811,7 +3808,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[140]);
             	}
 
-            a16=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceNbProp1975); if (state.failed) return element;
+            a16=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceNbProp1975); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3854,7 +3851,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceNbNode"
-    // Aspt.g:2752:1: parse_ASPT_TraceNbNode returns [ASPT.TraceNbNode element = null] : a0= 'trace_nb_node' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ')' a10= '.' ;
+    // Aspt.g:2752:1: parse_ASPT_TraceNbNode returns [ASPT.TraceNbNode element = null] : a0= 'trace_nb_node' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ')' a10= '.' ;
     public final ASPT.TraceNbNode parse_ASPT_TraceNbNode() throws RecognitionException {
         ASPT.TraceNbNode element =  null;
 
@@ -3877,10 +3874,10 @@ public class AsptParser extends AsptANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 8) ) { return element; }
 
-            // Aspt.g:2755:2: (a0= 'trace_nb_node' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ')' a10= '.' )
-            // Aspt.g:2756:2: a0= 'trace_nb_node' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= IDENTIFIER ) a9= ')' a10= '.'
+            // Aspt.g:2755:2: (a0= 'trace_nb_node' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ')' a10= '.' )
+            // Aspt.g:2756:2: a0= 'trace_nb_node' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ')' a10= '.'
             {
-            a0=(Token)match(input,19,FOLLOW_19_in_parse_ASPT_TraceNbNode2004); if (state.failed) return element;
+            a0=(Token)match(input,16,FOLLOW_16_in_parse_ASPT_TraceNbNode2004); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3897,7 +3894,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[148]);
             	}
 
-            a1=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceNbNode2018); if (state.failed) return element;
+            a1=(Token)match(input,8,FOLLOW_8_in_parse_ASPT_TraceNbNode2018); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3914,10 +3911,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[149]);
             	}
 
-            // Aspt.g:2784:2: (a2= IDENTIFIER )
-            // Aspt.g:2785:3: a2= IDENTIFIER
+            // Aspt.g:2784:2: (a2= TEXT )
+            // Aspt.g:2785:3: a2= TEXT
             {
-            a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbNode2036); if (state.failed) return element;
+            a2=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceNbNode2036); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3928,7 +3925,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a2 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__METAMODEL), result);
@@ -3956,7 +3953,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[150]);
             	}
 
-            a3=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbNode2057); if (state.failed) return element;
+            a3=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNbNode2057); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -3973,10 +3970,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[151]);
             	}
 
-            // Aspt.g:2834:2: (a4= INTEGER )
-            // Aspt.g:2835:3: a4= INTEGER
+            // Aspt.g:2834:2: (a4= TEXT )
+            // Aspt.g:2835:3: a4= TEXT
             {
-            a4=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceNbNode2075); if (state.failed) return element;
+            a4=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceNbNode2075); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -3987,7 +3984,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a4 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__ID), result);
@@ -4015,7 +4012,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[152]);
             	}
 
-            a5=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbNode2096); if (state.failed) return element;
+            a5=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNbNode2096); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4032,10 +4029,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[153]);
             	}
 
-            // Aspt.g:2884:2: (a6= QUOTED_34_34 )
-            // Aspt.g:2885:3: a6= QUOTED_34_34
+            // Aspt.g:2884:2: (a6= QUOTED_34_34_92 )
+            // Aspt.g:2885:3: a6= QUOTED_34_34_92
             {
-            a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbNode2114); if (state.failed) return element;
+            a6=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceNbNode2114); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4046,7 +4043,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a6 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__IDX), result);
@@ -4074,7 +4071,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[154]);
             	}
 
-            a7=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceNbNode2135); if (state.failed) return element;
+            a7=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceNbNode2135); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4091,10 +4088,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[155]);
             	}
 
-            // Aspt.g:2934:2: (a8= IDENTIFIER )
-            // Aspt.g:2935:3: a8= IDENTIFIER
+            // Aspt.g:2934:2: (a8= TEXT )
+            // Aspt.g:2935:3: a8= TEXT
             {
-            a8=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbNode2153); if (state.failed) return element;
+            a8=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceNbNode2153); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4105,7 +4102,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a8 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_NB_NODE__TYPE), result);
@@ -4133,7 +4130,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[156]);
             	}
 
-            a9=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceNbNode2174); if (state.failed) return element;
+            a9=(Token)match(input,9,FOLLOW_9_in_parse_ASPT_TraceNbNode2174); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4150,7 +4147,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[157]);
             	}
 
-            a10=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceNbNode2188); if (state.failed) return element;
+            a10=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceNbNode2188); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4193,7 +4190,7 @@ public class AsptParser extends AsptANTLRParserBase {
 
 
     // $ANTLR start "parse_ASPT_TraceLink"
-    // Aspt.g:3006:1: parse_ASPT_TraceLink returns [ASPT.TraceLink element = null] : a0= 'trace_link' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= INTEGER ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= IDENTIFIER ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.' ;
+    // Aspt.g:3006:1: parse_ASPT_TraceLink returns [ASPT.TraceLink element = null] : a0= 'trace_link' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= QUOTED_34_34_92 ) a11= ',' (a12= TEXT ) a13= ',' (a14= QUOTED_34_34_92 ) a15= ')' a16= '.' ;
     public final ASPT.TraceLink parse_ASPT_TraceLink() throws RecognitionException {
         ASPT.TraceLink element =  null;
 
@@ -4222,10 +4219,10 @@ public class AsptParser extends AsptANTLRParserBase {
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 9) ) { return element; }
 
-            // Aspt.g:3009:2: (a0= 'trace_link' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= INTEGER ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= IDENTIFIER ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.' )
-            // Aspt.g:3010:2: a0= 'trace_link' a1= '(' (a2= IDENTIFIER ) a3= ',' (a4= INTEGER ) a5= ',' (a6= QUOTED_34_34 ) a7= ',' (a8= INTEGER ) a9= ',' (a10= QUOTED_34_34 ) a11= ',' (a12= IDENTIFIER ) a13= ',' (a14= QUOTED_34_34 ) a15= ')' a16= '.'
+            // Aspt.g:3009:2: (a0= 'trace_link' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= QUOTED_34_34_92 ) a11= ',' (a12= TEXT ) a13= ',' (a14= QUOTED_34_34_92 ) a15= ')' a16= '.' )
+            // Aspt.g:3010:2: a0= 'trace_link' a1= '(' (a2= TEXT ) a3= ',' (a4= TEXT ) a5= ',' (a6= QUOTED_34_34_92 ) a7= ',' (a8= TEXT ) a9= ',' (a10= QUOTED_34_34_92 ) a11= ',' (a12= TEXT ) a13= ',' (a14= QUOTED_34_34_92 ) a15= ')' a16= '.'
             {
-            a0=(Token)match(input,16,FOLLOW_16_in_parse_ASPT_TraceLink2217); if (state.failed) return element;
+            a0=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceLink2217); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4242,7 +4239,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[165]);
             	}
 
-            a1=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceLink2231); if (state.failed) return element;
+            a1=(Token)match(input,8,FOLLOW_8_in_parse_ASPT_TraceLink2231); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4259,10 +4256,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[166]);
             	}
 
-            // Aspt.g:3038:2: (a2= IDENTIFIER )
-            // Aspt.g:3039:3: a2= IDENTIFIER
+            // Aspt.g:3038:2: (a2= TEXT )
+            // Aspt.g:3039:3: a2= TEXT
             {
-            a2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceLink2249); if (state.failed) return element;
+            a2=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceLink2249); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4273,7 +4270,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a2 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__METAMODEL), result);
@@ -4301,7 +4298,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[167]);
             	}
 
-            a3=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceLink2270); if (state.failed) return element;
+            a3=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceLink2270); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4318,10 +4315,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[168]);
             	}
 
-            // Aspt.g:3088:2: (a4= INTEGER )
-            // Aspt.g:3089:3: a4= INTEGER
+            // Aspt.g:3088:2: (a4= TEXT )
+            // Aspt.g:3089:3: a4= TEXT
             {
-            a4=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceLink2288); if (state.failed) return element;
+            a4=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceLink2288); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4332,7 +4329,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a4 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__ID), result);
@@ -4360,7 +4357,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[169]);
             	}
 
-            a5=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceLink2309); if (state.failed) return element;
+            a5=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceLink2309); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4377,10 +4374,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[170]);
             	}
 
-            // Aspt.g:3138:2: (a6= QUOTED_34_34 )
-            // Aspt.g:3139:3: a6= QUOTED_34_34
+            // Aspt.g:3138:2: (a6= QUOTED_34_34_92 )
+            // Aspt.g:3139:3: a6= QUOTED_34_34_92
             {
-            a6=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceLink2327); if (state.failed) return element;
+            a6=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceLink2327); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4391,7 +4388,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a6 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDX), result);
@@ -4419,7 +4416,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[171]);
             	}
 
-            a7=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceLink2348); if (state.failed) return element;
+            a7=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceLink2348); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4436,10 +4433,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[172]);
             	}
 
-            // Aspt.g:3188:2: (a8= INTEGER )
-            // Aspt.g:3189:3: a8= INTEGER
+            // Aspt.g:3188:2: (a8= TEXT )
+            // Aspt.g:3189:3: a8= TEXT
             {
-            a8=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_parse_ASPT_TraceLink2366); if (state.failed) return element;
+            a8=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceLink2366); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4450,7 +4447,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a8 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREF), result);
@@ -4478,7 +4475,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[173]);
             	}
 
-            a9=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceLink2387); if (state.failed) return element;
+            a9=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceLink2387); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4495,10 +4492,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[174]);
             	}
 
-            // Aspt.g:3238:2: (a10= QUOTED_34_34 )
-            // Aspt.g:3239:3: a10= QUOTED_34_34
+            // Aspt.g:3238:2: (a10= QUOTED_34_34_92 )
+            // Aspt.g:3239:3: a10= QUOTED_34_34_92
             {
-            a10=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceLink2405); if (state.failed) return element;
+            a10=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceLink2405); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4509,7 +4506,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a10 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a10.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__IDREFX), result);
@@ -4537,7 +4534,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[175]);
             	}
 
-            a11=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceLink2426); if (state.failed) return element;
+            a11=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceLink2426); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4554,10 +4551,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[176]);
             	}
 
-            // Aspt.g:3288:2: (a12= IDENTIFIER )
-            // Aspt.g:3289:3: a12= IDENTIFIER
+            // Aspt.g:3288:2: (a12= TEXT )
+            // Aspt.g:3289:3: a12= TEXT
             {
-            a12=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_parse_ASPT_TraceLink2444); if (state.failed) return element;
+            a12=(Token)match(input,TEXT,FOLLOW_TEXT_in_parse_ASPT_TraceLink2444); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4568,7 +4565,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a12 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("TEXT");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a12.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__TYPE), result);
@@ -4596,7 +4593,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[177]);
             	}
 
-            a13=(Token)match(input,13,FOLLOW_13_in_parse_ASPT_TraceLink2465); if (state.failed) return element;
+            a13=(Token)match(input,10,FOLLOW_10_in_parse_ASPT_TraceLink2465); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4613,10 +4610,10 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[178]);
             	}
 
-            // Aspt.g:3338:2: (a14= QUOTED_34_34 )
-            // Aspt.g:3339:3: a14= QUOTED_34_34
+            // Aspt.g:3338:2: (a14= QUOTED_34_34_92 )
+            // Aspt.g:3339:3: a14= QUOTED_34_34_92
             {
-            a14=(Token)match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceLink2483); if (state.failed) return element;
+            a14=(Token)match(input,QUOTED_34_34_92,FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceLink2483); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             			if (terminateParsing) {
@@ -4627,7 +4624,7 @@ public class AsptParser extends AsptANTLRParserBase {
             				startIncompleteElement(element);
             			}
             			if (a14 != null) {
-            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
+            				ASPT.resource.aspt.IAsptTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34_92");
             				tokenResolver.setOptions(getOptions());
             				ASPT.resource.aspt.IAsptTokenResolveResult result = getFreshTokenResolveResult();
             				tokenResolver.resolve(a14.getText(), element.eClass().getEStructuralFeature(ASPT.ASPTPackage.TRACE_LINK__RELATION), result);
@@ -4655,7 +4652,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[179]);
             	}
 
-            a15=(Token)match(input,12,FOLLOW_12_in_parse_ASPT_TraceLink2504); if (state.failed) return element;
+            a15=(Token)match(input,9,FOLLOW_9_in_parse_ASPT_TraceLink2504); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4672,7 +4669,7 @@ public class AsptParser extends AsptANTLRParserBase {
             		addExpectedElement(null, ASPT.resource.aspt.mopp.AsptExpectationConstants.EXPECTATIONS[180]);
             	}
 
-            a16=(Token)match(input,14,FOLLOW_14_in_parse_ASPT_TraceLink2518); if (state.failed) return element;
+            a16=(Token)match(input,11,FOLLOW_11_in_parse_ASPT_TraceLink2518); if (state.failed) return element;
 
             if ( state.backtracking==0 ) {
             		if (element == null) {
@@ -4742,43 +4739,43 @@ public class AsptParser extends AsptANTLRParserBase {
             // Aspt.g:3411:2: (c0= parse_ASPT_TraceNode |c1= parse_ASPT_TraceProp |c2= parse_ASPT_TraceEdge |c3= parse_ASPT_TraceNbEdge |c4= parse_ASPT_TraceNbProp |c5= parse_ASPT_TraceNbNode |c6= parse_ASPT_TraceLink )
             int alt6=7;
             switch ( input.LA(1) ) {
-            case 21:
+            case 18:
                 {
                 alt6=1;
                 }
                 break;
-            case 19:
+            case 16:
                 {
                 int LA6_2 = input.LA(2);
 
-                if ( (LA6_2==11) ) {
+                if ( (LA6_2==8) ) {
                     int LA6_8 = input.LA(3);
 
-                    if ( (LA6_8==IDENTIFIER) ) {
+                    if ( (LA6_8==TEXT) ) {
                         int LA6_11 = input.LA(4);
 
-                        if ( (LA6_11==13) ) {
+                        if ( (LA6_11==10) ) {
                             int LA6_14 = input.LA(5);
 
-                            if ( (LA6_14==INTEGER) ) {
+                            if ( (LA6_14==TEXT) ) {
                                 int LA6_17 = input.LA(6);
 
-                                if ( (LA6_17==13) ) {
+                                if ( (LA6_17==10) ) {
                                     int LA6_20 = input.LA(7);
 
-                                    if ( (LA6_20==QUOTED_34_34) ) {
+                                    if ( (LA6_20==QUOTED_34_34_92) ) {
                                         int LA6_23 = input.LA(8);
 
-                                        if ( (LA6_23==13) ) {
+                                        if ( (LA6_23==10) ) {
                                             int LA6_26 = input.LA(9);
 
-                                            if ( (LA6_26==IDENTIFIER) ) {
+                                            if ( (LA6_26==TEXT) ) {
                                                 int LA6_29 = input.LA(10);
 
-                                                if ( (LA6_29==12) ) {
+                                                if ( (LA6_29==9) ) {
                                                     int LA6_32 = input.LA(11);
 
-                                                    if ( (LA6_32==14) ) {
+                                                    if ( (LA6_32==11) ) {
                                                         int LA6_35 = input.LA(12);
 
                                                         if ( (synpred6_Aspt()) ) {
@@ -4887,61 +4884,61 @@ public class AsptParser extends AsptANTLRParserBase {
                 }
                 }
                 break;
-            case 22:
+            case 19:
                 {
                 alt6=2;
                 }
                 break;
-            case 20:
+            case 17:
                 {
                 int LA6_4 = input.LA(2);
 
-                if ( (LA6_4==11) ) {
+                if ( (LA6_4==8) ) {
                     int LA6_9 = input.LA(3);
 
-                    if ( (LA6_9==IDENTIFIER) ) {
+                    if ( (LA6_9==TEXT) ) {
                         int LA6_12 = input.LA(4);
 
-                        if ( (LA6_12==13) ) {
+                        if ( (LA6_12==10) ) {
                             int LA6_15 = input.LA(5);
 
-                            if ( (LA6_15==INTEGER) ) {
+                            if ( (LA6_15==TEXT) ) {
                                 int LA6_18 = input.LA(6);
 
-                                if ( (LA6_18==13) ) {
+                                if ( (LA6_18==10) ) {
                                     int LA6_21 = input.LA(7);
 
-                                    if ( (LA6_21==QUOTED_34_34) ) {
+                                    if ( (LA6_21==QUOTED_34_34_92) ) {
                                         int LA6_24 = input.LA(8);
 
-                                        if ( (LA6_24==13) ) {
+                                        if ( (LA6_24==10) ) {
                                             int LA6_27 = input.LA(9);
 
-                                            if ( (LA6_27==INTEGER) ) {
+                                            if ( (LA6_27==TEXT) ) {
                                                 int LA6_30 = input.LA(10);
 
-                                                if ( (LA6_30==13) ) {
+                                                if ( (LA6_30==10) ) {
                                                     int LA6_33 = input.LA(11);
 
-                                                    if ( (LA6_33==QUOTED_34_34) ) {
+                                                    if ( (LA6_33==QUOTED_34_34_92) ) {
                                                         int LA6_36 = input.LA(12);
 
-                                                        if ( (LA6_36==13) ) {
+                                                        if ( (LA6_36==10) ) {
                                                             int LA6_39 = input.LA(13);
 
-                                                            if ( (LA6_39==IDENTIFIER) ) {
+                                                            if ( (LA6_39==TEXT) ) {
                                                                 int LA6_41 = input.LA(14);
 
-                                                                if ( (LA6_41==13) ) {
+                                                                if ( (LA6_41==10) ) {
                                                                     int LA6_43 = input.LA(15);
 
-                                                                    if ( (LA6_43==QUOTED_34_34) ) {
+                                                                    if ( (LA6_43==QUOTED_34_34_92) ) {
                                                                         int LA6_45 = input.LA(16);
 
-                                                                        if ( (LA6_45==12) ) {
+                                                                        if ( (LA6_45==9) ) {
                                                                             int LA6_47 = input.LA(17);
 
-                                                                            if ( (LA6_47==14) ) {
+                                                                            if ( (LA6_47==11) ) {
                                                                                 int LA6_49 = input.LA(18);
 
                                                                                 if ( (synpred7_Aspt()) ) {
@@ -5104,67 +5101,67 @@ public class AsptParser extends AsptANTLRParserBase {
                 }
                 }
                 break;
-            case 15:
+            case 12:
                 {
                 alt6=3;
                 }
                 break;
-            case 18:
+            case 15:
                 {
                 int LA6_6 = input.LA(2);
 
-                if ( (LA6_6==11) ) {
+                if ( (LA6_6==8) ) {
                     int LA6_10 = input.LA(3);
 
-                    if ( (LA6_10==IDENTIFIER) ) {
+                    if ( (LA6_10==TEXT) ) {
                         int LA6_13 = input.LA(4);
 
-                        if ( (LA6_13==13) ) {
+                        if ( (LA6_13==10) ) {
                             int LA6_16 = input.LA(5);
 
-                            if ( (LA6_16==INTEGER) ) {
+                            if ( (LA6_16==TEXT) ) {
                                 int LA6_19 = input.LA(6);
 
-                                if ( (LA6_19==13) ) {
+                                if ( (LA6_19==10) ) {
                                     int LA6_22 = input.LA(7);
 
-                                    if ( (LA6_22==QUOTED_34_34) ) {
+                                    if ( (LA6_22==QUOTED_34_34_92) ) {
                                         int LA6_25 = input.LA(8);
 
-                                        if ( (LA6_25==13) ) {
+                                        if ( (LA6_25==10) ) {
                                             int LA6_28 = input.LA(9);
 
-                                            if ( (LA6_28==IDENTIFIER) ) {
+                                            if ( (LA6_28==TEXT) ) {
                                                 int LA6_31 = input.LA(10);
 
-                                                if ( (LA6_31==13) ) {
+                                                if ( (LA6_31==10) ) {
                                                     int LA6_34 = input.LA(11);
 
-                                                    if ( (LA6_34==INTEGER) ) {
+                                                    if ( (LA6_34==TEXT) ) {
                                                         int LA6_37 = input.LA(12);
 
-                                                        if ( (LA6_37==13) ) {
+                                                        if ( (LA6_37==10) ) {
                                                             int LA6_40 = input.LA(13);
 
-                                                            if ( (LA6_40==QUOTED_34_34) ) {
+                                                            if ( (LA6_40==QUOTED_34_34_92) ) {
                                                                 int LA6_42 = input.LA(14);
 
-                                                                if ( (LA6_42==13) ) {
+                                                                if ( (LA6_42==10) ) {
                                                                     int LA6_44 = input.LA(15);
 
-                                                                    if ( (LA6_44==INTEGER) ) {
+                                                                    if ( (LA6_44==TEXT) ) {
                                                                         int LA6_46 = input.LA(16);
 
-                                                                        if ( (LA6_46==13) ) {
+                                                                        if ( (LA6_46==10) ) {
                                                                             int LA6_48 = input.LA(17);
 
-                                                                            if ( (LA6_48==QUOTED_34_34) ) {
+                                                                            if ( (LA6_48==QUOTED_34_34_92) ) {
                                                                                 int LA6_50 = input.LA(18);
 
-                                                                                if ( (LA6_50==12) ) {
+                                                                                if ( (LA6_50==9) ) {
                                                                                     int LA6_52 = input.LA(19);
 
-                                                                                    if ( (LA6_52==14) ) {
+                                                                                    if ( (LA6_52==11) ) {
                                                                                         int LA6_53 = input.LA(20);
 
                                                                                         if ( (synpred8_Aspt()) ) {
@@ -5345,7 +5342,7 @@ public class AsptParser extends AsptANTLRParserBase {
                 }
                 }
                 break;
-            case 16:
+            case 13:
                 {
                 alt6=7;
                 }
@@ -5713,129 +5710,129 @@ public class AsptParser extends AsptANTLRParserBase {
 
     public static final BitSet FOLLOW_parse_ASPT_TraceModel_in_start82 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_start89 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_parse_ASPT_TraceModel115 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceModel129 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceModel147 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceModel168 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceModel186 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceModel207 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceModel221 = new BitSet(new long[]{0x00000000007D8002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceElement_in_parse_ASPT_TraceModel250 = new BitSet(new long[]{0x00000000007D8002L});
-    public static final BitSet FOLLOW_parse_ASPT_TraceLink_in_parse_ASPT_TraceModel292 = new BitSet(new long[]{0x00000000007D8002L});
-    public static final BitSet FOLLOW_21_in_parse_ASPT_TraceNode348 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceNode362 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNode380 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNode401 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNode419 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNode440 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNode458 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNode479 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNode497 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNode518 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceNode532 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceModel115 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_8_in_parse_ASPT_TraceModel129 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceModel147 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceModel168 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceModel186 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_parse_ASPT_TraceModel207 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceModel221 = new BitSet(new long[]{0x00000000000FB002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceElement_in_parse_ASPT_TraceModel250 = new BitSet(new long[]{0x00000000000FB002L});
+    public static final BitSet FOLLOW_parse_ASPT_TraceLink_in_parse_ASPT_TraceModel292 = new BitSet(new long[]{0x00000000000FB002L});
+    public static final BitSet FOLLOW_18_in_parse_ASPT_TraceNode348 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_8_in_parse_ASPT_TraceNode362 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceNode380 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNode401 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceNode419 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNode440 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceNode458 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNode479 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceNode497 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_parse_ASPT_TraceNode518 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceNode532 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_parse_ASPT_TraceNbNode_in_parse_ASPT_TraceNode551 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_parse_ASPT_TraceProp576 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceProp590 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceProp608 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceProp629 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceProp647 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceProp668 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp686 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceProp707 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceProp725 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceProp746 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp764 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceProp785 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceProp803 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceProp824 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceProp842 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceProp863 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceProp877 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_parse_ASPT_TraceProp576 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_8_in_parse_ASPT_TraceProp590 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceProp608 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceProp629 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceProp647 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceProp668 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceProp686 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceProp707 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceProp725 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceProp746 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceProp764 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceProp785 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceProp803 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceProp824 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceProp842 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_parse_ASPT_TraceProp863 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceProp877 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_parse_ASPT_TraceNbProp_in_parse_ASPT_TraceProp896 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_parse_ASPT_TraceEdge921 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceEdge935 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceEdge953 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceEdge974 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceEdge992 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceEdge1013 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge1031 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceEdge1052 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceEdge1070 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceEdge1091 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceEdge1109 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceEdge1130 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge1148 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceEdge1169 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceEdge1187 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceEdge1208 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceEdge1226 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceEdge1247 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceEdge1261 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceEdge921 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_8_in_parse_ASPT_TraceEdge935 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceEdge953 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceEdge974 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceEdge992 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceEdge1013 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceEdge1031 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceEdge1052 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceEdge1070 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceEdge1091 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceEdge1109 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceEdge1130 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceEdge1148 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceEdge1169 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceEdge1187 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceEdge1208 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceEdge1226 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_parse_ASPT_TraceEdge1247 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceEdge1261 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_parse_ASPT_TraceNbEdge_in_parse_ASPT_TraceEdge1280 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_parse_ASPT_TraceNbEdge1305 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceNbEdge1319 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbEdge1337 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbEdge1358 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1376 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbEdge1397 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1415 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbEdge1436 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbEdge1454 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbEdge1475 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1493 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbEdge1514 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1532 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbEdge1553 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbEdge1571 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbEdge1592 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbEdge1610 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbEdge1631 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceNbEdge1645 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_parse_ASPT_TraceNbProp1674 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceNbProp1688 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbProp1706 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbProp1727 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbProp1745 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbProp1766 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1784 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbProp1805 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbProp1823 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbProp1844 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1862 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbProp1883 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbProp1901 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbProp1922 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbProp1940 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbProp1961 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceNbProp1975 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_parse_ASPT_TraceNbNode2004 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceNbNode2018 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbNode2036 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbNode2057 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceNbNode2075 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbNode2096 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceNbNode2114 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceNbNode2135 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceNbNode2153 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceNbNode2174 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceNbNode2188 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_parse_ASPT_TraceLink2217 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceLink2231 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceLink2249 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceLink2270 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceLink2288 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceLink2309 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceLink2327 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceLink2348 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_parse_ASPT_TraceLink2366 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceLink2387 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceLink2405 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceLink2426 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_parse_ASPT_TraceLink2444 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceLink2465 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_parse_ASPT_TraceLink2483 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_parse_ASPT_TraceLink2504 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_parse_ASPT_TraceLink2518 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_parse_ASPT_TraceNbEdge1305 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_8_in_parse_ASPT_TraceNbEdge1319 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceNbEdge1337 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNbEdge1358 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceNbEdge1376 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNbEdge1397 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceNbEdge1415 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNbEdge1436 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceNbEdge1454 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNbEdge1475 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceNbEdge1493 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNbEdge1514 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceNbEdge1532 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNbEdge1553 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceNbEdge1571 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNbEdge1592 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceNbEdge1610 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_parse_ASPT_TraceNbEdge1631 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceNbEdge1645 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_parse_ASPT_TraceNbProp1674 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_8_in_parse_ASPT_TraceNbProp1688 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceNbProp1706 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNbProp1727 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceNbProp1745 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNbProp1766 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceNbProp1784 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNbProp1805 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceNbProp1823 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNbProp1844 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceNbProp1862 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNbProp1883 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceNbProp1901 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNbProp1922 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceNbProp1940 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_parse_ASPT_TraceNbProp1961 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceNbProp1975 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_parse_ASPT_TraceNbNode2004 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_8_in_parse_ASPT_TraceNbNode2018 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceNbNode2036 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNbNode2057 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceNbNode2075 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNbNode2096 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceNbNode2114 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceNbNode2135 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceNbNode2153 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_parse_ASPT_TraceNbNode2174 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceNbNode2188 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_parse_ASPT_TraceLink2217 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_8_in_parse_ASPT_TraceLink2231 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceLink2249 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceLink2270 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceLink2288 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceLink2309 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceLink2327 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceLink2348 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceLink2366 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceLink2387 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceLink2405 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceLink2426 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TEXT_in_parse_ASPT_TraceLink2444 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_parse_ASPT_TraceLink2465 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_QUOTED_34_34_92_in_parse_ASPT_TraceLink2483 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_parse_ASPT_TraceLink2504 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_parse_ASPT_TraceLink2518 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_parse_ASPT_TraceNode_in_parse_ASPT_TraceElement2543 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_parse_ASPT_TraceProp_in_parse_ASPT_TraceElement2553 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_parse_ASPT_TraceEdge_in_parse_ASPT_TraceElement2563 = new BitSet(new long[]{0x0000000000000002L});
