@@ -1,7 +1,6 @@
 package jtl.eclipse;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -15,9 +14,14 @@ public class ASPSolver extends AbstractASPSolver {
 	 * Locate the solver executable
 	 */
 	@Override
-	protected String getSolverPath(final String solverFile)
-			throws MalformedURLException, IOException {
-		return FileLocator.resolve(new URL("platform:/plugin/JTL/" + solverFile)).getPath();
+	protected String getSolverPath(final String solverFile) {
+		try {
+			return FileLocator.resolve(new URL("platform:/plugin/JTL/" + solverFile)).getPath();
+		} catch (IOException e) {
+			System.err.println("Cannot locate file:" + solverFile);
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -27,6 +31,17 @@ public class ASPSolver extends AbstractASPSolver {
 	protected String getWorkingDir() {
 		return ResourcesPlugin.getWorkspace()
 				.getRoot().getLocation().toString();
+	}
+
+	@Override
+	protected String getLibraryPath(String libraryFile) {
+		try {
+			return FileLocator.resolve(new URL("platform:/plugin/JTL/" + libraryFile)).getPath();
+		} catch (IOException e) {
+			System.err.println("Cannot locate file:" + libraryFile);
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

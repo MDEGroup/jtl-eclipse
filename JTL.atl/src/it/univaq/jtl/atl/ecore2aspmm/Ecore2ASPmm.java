@@ -194,6 +194,9 @@ public class Ecore2ASPmm {
 		try {
 			new EMFModelFactory().getResourceSet().getResource(URI.createURI(uriString), true);
 		} catch (Exception e) {
+			if (Ecore2ASPmm.class.getResource("Ecore2ASPmm.class").toString().startsWith("jar:")) {
+				return Ecore2ASPmm.class.getResource(uriString.replaceFirst("platform:/plugin/JTL.atl", "")).toString();
+			}
 			return uriString.replaceFirst("platform:/plugin", "..");
 		}
 		return uriString;
@@ -223,7 +226,7 @@ public class Ecore2ASPmm {
 		Map<String, Object> options = new HashMap<String, Object>();
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			if (entry.getKey().toString().startsWith("Ecore2ASPmm.options.")) {
-				options.put(entry.getKey().toString().replaceFirst("Ecore2ASPmm.options.", ""), 
+				options.put(entry.getKey().toString().replaceFirst("Ecore2ASPmm.options.", ""),
 				entry.getValue().toString());
 			}
 		}

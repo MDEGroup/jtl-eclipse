@@ -15,8 +15,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Map.Entry;
+import java.util.Properties;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -197,6 +197,9 @@ public class JTL2ASP {
 		try {
 			new EMFModelFactory().getResourceSet().getResource(URI.createURI(uriString), true);
 		} catch (Exception e) {
+			if (JTL2ASP.class.getResource("JTL2ASP.class").toString().startsWith("jar:")) {
+				return JTL2ASP.class.getResource(uriString.replaceFirst("platform:/plugin/JTL.atl", "")).toString();
+			}
 			return uriString.replaceFirst("platform:/plugin", "..");
 		}
 		return uriString;
@@ -226,7 +229,7 @@ public class JTL2ASP {
 		Map<String, Object> options = new HashMap<String, Object>();
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			if (entry.getKey().toString().startsWith("JTL2ASP.options.")) {
-				options.put(entry.getKey().toString().replaceFirst("JTL2ASP.options.", ""), 
+				options.put(entry.getKey().toString().replaceFirst("JTL2ASP.options.", ""),
 				entry.getValue().toString());
 			}
 		}

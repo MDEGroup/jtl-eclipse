@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,14 +32,23 @@ public abstract class AbstractASPSolver {
 	// Path to the solver executable
 	private String solverPath;
 
+	// Path to the solver library
+	private String libraryPath;
+
 	// OS type for jaspwrapper
 	private String osType;
 
-	/*
+	/**
 	 * Locate the solver executable
+	 * @return solver path
 	 */
-	protected abstract String getSolverPath(String solverFile)
-			throws MalformedURLException, IOException;
+	protected abstract String getSolverPath(String solverFile);
+
+	/**
+	 * Locate the library path
+	 * @return library path
+	 */
+	protected abstract String getLibraryPath(String libraryFile);
 
 	/*
 	 * Get the current working directory
@@ -68,8 +76,12 @@ public abstract class AbstractASPSolver {
 			osprop = "windows";
 			this.osType = "windows";
 		}
-		String solverFile = prop.getProperty("solver_" + osprop);
-		this.solverPath = getSolverPath(solverFile);
+		this.solverPath = getSolverPath(prop.getProperty("solver_" + osprop));
+
+		// On linux and mac we need an additional library
+		if (this.osType == "unix") {
+			this.libraryPath = getLibraryPath(prop.getProperty("solver_library"));
+		}
 	}
 
 	/**
@@ -118,7 +130,7 @@ public abstract class AbstractASPSolver {
 			// And a required library must be included
 			// extending the library path
 			this.solverPath = "LD_LIBRARY_PATH=" +
-					this.solverPath.substring(0, this.solverPath.lastIndexOf('/')) +
+					this.libraryPath.substring(0, this.libraryPath.lastIndexOf('/')) +
 					" " + this.solverPath;
 		}
 

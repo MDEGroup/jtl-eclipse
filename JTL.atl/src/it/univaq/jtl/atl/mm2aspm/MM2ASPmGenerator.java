@@ -259,6 +259,9 @@ public class MM2ASPmGenerator {
 		try {
 			new EMFModelFactory().getResourceSet().getResource(URI.createURI(uriString), true);
 		} catch (Exception e) {
+			if (MM2ASPmGenerator.class.getResource("MM2ASPmGenerator.class").toString().startsWith("jar:")) {
+				return MM2ASPmGenerator.class.getResource(uriString.replaceFirst("platform:/plugin/JTL.atl", "")).toString();
+			}
 			return uriString.replaceFirst("platform:/plugin", "..");
 		}
 		return uriString;
@@ -288,7 +291,7 @@ public class MM2ASPmGenerator {
 		Map<String, Object> options = new HashMap<String, Object>();
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			if (entry.getKey().toString().startsWith("MM2ASPmGenerator.options.")) {
-				options.put(entry.getKey().toString().replaceFirst("MM2ASPmGenerator.options.", ""), 
+				options.put(entry.getKey().toString().replaceFirst("MM2ASPmGenerator.options.", ""),
 				entry.getValue().toString());
 			}
 		}

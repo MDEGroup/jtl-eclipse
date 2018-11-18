@@ -494,7 +494,8 @@ public abstract class AbstractJTLLauncher {
 				// Add the generated file to the list of processed models files
 				targetFiles.add(xmiFilename);
 
-				removeFile(targetFile);
+				// TODO option to keep target asp
+				//removeFile(targetFile);
 				removeFile(targetFileModel);
 			}
 		}
@@ -539,7 +540,8 @@ public abstract class AbstractJTLLauncher {
 				// Add the generated file to the list of processed trace files
 				traceFiles.add(xmiFilename);
 
-				removeFile(traceFile);
+				// TODO option to keep traces asp
+				//removeFile(traceFile);
 				removeFile(traceFileModel);
 			}
 		}

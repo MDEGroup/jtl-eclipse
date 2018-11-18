@@ -291,6 +291,9 @@ public class ASPm2MMGenerator {
 		try {
 			new EMFModelFactory().getResourceSet().getResource(URI.createURI(uriString), true);
 		} catch (Exception e) {
+			if (ASPm2MMGenerator.class.getResource("ASPm2MMGenerator.class").toString().startsWith("jar:")) {
+				return ASPm2MMGenerator.class.getResource(uriString.replaceFirst("platform:/plugin/JTL.atl", "")).toString();
+			}
 			return uriString.replaceFirst("platform:/plugin", "..");
 		}
 		return uriString;
@@ -320,7 +323,7 @@ public class ASPm2MMGenerator {
 		Map<String, Object> options = new HashMap<String, Object>();
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			if (entry.getKey().toString().startsWith("ASPm2MMGenerator.options.")) {
-				options.put(entry.getKey().toString().replaceFirst("ASPm2MMGenerator.options.", ""), 
+				options.put(entry.getKey().toString().replaceFirst("ASPm2MMGenerator.options.", ""),
 				entry.getValue().toString());
 			}
 		}

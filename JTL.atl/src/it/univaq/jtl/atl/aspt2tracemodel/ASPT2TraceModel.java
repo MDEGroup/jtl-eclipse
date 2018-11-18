@@ -15,8 +15,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Map.Entry;
+import java.util.Properties;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -218,6 +218,9 @@ public class ASPT2TraceModel {
 		try {
 			new EMFModelFactory().getResourceSet().getResource(URI.createURI(uriString), true);
 		} catch (Exception e) {
+			if (ASPT2TraceModel.class.getResource("ASPT2TraceModel.class").toString().startsWith("jar:")) {
+				return ASPT2TraceModel.class.getResource(uriString.replaceFirst("platform:/plugin/JTL.atl", "")).toString();
+			}
 			return uriString.replaceFirst("platform:/plugin", "..");
 		}
 		return uriString;
@@ -247,7 +250,7 @@ public class ASPT2TraceModel {
 		Map<String, Object> options = new HashMap<String, Object>();
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			if (entry.getKey().toString().startsWith("ASPT2TraceModel.options.")) {
-				options.put(entry.getKey().toString().replaceFirst("ASPT2TraceModel.options.", ""), 
+				options.put(entry.getKey().toString().replaceFirst("ASPT2TraceModel.options.", ""),
 				entry.getValue().toString());
 			}
 		}

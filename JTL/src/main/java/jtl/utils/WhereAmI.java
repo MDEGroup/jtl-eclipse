@@ -19,4 +19,12 @@ public class WhereAmI {
 	public static boolean isOSGI() {
 		return insideOSGI;
 	}
+
+	/**
+	 * Detect if JTL is running from a JAR.
+	 * @return true if JTL is running from a JAR
+	 */
+	public static boolean isJar() {
+		return WhereAmI.class.getResource("WhereAmI.class").toString().startsWith("jar:");
+	}
 }
