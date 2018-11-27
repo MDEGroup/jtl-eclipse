@@ -103,8 +103,5 @@
 		</sourceLocator>
 	</extension>
 	
-	<extension point="ASPT.resource.aspt.default_load_options">
-        <provider class="ASPT.resource.aspt.PreProcessor" id="ASPT.resource.aspt.provider1" name="PreProcessor" />
-	</extension>
 
 </plugin>

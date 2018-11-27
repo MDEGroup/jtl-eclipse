@@ -103,13 +103,5 @@
 		<sourceLocator id="JTL.resource.jtl.ui.sourceLocator" class="JTL.resource.jtl.debug.JtlSourceLocator" name="jtl Source Locator">
 		</sourceLocator>
 	</extension>
- <extension
-       point="JTL.resource.jtl.default_load_options">
-    <provider
-          class="JTL.resource.jtl.PostProcessor"
-          id="JTL.resource.jtl.provider1"
-          name="PostProcessor">
-    </provider>
- </extension>
 	
 </plugin>

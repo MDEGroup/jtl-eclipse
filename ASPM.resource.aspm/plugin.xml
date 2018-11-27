@@ -104,13 +104,5 @@
 		</sourceLocator>
 	</extension>
 	
-	<extension
-          point="ASPM.resource.aspm.default_load_options">
-    	<provider
-          class="ASPM.resource.aspm.PreProcessor"
-          id="ASPM.resource.aspm.provider1"
-          name="PreProcessor">
-    	</provider>
-	</extension>
 	
 </plugin>

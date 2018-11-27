@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * 
+ *
  */
 /**
  * This class can be used to configure options that must be used when resources
@@ -12,11 +12,18 @@
  */
 package ASPM.resource.aspm.mopp;
 
+import java.util.Collections;
+
+import ASPM.resource.aspm.IAspmOptions;
+import ASPM.resource.aspm.PreProcessor;
+
 public class AspmOptionProvider implements ASPM.resource.aspm.IAspmOptionProvider {
-	
+
+	@Override
 	public java.util.Map<?,?> getOptions() {
 		// create a map with static option providers here
-		return java.util.Collections.emptyMap();
+//		return java.util.Collections.emptyMap();
+		return Collections.singletonMap(IAspmOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new PreProcessor());
 	}
-	
+
 }
