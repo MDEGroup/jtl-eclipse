@@ -58,7 +58,7 @@
 		<constant value="&#10;&#9;-&gt;collect(e|e.__xmiID__.split('-'))-&gt;flatten()"/>
 		<constant value="&#10;&#9;-&gt;collect(e|e.split('_')-&gt;at(2))-&gt;asSet();&#10;"/>
 		<constant value="helper context String def : normalize() : String = 'x_' + self;&#10;"/>
-		<constant value="helper context String def : processList(name : String) : String = self.regexReplaceAll('^[^,]+(,[^,]+)+$',name+'([&quot;$0&quot;])').regexReplaceAll(',([^,]+)','&quot;,&quot;x_$1');&#10;"/>
+		<constant value="helper context String def : processList(name : String) : String = self.regexReplaceAll('^[^,]+(,[^,]+)+$','x_list([&quot;$0&quot;])').regexReplaceAll(',([^,]+)','&quot;,&quot;x_$1');&#10;"/>
 		<constant value="helper context String def : cleanIDref() : String = self.regexReplaceAll('@','/@').regexReplaceAll('^/@','//@');&#10;"/>
 		<constant value="helper context String def : getId() : String = self.split('_').at(2);&#10;"/>
 		<constant value="helper context String def : getIdTrace() : String = self.split('_').at(3).regexReplaceAll('^([^/])','/$0');&#10;"/>
@@ -237,8 +237,8 @@
 		<constant value="13:2-29:58"/>
 		<constant value="30:2-30:71"/>
 		<constant value="13:2-30:71"/>
-		<constant value="31:2-31:175"/>
-		<constant value="13:2-31:175"/>
+		<constant value="31:2-31:176"/>
+		<constant value="13:2-31:176"/>
 		<constant value="32:2-32:126"/>
 		<constant value="13:2-32:126"/>
 		<constant value="33:2-33:77"/>
