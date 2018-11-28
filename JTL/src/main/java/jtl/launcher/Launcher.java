@@ -1,24 +1,42 @@
 package jtl.launcher;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import jtl.utils.Files;
 
 public class Launcher {
 
+	/** A map to keep the launch options status */
+	public final static Map<String, Boolean> options = new HashMap<String, Boolean>();
+
+	/** Command line option to keep .asp files */
+	public static final String OPTION_GENERATE_ASP = "--asp";
+
 	public static void main(final String[] args) {
 
 		if (args.length < 5) {
-			System.out.println("Insufficient arguments:");
-			System.out.println("Arguments:");
-			System.out.println("1. source metamodel");
-			System.out.println("2. target metamodel");
-			System.out.println("3. source model");
-			System.out.println("4. target models folder");
-			System.out.println("5. transformation (JTL or ASP)");
-			System.out.println("6. traces model (optional)");
+			System.out.println(
+					"Insufficient arguments:\n" +
+					"Arguments:\n" +
+			        "1. source metamodel\n" +
+					"2. target metamodel\n" +
+					"3. source model\n" +
+					"4. target models folder\n" +
+					"5. transformation (JTL or ASP)\n" +
+					"6. traces model (optional)\n" +
+					"Options:\n" +
+					"--asp		generate .asp files of target and traces models"
+			);
 			return;
 		}
+
+		// Parse command line options
+		List<String> argsList = Arrays.asList(args);
+		options.put(OPTION_GENERATE_ASP, argsList.contains(OPTION_GENERATE_ASP));
 
 		// Source metamodel
 		final File sourcemmFile = new File(args[0]);

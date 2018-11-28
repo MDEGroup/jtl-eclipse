@@ -198,10 +198,6 @@ public abstract class AbstractJTLLauncher {
 		// Check if the files involved in the transformation
 		// changed since the last run to skip the ASP generation.
 		if (launchFilesChanged()) {
-
-			// Dump launch information
-			dumpLaunchConfiguration();
-
 			// Process the source metamodel
 			processSourceMetamodel();
 
@@ -216,6 +212,9 @@ public abstract class AbstractJTLLauncher {
 
 			// Generate the transformation
 			generateTransformation(targetmmName);
+
+			// Dump launch information
+			dumpLaunchConfiguration();
 
 			// Write the ASP to file
 			writeASPToFile();
@@ -347,6 +346,12 @@ public abstract class AbstractJTLLauncher {
 	 * and write them as a comment in the ASP program.
 	 */
 	protected void dumpLaunchConfiguration() {
+		// The launch configuration should be prepended
+		// at the beginning of the current ASP output.
+		// We save the current output in order to
+		// later append it after the launch configuration.
+		final ByteArrayOutputStream tmp = this.asp;
+		this.asp = new ByteArrayOutputStream();
 
 		// Open the information section
 		writeASP("%%% Generated on: " + LocalDateTime.now() + "\n");
@@ -359,6 +364,14 @@ public abstract class AbstractJTLLauncher {
 
 		// Close the information section
 		writeASP("%%%-\n\n");
+
+		// Append the rest of the output
+		try {
+			tmp.writeTo(this.asp);
+		} catch (IOException e) {
+			System.err.println("An error occurred while dumping the launch configuration");
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -494,8 +507,10 @@ public abstract class AbstractJTLLauncher {
 				// Add the generated file to the list of processed models files
 				targetFiles.add(xmiFilename);
 
-				// TODO option to keep target asp
-				//removeFile(targetFile);
+				// Remove temporary itermediate files
+				if (!Launcher.options.get(Launcher.OPTION_GENERATE_ASP)) {
+					removeFile(targetFile);
+				}
 				removeFile(targetFileModel);
 			}
 		}
@@ -540,8 +555,10 @@ public abstract class AbstractJTLLauncher {
 				// Add the generated file to the list of processed trace files
 				traceFiles.add(xmiFilename);
 
-				// TODO option to keep traces asp
-				//removeFile(traceFile);
+				// Remove temporary itermediate files
+				if (!Launcher.options.get(Launcher.OPTION_GENERATE_ASP)) {
+					removeFile(traceFile);
+				}
 				removeFile(traceFileModel);
 			}
 		}
