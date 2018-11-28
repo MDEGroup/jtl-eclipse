@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class Jar {
 
@@ -21,7 +22,7 @@ public class Jar {
 		tempFile.deleteOnExit();
 		try {
 			try (final InputStream is = Jar.class.getClassLoader().getResourceAsStream(file)) {
-				Files.copy(is, tempFile.toPath());
+				Files.copy(is, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			}
 			return tempFile.toString();
 		} catch (IOException e) {

@@ -79,7 +79,7 @@ public abstract class AbstractASPSolver {
 		this.solverPath = getSolverPath(prop.getProperty("solver_" + osprop));
 
 		// On linux and mac we need an additional library
-		if (this.osType == "unix") {
+		if (this.osType.equals("unix")) {
 			this.libraryPath = getLibraryPath(prop.getProperty("solver_library"));
 		}
 	}

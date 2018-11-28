@@ -34,7 +34,7 @@ public class ASPSolver extends AbstractASPSolver {
 	}
 
 	@Override
-	protected String getLibraryPath(String libraryFile) {
+	protected String getLibraryPath(final String libraryFile) {
 		try {
 			return FileLocator.resolve(new URL("platform:/plugin/JTL/" + libraryFile)).getPath();
 		} catch (IOException e) {
