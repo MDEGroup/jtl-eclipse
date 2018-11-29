@@ -11,6 +11,7 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 
+import jtl.launcher.Launcher;
 import jtl.transformations.RegisterMetamodel;
 import jtl.utils.Files;
 
@@ -124,6 +125,10 @@ public class LaunchConfigurationDelegate
 			launcher.setChainLimit(
 					configuration.getAttribute(LaunchConfigurationAttributes.CHAIN_LIMIT, 1));
 		}
+
+		// Process options
+		Launcher.options.put(Launcher.OPTION_GENERATE_ASP,
+				configuration.getAttribute(LaunchConfigurationAttributes.GENERATE_ASP, false));
 
 		// Launch
 		launcher.launch();
