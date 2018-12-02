@@ -290,32 +290,27 @@ public abstract class AbstractASPSolver {
 	 * @param target Folder where generated models are created
 	 * @return target models directory
 	 */
-	private Path getOutputDir(final File target) {
+	Path getOutputDir(final File target) {
 
 		String wd = getWorkingDir();
 
 		// If we have an absolute path inside Eclipse, prepend the workspace
 		// If we have an absolute path outside Eclipse, return it as it is
-		final Path targetPath = (target.isAbsolute() == WhereAmI.isEclipse()) ?
-				Paths.get(getWorkingDir(), target.getPath()) : target.toPath();
+		final Path targetPath = (target.isAbsolute() == WhereAmI.isOSGI()) ?
+				Paths.get(wd, target.getPath()) : target.toPath();
 
-		if (WhereAmI.isOSGI()) {
-			final Path fullPath = Paths.get(wd, target.toString());
-			if (Files.isDirectory(fullPath) && Files.isWritable(fullPath)) {
-				return target.toPath();
-			} else if (target.getPath().endsWith(".xmi")) {
-				return getOutputDir(target.getParentFile());
-			}
-		} else if (target.isAbsolute()) {
-			if (Files.isDirectory(target.toPath())) {
-				return target.toPath();
-			} else {
-				return target.getParentFile().toPath();
-			}
+		if (targetPath.toString().endsWith(".xmi")) {
+			return getOutputDir(target.getParentFile());
 		}
-
-		System.err.println(targetPath + " not a valid file or directory.");
-		return null;
+		if (!Files.isDirectory(targetPath)) {
+			System.err.println(targetPath + " is not a directory.");
+			return null;
+		}
+		if (!Files.isWritable(targetPath)) {
+			System.err.println(targetPath + " is a directory but it is not writable.");
+			return null;
+		}
+		return target.toPath();
 	}
 
 	/**
