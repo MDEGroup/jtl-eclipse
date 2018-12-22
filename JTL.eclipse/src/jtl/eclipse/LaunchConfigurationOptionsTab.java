@@ -16,6 +16,7 @@ import org.eclipse.swt.widgets.Composite;
 public class LaunchConfigurationOptionsTab extends AbstractLaunchConfigurationTab {
 
 	private Button generateAspCheck;
+	private Button clearTargetCheck;
 
 	@Override
 	public void createControl(Composite parent) {
@@ -41,6 +42,18 @@ public class LaunchConfigurationOptionsTab extends AbstractLaunchConfigurationTa
         		updateLaunchConfigurationDialog();
         	}
         });
+
+        // OPTION_CLEAR_TARGET
+        clearTargetCheck = new Button(comp, SWT.CHECK);
+        clearTargetCheck.setText("Remove all files in the target directory before the launch");
+        clearTargetCheck.setLayoutData(
+        		new GridData(SWT.FILL, SWT.CENTER, true, false));
+        clearTargetCheck.addSelectionListener(new SelectionAdapter() {
+        	@Override
+            public void widgetSelected(SelectionEvent e) {
+        		updateLaunchConfigurationDialog();
+        	}
+        });
 	}
 
 	@Override
@@ -52,6 +65,8 @@ public class LaunchConfigurationOptionsTab extends AbstractLaunchConfigurationTa
 		try {
 			generateAspCheck.setSelection(configuration
 					.getAttribute(LaunchConfigurationAttributes.GENERATE_ASP, false));
+			clearTargetCheck.setSelection(configuration
+					.getAttribute(LaunchConfigurationAttributes.CLEAR_TARGET, false));
 		} catch (CoreException e) {
 			System.out.println("Unable to load the configuration data.");
 			e.printStackTrace();
@@ -62,6 +77,8 @@ public class LaunchConfigurationOptionsTab extends AbstractLaunchConfigurationTa
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(LaunchConfigurationAttributes.GENERATE_ASP,
 				generateAspCheck.getSelection());
+		configuration.setAttribute(LaunchConfigurationAttributes.CLEAR_TARGET,
+				clearTargetCheck.getSelection());
 	}
 
 	@Override

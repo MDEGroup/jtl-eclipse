@@ -14,4 +14,5 @@ public interface LaunchConfigurationAttributes {
 	public static final String CHAIN_COMBO = "it.univaq.jtl.chaincombo";
 	public static final String CHAIN_LIMIT = "it.univaq.jtl.chainlimit";
 	public static final String GENERATE_ASP = "it.univaq.jtl.generateasp";
+	public static final String CLEAR_TARGET = "it.univaq.jtl.cleartarget";
 }

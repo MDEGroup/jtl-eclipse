@@ -12,10 +12,10 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.emf.common.util.URI;
 
 import jtl.launcher.AbstractJTLLauncher;
@@ -90,7 +90,7 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 	 */
 	@Override
 	protected AbstractASPSolver getSolver() {
-		return new ASPSolver();
+		return new ASPSolver(this);
 	}
 
 	/**
@@ -254,5 +254,26 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 		return Paths.get(
 				ResourcesPlugin.getWorkspace().getRoot().getLocation().toString(),
 				path).toString();
+	}
+
+	/**
+	 * Get the current working directory
+	 */
+	@Override
+	public String getWorkingDir() {
+		return ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
+	}
+
+	/**
+	 * Clear (as in remove all files) from the target directory.
+	 */
+	@Override
+	protected void clearTargetDirectory() {
+		final File targetDir = Paths.get(getWorkingDir(), getOutputDir().toString()).toFile();
+		for (File file : targetDir.listFiles()) {
+			if (file.isFile()) {
+				file.delete();
+			}
+		}
 	}
 }

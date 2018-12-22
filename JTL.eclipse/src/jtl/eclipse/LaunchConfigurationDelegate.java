@@ -129,6 +129,8 @@ public class LaunchConfigurationDelegate
 		// Process options
 		Launcher.options.put(Launcher.OPTION_GENERATE_ASP,
 				configuration.getAttribute(LaunchConfigurationAttributes.GENERATE_ASP, false));
+		Launcher.options.put(Launcher.OPTION_CLEAR_TARGET,
+				configuration.getAttribute(LaunchConfigurationAttributes.CLEAR_TARGET, false));
 
 		// Launch
 		launcher.launch();
