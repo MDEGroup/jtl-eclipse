@@ -24,9 +24,9 @@ public class ASPT2TraceModel {
 				Files.removeFileExtension(mInPath)) , "xmi");
 
 		// Register the ASPm metamodel
-		RegisterMetamodel.registerMetamodel(new File(
+		RegisterMetamodel.registerMetamodel(
 				new it.univaq.jtl.atl.aspt2tracemodel.ASPT2TraceModel()
-					.getMetamodelUri("TraceModel")));
+					.getMetamodelUri("TraceModel"));
 
 		// Perform the transformation (ASPT to TraceModel)
 		it.univaq.jtl.atl.aspt2tracemodel.ASPT2TraceModel.main(new String[] {

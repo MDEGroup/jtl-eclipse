@@ -20,9 +20,9 @@ public class TraceModel2ASPT {
 				Files.removeFileExtension(mInPath) , "aspt.ecore");
 
 		// Register the ASPm metamodel
-		RegisterMetamodel.registerMetamodel(new File(
+		RegisterMetamodel.registerMetamodel(
 				new it.univaq.jtl.atl.tracemodel2aspt.TraceModel2ASPT()
-					.getMetamodelUri("ASPT")));
+					.getMetamodelUri("ASPT"));
 
 		// Perform the transformation (ASPT to TraceModel)
 		it.univaq.jtl.atl.tracemodel2aspt.TraceModel2ASPT.main(new String[] {

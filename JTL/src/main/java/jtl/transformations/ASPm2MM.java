@@ -21,9 +21,9 @@ public class ASPm2MM {
 				Files.removeFileExtension(mInPath)), "xmi");
 
 		// Register the ASPm metamodel
-		RegisterMetamodel.registerMetamodel(new File(
+		RegisterMetamodel.registerMetamodel(
 				new it.univaq.jtl.atl.aspm2mm.ASPm2MMGenerator()
-					.getMetamodelUri("ASPm")));
+					.getMetamodelUri("ASPm"));
 
 		// Register the input metamodel
 		RegisterMetamodel.registerMetamodel(mmIn);

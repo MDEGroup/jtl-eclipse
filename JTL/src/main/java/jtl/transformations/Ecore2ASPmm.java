@@ -20,9 +20,9 @@ public class Ecore2ASPmm {
 				Files.removeFileExtension(path), "aspmm.ecore");
 
 		// Register the ASPmm metamodel
-		RegisterMetamodel.registerMetamodel(new File(
+		RegisterMetamodel.registerMetamodel(
 				new it.univaq.jtl.atl.ecore2aspmm.Ecore2ASPmm()
-					.getMetamodelUri("ASPmm")));
+					.getMetamodelUri("ASPmm"));
 
 		// Perform the transformation (Ecore to ASPmm)
 		it.univaq.jtl.atl.ecore2aspmm.Ecore2ASPmm.main(new String[] {

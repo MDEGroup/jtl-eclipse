@@ -73,17 +73,17 @@ public class EmftextHandler extends AbstractHandler {
 	private void registerEmftextMetamodel(final String extension) {
 		try {
 			if (extension.equals("aspm")) {
-				RegisterMetamodel.registerMetamodel(new File(
+				RegisterMetamodel.registerMetamodel(
 						new it.univaq.jtl.atl.mm2aspm.MM2ASPmGenerator()
-							.getMetamodelUri("ASPm")));
+							.getMetamodelUri("ASPm"));
 			} else if (extension.equals("aspmm")) {
-				RegisterMetamodel.registerMetamodel(new File(
+				RegisterMetamodel.registerMetamodel(
 						new it.univaq.jtl.atl.ecore2aspmm.Ecore2ASPmm()
-							.getMetamodelUri("ASPmm")));
+							.getMetamodelUri("ASPmm"));
 			} else if (extension.equals("aspt")) {
-				RegisterMetamodel.registerMetamodel(new File(
+				RegisterMetamodel.registerMetamodel(
 						new it.univaq.jtl.atl.tracemodel2aspt.TraceModel2ASPT()
-							.getMetamodelUri("ASPT")));
+							.getMetamodelUri("ASPT"));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
