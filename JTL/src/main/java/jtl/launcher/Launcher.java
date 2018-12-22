@@ -1,6 +1,7 @@
 package jtl.launcher;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -10,11 +11,23 @@ import jtl.utils.Files;
 
 public class Launcher {
 
+	/** JTL launcher */
+	public static AbstractJTLLauncher launcher;
+
 	/** A map to keep the launch options status */
 	public final static Map<String, Boolean> options = new HashMap<String, Boolean>();
 
+	/** Command line option to provide a trace model */
+	public static final String OPTION_TRACE = "--trace";
+
+	/** Command line option to provide additional constraints */
+	public static final String OPTION_CONSTRAINTS = "--constraints";
+
 	/** Command line option to keep .asp files */
 	public static final String OPTION_GENERATE_ASP = "--asp";
+
+	/** Command line option to clear the target directory before the launch */
+	public static final String OPTION_CLEAR_TARGET = "--clear-target";
 
 	public static void main(final String[] args) {
 
@@ -22,14 +35,16 @@ public class Launcher {
 			System.out.println(
 					"Insufficient arguments:\n" +
 					"Arguments:\n" +
-			        "1. source metamodel\n" +
+					"1. source metamodel\n" +
 					"2. target metamodel\n" +
 					"3. source model\n" +
 					"4. target models folder\n" +
 					"5. transformation (JTL or ASP)\n" +
-					"6. traces model (optional)\n" +
 					"Options:\n" +
-					"--asp		generate .asp files of target and traces models"
+					"--trace			trace model" +
+					"--constraints		file containing additional constraints" +
+					"--asp				generate .asp files of target and traces models\n" +
+					"--clear-target		clear the target directory before the launch"
 			);
 			return;
 		}
@@ -37,6 +52,7 @@ public class Launcher {
 		// Parse command line options
 		List<String> argsList = Arrays.asList(args);
 		options.put(OPTION_GENERATE_ASP, argsList.contains(OPTION_GENERATE_ASP));
+		options.put(OPTION_CLEAR_TARGET, argsList.contains(OPTION_CLEAR_TARGET));
 
 		// Source metamodel
 		final File sourcemmFile = new File(args[0]);
@@ -55,12 +71,11 @@ public class Launcher {
 
 		// Traces model
 		File tracesFile = null;
-		if (args.length == 6) {
-			tracesFile = new File(args[5]);
+		if (argsList.contains(OPTION_TRACE)) {
+			tracesFile = new File(argsList.get(argsList.indexOf(OPTION_TRACE) + 1));
 		}
 
 		// Dispatch execution to specific launchers:
-		AbstractJTLLauncher launcher;
 		if (Files.getFileExtension(transfFile).equals("dl")) {
 			if (sourcemmFile.equals(targetmmFile)) {
 				// ASP Endogenous transformation
@@ -110,6 +125,19 @@ public class Launcher {
 		} else {
 			System.err.println("Transformation file must have '.jtl' or '.dl' extension.");
 			return;
+		}
+
+		// Additional constraints
+		List<File> constraintsFiles = null;
+		if (argsList.contains(OPTION_CONSTRAINTS)) {
+			constraintsFiles = new ArrayList<File>();
+			for (int i = 0; i < argsList.size(); i++) {
+				if (argsList.get(i).equals(OPTION_CONSTRAINTS)) {
+					constraintsFiles.add(new File(argsList.get(i + 1)));
+					i++;
+				}
+			}
+			launcher.setConstraintsFile(constraintsFiles);
 		}
 
 		// Launch

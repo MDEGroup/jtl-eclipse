@@ -12,12 +12,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.net.URISyntaxException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,6 +43,7 @@ import jtl.transformations.MM2ASPm;
 import jtl.transformations.RegisterMetamodel;
 import jtl.transformations.TraceModel2ASPT;
 import jtl.utils.Files;
+import jtl.utils.WhereAmI;
 
 public abstract class AbstractJTLLauncher {
 
@@ -67,6 +70,9 @@ public abstract class AbstractJTLLauncher {
 
 	// Traces model file
 	protected File tracesFile;
+
+	// Constraints file
+	protected List<File> constraintsFiles;
 
 	// Limit the number of output models (0 = no limit)
 	protected int targetModelsLimit = 0;
@@ -150,6 +156,22 @@ public abstract class AbstractJTLLauncher {
 	}
 
 	/**
+	 * Returns the constraits file.
+	 * @return constraints file
+	 */
+	public List<File> getConstraintsFile() {
+		return constraintsFiles;
+	}
+
+	/**
+	 * Set the constraints file
+	 * @param constraintsFile2 constraints file
+	 */
+	public void setConstraintsFile(final List<File> constraintsFile2) {
+		this.constraintsFiles = constraintsFile2;
+	}
+
+	/**
 	 * Returns the ASP output stream.
 	 * @returns ASP output stream
 	 */
@@ -210,6 +232,13 @@ public abstract class AbstractJTLLauncher {
 			// Process the traces model
 			processTracesModel();
 
+			// Append additional constraints
+			if (constraintsFiles != null) {
+				for (File file : constraintsFiles) {
+					writeASP(file);
+				}
+			}
+
 			// Generate the transformation
 			generateTransformation(targetmmName);
 
@@ -218,6 +247,11 @@ public abstract class AbstractJTLLauncher {
 
 			// Write the ASP to file
 			writeASPToFile();
+		}
+
+		// Clear the target directory if needed
+		if (Launcher.options.get(Launcher.OPTION_CLEAR_TARGET)) {
+			clearTargetDirectory();
 		}
 
 		// Set the ASP filename
@@ -255,6 +289,53 @@ public abstract class AbstractJTLLauncher {
 		// Clean
 		clean();
 	};
+
+	/**
+	 * Get the current working directory
+	 */
+	public String getWorkingDir() {
+		return System.getProperty("user.dir");
+	}
+
+	/**
+	 * Get the directory that will be used to store target models.
+	 * @return target models directory
+	 */
+	public File getOutputDir() {
+
+		File outputDir = targetmFolder;
+
+		// If we have an absolute path inside Eclipse, prepend the workspace
+		// If we have an absolute path outside Eclipse, return it as it is
+		Path targetPath = (outputDir.isAbsolute() == WhereAmI.isOSGI()) ?
+				Paths.get(getWorkingDir(), outputDir.getPath()) : outputDir.toPath();
+
+		if (outputDir.getName().endsWith(".xmi")) {
+			outputDir = outputDir.getParentFile();
+			targetPath = targetPath.getParent();
+		}
+		if (!java.nio.file.Files.isDirectory(targetPath)) {
+			System.err.println(targetPath + " is not a directory.");
+			return null;
+		}
+		if (!java.nio.file.Files.isWritable(targetPath)) {
+			System.err.println(targetPath + " is a directory but it is not writable.");
+			return null;
+		}
+		return outputDir;
+	}
+
+	/**
+	 * Clear (as in remove all files) from the target directory.
+	 */
+	protected void clearTargetDirectory() {
+		final File targetDir = getOutputDir();
+		for (File file : targetDir.listFiles()) {
+			if (file.isFile()) {
+				file.delete();
+			}
+		}
+	}
 
 	/**
 	 * Process the source metamodel to generate the corresponding ASP code.
@@ -484,9 +565,9 @@ public abstract class AbstractJTLLauncher {
 
 		// Register the ASPm metamodel
 		try {
-			RegisterMetamodel.registerMetamodel(new File(
+			RegisterMetamodel.registerMetamodel(
 					new it.univaq.jtl.atl.aspm2mm.ASPm2MMGenerator()
-						.getMetamodelUri("ASPm")));
+						.getMetamodelUri("ASPm"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -528,9 +609,9 @@ public abstract class AbstractJTLLauncher {
 
 		// Register the ASPT metamodel
 		try {
-			RegisterMetamodel.registerMetamodel(new File(
+			RegisterMetamodel.registerMetamodel(
 					new it.univaq.jtl.atl.aspt2tracemodel.ASPT2TraceModel()
-						.getMetamodelUri("ASPT")));
+						.getMetamodelUri("ASPT"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -597,7 +678,7 @@ public abstract class AbstractJTLLauncher {
 	 * @return solver object
 	 */
 	protected AbstractASPSolver getSolver() {
-		return new ASPSolver();
+		return new ASPSolver(this);
 	}
 
 	/**
@@ -789,7 +870,7 @@ public abstract class AbstractJTLLauncher {
 	public void clean() { }
 
 	/**
-	 * Write a string to buffer of the ASP file.
+	 * Write a string to the buffer of the ASP file.
 	 * @param content String to write
 	 * @param asp OutputStream containing the ASP program
 	 */
@@ -798,6 +879,25 @@ public abstract class AbstractJTLLauncher {
 			asp.write(content.getBytes());
 		} catch (IOException e) {
 			System.out.println("Unable to write the generated ASP:");
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Write an entire file to the buffer of the ASP file.
+	 * @param file file to write
+	 */
+	protected void writeASP(final File file) {
+		String line = null;
+		try (BufferedReader r = new BufferedReader(new FileReader(file))) {
+			while ((line = r.readLine()) != null) {
+				writeASP(line + "\n");
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found: " + constraintsFiles);
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Unable to read the file: " + constraintsFiles);
 			e.printStackTrace();
 		}
 	}
