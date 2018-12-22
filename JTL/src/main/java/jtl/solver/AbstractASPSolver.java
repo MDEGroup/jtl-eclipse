@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -22,21 +23,32 @@ import jaspwrapper.exec.Program;
 import jaspwrapper.exec.Solver;
 import jaspwrapper.items.Atom;
 import jaspwrapper.items.Model;
-import jtl.utils.WhereAmI;
+import jtl.launcher.AbstractJTLLauncher;
 
 public abstract class AbstractASPSolver {
 
 	// Configuration file
 	private final static String config = "config.properties";
 
+	// Launcher instance invoking this solver
+	protected AbstractJTLLauncher launcher;
+
 	// Path to the solver executable
 	private String solverPath;
 
-	// Path to the solver library
-	private String libraryPath;
+	// Paths to the solver libraries
+	private List<String> librariesPaths;
 
 	// OS type for jaspwrapper
 	private String osType;
+
+	/**
+	 * Constructor.
+	 * @param launcher the launcher instance invoking this solver
+	 */
+	public AbstractASPSolver(AbstractJTLLauncher launcher) {
+		this.launcher = launcher;
+	}
 
 	/**
 	 * Locate the solver executable
@@ -45,15 +57,11 @@ public abstract class AbstractASPSolver {
 	protected abstract String getSolverPath(String solverFile);
 
 	/**
-	 * Locate the library path
-	 * @return library path
+	* Locate additional libraries paths
+	 * @param librariesConfig List of colon-separated paths to libraries
+	 * @return libraries paths
 	 */
-	protected abstract String getLibraryPath(String libraryFile);
-
-	/*
-	 * Get the current working directory
-	 */
-	protected abstract String getWorkingDir();
+	protected abstract List<String> getLibrariesPaths(String libraryFile);
 
 	/**
 	 * Load configurations from file.
@@ -78,10 +86,8 @@ public abstract class AbstractASPSolver {
 		}
 		this.solverPath = getSolverPath(prop.getProperty("solver_" + osprop));
 
-		// On linux and mac we need an additional library
-		if (this.osType.equals("unix")) {
-			this.libraryPath = getLibraryPath(prop.getProperty("solver_library"));
-		}
+		// Load additional libraries
+		this.librariesPaths = getLibrariesPaths(prop.getProperty("solver_library_" + osprop));
 	}
 
 	/**
@@ -96,10 +102,10 @@ public abstract class AbstractASPSolver {
 			throws JASPException, IOException, URISyntaxException {
 
 		// Get the working directory
-		final String wd = getWorkingDir();
+		final String wd = launcher.getWorkingDir();
 
 		// Get the target output directory
-		final Path outputDir = getOutputDir(target);
+		final Path outputDir = launcher.getOutputDir().toPath();
 
 		// If the user provided a target file name
 		// set it as the base model file name and
@@ -130,7 +136,7 @@ public abstract class AbstractASPSolver {
 			// And a required library must be included
 			// extending the library path
 			this.solverPath = "LD_LIBRARY_PATH=" +
-					this.libraryPath.substring(0, this.libraryPath.lastIndexOf('/')) +
+					this.librariesPaths.get(0).substring(0, this.librariesPaths.get(0).lastIndexOf('/')) +
 					" " + this.solverPath;
 		}
 
@@ -286,40 +292,13 @@ public abstract class AbstractASPSolver {
 	}
 
 	/**
-	 * Get the directory that will be used to store target models.
-	 * @param target Folder where generated models are created
-	 * @return target models directory
-	 */
-	Path getOutputDir(final File target) {
-
-		String wd = getWorkingDir();
-
-		// If we have an absolute path inside Eclipse, prepend the workspace
-		// If we have an absolute path outside Eclipse, return it as it is
-		final Path targetPath = (target.isAbsolute() == WhereAmI.isOSGI()) ?
-				Paths.get(wd, target.getPath()) : target.toPath();
-
-		if (targetPath.toString().endsWith(".xmi")) {
-			return getOutputDir(target.getParentFile());
-		}
-		if (!Files.isDirectory(targetPath)) {
-			System.err.println(targetPath + " is not a directory.");
-			return null;
-		}
-		if (!Files.isWritable(targetPath)) {
-			System.err.println(targetPath + " is a directory but it is not writable.");
-			return null;
-		}
-		return target.toPath();
-	}
-
-	/**
 	 * Build an absolute pathname that will work inside and outside Eclipse.
 	 * @param path
 	 * @param working directory
 	 * @return target model absolute pathname
 	 */
 	private Path getAbsolutePath(final Path path, final String wd) {
+		// FIXME we probably don't need this method anymore
 		return (Files.isDirectory(path.getParent())) ? path : Paths.get(wd, path.toString());
 	}
 }
