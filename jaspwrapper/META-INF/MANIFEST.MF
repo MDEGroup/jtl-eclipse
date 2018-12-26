@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: jaspwrapper
+Bundle-SymbolicName: jaspwrapper
+Bundle-Version: 0.9.1
+Export-Package: jaspwrapper.analyzer,
+ jaspwrapper.exception,
+ jaspwrapper.exec,
+ jaspwrapper.items,
+ jaspwrapper.output,
+ jaspwrapper.tools,
+ jaspwrapper.util
