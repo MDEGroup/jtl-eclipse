@@ -17,10 +17,10 @@ helper context String def: denormalize() : String = self.regexReplaceAll('^x_', 
 helper context String def: getObjectByIDref(idref : String) : ECORE!EObject =
     ECORE!EObject.allInstancesFrom(self)->select(e | e.__xmiID__ = idref.denormalize())->first();
 
-helper context String def: getObjectByASPIDref(idref : String) : ECORE!EObject =
+helper context String def: getObjectByASPIDref(id: String, idref : String) : ECORE!EObject =
     if self.getObjectByIDref(idref).oclIsUndefined() then
     	ECORE!EObject.allInstancesFrom(self)
-    		->select(e | e.__xmiID__.split('-').at(1).split('_').at(3) = idref.denormalize())->first()
+    		->select(e | e.__xmiID__.split('-').at(1) = 'ASPid' + '_' + id + '_' + idref.denormalize())->first()
     else self.getObjectByIDref(idref) endif;
 
 helper context String def: getTraceLinkEndName(obj : ECORE!EObject) : String =
@@ -36,7 +36,7 @@ rule TraceLink2TraceLinkEnd(link : ASPT!TraceLink, model : String) {
     to
     	t : TraceModel!TraceLinkEnd (
     	    type <- link.type.denormalize(),
-    	    traceElement <- model.getObjectByASPIDref(link.idrefx),
+    	    traceElement <- model.getObjectByASPIDref(link.id, link.idrefx),
     	    name <- t.type.getTraceLinkEndName(t.traceElement)
     	)
    	do { t; }
@@ -47,9 +47,12 @@ rule TraceElement2TraceLinkEnd(link : ASPT!TraceElement, type : String) {
     	t : TraceModel!TraceLinkEnd (
     	    type <- link.type.denormalize(),
     	    traceElement <- 'Source'.getObjectByASPIDref(
-       	        if type = 'node' then link.idx			-- node
-      	        else if type = 'prop' then link.idpx	-- prop
-       	        else link.idsx endif endif				-- edge
+       	        if type = 'node' then link.id			-- node id
+      	        else if type = 'prop' then link.idp		-- prop id
+       	        else link.ids endif endif,				-- edge id
+       	        if type = 'node' then link.idx			-- node idref
+      	        else if type = 'prop' then link.idpx	-- prop idref
+       	        else link.idsx endif endif				-- edge idref
        	    ),
     	    name <- t.type.getTraceLinkEndName(t.traceElement)
     	)
