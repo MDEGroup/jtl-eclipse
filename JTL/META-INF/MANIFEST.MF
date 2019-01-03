@@ -38,7 +38,8 @@ Require-Bundle: JTL.atl,
  org.hamcrest.core,
  org.opentest4j,
  org.apiguardian,
- org.eclipse.m2m.atl.emftvm;bundle-version="3.8.0"
-Bundle-ClassPath: lib/jaspwrapper-0.9.jar,
- .
+ jaspwrapper,
+ org.apache.logging.log4j.api,
+ org.apache.logging.log4j.core
+Bundle-ClassPath: .
 Bundle-Activator: jtl.utils.Activator

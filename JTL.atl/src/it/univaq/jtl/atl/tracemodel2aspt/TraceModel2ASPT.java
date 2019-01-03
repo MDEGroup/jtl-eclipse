@@ -18,6 +18,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -44,6 +46,9 @@ import org.eclipse.m2m.atl.engine.emfvm.launch.EMFVMLauncher;
  */
 public class TraceModel2ASPT {
 
+	/** Logger */
+	private static Logger logger = LogManager.getLogger(TraceModel2ASPT.class);
+
 	/**
 	 * The property file. Stores module list, the metamodel and library locations.
 	 * @generated
@@ -67,12 +72,11 @@ public class TraceModel2ASPT {
 	 *
 	 * @param args
 	 *            are the arguments
-	 * @generated
 	 */
 	public static void main(String[] args) {
 		try {
 			if (args.length < 2) {
-				System.out.println("Arguments not valid : {IN_model_path, OUT_model_path}.");
+				logger.error("Arguments not valid : {IN_model_path, OUT_model_path}.");
 			} else {
 				TraceModel2ASPT runner = new TraceModel2ASPT();
 				runner.loadModels(args[0]);

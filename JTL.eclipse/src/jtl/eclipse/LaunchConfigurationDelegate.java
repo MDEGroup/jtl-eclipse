@@ -4,6 +4,8 @@ package jtl.eclipse;
 import java.io.File;
 import java.nio.file.Paths;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -17,6 +19,9 @@ import jtl.utils.Files;
 
 public class LaunchConfigurationDelegate
 		implements ILaunchConfigurationDelegate {
+
+	/** Logger */
+	private static Logger logger = LogManager.getLogger(LaunchConfigurationDelegate.class);
 
 	@Override
 	public void launch(ILaunchConfiguration configuration,
@@ -108,7 +113,7 @@ public class LaunchConfigurationDelegate
 				}
 			}
 		} else {
-			System.err.println("Transformation file must have '.jtl' or '.dl' extension.");
+			logger.error("Transformation file must have '.jtl' or '.dl' extension.");
 			return;
 		}
 

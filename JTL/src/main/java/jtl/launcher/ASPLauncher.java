@@ -7,11 +7,18 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public interface ASPLauncher  {
 	public String appendTransformation(
 			File ASPFile, String targetmmName, ByteArrayOutputStream asp);
 
 	class ASPLauncherImpl implements ASPLauncher {
+
+		/** Logger */
+		private static Logger logger = LogManager.getLogger(ASPLauncherImpl.class);
+
 		/**
 		 * Keep the text from the '%%% TRANSFORMATION %%%' line on.
 		 * @param ASPFile the file containing ASP code
@@ -39,11 +46,9 @@ public interface ASPLauncher  {
 					}
 				}
 			} catch (FileNotFoundException e) {
-				System.out.println("File not found: " + ASPFile);
-				e.printStackTrace();
+				logger.error("File not found: " + ASPFile, e);
 			} catch (IOException e) {
-				System.out.println("Unable to read the file: " + ASPFile);
-				e.printStackTrace();
+				logger.error("Unable to read the file: " + ASPFile, e);
 			}
 			return ASPFile.getPath();
 		}

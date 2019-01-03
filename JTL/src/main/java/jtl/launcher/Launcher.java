@@ -7,9 +7,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import jtl.utils.Files;
 
 public class Launcher {
+
+	/** Logger */
+	private static Logger logger = LogManager.getLogger(AbstractJTLLauncher.class);
 
 	/** JTL launcher */
 	public static AbstractJTLLauncher launcher;
@@ -123,7 +129,7 @@ public class Launcher {
 				}
 			}
 		} else {
-			System.err.println("Transformation file must have '.jtl' or '.dl' extension.");
+			logger.error("Transformation file must have '.jtl' or '.dl' extension.");
 			return;
 		}
 

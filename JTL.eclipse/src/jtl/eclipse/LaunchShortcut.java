@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -33,6 +35,9 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 
 public class LaunchShortcut implements ILaunchShortcut {
+
+	/** Logger */
+	private static Logger logger = LogManager.getLogger(LaunchShortcut.class);
 
 	@Override
 	public void launch(ISelection selection, String mode) {
@@ -111,8 +116,7 @@ public class LaunchShortcut implements ILaunchShortcut {
 				workingCopy.doSave();
 			}
 		} catch (CoreException e) {
-			System.err.println("Exception while launching selection.");
-			e.printStackTrace();
+			logger.error("Exception while launching selection.", e);
 			return;
 		}
 	}

@@ -24,6 +24,8 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -47,43 +49,46 @@ import jtl.utils.WhereAmI;
 
 public abstract class AbstractJTLLauncher {
 
-	// Configuration file
+	/** Logger */
+	private static Logger logger = LogManager.getLogger(AbstractJTLLauncher.class);
+
+	/** Configuration file */
 	protected final static String config = "config.properties";
 
-	// Working directory
+	/** Working directory */
 	protected String workingDir = "";
 
-	// Source metamodel file
+	/** Source metamodel file */
 	protected File sourcemmFile;
 
-	// Target metamodel file
+	/** Target metamodel file */
 	protected File targetmmFile;
 
-	// Source model file
+	/** Source model file */
 	protected File sourcemFile;
 
-	// Target models folder
+	/** Target models folder */
 	protected File targetmFolder;
 
-	// Transformation file
+	/** Transformation file */
 	protected File transfFile;
 
-	// Traces model file
+	/** Traces model file */
 	protected File tracesFile;
 
-	// Constraints file
+	/** Constraints file */
 	protected List<File> constraintsFiles;
 
-	// Limit the number of output models (0 = no limit)
+	/** Limit the number of output models (0 = no limit) */
 	protected int targetModelsLimit = 0;
 
-	// Next transformation in the chain
+	/** Next transformation in the chain */
 	protected String chainTransformation;
 
-	// Limit the number of models in input to the next transformation
+	/** Limit the number of models in input to the next transformation */
 	protected int chainLimit;
 
-	// ASP output
+	/** ASP output */
 	protected ByteArrayOutputStream asp = new ByteArrayOutputStream();
 
 	/**
@@ -315,11 +320,11 @@ public abstract class AbstractJTLLauncher {
 			targetPath = targetPath.getParent();
 		}
 		if (!java.nio.file.Files.isDirectory(targetPath)) {
-			System.err.println(targetPath + " is not a directory.");
+			logger.error(targetPath + " is not a directory.");
 			return null;
 		}
 		if (!java.nio.file.Files.isWritable(targetPath)) {
-			System.err.println(targetPath + " is a directory but it is not writable.");
+			logger.error(targetPath + " is a directory but it is not writable.");
 			return null;
 		}
 		return outputDir;
@@ -411,11 +416,9 @@ public abstract class AbstractJTLLauncher {
 			}
 			return verified != launchFiles.length;
 		} catch (FileNotFoundException e) {
-			System.out.println("File not found: " + ASPFile);
-			e.printStackTrace();
+			logger.error("File not found: " + ASPFile, e);
 		} catch (IOException e) {
-			System.out.println("Unable to read the file: " + ASPFile);
-			e.printStackTrace();
+			logger.error("Unable to read the file: " + ASPFile, e);
 		}
 
 		return true;
@@ -450,8 +453,7 @@ public abstract class AbstractJTLLauncher {
 		try {
 			tmp.writeTo(this.asp);
 		} catch (IOException e) {
-			System.err.println("An error occurred while dumping the launch configuration");
-			e.printStackTrace();
+			logger.error("An error occurred while dumping the launch configuration.", e);
 		}
 	}
 
@@ -498,8 +500,7 @@ public abstract class AbstractJTLLauncher {
 		try {
 			transfASPFile = new File(JTL2ASP.runTransformation(ecoreASPFile));
 		} catch (IOException | ATLCoreException e) {
-			System.out.println("Unable to perform the JTL to Ecore transformation:");
-			e.printStackTrace();
+			logger.error("Unable to perform the JTL to Ecore transformation.", e);
 			return;
 		}
 		// Remove the temporary created file
@@ -694,10 +695,9 @@ public abstract class AbstractJTLLauncher {
 		try {
 			mmASPmmFile = Ecore2ASPmm.runTransformation(metamodelFile);
 		} catch (IOException | ATLCoreException e) {
-			System.out.println(
+			logger.error(
 					"Unable to perform the Ecore to ASPmm transformation of file: " +
-					metamodelFile.getPath());
-			e.printStackTrace();
+					metamodelFile.getPath(), e);
 			return null;
 		}
 		return mmASPmmFile;
@@ -715,10 +715,9 @@ public abstract class AbstractJTLLauncher {
 		try {
 			mASPmFile = MM2ASPm.runTransformation(metamodelFile, modelFile);
 		} catch (IOException | ATLCoreException e) {
-			System.out.println(
+			logger.error(
 					"Unable to perform the Ecore to ASPm transformation: " +
-					modelFile.getPath());
-			e.printStackTrace();
+					modelFile.getPath(), e);
 			return null;
 		}
 		return mASPmFile;
@@ -734,10 +733,9 @@ public abstract class AbstractJTLLauncher {
 		try {
 			mASPTFile = TraceModel2ASPT.runTransformation(modelFile);
 		} catch (IOException | ATLCoreException e) {
-			System.out.println(
+			logger.error(
 					"Unable to perform the Ecore to ASPT transformation: " +
-					modelFile.getPath());
-			e.printStackTrace();
+					modelFile.getPath(), e);
 			return null;
 		}
 		return mASPTFile;
@@ -754,10 +752,9 @@ public abstract class AbstractJTLLauncher {
 		try {
 			mEcoreFile = ASPm2MM.runTransformation(metamodelFile, modelFile);
 		} catch (IOException | ATLCoreException e) {
-			System.out.println(
+			logger.error(
 					"Unable to perform the ASPm to Ecore transformation: " +
-					modelFile.getPath());
-			e.printStackTrace();
+					modelFile.getPath(), e);
 			return null;
 		}
 		return mEcoreFile;
@@ -776,10 +773,9 @@ public abstract class AbstractJTLLauncher {
 		try {
 			mEcoreFile = ASPT2TraceModel.runTransformation(modelFile, source, target);
 		} catch (IOException | ATLCoreException e) {
-			System.out.println(
+			logger.error(
 					"Unable to perform the ASPT to Ecore transformation: " +
-					modelFile.getPath());
-			e.printStackTrace();
+					modelFile.getPath(), e);
 			return null;
 		}
 		return mEcoreFile;
@@ -878,8 +874,7 @@ public abstract class AbstractJTLLauncher {
 		try {
 			asp.write(content.getBytes());
 		} catch (IOException e) {
-			System.out.println("Unable to write the generated ASP:");
-			e.printStackTrace();
+			logger.error("Unable to write the generated ASP.", e);
 		}
 	}
 
@@ -894,11 +889,9 @@ public abstract class AbstractJTLLauncher {
 				writeASP(line + "\n");
 			}
 		} catch (FileNotFoundException e) {
-			System.out.println("File not found: " + constraintsFiles);
-			e.printStackTrace();
+			logger.error("File not found: " + constraintsFiles, e);
 		} catch (IOException e) {
-			System.out.println("Unable to read the file: " + constraintsFiles);
-			e.printStackTrace();
+			logger.error("Unable to read the file: " + constraintsFiles, e);
 		}
 	}
 
@@ -937,8 +930,7 @@ public abstract class AbstractJTLLauncher {
 		try (OutputStream ASPout = new FileOutputStream(ASPFile)) {
 			asp.writeTo(ASPout);
 		} catch (IOException e) {
-			System.out.println("Unable to write the ASP file:");
-			e.printStackTrace();
+			logger.error("Unable to write the ASP file: " + ASPFile, e);
 			return null;
 		}
 		return ASPFile;
@@ -980,8 +972,7 @@ public abstract class AbstractJTLLauncher {
 		try {
 			md = MessageDigest.getInstance("MD5");
 		} catch (NoSuchAlgorithmException e) {
-			System.out.println("No MD5 algorithm found.");
-			e.printStackTrace();
+			logger.error("No MD5 algorithm found.", e);
 			return null;
 		}
 
@@ -993,8 +984,7 @@ public abstract class AbstractJTLLauncher {
 				md.update(data, 0, nread);
 			}
 		} catch (IOException e) {
-			System.out.println("Unable to read the file: " + file);
-			e.printStackTrace();
+			logger.error("Unable to read the file: " + file, e);
 			return null;
 		}
 		byte[] mdbytes = md.digest();

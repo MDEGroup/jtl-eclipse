@@ -9,7 +9,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.m2m.atl.engine.emfvm,
  org.eclipse.m2m.atl.engine,
  org.eclipse.emf.ecore,
- org.eclipse.m2m.atl.dsls
+ org.eclipse.m2m.atl.dsls,
+ org.apache.logging.log4j.api,
+ org.apache.logging.log4j.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -32,6 +34,9 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ResourceListSelectionDialog;
 
 public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
+
+	/** Logger */
+	private static Logger logger = LogManager.getLogger(LaunchConfigurationTab.class);
 
 	private Text sourcemmText;
 	private Text targetmmText;
@@ -325,8 +330,7 @@ public class LaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 					.getAttribute(LaunchConfigurationAttributes.CHAIN_LIMIT, 1));
 			setChainVisible(chainCheck.getSelection());
 		} catch (CoreException e) {
-			System.out.println("Unable to load the configuration data.");
-			e.printStackTrace();
+			logger.warn("Unable to load the configuration data.", e);
 		}
 	}
 

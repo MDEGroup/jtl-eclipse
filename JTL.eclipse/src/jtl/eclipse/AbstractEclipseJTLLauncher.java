@@ -5,6 +5,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -22,6 +24,9 @@ import jtl.launcher.AbstractJTLLauncher;
 import jtl.solver.AbstractASPSolver;
 
 public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
+
+	/** Logger */
+	private static Logger logger = LogManager.getLogger(AbstractEclipseJTLLauncher.class);
 
 	// List of bundles names to get version from
 	protected final static String[] bundles = new String[] {
@@ -111,8 +116,7 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 					lcwc.setAttribute(LaunchConfigurationAttributes.SOURCEM_TEXT, targetFiles.get(i));
 					lcwc.launch(ILaunchManager.RUN_MODE, null);
 				} catch (CoreException e) {
-					System.err.println("An error occurred launching a chained transformation...");
-					e.printStackTrace();
+					logger.error("An error occurred launching a chained transformation...", e);
 				}
 			}
 		}
@@ -238,8 +242,7 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 			    project.refreshLocal(IResource.DEPTH_INFINITE, null);
 			}
 		} catch (CoreException e) {
-			System.out.println("An error occurred refreshing the workspace:");
-			e.printStackTrace();
+			logger.warn("An error occurred refreshing the workspace.", e);
 			return;
 		}
 	}

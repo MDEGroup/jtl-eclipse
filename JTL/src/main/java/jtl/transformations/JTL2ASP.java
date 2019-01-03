@@ -3,6 +3,8 @@ package jtl.transformations;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -13,6 +15,9 @@ import org.eclipse.m2m.atl.core.ATLCoreException;
 import jtl.utils.Files;
 
 public class JTL2ASP {
+
+	/** Logger */
+	private static Logger logger = LogManager.getLogger(JTL2ASP.class);
 
 	public static String runTransformation(final File file)
 			throws IOException, ATLCoreException {
@@ -48,8 +53,8 @@ public class JTL2ASP {
 
 			return targetFile;
 		} else {
-			System.out.println("This is not a JTL model. Found:");
-			System.out.println(xmiResource.getContents().get(0));
+			logger.warn("This is not a JTL model. Found:" +
+					xmiResource.getContents().get(0));
 			return null;
 		}
 	}

@@ -1,6 +1,8 @@
 package jtl.eclipse;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
@@ -14,6 +16,9 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 public class LaunchConfigurationOptionsTab extends AbstractLaunchConfigurationTab {
+
+	/** Logger */
+	private static Logger logger = LogManager.getLogger(LaunchConfigurationOptionsTab.class);
 
 	private Button generateAspCheck;
 	private Button clearTargetCheck;
@@ -68,8 +73,7 @@ public class LaunchConfigurationOptionsTab extends AbstractLaunchConfigurationTa
 			clearTargetCheck.setSelection(configuration
 					.getAttribute(LaunchConfigurationAttributes.CLEAR_TARGET, false));
 		} catch (CoreException e) {
-			System.out.println("Unable to load the configuration data.");
-			e.printStackTrace();
+			logger.warn("Unable to load configuration data.", e);
 		}
 	}
 

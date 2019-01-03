@@ -23,7 +23,9 @@ Require-Bundle: org.eclipse.ui,
  ASPMM.resource.aspmm,
  ASPM.resource.aspm,
  ASP.resource.asp,
- JTL.resource.jtl
+ JTL.resource.jtl,
+ org.apache.logging.log4j.api,
+ org.apache.logging.log4j.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.ui.dialogs, org.eclipse.ui.actions

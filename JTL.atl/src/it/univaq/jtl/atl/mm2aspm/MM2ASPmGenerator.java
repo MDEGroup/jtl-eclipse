@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.StreamHandler;
 
+import org.apache.logging.log4j.LogManager;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -56,6 +57,10 @@ import org.eclipse.m2m.atl.engine.emfvm.launch.EMFVMLauncher;;
  */
 public class MM2ASPmGenerator {
 
+	/** Logger */
+	private static org.apache.logging.log4j.Logger logger =
+			LogManager.getLogger(MM2ASPmGenerator.class);
+
 	/**
 	 * The property file. Stores module list, the metamodel and library locations.
 	 * @generated
@@ -84,7 +89,7 @@ public class MM2ASPmGenerator {
 	public static void main(String[] args) {
 		try {
 			if (args.length < 3) {
-				System.out.println("Arguments not valid : {IN_metamodel_path, IN_model_path, OUT_model_path}.");
+				logger.error("Arguments not valid : {IN_metamodel_path, IN_model_path, OUT_model_path}.");
 			} else {
 				MM2ASPmGenerator runner = new MM2ASPmGenerator();
 				runner.loadModels(args[0]);
@@ -111,6 +116,10 @@ public class MM2ASPmGenerator {
 
                 // Remove log output in order to keep only the generated transformation
                 runner.generated = new ByteArrayInputStream(baos.toString().replaceFirst("(?s).+?(?=--)", "").getBytes());
+                if (MM2ASPmGenerator.logger.isDebugEnabled()) {
+                	MM2ASPmGenerator.logger.debug("MM2ASPm generated ATL transformation:\n" +
+                			baos.toString().replaceFirst("(?s).+?(?=--)", ""));
+                }
 
                 // Unregister the handler
                 handler.setLevel(Level.OFF);
