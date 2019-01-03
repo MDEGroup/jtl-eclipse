@@ -13,7 +13,12 @@ public class RegisterMetamodel {
 
 	public static void registerMetamodel(final File file) {
 		ResourceSet rs = new ResourceSetImpl();
-		registerResource(rs.getResource(URI.createFileURI(file.getPath()), true));
+		final String path = file.getPath();
+		registerResource(rs.getResource(
+				(file.exists()) ?
+				URI.createFileURI(path) :
+				URI.createURI(path)
+			, true));
 	}
 
 	public static void registerMetamodel(final String uri) {
