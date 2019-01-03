@@ -27,8 +27,8 @@ query MM2ASPmGenerator = ECORE!EClass.allInstancesFrom('IN')->reject(e | e.abstr
         '\n\t' + thisModule.getRoot().name + '!EObject.allInstancesFrom(\'IN\')->select(e|e.__xmiID__.startsWith(\'ASPid_\'))' +
     	'\n\t->collect(e|e.__xmiID__.split(\'-\'))->flatten()' +
     	'\n\t->collect(e|e.split(\'_\')->at(2))->asSet();\n' +
-	'helper context String def : normalize() : String = \'x_\' + self;\n' +
-	'helper context String def : processList(name : String) : String = self.regexReplaceAll(\'^[^,]+(,[^,]+)+$\',\'x_list(["$0"])\').regexReplaceAll(\',([^,]+)\',\'","x_$1\');\n' +
+	'helper context String def : normalize() : String = \'x_\' + self.regexReplaceAll(\'"\', \'\');\n' +
+	'helper context String def : processList(name : String) : String = self.regexReplaceAll(\'^[^,]+(,[^,]+)+$\',\'x_list(["$0"])\').regexReplaceAll(\', ([^,]+)\',\'","x_$1\');\n' +
 	'helper context String def : cleanIDref() : String = self.regexReplaceAll(\'@\',\'/@\').regexReplaceAll(\'^/@\',\'//@\');\n' +
 	'helper context String def : getId() : String = self.split(\'_\').at(2);\n' +
 	'helper context String def : getIdTrace() : String = self.split(\'_\').at(3).regexReplaceAll(\'^([^/])\',\'/$0\');\n' +
