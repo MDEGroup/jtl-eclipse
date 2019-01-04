@@ -117,12 +117,12 @@ public class ASPm2MMGenerator {
 				// Since ATL is printing the generated transformation
                 // to Standard Error we need to intercept it adding
                 // a handler to the logger registered by ATL
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                Logger logger = Logger.getLogger("org.eclipse.m2m.atl");
+                final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                final Logger logger = Logger.getLogger("org.eclipse.m2m.atl");
                 logger.setUseParentHandlers(false);
-                Handler handler = new StreamHandler(baos, new SimpleFormatter());
+                final Handler handler = new StreamHandler(baos, new SimpleFormatter());
                 logger.addHandler(handler);
-                PrintStream err = System.err;
+                final PrintStream err = System.err;
                 System.setErr(new PrintStream(new ByteArrayOutputStream()));
 
                 // Run the HOT
@@ -139,7 +139,7 @@ public class ASPm2MMGenerator {
                 }
 
                 // Unregister the handler
-                handler.setLevel(Level.OFF);
+                handler.setLevel(Level.SEVERE);
                 logger.removeHandler(handler);
                 System.setErr(err);
 

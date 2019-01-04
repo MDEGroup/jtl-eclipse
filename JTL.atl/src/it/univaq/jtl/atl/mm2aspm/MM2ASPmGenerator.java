@@ -16,7 +16,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -37,6 +39,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.m2m.atl.common.ATLExecutionException;
 import org.eclipse.m2m.atl.core.ATLCoreException;
@@ -50,7 +53,11 @@ import org.eclipse.m2m.atl.core.emf.EMFInjector;
 import org.eclipse.m2m.atl.core.emf.EMFModelFactory;
 import org.eclipse.m2m.atl.core.launch.ILauncher;
 import org.eclipse.m2m.atl.engine.compiler.AtlCompiler;
-import org.eclipse.m2m.atl.engine.emfvm.launch.EMFVMLauncher;;
+import org.eclipse.m2m.atl.engine.emfvm.ASM;
+import org.eclipse.m2m.atl.engine.emfvm.adapter.EMFModelAdapter;
+import org.eclipse.m2m.atl.engine.emfvm.adapter.IModelAdapter;
+import org.eclipse.m2m.atl.engine.emfvm.launch.EMFVMLauncher;
+import org.eclipse.m2m.atl.engine.emfvm.launch.ITool;;
 
 /**
  * Entry point of the 'MM2ASPmGenerator' transformation module.
@@ -91,7 +98,7 @@ public class MM2ASPmGenerator {
 			if (args.length < 3) {
 				logger.error("Arguments not valid : {IN_metamodel_path, IN_model_path, OUT_model_path}.");
 			} else {
-				MM2ASPmGenerator runner = new MM2ASPmGenerator();
+				final MM2ASPmGenerator runner = new MM2ASPmGenerator();
 				runner.loadModels(args[0]);
 				runner.mmIn = args[0];
 
@@ -100,12 +107,12 @@ public class MM2ASPmGenerator {
 				// Since ATL is printing the generated transformation
                 // to Standard Error we need to intercept it adding
                 // a handler to the logger registered by ATL
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                Logger logger = Logger.getLogger("org.eclipse.m2m.atl");
+                final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                final Logger logger = Logger.getLogger("org.eclipse.m2m.atl");
                 logger.setUseParentHandlers(false);
-                Handler handler = new StreamHandler(baos, new SimpleFormatter());
+                final Handler handler = new StreamHandler(baos, new SimpleFormatter());
                 logger.addHandler(handler);
-                PrintStream err = System.err;
+                final PrintStream err = System.err;
                 System.setErr(new PrintStream(new ByteArrayOutputStream()));
 
                 // Run the HOT
@@ -115,14 +122,15 @@ public class MM2ASPmGenerator {
                 handler.flush();
 
                 // Remove log output in order to keep only the generated transformation
-                runner.generated = new ByteArrayInputStream(baos.toString().replaceFirst("(?s).+?(?=--)", "").getBytes());
+                final String generatedTransformation = baos.toString().replaceFirst("(?s).+?(?=--)", "");
+                runner.generated = new ByteArrayInputStream(generatedTransformation.getBytes());
                 if (MM2ASPmGenerator.logger.isDebugEnabled()) {
                 	MM2ASPmGenerator.logger.debug("MM2ASPm generated ATL transformation:\n" +
-                			baos.toString().replaceFirst("(?s).+?(?=--)", ""));
+                			generatedTransformation);
                 }
 
                 // Unregister the handler
-                handler.setLevel(Level.OFF);
+                handler.setLevel(Level.SEVERE);
                 logger.removeHandler(handler);
                 System.setErr(err);
 
@@ -219,7 +227,34 @@ public class MM2ASPmGenerator {
 	}
 
 	public Object doMM2ASPm(IProgressMonitor monitor) throws ATLCoreException, IOException, ATLExecutionException {
-		ILauncher launcher = new EMFVMLauncher();
+
+		// Override the EMFModelAdapter#setID method to avoid
+		// the generation of a warning when an xmiID is set.
+		// This warning will throw a NullPointerException when
+		// a metaclass contains a feature "name" not of type String.
+		ILauncher launcher = new EMFVMLauncher() {
+			@Override
+			protected Object internalLaunch(ITool[] tools, IProgressMonitor monitor,
+					Map<String, Object> options, Object... modules) {
+				List<ASM> superimpose = new ArrayList<ASM>();
+				ASM mainModule = getASMFromObject(modules[0]);
+				IModelAdapter modelAdapter = new EMFModelAdapter() {
+					@Override
+					public void setID(Object element, Object id) {
+						if (element instanceof EObject) {
+							EObject eo = (EObject)element;
+							Resource resource = eo.eResource();
+							if (resource instanceof XMIResource) {
+								XMIResource xmiResource = (XMIResource)resource;
+								xmiResource.setID(eo, id.toString());
+							}
+						}
+					}
+				};
+				modelAdapter.setAllowInterModelReferences(true);
+				return mainModule.run(tools, models, libraries, superimpose, options, monitor, modelAdapter);
+			}
+		};
 		launcher.initialize(new HashMap<String,Object>());
 		launcher.addInModel(inModel, "IN", this.mmInName);
 		launcher.addOutModel(outModel, "OUT", "ASPm");
