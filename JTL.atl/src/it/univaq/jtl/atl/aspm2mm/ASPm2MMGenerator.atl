@@ -15,7 +15,7 @@ query ASPm2MMGenerator = (ECORE!EClass.allInstancesFrom('IN')->iterate(e; acc : 
 	'module ASPm2' + thisModule.getRoot().name.toKString() + ';\n\n' +
 	'create OUT : ' + thisModule.getRoot().name.toKString() + ' from IN : ASPm; \n\n' +
 	'helper context String def : denormalize() : String = self.replaceAll(\'"\', \' \').trim().substring(3, self.size()).processList();\n' +
-	'helper context String def : processList() : String = self.regexReplaceAll(\'\\\\w+\\\\(\\\\[([^\\\\]]+)\\\\]\\\\)\', \'$1\').regexReplaceAll(\' x_([^ ]+) \',\'$1\');\n\n' +
+	'helper context String def : processList() : String = self.regexReplaceAll(\'\\\\w+\\\\(\\\\[([^\\\\]]+)\\\\]\\\\)\', \'$1\').regexReplaceAll(\', x_([^ ]+) \',\', $1\').regexReplaceAll(\' x_([^ ]+) \',\'$1\');\n\n' +
 	'helper context ASPm!Node def: getProps(name:String) : Sequence(ASPm!Prop) = ASPm!Prop.allInstancesFrom(\'IN\')->select(e | e.name.denormalize() = name and e.owner = self);\n' +
 	'helper context ASPm!Node def: getEdges(name:String) : Sequence(ASPm!Edge) = ASPm!Edge.allInstancesFrom(\'IN\')->select(e | e.name.denormalize() = name and e.source = self);\n' +
 	'helper context ASPm!Node def: serializeNodeID() : String =	\'ASPid_\' + self.ID + \'_\' + self.IDtrace.denormalize();\n' +
@@ -40,39 +40,23 @@ helper context ECORE!EEnum def : enumerationToRuleString() : String =
 helper context ECORE!EClass def : classToRuleString() : String =
 			'rule ' + self.rulename + ' {\n' +
 			'\tfrom s : ASPm!Node(s.name.denormalize() = \'' + self.cname + '\')\n' +	
-			'\tto  t : ' + thisModule.getRoot().name.toKString() + '!' + self.cname + ' (\n' + 
-			self.eAllStructuralFeatures->iterate(e; acc : String = '' | acc + e.featureToBindingString() + if(e.isLast(self.eAllStructuralFeatures)) then '' else ',' endif + '\n') +
+			'\tto  t : ' + thisModule.getRoot().name.toKString() + '!' + self.cname + ' (\n' +			        
+			self.eAllAttributes
+				->select(e | e.eAttributeType <> ECORE!EDate)
+				->iterate(e; acc : String = '' | acc + e.attributeToBindingString() + if(e.isLast(self.eAllAttributes) and self.eAllReferences.isEmpty()) then '' else ',' endif + '\n') +
+			self.eAllReferences
+				->iterate(e; acc : String = '' | acc + e.referenceToBindingString() + if(e.isLast(self.eAllReferences)) then '' else ',' endif + '\n') +			
 			'\t)\n' +
 			'\tdo {\n'+
 			'\t\tt.__xmiID__ <- s.serializeNodeID()' +
-			self.eAllStructuralFeatures
-			  ->collect(f | '\n\t\t+ s.serialize' + 
-			      if(f.oclIsTypeOf(ECORE!EReference)) then 'Edge' else 'Prop' endif +
-			      'IDs(\'' + f.name.toKString() + '\')').sum() +
+			if (self.eAllStructuralFeatures.isEmpty()) then '' else
+			    self.eAllStructuralFeatures
+    			  ->collect(f | '\n\t\t+ s.serialize' + 
+    			      if(f.oclIsTypeOf(ECORE!EReference)) then 'Edge' else 'Prop' endif +
+    			      'IDs(\'' + f.name.toKString() + '\')').sum()
+    		endif +
 			';\n\t}\n'+
 			'}\n\n';
-			
-helper context ECORE!EStructuralFeature def : featureToBindingStringID() : String =
-	if(self.oclIsTypeOf(ECORE!EReference)) then
-		self.referenceToBindingStringID()
-	else
-		self.attributeToBindingStringID()
-	endif;				
-helper context ECORE!EReference def : referenceToBindingStringID() : String =
-		'\t\t\'_' + self.name.toKString() + '_\' + ' + 'ASPm!Edge.allInstancesFrom(\'IN\')->select(e | e.name.denormalize() = \'' + self.name + '\' and e.source = s)'
-		+ if(self.upperBound <> 1) then '' else '.first()' endif + '.ID';
-helper context ECORE!EAttribute def : attributeToBindingStringID() : String =
-		'\t\t\'_' + self.name.toKString() + '_\' + ' + 'ASPm!Prop.allInstancesFrom(\'IN\')->select(e | e.name.denormalize() = \'' + self.name + '\' and e.owner = s)'
-		+ if(self.upperBound <> 1) then '' else '.first()' endif + '.ID';
-			
-			
-			
-helper context ECORE!EStructuralFeature def : featureToBindingString() : String =
-	if(self.oclIsTypeOf(ECORE!EReference)) then
-		self.referenceToBindingString()
-	else
-		self.attributeToBindingString()
-	endif;
 				
 helper context ECORE!EReference def : referenceToBindingString() : String =
 		'\t\t' + self.name.toKString() + ' <- ASPm!Edge.allInstancesFrom(\'IN\')->select(e | e.name.denormalize() = \'' + self.name + '\' and e.source = s)->collect(e | e.target)'
