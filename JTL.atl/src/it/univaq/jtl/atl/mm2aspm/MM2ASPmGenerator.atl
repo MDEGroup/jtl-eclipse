@@ -27,7 +27,8 @@ query MM2ASPmGenerator = ECORE!EClass.allInstancesFrom('IN')->reject(e | e.abstr
         '\n\t' + thisModule.getRoot().name + '!EObject.allInstancesFrom(\'IN\')->select(e|e.__xmiID__.startsWith(\'ASPid_\'))' +
     	'\n\t->collect(e|e.__xmiID__.split(\'-\'))->flatten()' +
     	'\n\t->collect(e|e.split(\'_\')->at(2))->asSet();\n' +
-	'helper context String def : normalize() : String = \'x_\' + self.regexReplaceAll(\'"\', \'\');\n' +
+    'helper def : toStr(s:' + thisModule.getRoot().name + '!EObject) : String = if s.oclIsTypeOf(ASPm!EEnumLiteral) then s.name else s.toString() endif;\n' +
+	'helper context String def : normalize() : String = \'x_\' + self;\n' +
 	'helper context String def : processList(name : String) : String = self.regexReplaceAll(\'^[^,]+(,[^,]+)+$\',\'x_list(["$0"])\').regexReplaceAll(\', ([^,]+)\',\'","x_$1\');\n' +
 	'helper context String def : cleanIDref() : String = self.regexReplaceAll(\'@\',\'/@\').regexReplaceAll(\'^/@\',\'//@\');\n' +
 	'helper context String def : getId() : String = self.split(\'_\').at(2);\n' +
@@ -88,7 +89,7 @@ query MM2ASPmGenerator = ECORE!EClass.allInstancesFrom('IN')->reject(e | e.abstr
 	'rule createProp(s : ' + thisModule.getRoot().name + '!EObject, tuple : TupleType(attr : ' + thisModule.getRoot().name + '!EAttribute, value : String)) {\n'+
 	'to\n'+
 	'\tt : ASPm!Prop(\n'+
-	-- assunzione: gli attributi hanno tutti cardinalit� <= 1
+	-- assunzione: gli attributi hanno tutti cardinalita' <= 1
 	'\t\tIDtrace <- thisModule.getFeatureIdTrace(s, tuple.attr.name).normalize(),\n'+
 	'\t\tID <- thisModule.getFeatureId(s, tuple.attr.name),\n'+
 	'\t\tname <- tuple.attr.name.normalize(),\n'+
@@ -135,11 +136,11 @@ helper context ECORE!EClass def : toRuleString() : String =
 			'\t\tIDtrace <- thisModule.getNodeIdTrace(s).normalize(),\n' +
 			'\t\tID <- thisModule.getNodeId(s),\n' +
 			'\t\tmodel <- thisModule.model,\n' +
-			'\t\tname <- \'' + self.cname + '\'.normalize()\n' +
+			'\t\tname <- \'' + self.cname.regexReplaceAll('"','') + '\'.normalize()\n' +
 			'\t)\n' +
 			'\tdo {\n'+
 			'\t\ts.eClass().eAllReferences->select(e | s.eGet(e) <> e.defaultValue)->iterate(e; acc : Sequence(OclAny) = Sequence{} | acc.append((Sequence{s.eGet(e)}->flatten()->collect(e2 | Tuple{ref = e, target = e2})))).flatten()->collect(e | thisModule.createEdge(s, e));\n'+
-			'\t\ts.eClass().eAllAttributes->select(e | s.eGet(e) <> e.defaultValue)->iterate(e; acc : Sequence(OclAny) = Sequence{} | acc.append((Sequence{s.eGet(e)}->flatten()->collect(e2 | Tuple{attr = e, value = e2.toString()})))).flatten()->collect(e | thisModule.createProp(s, e));\n'+
+			'\t\ts.eClass().eAllAttributes->select(e | s.eGet(e) <> e.defaultValue)->iterate(e; acc : Sequence(OclAny) = Sequence{} | acc.append((Sequence{s.eGet(e)}->flatten()->collect(e2 | Tuple{attr = e, value = thisModule.toStr(e2)})))).flatten()->collect(e | thisModule.createProp(s, e));\n'+
 			'\t}\n'+
 			'}\n\n';
 
@@ -172,7 +173,7 @@ helper context ECORE!ENamedElement def : cname : String =
 			'"' + self.name + '"'
 		else
 			self.name
-		endif
+		endif 
 	endif;
 
 helper context ECORE!ENamedElement def : rulename : String =
