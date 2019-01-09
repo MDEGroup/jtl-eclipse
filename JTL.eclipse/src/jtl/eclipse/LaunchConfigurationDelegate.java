@@ -69,53 +69,32 @@ public class LaunchConfigurationDelegate
 		if (Files.getFileExtension(transfFile).equals("dl")) {
 			if (sourcemmFile.equals(targetmmFile)) {
 				// ASP Endogenous transformation
-				if (tracesFile == null) {
-					launcher = new ASPEndogenousLauncher(
-							sourcemmFile, sourcemFile, targetmFolder, transfFile);
-				} else {
-					launcher = new ASPEndogenousLauncher(
-							sourcemmFile, sourcemFile, targetmFolder,
-							transfFile, tracesFile);
-				}
+				launcher = new ASPEndogenousLauncher(
+						sourcemmFile, sourcemFile, targetmFolder, transfFile);
 			} else {
 				// ASP Exogenous transformation
-				if (tracesFile == null) {
-					launcher = new ASPExogenousLauncher(
-							sourcemmFile, targetmmFile,	sourcemFile,
-							targetmFolder, transfFile);
-				} else {
-					launcher = new ASPExogenousLauncher(
-							sourcemmFile, targetmmFile,	sourcemFile,
-							targetmFolder, transfFile, tracesFile);
-				}
+				launcher = new ASPExogenousLauncher(
+						sourcemmFile, targetmmFile,	sourcemFile,
+						targetmFolder, transfFile);
 			}
 		} else if (Files.getFileExtension(transfFile).equals("jtl")) {
 			if (sourcemmFile.equals(targetmmFile)) {
 				// Endogenous transformation
-				if (tracesFile == null) {
-					launcher = new JTLEndogenousLauncher(
-							sourcemmFile, sourcemFile, targetmFolder, transfFile);
-				} else {
-					launcher = new JTLEndogenousLauncher(
-							sourcemmFile, sourcemFile, targetmFolder,
-							transfFile, tracesFile);
-				}
+				launcher = new JTLEndogenousLauncher(
+						sourcemmFile, sourcemFile, targetmFolder, transfFile);
 			} else {
 				// Exogenous transformation
-				if (tracesFile == null) {
-					launcher = new JTLExogenousLauncher(
-							sourcemmFile, targetmmFile,	sourcemFile,
-							targetmFolder, transfFile);
-				} else {
-					launcher = new JTLExogenousLauncher(
-							sourcemmFile, targetmmFile,	sourcemFile,
-							targetmFolder, transfFile, tracesFile);
-				}
+				launcher = new JTLExogenousLauncher(
+						sourcemmFile, targetmmFile,	sourcemFile,
+						targetmFolder, transfFile);
 			}
 		} else {
 			logger.error("Transformation file must have '.jtl' or '.dl' extension.");
 			return;
 		}
+
+		// Traces model
+		launcher.setTracesFile(tracesFile);
 
 		// Target models limit
 		if (configuration.getAttribute(LaunchConfigurationAttributes.TRANSF_LIMIT, 0) > 0) {

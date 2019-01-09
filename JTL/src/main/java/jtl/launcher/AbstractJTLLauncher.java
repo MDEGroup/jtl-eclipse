@@ -10,7 +10,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.StringReader;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,8 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -113,26 +110,18 @@ public abstract class AbstractJTLLauncher {
 	}
 
 	/**
-	 * Default constructor to be used by implementing classes.
-	 * @param sourcemmFile source metamodel file
-	 * @param targetmmFile target metamodel file
-	 * @param sourcemFile source model file
-	 * @param targetmFolder folder where to save generated target models
-	 * @param transfFile file specifying the transformation
+	 * Returns the traces model file.
+	 * @return the traces model file
+	 */
+	public File getTracesFile() {
+		return tracesFile;
+	}
+
+	/**
+	 * Sets the traces model file.
 	 * @param tracesFile traces model file
 	 */
-	public AbstractJTLLauncher(
-			final File sourcemmFile,
-			final File targetmmFile,
-			final File sourcemFile,
-			final File targetmFolder,
-			final File transfFile,
-			final File tracesFile) {
-		this.sourcemmFile = sourcemmFile;
-		this.targetmmFile = targetmmFile;
-		this.sourcemFile =  sourcemFile;
-		this.targetmFolder = targetmFolder;
-		this.transfFile = transfFile;
+	public void setTracesFile(File tracesFile) {
 		this.tracesFile = tracesFile;
 	}
 
@@ -525,33 +514,6 @@ public abstract class AbstractJTLLauncher {
 
 		// Append the transformation engine
 		writeTransformationEngine();
-	}
-
-	/**
-	 * Impose the transformation direction in the ASP transformation
-	 * setting the constant mmt for each generated constraint.
-	 * @param transfASP generated ASP program to update
-	 * @return ASP program updated witj transformation direction
-	 */
-	private String setTransformationDirection(final String transfASP) {
-		final String newline = System.getProperty("line.separator");
-		String result = "";
-		Pattern p = Pattern.compile("(nodex|propx|edgex)\\(([^,]+)");
-		try (BufferedReader br = new BufferedReader(new StringReader(transfASP))) {
-			String line = null;
-			while ((line = br.readLine()) != null) {
-				Matcher m = p.matcher(line);
-				if (m.find()) {
-					result += line.replaceFirst("\\.$", ", mmt=" + m.group(2) + ".");
-				} else {
-					result += line;
-				}
-				result += newline;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return result;
 	}
 
 	/**

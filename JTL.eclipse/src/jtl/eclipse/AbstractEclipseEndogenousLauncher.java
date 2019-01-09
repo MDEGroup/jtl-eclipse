@@ -31,28 +31,6 @@ public abstract class AbstractEclipseEndogenousLauncher extends AbstractEclipseJ
 	}
 
 	/**
-	 * Default constructor to be used by implementing classes.
-	 * @param sourcemmFile source metamodel file
-	 * @param targetmmFile target metamodel file
-	 * @param sourcemFile source model file
-	 * @param targetmFolder folder where to save generated target models
-	 * @param transfFile file specifying the transformation
-	 * @param tracesFile traces model file
-	 */
-	public AbstractEclipseEndogenousLauncher(
-			final File sourcemmFile,
-			final File sourcemFile,
-			final File targetmFolder,
-			final File transfFile,
-			final File tracesFile) {
-		super(sourcemmFile, sourcemmFile, sourcemFile, targetmFolder, transfFile, tracesFile);
-		launcher = new AbstractEndogenousLauncher(
-				sourcemmFile, sourcemFile, targetmFolder, transfFile, tracesFile) {	};
-		this.asp = launcher.getASP();
-		launcher.setWorkingDir(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString());
-	}
-
-	/**
 	 * Process the source metamodel to generate the corresponding ASP code.
 	 * @param sourcemmFile source metamodel file
 	 */

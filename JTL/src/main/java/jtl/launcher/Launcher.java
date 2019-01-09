@@ -18,7 +18,7 @@ public class Launcher {
 	private static Logger logger = LogManager.getLogger(AbstractJTLLauncher.class);
 
 	/** JTL launcher */
-	public static AbstractJTLLauncher launcher;
+	private AbstractJTLLauncher launcher;
 
 	/** A map to keep the launch options status */
 	public final static Map<String, Boolean> options = new HashMap<String, Boolean>();
@@ -34,6 +34,53 @@ public class Launcher {
 
 	/** Command line option to clear the target directory before the launch */
 	public static final String OPTION_CLEAR_TARGET = "--clear-target";
+
+	public void launch(
+			final File sourcemmFile,
+			final File targetmmFile,
+			final File sourcemFile,
+			final File targetmFolder,
+			final File transfFile,
+			final File tracesFile,
+			final List<File> constraintsFile) {
+
+		// Dispatch execution to specific launchers
+		if (Files.getFileExtension(transfFile).equals("dl")) {
+			if (sourcemmFile.equals(targetmmFile)) {
+				// ASP Endogenous transformation
+				launcher = new ASPEndogenousLauncher(
+						sourcemmFile, sourcemFile, targetmFolder, transfFile);
+			} else {
+				// ASP Exogenous transformation
+				launcher = new ASPExogenousLauncher(
+						sourcemmFile, targetmmFile,	sourcemFile,
+						targetmFolder, transfFile);
+			}
+		} else if (Files.getFileExtension(transfFile).equals("jtl")) {
+			if (sourcemmFile.equals(targetmmFile)) {
+				// Endogenous transformation
+				launcher = new JTLEndogenousLauncher(
+						sourcemmFile, sourcemFile, targetmFolder, transfFile);
+			} else {
+				// Exogenous transformation
+				launcher = new JTLExogenousLauncher(
+						sourcemmFile, targetmmFile,	sourcemFile,
+						targetmFolder, transfFile);
+			}
+		} else {
+			logger.error("Transformation file must have '.jtl' or '.dl' extension.");
+			return;
+		}
+
+		// Traces model
+		launcher.setTracesFile(tracesFile);
+
+		// Additional constraints
+		launcher.setConstraintsFile(constraintsFile);
+
+		// Launch
+		launcher.launch();
+	}
 
 	public static void main(final String[] args) {
 
@@ -81,58 +128,6 @@ public class Launcher {
 			tracesFile = new File(argsList.get(argsList.indexOf(OPTION_TRACE) + 1));
 		}
 
-		// Dispatch execution to specific launchers:
-		if (Files.getFileExtension(transfFile).equals("dl")) {
-			if (sourcemmFile.equals(targetmmFile)) {
-				// ASP Endogenous transformation
-				if (tracesFile == null) {
-					launcher = new ASPEndogenousLauncher(
-							sourcemmFile, sourcemFile, targetmFolder, transfFile);
-				} else {
-					launcher = new ASPEndogenousLauncher(
-							sourcemmFile, sourcemFile, targetmFolder,
-							transfFile, tracesFile);
-				}
-			} else {
-				// ASP Exogenous transformation
-				if (tracesFile == null) {
-					launcher = new ASPExogenousLauncher(
-							sourcemmFile, targetmmFile,	sourcemFile,
-							targetmFolder, transfFile);
-				} else {
-					launcher = new ASPExogenousLauncher(
-							sourcemmFile, targetmmFile,	sourcemFile,
-							targetmFolder, transfFile, tracesFile);
-				}
-			}
-		} else if (Files.getFileExtension(transfFile).equals("jtl")) {
-			if (sourcemmFile.equals(targetmmFile)) {
-				// Endogenous transformation
-				if (tracesFile == null) {
-					launcher = new JTLEndogenousLauncher(
-							sourcemmFile, sourcemFile, targetmFolder, transfFile);
-				} else {
-					launcher = new JTLEndogenousLauncher(
-							sourcemmFile, sourcemFile, targetmFolder,
-							transfFile, tracesFile);
-				}
-			} else {
-				// Exogenous transformation
-				if (tracesFile == null) {
-					launcher = new JTLExogenousLauncher(
-							sourcemmFile, targetmmFile,	sourcemFile,
-							targetmFolder, transfFile);
-				} else {
-					launcher = new JTLExogenousLauncher(
-							sourcemmFile, targetmmFile,	sourcemFile,
-							targetmFolder, transfFile, tracesFile);
-				}
-			}
-		} else {
-			logger.error("Transformation file must have '.jtl' or '.dl' extension.");
-			return;
-		}
-
 		// Additional constraints
 		List<File> constraintsFiles = null;
 		if (argsList.contains(OPTION_CONSTRAINTS)) {
@@ -143,11 +138,10 @@ public class Launcher {
 					i++;
 				}
 			}
-			launcher.setConstraintsFile(constraintsFiles);
 		}
 
 		// Launch
-		launcher.launch();
+		new Launcher().launch(sourcemmFile, targetmmFile,	sourcemFile,
+				targetmFolder, transfFile, tracesFile, constraintsFiles);
 	}
-
 }
