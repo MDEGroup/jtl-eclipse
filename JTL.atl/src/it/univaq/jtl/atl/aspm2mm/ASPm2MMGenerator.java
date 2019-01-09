@@ -21,6 +21,7 @@ import java.io.PrintStream;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
@@ -68,7 +70,11 @@ import org.eclipse.m2m.atl.core.emf.EMFModelFactory;
 import org.eclipse.m2m.atl.core.emf.EMFReferenceModel;
 import org.eclipse.m2m.atl.core.launch.ILauncher;
 import org.eclipse.m2m.atl.engine.compiler.AtlCompiler;
+import org.eclipse.m2m.atl.engine.emfvm.ASM;
+import org.eclipse.m2m.atl.engine.emfvm.adapter.EMFModelAdapter;
+import org.eclipse.m2m.atl.engine.emfvm.adapter.IModelAdapter;
 import org.eclipse.m2m.atl.engine.emfvm.launch.EMFVMLauncher;
+import org.eclipse.m2m.atl.engine.emfvm.launch.ITool;
 
 /**
  * Entry point of the 'ASPm2MMGenerator' transformation module.
@@ -267,7 +273,34 @@ public class ASPm2MMGenerator {
 	}
 
 	public Object doASPm2MM(IProgressMonitor monitor) throws ATLCoreException, IOException, ATLExecutionException {
-		ILauncher launcher = new EMFVMLauncher();
+
+		// Override the EMFModelAdapter#setID method to avoid
+		// the generation of a warning when an xmiID is set.
+		// This warning will throw a NullPointerException when
+		// a metaclass contains a feature "name" not of type String.
+		ILauncher launcher = new EMFVMLauncher() {
+			@Override
+			protected Object internalLaunch(ITool[] tools, IProgressMonitor monitor,
+					Map<String, Object> options, Object... modules) {
+				List<ASM> superimpose = new ArrayList<ASM>();
+				ASM mainModule = getASMFromObject(modules[0]);
+				IModelAdapter modelAdapter = new EMFModelAdapter() {
+					@Override
+					public void setID(Object element, Object id) {
+						if (element instanceof EObject) {
+							EObject eo = (EObject)element;
+							Resource resource = eo.eResource();
+							if (resource instanceof XMIResource) {
+								XMIResource xmiResource = (XMIResource)resource;
+								xmiResource.setID(eo, id.toString());
+							}
+						}
+					}
+				};
+				modelAdapter.setAllowInterModelReferences(true);
+				return mainModule.run(tools, models, libraries, superimpose, options, monitor, modelAdapter);
+			}
+		};
 		launcher.initialize(new HashMap<String,Object>());
 		launcher.addInModel(inModel, "IN", "ASPm");
 		launcher.addOutModel(outModel, "OUT", this.mmOutName);
