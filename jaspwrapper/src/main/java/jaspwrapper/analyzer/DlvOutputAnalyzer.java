@@ -157,6 +157,7 @@ public class DlvOutputAnalyzer extends OutputAnalyzer {
         	list.add(str.substring(off, next + 1));
         	off = next + 3;
         }
+        list.add(str.substring(off));
         return list.toArray(new String[list.size()]);
     }
 }
