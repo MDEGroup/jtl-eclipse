@@ -138,10 +138,11 @@ public class ASPm2MMGenerator {
                 handler.flush();
 
                 // Remove log output in order to keep only the generated transformation
-                runner.generated = new ByteArrayInputStream(baos.toString().replaceFirst("(?s).+?(?=--)", "").getBytes());
+                final String generatedTransformation = baos.toString().replaceFirst("(?s).+?(?=--)", "");
+                runner.generated = new ByteArrayInputStream(generatedTransformation.getBytes());
                 if (ASPm2MMGenerator.logger.isDebugEnabled()) {
                 	ASPm2MMGenerator.logger.debug("ASPm2MM generated ATL transformation:\n" +
-                			baos.toString().replaceFirst("(?s).+?(?=--)", ""));
+                			generatedTransformation);
                 }
 
                 // Unregister the handler
