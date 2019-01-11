@@ -49,11 +49,13 @@ public class ASPSolver extends AbstractASPSolver {
 	@Override
 	protected List<String> getLibrariesPaths(final String librariesConfig) {
 		final List<String> libraries = new ArrayList<String>();
-		for (String path : librariesConfig.split(":")) {
-			libraries.add((WhereAmI.isJar()) ?
-					Jar.extractFile(new File(path).getName(), launcher.getWorkingDir()) :
-					launcher.getWorkingDir() + File.separator + path
-			);
+		if (librariesConfig != null) {
+			for (String path : librariesConfig.split(":")) {
+				libraries.add((WhereAmI.isJar()) ?
+						Jar.extractFile(new File(path).getName(), launcher.getWorkingDir()) :
+						launcher.getWorkingDir() + File.separator + path
+				);
+			}
 		}
 		return libraries;
 	}

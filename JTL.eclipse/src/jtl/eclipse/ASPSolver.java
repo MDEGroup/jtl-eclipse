@@ -47,11 +47,13 @@ public class ASPSolver extends AbstractASPSolver {
 	@Override
 	protected List<String> getLibrariesPaths(final String librariesConfig) {
 		final List<String> libraries = new ArrayList<String>();
-		for (String path : librariesConfig.split(":")) {
-			try {
-				libraries.add(FileLocator.resolve(new URL("platform:/plugin/JTL/" + path)).getPath());
-			} catch (IOException e) {
-				logger.error("Cannot locate file:" + path, e);
+		if (librariesConfig != null) {
+			for (String path : librariesConfig.split(":")) {
+				try {
+					libraries.add(FileLocator.resolve(new URL("platform:/plugin/JTL/" + path)).getPath());
+				} catch (IOException e) {
+					logger.error("Cannot locate file:" + path, e);
+				}
 			}
 		}
 		return libraries;

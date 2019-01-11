@@ -135,9 +135,11 @@ public abstract class AbstractASPSolver {
 
 			// And a required library must be included
 			// extending the library path
-			this.solverPath = "LD_LIBRARY_PATH=" +
-					this.librariesPaths.get(0).substring(0, this.librariesPaths.get(0).lastIndexOf('/')) +
-					" " + this.solverPath;
+			if (librariesPaths.size() > 0) {
+				this.solverPath = "LD_LIBRARY_PATH=" +
+						this.librariesPaths.get(0).substring(0, this.librariesPaths.get(0).lastIndexOf('/')) +
+						" " + this.solverPath;
+			}
 		}
 
 		// On windows FileLocator does not escape spaces
