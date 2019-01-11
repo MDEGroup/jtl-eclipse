@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: JTL ATL Transformation Runtime Plug-in
 Bundle-SymbolicName: JTL.atl;singleton:=true
-Bundle-Version: 0.2.1.qualifier
+Bundle-Version: 0.3.0.qualifier
 Bundle-Activator: it.univaq.jtl.atl.Activator
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources,
