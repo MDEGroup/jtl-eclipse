@@ -254,7 +254,7 @@ public class ASPT2TraceModel {
 		Map<String, Object> options = new HashMap<String, Object>();
 		for (Entry<Object, Object> entry : properties.entrySet()) {
 			if (entry.getKey().toString().startsWith("ASPT2TraceModel.options.")) {
-				options.put(entry.getKey().toString().replaceFirst("ASPT2TraceModel.options.", ""),
+				options.put(entry.getKey().toString().replaceFirst("ASPT2TraceModel.options.", ""), 
 				entry.getValue().toString());
 			}
 		}

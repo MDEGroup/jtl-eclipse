@@ -36,7 +36,7 @@ rule TraceLink2TraceLinkEnd(link : ASPT!TraceLink, model : String) {
     to
     	t : TraceModel!TraceLinkEnd (
     	    type <- link.type.denormalize(),
-    	    traceElement <- model.getObjectByASPIDref(link.id, link.idrefx),
+    	    traceElement <- model.getObjectByASPIDref(link.idref.debug('idref'), link.idrefx.debug('idrefx')),
     	    name <- t.type.getTraceLinkEndName(t.traceElement)
     	)
    	do { t; }
@@ -82,10 +82,10 @@ rule TraceLinks2TraceLink {
     	    trule <- s.relation,
     		isPartial <- false,
     		isNonInjective <- false,
-    		leftLinkEnd <- thisModule.TraceLink2TraceLinkEnd(s, 'Source'),
+    		leftLinkEnd <- thisModule.TraceLink2TraceLinkEnd(s.debug('left'), 'Source'),
     		rightLinkEnd <- thisModule.TraceLink2TraceLinkEnd(
     		    ASPT!TraceLink.allInstancesFrom('IN')
-    				->select(l | l.id = s.id and l <> s).first(), 'Target')
+    				->select(l | l.id = s.id and l <> s).first().debug('right'), 'Target')
     	)
     do { thisModule.tracemodel.traceLinks <- t; }
 }

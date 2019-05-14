@@ -1,0 +1,18 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%    TRACEABILITY ENGINE   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+trace_linkx(MMS,ID,IDx,ID,IDx,Node,R) :-
+    relation_node(R,MMS,Node,X), relation_node(R,target,Node2,Y),
+    node(MMS,ID,IDx,Node), node(target,ID2,ID2x,Node2), 
+    prop(MMS,IDp, IDpx, ID, IDx, Name, Value), prop(target,ID2p, ID2px, ID2, ID2x, Name2, Value),
+    MMS!=target, target = x_b.
+    
+trace_linkx(target,ID,IDx,ID2,ID2x,Node2,R) :-
+    relation_node(R,MMS,Node,X), relation_node(R,target,Node2,Y),
+    node(MMS,ID,IDx,Node), node(target,ID2,ID2x,Node2),
+    prop(MMS,IDp, IDpx, ID, IDx, Name, Value), prop(target,ID2p, ID2px, ID2, ID2x, Name2, Value),
+    MMS!=target, target = x_b.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

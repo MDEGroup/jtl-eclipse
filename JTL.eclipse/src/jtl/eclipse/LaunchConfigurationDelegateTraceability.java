@@ -27,102 +27,52 @@ public class LaunchConfigurationDelegateTraceability
 		// Workspace absolute path
 		final String wsPath = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
 
-		// Source Metamodel
-		final File sourcemmFile = new File(configuration
-				.getAttribute(LaunchConfigurationAttributes.SOURCEMM_TEXT, ""));
+		// Left Metamodel
+		final File leftmmFile = new File(configuration
+				.getAttribute(LaunchConfigurationAttributes.LEFTMM_TEXT, ""));
 
-		// Target metamodel
-		final File targetmmFile = new File(configuration
-				.getAttribute(LaunchConfigurationAttributes.TARGETMM_TEXT, ""));
+		// Right metamodel
+		final File rightmmFile = new File(configuration
+				.getAttribute(LaunchConfigurationAttributes.RIGHTMM_TEXT, ""));
 
-		// Source model
-		final File sourcemFile = new File(configuration
-				.getAttribute(LaunchConfigurationAttributes.SOURCEM_TEXT, ""));
+		// Left model
+		final File leftmFile = new File(configuration
+				.getAttribute(LaunchConfigurationAttributes.LEFTM_TEXT, ""));
 
-		// Target models folder
-		final File targetmFolder = new File(configuration
-				.getAttribute(LaunchConfigurationAttributes.TARGETM_TEXT, ""));
+		// Right model
+		final File rightmFolder = new File(configuration
+				.getAttribute(LaunchConfigurationAttributes.RIGHTM_TEXT, ""));
 
 		// Transformation
 		final File transfFile = new File(configuration
 				.getAttribute(LaunchConfigurationAttributes.TRANSF_TEXT, ""));
 
-		// Traces model
-		File tracesFile = null;
-		if (configuration.getAttribute(LaunchConfigurationAttributes.TRACE_CHECK, false)) {
-			tracesFile = new File(configuration
-					.getAttribute(LaunchConfigurationAttributes.TRACE_TEXT, ""));
-		}
+		// Trace model (output)
+		final File traceFile = new File(configuration
+				.getAttribute(LaunchConfigurationAttributes.TRACE_TEXT, ""));
 
 		// Register the metamodels
-		RegisterMetamodel.registerMetamodel(Paths.get(wsPath, sourcemmFile.getPath()).toFile());
-		RegisterMetamodel.registerMetamodel(Paths.get(wsPath, targetmmFile.getPath()).toFile());
+		RegisterMetamodel.registerMetamodel(Paths.get(wsPath, leftmmFile.getPath()).toFile());
+		RegisterMetamodel.registerMetamodel(Paths.get(wsPath, rightmmFile.getPath()).toFile());
 
 		// Dispatch execution to specific launchers:
-		AbstractEclipseJTLLauncher launcher;
+		jtl.launcher.ASPExogenousTraceabilityLauncher launcher;
 		if (Files.getFileExtension(transfFile).equals("dl")) {
-			if (sourcemmFile.equals(targetmmFile)) {
-				// ASP Endogenous transformation
-				if (tracesFile == null) {
-					launcher = new ASPEndogenousLauncher(
-							sourcemmFile, sourcemFile, targetmFolder, transfFile);
-				} else {
-					launcher = new ASPEndogenousLauncher(
-							sourcemmFile, sourcemFile, targetmFolder,
-							transfFile, tracesFile);
-				}
+			if (leftmmFile.equals(rightmmFile)) {
+				System.err.println("Not implemented");
+				return;
 			} else {
 				// ASP Exogenous transformation
-				if (tracesFile == null) {
-					launcher = new ASPExogenousLauncher(
-							sourcemmFile, targetmmFile,	sourcemFile,
-							targetmFolder, transfFile);
-				} else {
-					launcher = new ASPExogenousLauncher(
-							sourcemmFile, targetmmFile,	sourcemFile,
-							targetmFolder, transfFile, tracesFile);
-				}
+				launcher = new ASPExogenousTraceabilityLauncher(
+						leftmmFile, rightmmFile, leftmFile,
+						rightmFolder, transfFile, traceFile);
 			}
 		} else if (Files.getFileExtension(transfFile).equals("jtl")) {
-			if (sourcemmFile.equals(targetmmFile)) {
-				// Endogenous transformation
-				if (tracesFile == null) {
-					launcher = new JTLEndogenousLauncher(
-							sourcemmFile, sourcemFile, targetmFolder, transfFile);
-				} else {
-					launcher = new JTLEndogenousLauncher(
-							sourcemmFile, sourcemFile, targetmFolder,
-							transfFile, tracesFile);
-				}
-			} else {
-				// Exogenous transformation
-				if (tracesFile == null) {
-					launcher = new JTLExogenousLauncher(
-							sourcemmFile, targetmmFile,	sourcemFile,
-							targetmFolder, transfFile);
-				} else {
-					launcher = new JTLExogenousLauncher(
-							sourcemmFile, targetmmFile,	sourcemFile,
-							targetmFolder, transfFile, tracesFile);
-				}
-			}
+			System.err.println("Not implemented");
+			return;
 		} else {
 			System.err.println("Transformation file must have '.jtl' or '.dl' extension.");
 			return;
-		}
-
-		// Target models limit
-		if (configuration.getAttribute(LaunchConfigurationAttributes.TRANSF_LIMIT, 0) > 0) {
-			launcher.setTargetModelsLimit(
-					configuration.getAttribute(LaunchConfigurationAttributes.TRANSF_LIMIT, 0));
-		}
-
-		// Set the chained trasformation, if needed
-		if (configuration.getAttribute(LaunchConfigurationAttributes.CHAIN_CHECK, false)) {
-			launcher.setChainTransformation(
-					configuration.getAttribute(LaunchConfigurationAttributes.CHAIN_COMBO, ""));
-			launcher.setChainLimit(
-					configuration.getAttribute(LaunchConfigurationAttributes.CHAIN_LIMIT, 1));
 		}
 
 		// Launch

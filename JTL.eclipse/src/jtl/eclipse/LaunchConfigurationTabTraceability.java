@@ -1,18 +1,11 @@
 package jtl.eclipse;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
-import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -22,31 +15,20 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ResourceListSelectionDialog;
 
 public class LaunchConfigurationTabTraceability extends AbstractLaunchConfigurationTab {
 
-	private Text sourcemmText;
-	private Text targetmmText;
-	private Text sourcemText;
-	private Text targetmText;
+	private Text leftmmText;
+	private Text rightmmText;
+	private Text leftmText;
+	private Text rightmText;
 	private Text transfText;
-	private Spinner limitSpinner;
-	private Button tracesCheck;
-	private Text tracesText;
-	private Button chainCheck;
-	private Combo chainCombo;
-	private Spinner chainLimitSpinner;
-	private ArrayList<Control> tracesControls = new ArrayList<Control>();
-	private ArrayList<Control> chainControls = new ArrayList<Control>();
-
+	private Text traceText;
 
 	@Override
 	public void createControl(Composite parent) {
@@ -74,37 +56,36 @@ public class LaunchConfigurationTabTraceability extends AbstractLaunchConfigurat
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
         metamodelsGroup.setText("Metamodels");
 
-        // Source metamodel
-        new Label(metamodelsGroup, SWT.NONE).setText("Source:");
-        sourcemmText = new Text(metamodelsGroup, SWT.BORDER);
-        sourcemmText.setLayoutData(
+        // Left metamodel
+        new Label(metamodelsGroup, SWT.NONE).setText("Left:");
+        leftmmText = new Text(metamodelsGroup, SWT.BORDER);
+        leftmmText.setLayoutData(
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
-        sourcemmText.addModifyListener(modTextListener);
-        //sourcemmText.addModifyListener(new ModifyListener() {
-        Button sourcemmButton = new Button(metamodelsGroup, SWT.PUSH);
-        sourcemmButton.setText("Browse...");
-        sourcemmButton.addSelectionListener(new SelectionAdapter() {
+        leftmmText.addModifyListener(modTextListener);
+        Button leftmmButton = new Button(metamodelsGroup, SWT.PUSH);
+        leftmmButton.setText("Browse...");
+        leftmmButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-        		sourcemmText.setText(selectResource(
-                        "Select a resource as the source metamodel",
+        		leftmmText.setText(selectResource(
+                        "Select a resource as the left metamodel",
         				IResource.FILE));
         		updateLaunchConfigurationDialog();
         	}
         });
 
-        // Target metamodel
-        new Label(metamodelsGroup, SWT.NONE).setText("Target:");
-        targetmmText = new Text(metamodelsGroup, SWT.BORDER);
-        targetmmText.setLayoutData(
+        // Right metamodel
+        new Label(metamodelsGroup, SWT.NONE).setText("Right:");
+        rightmmText = new Text(metamodelsGroup, SWT.BORDER);
+        rightmmText.setLayoutData(
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
-        targetmmText.addModifyListener(modTextListener);
-        Button targetmmButton = new Button(metamodelsGroup, SWT.PUSH);
-        targetmmButton.setText("Browse...");
-        targetmmButton.addSelectionListener(new SelectionAdapter() {
+        rightmmText.addModifyListener(modTextListener);
+        Button rightmmButton = new Button(metamodelsGroup, SWT.PUSH);
+        rightmmButton.setText("Browse...");
+        rightmmButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-        		targetmmText.setText(selectResource(
+        		rightmmText.setText(selectResource(
         				"Select a resource as the target metamodel",
         				IResource.FILE));
         		updateLaunchConfigurationDialog();
@@ -120,37 +101,37 @@ public class LaunchConfigurationTabTraceability extends AbstractLaunchConfigurat
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
         modelsGroup.setText("Models");
 
-        // Source model
-        new Label(modelsGroup, SWT.NONE).setText("Source:");
-        sourcemText = new Text(modelsGroup, SWT.BORDER);
-        sourcemText.setLayoutData(
+        // Left model
+        new Label(modelsGroup, SWT.NONE).setText("Left:");
+        leftmText = new Text(modelsGroup, SWT.BORDER);
+        leftmText.setLayoutData(
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
-        sourcemText.addModifyListener(modTextListener);
-        Button sourcemButton = new Button(modelsGroup, SWT.PUSH);
-        sourcemButton.setText("Browse...");
-        sourcemButton.addSelectionListener(new SelectionAdapter() {
+        leftmText.addModifyListener(modTextListener);
+        Button leftmButton = new Button(modelsGroup, SWT.PUSH);
+        leftmButton.setText("Browse...");
+        leftmButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-        		sourcemText.setText(selectResource(
-        				"Select a resource as the source model",
+        		leftmText.setText(selectResource(
+        				"Select a resource as the left model",
         				IResource.FILE));
         		updateLaunchConfigurationDialog();
         	}
         });
 
-        // Target models folder
-        new Label(modelsGroup, SWT.NONE).setText("Target:");
-        targetmText = new Text(modelsGroup, SWT.BORDER);
-        targetmText.setLayoutData(
+        // Right model
+        new Label(modelsGroup, SWT.NONE).setText("Right:");
+        rightmText = new Text(modelsGroup, SWT.BORDER);
+        rightmText.setLayoutData(
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
-        targetmText.addModifyListener(modTextListener);
-        Button targetmButton = new Button(modelsGroup, SWT.PUSH);
-        targetmButton.setText("Browse...");
-        targetmButton.addSelectionListener(new SelectionAdapter() {
+        rightmText.addModifyListener(modTextListener);
+        Button rightmButton = new Button(modelsGroup, SWT.PUSH);
+        rightmButton.setText("Browse...");
+        rightmButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-        		targetmText.setText(selectResource(
-        				"Select a folder where to store target models",
+        		rightmText.setText(selectResource(
+        				"Select a resource as the right model",
         				IResource.FILE));
         		updateLaunchConfigurationDialog();
         	}
@@ -163,7 +144,7 @@ public class LaunchConfigurationTabTraceability extends AbstractLaunchConfigurat
         transfGroup.setLayout(new GridLayout(4, false));
         transfGroup.setLayoutData(
         		new GridData(SWT.FILL, SWT.CENTER, true, false));
-        transfGroup.setText("Transformation");
+        transfGroup.setText("Correspondences specification");
 
         // Transformation
         new Label(transfGroup, SWT.NONE).setText("JTL:");
@@ -179,11 +160,29 @@ public class LaunchConfigurationTabTraceability extends AbstractLaunchConfigurat
             @Override
             public void widgetSelected(SelectionEvent e) {
         		transfText.setText(selectResource(
-        				"Select a resource as JTL transformation",
+        				"Select a resource as correspondences specification",
         				IResource.FILE));
         		updateLaunchConfigurationDialog();
         	}
         });
+
+        // Trace model
+        Group traceGroup = new Group(comp, SWT.NONE);
+        traceGroup.setFont(comp.getFont());
+        traceGroup.setLayout(new GridLayout(1, false));
+        traceGroup.setLayoutData(
+        		new GridData(SWT.FILL, SWT.CENTER, true, false));
+        traceGroup.setText("Output");
+        new Label(traceGroup, SWT.NONE).setText("Trace model:");
+        traceText = new Text(traceGroup, SWT.BORDER);
+        traceText.setLayoutData(
+        		new GridData(SWT.FILL, SWT.CENTER, true, false));
+        traceText.addModifyListener(new ModifyListener() {
+			@Override
+			public void modifyText(ModifyEvent e) {
+        		updateLaunchConfigurationDialog();
+			}
+		});
 	}
 
 	@Override
@@ -193,16 +192,18 @@ public class LaunchConfigurationTabTraceability extends AbstractLaunchConfigurat
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			sourcemmText.setText(configuration
-				.getAttribute(LaunchConfigurationAttributes.SOURCEMM_TEXT, ""));
-			targetmmText.setText(configuration
-				.getAttribute(LaunchConfigurationAttributes.TARGETMM_TEXT, ""));
-			sourcemText.setText(configuration
-				.getAttribute(LaunchConfigurationAttributes.SOURCEM_TEXT, ""));
-			targetmText.setText(configuration
-				.getAttribute(LaunchConfigurationAttributes.TARGETM_TEXT, ""));
+			leftmmText.setText(configuration
+				.getAttribute(LaunchConfigurationAttributes.LEFTMM_TEXT, ""));
+			rightmmText.setText(configuration
+				.getAttribute(LaunchConfigurationAttributes.RIGHTMM_TEXT, ""));
+			leftmText.setText(configuration
+				.getAttribute(LaunchConfigurationAttributes.LEFTM_TEXT, ""));
+			rightmText.setText(configuration
+				.getAttribute(LaunchConfigurationAttributes.RIGHTM_TEXT, ""));
 			transfText.setText(configuration
 				.getAttribute(LaunchConfigurationAttributes.TRANSF_TEXT, ""));
+			traceText.setText(configuration
+				.getAttribute(LaunchConfigurationAttributes.TRACE_TEXT, ""));
 		} catch (CoreException e) {
 			System.out.println("Unable to load the configuration data.");
 			e.printStackTrace();
@@ -211,16 +212,18 @@ public class LaunchConfigurationTabTraceability extends AbstractLaunchConfigurat
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(LaunchConfigurationAttributes.SOURCEMM_TEXT,
-				sourcemmText.getText());
-		configuration.setAttribute(LaunchConfigurationAttributes.TARGETMM_TEXT,
-				targetmmText.getText());
-		configuration.setAttribute(LaunchConfigurationAttributes.SOURCEM_TEXT,
-				sourcemText.getText());
-		configuration.setAttribute(LaunchConfigurationAttributes.TARGETM_TEXT,
-				targetmText.getText());
+		configuration.setAttribute(LaunchConfigurationAttributes.LEFTMM_TEXT,
+				leftmmText.getText());
+		configuration.setAttribute(LaunchConfigurationAttributes.RIGHTMM_TEXT,
+				rightmmText.getText());
+		configuration.setAttribute(LaunchConfigurationAttributes.LEFTM_TEXT,
+				leftmText.getText());
+		configuration.setAttribute(LaunchConfigurationAttributes.RIGHTM_TEXT,
+				rightmText.getText());
 		configuration.setAttribute(LaunchConfigurationAttributes.TRANSF_TEXT,
 				transfText.getText());
+		configuration.setAttribute(LaunchConfigurationAttributes.TRACE_TEXT,
+				traceText.getText());
 	}
 
 	@Override
@@ -243,20 +246,56 @@ public class LaunchConfigurationTabTraceability extends AbstractLaunchConfigurat
 
 	@Override
 	public boolean isValid(ILaunchConfiguration launchConfig) {
+		String errorMsg = "";
+		if (leftmmText.getText().equals("")) {
+			errorMsg += ", the left metamodel";
+		}
+		if (rightmmText.getText().equals("")) {
+			errorMsg += ", the right metamodel";
+		}
+		if (leftmText.getText().equals("")) {
+			errorMsg += ", the left model";
+		}
+		if (rightmText.getText().equals("")) {
+			errorMsg += ", the right model";
+		}
+		if (transfText.getText().equals("")) {
+			errorMsg += ", the correspondences specification";
+		}
+		if (traceText.getText().equals("")) {
+			errorMsg += ", the ouput trace model";
+		}
+		if (!errorMsg.equals("")) {
+			errorMsg = "Please, select a path for " + errorMsg.substring(1) + ".";
+			this.setErrorMessage(errorMsg);
+			return false;
+		}
+
+		if (leftmmText.getText().contains(" ")) {
+			errorMsg += "left metamodel, ";
+		}
+		if (rightmmText.getText().contains(" ")) {
+			errorMsg += "right metamodel, ";
+		}
+		if (leftmText.getText().contains(" ")) {
+			errorMsg += "left model, ";
+		}
+		if (rightmText.getText().contains(" ")) {
+			errorMsg += "right model, ";
+		}
+		if (transfText.getText().contains(" ")) {
+			errorMsg += "correspondences specification, ";
+		}
+		if (traceText.getText().contains(" ")) {
+			errorMsg += "output trace model, ";
+		}
+		if (!errorMsg.equals("")) {
+			errorMsg = errorMsg.substring(0, errorMsg.length() - 2) + " cannot contain spaces.";
+			this.setErrorMessage(errorMsg);
+			return false;
+		}
+
 		this.setErrorMessage(null);
 		return super.isValid(launchConfig);
 	}
-
-	private void setTraceModelVisible(final boolean visible) {
-		for (Control c : tracesControls) {
-			c.setVisible(visible);
-		}
-	}
-
-	private void setChainVisible(final boolean visible) {
-		for (Control c : chainControls) {
-			c.setVisible(visible);
-		}
-	}
-
 }

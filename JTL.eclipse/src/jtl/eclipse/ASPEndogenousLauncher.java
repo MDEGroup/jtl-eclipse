@@ -35,7 +35,7 @@ public class ASPEndogenousLauncher extends AbstractEclipseEndogenousLauncher imp
 	 * @return filename of the final ASP program
 	 */
 	@Override
-	protected void generateTransformation(final String targetmmName) {
+	public void generateTransformation(final String targetmmName) {
 		// Temporary replace the relative file path with the absolute one
 		final File transfFileRelative = launcher.getTransfFile();
 		launcher.setTransfFile(new File(getAbsolutePath(transfFileRelative.getPath())));

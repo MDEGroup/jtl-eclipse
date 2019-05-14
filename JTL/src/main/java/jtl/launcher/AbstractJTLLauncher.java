@@ -480,7 +480,7 @@ public abstract class AbstractJTLLauncher {
 	 * @param targetmmName name of the target metamodel
 	 * @return filename of the final ASP program
 	 */
-	protected void generateTransformation(final String targetmmName) {
+	public void generateTransformation(final String targetmmName) {
 		// JTL text to model (EMFText)
 		final File ecoreASPFile = emftextTextToModel(transfFile);
 

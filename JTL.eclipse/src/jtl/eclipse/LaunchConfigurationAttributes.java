@@ -15,4 +15,8 @@ public interface LaunchConfigurationAttributes {
 	public static final String CHAIN_LIMIT = "it.univaq.jtl.chainlimit";
 	public static final String GENERATE_ASP = "it.univaq.jtl.generateasp";
 	public static final String CLEAR_TARGET = "it.univaq.jtl.cleartarget";
+	public static final String LEFTMM_TEXT = "it.univaq.jtl.leftmm";
+	public static final String RIGHTMM_TEXT = "it.univaq.jtl.rightmm";
+	public static final String LEFTM_TEXT = "it.univaq.jtl.leftm";
+	public static final String RIGHTM_TEXT = "it.univaq.jtl.rightm";
 }
