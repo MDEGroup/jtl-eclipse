@@ -3,7 +3,6 @@
  */
 package jtl.eclipse.handlers;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -48,7 +47,7 @@ public class JTL2ASPHandler extends AbstractHandler {
 		String targetFile;
 		try {
 			targetFile = JTL2ASP.runTransformation(
-					new File(file.getFullPath().toOSString()));
+					file.getFullPath().toOSString());
 		} catch (IOException | ATLCoreException e1) {
 			MessageDialog.openInformation(window.getShell(),
 					"ATL Transformation",

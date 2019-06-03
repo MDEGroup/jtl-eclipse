@@ -1,7 +1,6 @@
 package jtl.eclipse;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 
 import jtl.launcher.ASPLauncher;
 
@@ -11,21 +10,21 @@ public class ASPExogenousLauncher extends AbstractEclipseExogenousLauncher imple
 
 	/**
 	 * Create an instance of ASPExogenousLauncher.
-	 * @param sourcemmFile source metamodel file
-	 * @param targetmmFile target metamodel file
-	 * @param sourcemFile source model file
-	 * @param targetmFolder folder where to save generated target models
+	 * @param leftmmFile source metamodel file
+	 * @param rightmmFile target metamodel file
+	 * @param leftmFile source model file
+	 * @param rightmFile folder where to save generated target models
 	 * @param transfFile file specifying the transformation
 	 */
 	public ASPExogenousLauncher(
-			final File sourcemmFile,
-			final File targetmmFile,
-			final File sourcemFile,
-			final File targetmFolder,
-			final File transfFile) {
-		super(sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile);
+			final String leftmmFile,
+			final String rightmmFile,
+			final String leftmFile,
+			final String rightmFile,
+			final String transfFile) {
+		super(leftmmFile, rightmmFile, leftmFile, rightmFile, transfFile);
 		launcher = new jtl.launcher.ASPExogenousLauncher(
-				sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile);
+				leftmmFile, rightmmFile, leftmFile, rightmFile, transfFile);
 		launcher.setASP(asp);
 	}
 
@@ -38,8 +37,8 @@ public class ASPExogenousLauncher extends AbstractEclipseExogenousLauncher imple
 	@Override
 	public void generateTransformation(final String targetmmName) {
 		// Temporary replace the relative file path with the absolute one
-		final File transfFileRelative = launcher.getTransfFile();
-		launcher.setTransfFile(new File(getAbsolutePath(transfFileRelative.getPath())));
+		final String transfFileRelative = launcher.getTransfFile();
+		launcher.setTransfFile(getAbsolutePath(transfFileRelative));
 
 		launcher.generateTransformation(targetmmName);
 
@@ -49,7 +48,7 @@ public class ASPExogenousLauncher extends AbstractEclipseExogenousLauncher imple
 
 	@Override
 	public String appendTransformation(
-			final File ASPFile,
+			final String ASPFile,
 			final String targetmmName,
 			final ByteArrayOutputStream asp) {
 		return new ASPLauncher.ASPLauncherImpl()

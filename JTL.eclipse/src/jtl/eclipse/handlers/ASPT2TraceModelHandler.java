@@ -1,6 +1,5 @@
 package jtl.eclipse.handlers;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -58,9 +57,9 @@ public class ASPT2TraceModelHandler extends AbstractHandler {
 		String targetFile;
 		try {
 			targetFile = ASPT2TraceModel.runTransformation(
-					new File(file.getFullPath().toOSString()),
-					new File(sourceM.getFullPath().toOSString()),
-					new File(targetM.getFullPath().toOSString()));
+					file.getFullPath().toOSString(),
+					sourceM.getFullPath().toOSString(),
+					targetM.getFullPath().toOSString());
 		} catch (IOException | ATLCoreException e1) {
 			MessageDialog.openInformation(window.getShell(),
 					"ATL Transformation",

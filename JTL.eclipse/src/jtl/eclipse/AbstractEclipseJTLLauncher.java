@@ -53,20 +53,20 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 
 	/**
 	 * Default constructor to be used by implementing classes.
-	 * @param sourcemmFile source metamodel file
-	 * @param targetmmFile target metamodel file
-	 * @param sourcemFile source model file
-	 * @param targetmFolder folder where to save generated target models
+	 * @param leftmmFile source metamodel file
+	 * @param rightmmFile target metamodel file
+	 * @param leftmFile source model file
+	 * @param rightmFile folder where to save generated target models
 	 * @param transfFile file specifying the transformation
 	 */
 	public AbstractEclipseJTLLauncher(
-			final File sourcemmFile,
-			final File targetmmFile,
-			final File sourcemFile,
-			final File targetmFolder,
-			final File transfFile) {
-		super(sourcemmFile, targetmmFile, sourcemFile,
-				targetmFolder, transfFile);
+			final String leftmmFile,
+			final String rightmmFile,
+			final String leftmFile,
+			final String rightmFile,
+			final String transfFile) {
+		super(leftmmFile, rightmmFile, leftmFile,
+				rightmFile, transfFile);
 	}
 
 	/**
@@ -134,7 +134,7 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 	@Override
 	protected void computeMD5() {
 		// Files involved in the launch
-		final ArrayList<File> launchFilesList = new ArrayList<File>(Arrays.asList(
+		final ArrayList<String> launchFilesList = new ArrayList<String>(Arrays.asList(
 			sourcemmFile,
 			targetmmFile,
 			sourcemFile,
@@ -169,7 +169,7 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 	 */
 	@Override
 	protected String writeASPToFile() {
-		transfFile = new File(getAbsolutePath(transfFile.getPath()));
+		transfFile = getAbsolutePath(transfFile);
 		return super.writeASPToFile();
 	}
 
@@ -200,8 +200,8 @@ public abstract class AbstractEclipseJTLLauncher extends AbstractJTLLauncher {
 	 * @param file The file to remove.
 	 */
 	@Override
-	protected void removeFile(final File file) {
-		new File(getAbsolutePath(file.getPath())).delete();
+	protected void removeFile(final String file) {
+		new File(getAbsolutePath(file)).delete();
 	}
 
 	/**

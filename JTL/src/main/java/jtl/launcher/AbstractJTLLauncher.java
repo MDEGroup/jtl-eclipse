@@ -56,22 +56,22 @@ public abstract class AbstractJTLLauncher {
 	protected String workingDir = "";
 
 	/** Source metamodel file */
-	protected File sourcemmFile;
+	protected String sourcemmFile;
 
 	/** Target metamodel file */
-	protected File targetmmFile;
+	protected String targetmmFile;
 
 	/** Source model file */
-	protected File sourcemFile;
+	protected String sourcemFile;
 
 	/** Target models folder */
-	protected File targetmFolder;
+	protected String targetmFolder;
 
 	/** Transformation file */
-	protected File transfFile;
+	protected String transfFile;
 
 	/** Traces model file */
-	protected File tracesFile;
+	protected String tracesFile;
 
 	/** Constraints file */
 	protected List<File> constraintsFiles;
@@ -90,22 +90,22 @@ public abstract class AbstractJTLLauncher {
 
 	/**
 	 * Default constructor to be used by implementing classes.
-	 * @param sourcemmFile source metamodel file
-	 * @param targetmmFile target metamodel file
-	 * @param sourcemFile source model file
-	 * @param targetmFolder folder where to save generated target models
+	 * @param leftmmFile source metamodel file
+	 * @param rightmmFile target metamodel file
+	 * @param leftmFile source model file
+	 * @param rightmFile folder where to save generated target models
 	 * @param transfFile file specifying the transformation
 	 */
 	public AbstractJTLLauncher(
-			final File sourcemmFile,
-			final File targetmmFile,
-			final File sourcemFile,
-			final File targetmFolder,
-			final File transfFile) {
-		this.sourcemmFile = sourcemmFile;
-		this.targetmmFile = targetmmFile;
-		this.sourcemFile =  sourcemFile;
-		this.targetmFolder = targetmFolder;
+			final String leftmmFile,
+			final String rightmmFile,
+			final String leftmFile,
+			final String rightmFile,
+			final String transfFile) {
+		this.sourcemmFile = leftmmFile;
+		this.targetmmFile = rightmmFile;
+		this.sourcemFile =  leftmFile;
+		this.targetmFolder = rightmFile;
 		this.transfFile = transfFile;
 	}
 
@@ -113,7 +113,7 @@ public abstract class AbstractJTLLauncher {
 	 * Returns the traces model file.
 	 * @return the traces model file
 	 */
-	public File getTracesFile() {
+	public String getTracesFile() {
 		return tracesFile;
 	}
 
@@ -121,7 +121,7 @@ public abstract class AbstractJTLLauncher {
 	 * Sets the traces model file.
 	 * @param tracesFile traces model file
 	 */
-	public void setTracesFile(File tracesFile) {
+	public void setTracesFile(String tracesFile) {
 		this.tracesFile = tracesFile;
 	}
 
@@ -137,7 +137,7 @@ public abstract class AbstractJTLLauncher {
 	 * Returns the transformation file.
 	 * @return transformation file
 	 */
-	public File getTransfFile() {
+	public String getTransfFile() {
 		return transfFile;
 	}
 
@@ -145,7 +145,7 @@ public abstract class AbstractJTLLauncher {
 	 * Sets the transformation file.
 	 * @param transfFile transformation file
 	 */
-	public void setTransfFile(final File transfFile) {
+	public void setTransfFile(final String transfFile) {
 		this.transfFile = transfFile;
 	}
 
@@ -249,7 +249,7 @@ public abstract class AbstractJTLLauncher {
 		}
 
 		// Set the ASP filename
-		transfFile = new File(getASPFilename());
+		transfFile = getASPFilename();
 
 		// Run the solver
 		ArrayList<String> modelsFiles =
@@ -295,17 +295,17 @@ public abstract class AbstractJTLLauncher {
 	 * Get the directory that will be used to store target models.
 	 * @return target models directory
 	 */
-	public File getOutputDir() {
+	public Path getOutputDir() {
 
-		File outputDir = targetmFolder;
+		Path outputDir = Paths.get(targetmFolder);
 
 		// If we have an absolute path inside Eclipse, prepend the workspace
 		// If we have an absolute path outside Eclipse, return it as it is
 		Path targetPath = (outputDir.isAbsolute() == WhereAmI.isOSGI()) ?
-				Paths.get(getWorkingDir(), outputDir.getPath()) : outputDir.toPath();
+				Paths.get(getWorkingDir(), targetmFolder) : outputDir;
 
-		if (outputDir.getName().endsWith(".xmi")) {
-			outputDir = outputDir.getParentFile();
+		if (targetmFolder.endsWith(".xmi")) {
+			outputDir = outputDir.getParent();
 			targetPath = targetPath.getParent();
 		}
 		if (!java.nio.file.Files.isDirectory(targetPath)) {
@@ -323,7 +323,7 @@ public abstract class AbstractJTLLauncher {
 	 * Clear (as in remove all files) from the target directory.
 	 */
 	protected void clearTargetDirectory() {
-		final File targetDir = getOutputDir();
+		final File targetDir = getOutputDir().toFile();
 		for (File file : targetDir.listFiles()) {
 			if (file.isFile()) {
 				file.delete();
@@ -359,7 +359,7 @@ public abstract class AbstractJTLLauncher {
 	 */
 	protected boolean launchFilesChanged() {
 		// Files involved in the launch
-		final ArrayList<File> launchFilesList = new ArrayList<File>(Arrays.asList(
+		final ArrayList<String> launchFilesList = new ArrayList<String>(Arrays.asList(
 			sourcemmFile,
 			targetmmFile,
 			sourcemFile,
@@ -451,7 +451,7 @@ public abstract class AbstractJTLLauncher {
 	 */
 	protected void computeMD5() {
 		// Files involved in the launch
-		final ArrayList<File> launchFilesList = new ArrayList<File>(Arrays.asList(
+		final ArrayList<String> launchFilesList = new ArrayList<String>(Arrays.asList(
 			sourcemmFile,
 			targetmmFile,
 			sourcemFile,
@@ -482,12 +482,12 @@ public abstract class AbstractJTLLauncher {
 	 */
 	public void generateTransformation(final String targetmmName) {
 		// JTL text to model (EMFText)
-		final File ecoreASPFile = emftextTextToModel(transfFile);
+		final String ecoreASPFile = emftextTextToModel(transfFile);
 
 		// JTL to ASP Ecore (ATL)
-		File transfASPFile;
+		String transfASPFile;
 		try {
-			transfASPFile = new File(JTL2ASP.runTransformation(ecoreASPFile));
+			transfASPFile = JTL2ASP.runTransformation(ecoreASPFile);
 		} catch (IOException | ATLCoreException e) {
 			logger.error("Unable to perform the JTL to Ecore transformation.", e);
 			return;
@@ -524,7 +524,7 @@ public abstract class AbstractJTLLauncher {
 	 */
 	protected ArrayList<String> processTargetModels(
 			final ArrayList<String> modelsFiles,
-			final File targetmmFile) {
+			final String targetmmFile) {
 
 		// Register the ASPm metamodel
 		try {
@@ -540,10 +540,8 @@ public abstract class AbstractJTLLauncher {
 		for (String target : modelsFiles) {
 			// Distinguish target models from trace models
 			if (target.endsWith(".aspm")) {
-				final File targetFile = new File(target);
-
 				// Convert the ASP target models (text2model)
-				final File targetFileModel = emftextTextToModel(targetFile);
+				final String targetFileModel = emftextTextToModel(target);
 
 				// ASPm to Ecore (ATL generated from HOT)
 				final String xmiFilename = modelASPmToEcore(targetmmFile, targetFileModel);
@@ -553,7 +551,7 @@ public abstract class AbstractJTLLauncher {
 
 				// Remove temporary itermediate files
 				if (!Launcher.options.get(Launcher.OPTION_GENERATE_ASP)) {
-					removeFile(targetFile);
+					removeFile(target);
 				}
 				removeFile(targetFileModel);
 			}
@@ -584,24 +582,22 @@ public abstract class AbstractJTLLauncher {
 		for (String trace : modelsFiles) {
 			// Distinguish trace models from target models
 			if (trace.endsWith(".aspt")) {
-				final File traceFile = new File(trace);
-
 				// Convert the ASP trace models (text2model)
-				final File traceFileModel = emftextTextToModel(traceFile);
+				final String traceFileModel = emftextTextToModel(trace);
 
 				// ASPT to Ecore
 				// The name of the trace model has the "_trace.aspt" suffix.
 				// This is why we need to remove the last 11 chars and replace them
 				// with ".xmi" to get the name of the corresponding target model.
 				final String xmiFilename = modelASPTToEcore(traceFileModel, sourcemFile,
-						new File(trace.substring(0, trace.length() - 11) + ".xmi"));
+						trace.substring(0, trace.length() - 11) + ".xmi");
 
 				// Add the generated file to the list of processed trace files
 				traceFiles.add(xmiFilename);
 
 				// Remove temporary itermediate files
 				if (!Launcher.options.get(Launcher.OPTION_GENERATE_ASP)) {
-					removeFile(traceFile);
+					removeFile(trace);
 				}
 				removeFile(traceFileModel);
 			}
@@ -619,17 +615,17 @@ public abstract class AbstractJTLLauncher {
 
 	/**
 	 * Run the solver to generate the target models.
-	 * @param ASPFile filename of the file containing the ASP program
+	 * @param transfFile filename of the file containing the ASP program
 	 * @param targetmFolder folder where to save generated target models
 	 * @return List of target models
 	 */
 	protected ArrayList<String> runSolver(
-			final File ASPFile,
-			final File targetmFolder,
-			final File sourcemFile) {
+			final String transfFile,
+			final String targetmFolder,
+			final String sourcemFile) {
 		ArrayList<String> modelsFiles = null;
 		try {
-			modelsFiles = getSolver().run(ASPFile, targetmFolder, sourcemFile);
+			modelsFiles = getSolver().run(transfFile, targetmFolder, sourcemFile);
 		} catch (JASPException | IOException |  URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -648,18 +644,18 @@ public abstract class AbstractJTLLauncher {
 	 * Ecore to ASPmm (ATL).
 	 * This will create the target file of the ATL transformation:
 	 * source filename + .ASPmm.ecore
-	 * @param metamodelFile File of the metamodel
+	 * @param sourcemmFile File of the metamodel
 	 * @return Path to the converted file
 	 */
-	protected String metamodelEcoreToASPmm(final File metamodelFile) {
+	protected String metamodelEcoreToASPmm(final String sourcemmFile) {
 		// The file created by the transformation
 		String mmASPmmFile;
 		try {
-			mmASPmmFile = Ecore2ASPmm.runTransformation(metamodelFile);
+			mmASPmmFile = Ecore2ASPmm.runTransformation(sourcemmFile);
 		} catch (IOException | ATLCoreException e) {
 			logger.error(
 					"Unable to perform the Ecore to ASPmm transformation of file: " +
-					metamodelFile.getPath(), e);
+					sourcemmFile, e);
 			return null;
 		}
 		return mmASPmmFile;
@@ -671,7 +667,7 @@ public abstract class AbstractJTLLauncher {
 	 * @param modelFile File of the model
 	 * @return Path to the converted file
 	 */
-	protected String modelEcoreToASPm(final File metamodelFile, final File modelFile) {
+	protected String modelEcoreToASPm(final String metamodelFile, final String modelFile) {
 		// The file created by the transformation
 		String mASPmFile;
 		try {
@@ -679,7 +675,7 @@ public abstract class AbstractJTLLauncher {
 		} catch (IOException | ATLCoreException e) {
 			logger.error(
 					"Unable to perform the Ecore to ASPm transformation: " +
-					modelFile.getPath(), e);
+					modelFile, e);
 			return null;
 		}
 		return mASPmFile;
@@ -690,14 +686,14 @@ public abstract class AbstractJTLLauncher {
 	 * @param modelFile File of the trace model
 	 * @return Path to the converted file
 	 */
-	protected String modelEcoreToASPT(final File modelFile) {
+	protected String modelEcoreToASPT(final String modelFile) {
 		String mASPTFile;
 		try {
 			mASPTFile = TraceModel2ASPT.runTransformation(modelFile);
 		} catch (IOException | ATLCoreException e) {
 			logger.error(
 					"Unable to perform the Ecore to ASPT transformation: " +
-					modelFile.getPath(), e);
+					modelFile, e);
 			return null;
 		}
 		return mASPTFile;
@@ -709,14 +705,14 @@ public abstract class AbstractJTLLauncher {
 	 * @param modelFile File of the model
 	 * @return Path to the converted file
 	 */
-	protected String modelASPmToEcore(final File metamodelFile, final File modelFile) {
+	protected String modelASPmToEcore(final String metamodelFile, final String modelFile) {
 		String mEcoreFile;
 		try {
 			mEcoreFile = ASPm2MM.runTransformation(metamodelFile, modelFile);
 		} catch (IOException | ATLCoreException e) {
 			logger.error(
 					"Unable to perform the ASPm to Ecore transformation: " +
-					modelFile.getPath(), e);
+					modelFile, e);
 			return null;
 		}
 		return mEcoreFile;
@@ -728,16 +724,16 @@ public abstract class AbstractJTLLauncher {
 	 * @return Path to the converted file
 	 */
 	protected String modelASPTToEcore(
-			final File modelFile,
-			final File source,
-			final File target) {
+			final String modelFile,
+			final String source,
+			final String target) {
 		String mEcoreFile;
 		try {
 			mEcoreFile = ASPT2TraceModel.runTransformation(modelFile, source, target);
 		} catch (IOException | ATLCoreException e) {
 			logger.error(
 					"Unable to perform the ASPT to Ecore transformation: " +
-					modelFile.getPath(), e);
+					modelFile, e);
 			return null;
 		}
 		return mEcoreFile;
@@ -749,14 +745,13 @@ public abstract class AbstractJTLLauncher {
 	 * @param comment Comment to write before the produced ASP
 	 * @return File of the converted file
 	 */
-	protected File emftextModelToText(
+	protected String emftextModelToText(
 			final String modelFile, final String comment) {
-		final File modelASPmmFile = new File(modelFile);
 		if (comment != null) {
 			writeASP(comment);
 		}
-		new EmftextConverter().convert(new File(modelFile), asp);
-		return modelASPmmFile;
+		new EmftextConverter().convert(modelFile, asp);
+		return modelFile;
 	}
 
 	/**
@@ -768,13 +763,12 @@ public abstract class AbstractJTLLauncher {
 	 * @param asp OutputStream containing the ASP program
 	 * @return File of the converted file
 	 */
-	protected File emftextModelToText(
+	protected String emftextModelToText(
 			final String modelFile,
 			final String comment,
 			final String modelname,
 			final String replace,
 			final ByteArrayOutputStream asp) {
-		final File modelASPmmFile = new File(modelFile);
 		if (comment != null) {
 			writeASP(comment);
 		}
@@ -783,7 +777,7 @@ public abstract class AbstractJTLLauncher {
 		ByteArrayOutputStream tmpReplace = new ByteArrayOutputStream();
 
 		// Convert
-		new EmftextConverter().convert(modelASPmmFile, tmpReplace);
+		new EmftextConverter().convert(modelFile, tmpReplace);
 		String converted = tmpReplace.toString();
 
 		// Replace
@@ -792,17 +786,17 @@ public abstract class AbstractJTLLauncher {
 		// Write to the output
 		writeASP(converted);
 
-		return modelASPmmFile;
+		return modelFile;
 	}
 
 	/**
 	 * EMFText Text to Model
-	 * @param textFile File of the text file
+	 * @param transfFile File of the text file
 	 * @param comment Comment to write before the produced ASP
 	 * @return File of the converted file
 	 */
-	protected File emftextTextToModel(final File textFile) {
-		return new File(new EmftextConverter().convert(textFile));
+	protected String emftextTextToModel(final String transfFile) {
+		return new EmftextConverter().convert(transfFile);
 	}
 
 	/**
@@ -902,11 +896,12 @@ public abstract class AbstractJTLLauncher {
 	 * Remove a file.
 	 * @param file The file to remove.
 	 */
-	protected void removeFile(final File file) {
-		if (file.exists()) {
-			file.delete();
+	protected void removeFile(final String file) {
+		final File toBeRemoved = new File(file);
+		if (toBeRemoved.exists()) {
+			toBeRemoved.delete();
 		} else {
-			final File fullPath = Paths.get(workingDir, file.getPath()).toFile();
+			final File fullPath = Paths.get(workingDir, file).toFile();
 			if (fullPath.exists()) {
 				fullPath.delete();
 			}
@@ -919,7 +914,7 @@ public abstract class AbstractJTLLauncher {
 	 */
 	protected String getASPFilename() {
 		return Files.addFileExtension(
-			   Files.removeFileExtension(transfFile.getPath()), "dl");
+			   Files.removeFileExtension(transfFile), "dl");
 	}
 
 	/**

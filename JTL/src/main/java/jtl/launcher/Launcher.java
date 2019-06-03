@@ -36,12 +36,12 @@ public class Launcher {
 	public static final String OPTION_CLEAR_TARGET = "--clear-target";
 
 	public void launch(
-			final File sourcemmFile,
-			final File targetmmFile,
-			final File sourcemFile,
-			final File targetmFolder,
-			final File transfFile,
-			final File tracesFile,
+			final String sourcemmFile,
+			final String targetmmFile,
+			final String sourcemFile,
+			final String targetmFolder,
+			final String transfFile,
+			final String tracesFile,
 			final List<File> constraintsFile) {
 
 		// Dispatch execution to specific launchers
@@ -108,24 +108,24 @@ public class Launcher {
 		options.put(OPTION_CLEAR_TARGET, argsList.contains(OPTION_CLEAR_TARGET));
 
 		// Source metamodel
-		final File sourcemmFile = new File(args[0]);
+		final String sourcemmFile = args[0];
 
 		// Target metamodel
-		final File targetmmFile = new File(args[1]);
+		final String targetmmFile = args[1];
 
 		// Source model
-		final File sourcemFile = new File(args[2]);
+		final String sourcemFile = args[2];
 
 		// Target models folder
-		final File targetmFolder = new File(args[3]);
+		final String targetmFolder = args[3];
 
 		// Transformation
-		final File transfFile = new File(args[4]);
+		final String transfFile = args[4];
 
 		// Traces model
-		File tracesFile = null;
+		String tracesFile = null;
 		if (argsList.contains(OPTION_TRACE)) {
-			tracesFile = new File(argsList.get(argsList.indexOf(OPTION_TRACE) + 1));
+			tracesFile = argsList.get(argsList.indexOf(OPTION_TRACE) + 1);
 		}
 
 		// Additional constraints

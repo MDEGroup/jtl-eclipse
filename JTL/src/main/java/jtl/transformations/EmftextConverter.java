@@ -1,6 +1,5 @@
 package jtl.transformations;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -31,7 +30,7 @@ public class EmftextConverter {
 	 * @param file file to be transformed
 	 * @return path of the target file
 	 */
-	public String convert(final File file) {
+	public String convert(final String file) {
 
 		Resource dslResource = doConvert(file);
 
@@ -51,7 +50,7 @@ public class EmftextConverter {
 	 * @param file file to be transformed
 	 * @param out OutputStream to be used as target of the transformation
 	 */
-	public void convert(final File file, final OutputStream out) {
+	public void convert(final String file, final OutputStream out) {
 
 		Resource dslResource = doConvert(file);
 
@@ -69,7 +68,7 @@ public class EmftextConverter {
 	 * @param file file to be transformed
 	 * @return the resource target of the transformation
 	 */
-	private Resource doConvert(final File file) {
+	private Resource doConvert(final String file) {
 
 		// Register XMI resource factory for all other extensions
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
@@ -82,7 +81,7 @@ public class EmftextConverter {
 
 		// Dispatch the ResourceFactory registration to specific factories
 		Resource targetResource = dispatchResource(file, rs);
-		Resource sourceResource = rs.getResource(URI.createURI(file.getPath()), true);
+		Resource sourceResource = rs.getResource(URI.createURI(file), true);
 
 		// Transfer content from XMI to DSL resource
 		targetResource.getContents().addAll(sourceResource.getContents());
@@ -96,13 +95,13 @@ public class EmftextConverter {
 	 * @param rs ResourceSet for resource creation
 	 * @return the target resource
 	 */
-	private Resource dispatchResource(final File file, final ResourceSet rs) {
+	private Resource dispatchResource(final String file, final ResourceSet rs) {
 
 		// The new resource to create
 		Resource resource = null;
 
 		// Get file location on filesystem
-		String location = file.getPath();
+		String location = file;
 
 		// Get the file extension
 		String extension = Files.getFileExtension(location);

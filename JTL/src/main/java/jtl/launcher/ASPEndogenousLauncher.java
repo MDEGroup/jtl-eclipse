@@ -1,7 +1,6 @@
 package jtl.launcher;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 
 public class ASPEndogenousLauncher extends AbstractEndogenousLauncher implements ASPLauncher {
 
@@ -14,10 +13,10 @@ public class ASPEndogenousLauncher extends AbstractEndogenousLauncher implements
 	 * @param transfFile file specifying the transformation
 	 */
 	public ASPEndogenousLauncher(
-			final File sourcemmFile,
-			final File sourcemFile,
-			final File targetmFolder,
-			final File transfFile) {
+			final String sourcemmFile,
+			final String sourcemFile,
+			final String targetmFolder,
+			final String transfFile) {
 		super(sourcemmFile, sourcemFile, targetmFolder, transfFile);
 	}
 
@@ -35,7 +34,7 @@ public class ASPEndogenousLauncher extends AbstractEndogenousLauncher implements
 
 	@Override
 	public String appendTransformation(
-			final File ASPFile,
+			final String ASPFile,
 			final String targetmmName,
 			final ByteArrayOutputStream asp) {
 		return new ASPLauncher.ASPLauncherImpl()

@@ -1,24 +1,22 @@
 package jtl.launcher;
 
-import java.io.File;
-
 public abstract class AbstractExogenousLauncher extends AbstractJTLLauncher {
 
 	/**
 	 * Default constructor to be used by implementing classes.
-	 * @param sourcemmFile source metamodel file
-	 * @param targetmmFile target metamodel file
-	 * @param sourcemFile source model file
-	 * @param targetmFolder folder where to save generated target models
+	 * @param leftmmFile source metamodel file
+	 * @param rightmmFile target metamodel file
+	 * @param leftmFile source model file
+	 * @param rightmFile folder where to save generated target models
 	 * @param transfFile file specifying the transformation
 	 */
 	public AbstractExogenousLauncher(
-			final File sourcemmFile,
-			final File targetmmFile,
-			final File sourcemFile,
-			final File targetmFolder,
-			final File transfFile) {
-		super(sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile);
+			final String leftmmFile,
+			final String rightmmFile,
+			final String leftmFile,
+			final String rightmFile,
+			final String transfFile) {
+		super(leftmmFile, rightmmFile, leftmFile, rightmFile, transfFile);
 	}
 
 	/**
@@ -29,7 +27,7 @@ public abstract class AbstractExogenousLauncher extends AbstractJTLLauncher {
 		// Ecore to ASPmm (ATL)
 		final String sourcemmASPmm = metamodelEcoreToASPmm(sourcemmFile);
 		// ASPmm model to text (EMFText)
-		final File sourcemmASPmmFile =
+		final String sourcemmASPmmFile =
 					emftextModelToText(sourcemmASPmm, "%%% SOURCE METAMODEL %%%\n");
 		// Remove the temporarily created file
 		removeFile(sourcemmASPmmFile);
@@ -46,7 +44,7 @@ public abstract class AbstractExogenousLauncher extends AbstractJTLLauncher {
 		// Get the name of the target metamodel
 		final String targetmmName = getMetamodelName(targetmmASPmm);
 		// ASPmm model to text (EMFText)
-		final File targetmmASPmmFile =
+		final String targetmmASPmmFile =
 				emftextModelToText(targetmmASPmm, "\n%%% TARGET METAMODEL %%%\n");
 		// Remove the temporarily created file
 		removeFile(targetmmASPmmFile);
@@ -62,9 +60,9 @@ public abstract class AbstractExogenousLauncher extends AbstractJTLLauncher {
 		// Ecore to ASPm (ATL generated from HOT)
 		final String sourcemASPm = modelEcoreToASPm(sourcemmFile, sourcemFile);
 		// Transform ASPm back to Ecore to store the generated ASP ID in the original model
-		modelASPmToEcore(sourcemmFile, new File(sourcemASPm));
+		modelASPmToEcore(sourcemmFile, sourcemASPm);
 		// ASPm model to text (EMFText)
-		final File sourcemASPmFile =
+		final String sourcemASPmFile =
 					emftextModelToText(sourcemASPm, "\n%%% SOURCE MODEL %%%\n");
 		// Remove the temporarily created file
 		removeFile(sourcemASPmFile);
@@ -79,7 +77,7 @@ public abstract class AbstractExogenousLauncher extends AbstractJTLLauncher {
 		// Ecore to ASPT (ATL)
 		final String traceASPm = modelEcoreToASPT(tracesFile);
 		// ASPT model to text (EMFText)
-		final File traceASPTFile =
+		final String traceASPTFile =
 				emftextModelToText(traceASPm, "\n%%% TRACE MODEL %%%\n");
 		// Remove the temporarily created file
 		removeFile(traceASPTFile);

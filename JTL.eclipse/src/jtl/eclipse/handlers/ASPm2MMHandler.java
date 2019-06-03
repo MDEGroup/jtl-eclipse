@@ -3,7 +3,6 @@
  */
 package jtl.eclipse.handlers;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -88,8 +87,8 @@ public class ASPm2MMHandler extends AbstractHandler {
 		String targetFile;
 		try {
 			targetFile = ASPm2MM.runTransformation(
-					new File(metamodel.getFullPath().toOSString()),
-					new File(file.getFullPath().toOSString()));
+					metamodel.getFullPath().toOSString(),
+					file.getFullPath().toOSString());
 		} catch (IOException | ATLCoreException e1) {
 			MessageDialog.openInformation(window.getShell(),
 					"ATL Transformation",

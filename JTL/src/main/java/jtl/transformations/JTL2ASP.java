@@ -1,6 +1,5 @@
 package jtl.transformations;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
@@ -19,7 +18,7 @@ public class JTL2ASP {
 	/** Logger */
 	private static Logger logger = LogManager.getLogger(JTL2ASP.class);
 
-	public static String runTransformation(final File file)
+	public static String runTransformation(final String ecoreASPFile)
 			throws IOException, ATLCoreException {
 		// Register XMI resource factory for all other extensions
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
@@ -32,14 +31,14 @@ public class JTL2ASP {
 
 		// Load xmi resource
 		Resource xmiResource = rs.getResource(
-				URI.createURI(file.getPath()), true);
+				URI.createURI(ecoreASPFile), true);
 
 		// Check if the ecore looks like a JTL model
 		if (xmiResource.getContents().get(0)
 				instanceof JTL.JTL.impl.TransformationImpl) {
 
 			// File path
-			final String path = file.getPath();
+			final String path = ecoreASPFile;
 
 			// Generate the target filename
 			final String targetFile = Files.addFileExtension(

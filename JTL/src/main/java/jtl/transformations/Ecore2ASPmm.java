@@ -1,6 +1,5 @@
 package jtl.transformations;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.m2m.atl.core.ATLCoreException;
@@ -9,11 +8,11 @@ import jtl.utils.Files;
 
 public class Ecore2ASPmm {
 
-	public static String runTransformation(final File file)
+	public static String runTransformation(final String sourcemmFile2)
 			throws IOException, ATLCoreException {
 
 		// File path
-		final String path = file.getPath();
+		final String path = sourcemmFile2;
 
 		// Generate the target filename
 		final String targetFile = Files.addFileExtension(

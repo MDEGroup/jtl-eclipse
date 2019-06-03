@@ -1,16 +1,14 @@
 package jtl.eclipse;
 
-import java.io.File;
-
 public class ASPExogenousTraceabilityLauncher extends jtl.launcher.ASPExogenousTraceabilityLauncher {
 
 	public ASPExogenousTraceabilityLauncher(
-			File leftmmFile,
-			File rightmmFile,
-			File leftmFile,
-			File rightmFile,
-			File transfFile,
-			File traceFile) {
+			String leftmmFile,
+			String rightmmFile,
+			String leftmFile,
+			String rightmFile,
+			String transfFile,
+			String traceFile) {
 		super(leftmmFile, rightmmFile, leftmFile, rightmFile, transfFile, traceFile);
 		launcher = new jtl.eclipse.ASPExogenousLauncher(
 				leftmmFile, rightmmFile, leftmFile, rightmFile, transfFile);
@@ -24,9 +22,9 @@ public class ASPExogenousTraceabilityLauncher extends jtl.launcher.ASPExogenousT
 	@Override
 	protected void generateTransformation(final String targetmmName) {
 		// Replace the relative file path with the absolute one
-		final File transfFileRelative = launcher.getTransfFile();
-		launcher.setTransfFile(new File(
-				AbstractEclipseJTLLauncher.getAbsolutePath(transfFileRelative.getPath())));
+		final String transfFileRelative = launcher.getTransfFile();
+		launcher.setTransfFile(
+				AbstractEclipseJTLLauncher.getAbsolutePath(transfFileRelative));
 
 		launcher.generateTransformation(targetmmName);
 

@@ -1,25 +1,24 @@
 package jtl.launcher;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 
 public class ASPExogenousLauncher extends AbstractExogenousLauncher implements ASPLauncher {
 
 	/**
 	 * Create an instance of ASPExogenousLauncher.
-	 * @param sourcemmFile source metamodel file
-	 * @param targetmmFile target metamodel file
-	 * @param sourcemFile source model file
-	 * @param targetmFolder folder where to save generated target models
+	 * @param leftmmFile source metamodel file
+	 * @param rightmmFile target metamodel file
+	 * @param leftmFile source model file
+	 * @param rightmFile folder where to save generated target models
 	 * @param transfFile file specifying the transformation
 	 */
 	public ASPExogenousLauncher(
-			final File sourcemmFile,
-			final File targetmmFile,
-			final File sourcemFile,
-			final File targetmFolder,
-			final File transfFile) {
-		super(sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile);
+			final String leftmmFile,
+			final String rightmmFile,
+			final String leftmFile,
+			final String rightmFile,
+			final String transfFile) {
+		super(leftmmFile, rightmmFile, leftmFile, rightmFile, transfFile);
 	}
 
 	/**
@@ -36,7 +35,7 @@ public class ASPExogenousLauncher extends AbstractExogenousLauncher implements A
 
 	@Override
 	public String appendTransformation(
-			final File ASPFile,
+			final String ASPFile,
 			final String targetmmName,
 			final ByteArrayOutputStream asp) {
 		return new ASPLauncher.ASPLauncherImpl()

@@ -1,7 +1,6 @@
 package jtl.eclipse;
 
 
-import java.io.File;
 import java.nio.file.Paths;
 
 import org.apache.logging.log4j.LogManager;
@@ -34,35 +33,35 @@ public class LaunchConfigurationDelegate
 		final String wsPath = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
 
 		// Source Metamodel
-		final File sourcemmFile = new File(configuration
-				.getAttribute(LaunchConfigurationAttributes.SOURCEMM_TEXT, ""));
+		final String sourcemmFile = configuration
+				.getAttribute(LaunchConfigurationAttributes.SOURCEMM_TEXT, "");
 
 		// Target metamodel
-		final File targetmmFile = new File(configuration
-				.getAttribute(LaunchConfigurationAttributes.TARGETMM_TEXT, ""));
+		final String targetmmFile = configuration
+				.getAttribute(LaunchConfigurationAttributes.TARGETMM_TEXT, "");
 
 		// Source model
-		final File sourcemFile = new File(configuration
-				.getAttribute(LaunchConfigurationAttributes.SOURCEM_TEXT, ""));
+		final String sourcemFile = configuration
+				.getAttribute(LaunchConfigurationAttributes.SOURCEM_TEXT, "");
 
 		// Target models folder
-		final File targetmFolder = new File(configuration
-				.getAttribute(LaunchConfigurationAttributes.TARGETM_TEXT, ""));
+		final String targetmFolder = configuration
+				.getAttribute(LaunchConfigurationAttributes.TARGETM_TEXT, "");
 
 		// Transformation
-		final File transfFile = new File(configuration
-				.getAttribute(LaunchConfigurationAttributes.TRANSF_TEXT, ""));
+		final String transfFile = configuration
+				.getAttribute(LaunchConfigurationAttributes.TRANSF_TEXT, "");
 
 		// Traces model
-		File tracesFile = null;
+		String tracesFile = null;
 		if (configuration.getAttribute(LaunchConfigurationAttributes.TRACE_CHECK, false)) {
-			tracesFile = new File(configuration
-					.getAttribute(LaunchConfigurationAttributes.TRACE_TEXT, ""));
+			tracesFile = configuration
+					.getAttribute(LaunchConfigurationAttributes.TRACE_TEXT, "");
 		}
 
 		// Register the metamodels
-		RegisterMetamodel.registerMetamodel(Paths.get(wsPath, sourcemmFile.getPath()).toFile());
-		RegisterMetamodel.registerMetamodel(Paths.get(wsPath, targetmmFile.getPath()).toFile());
+		RegisterMetamodel.registerMetamodel(Paths.get(wsPath, sourcemmFile).toFile());
+		RegisterMetamodel.registerMetamodel(Paths.get(wsPath, targetmmFile).toFile());
 
 		// Dispatch execution to specific launchers:
 		AbstractEclipseJTLLauncher launcher;

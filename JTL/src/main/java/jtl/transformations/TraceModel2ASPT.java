@@ -1,6 +1,5 @@
 package jtl.transformations;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.m2m.atl.core.ATLCoreException;
@@ -9,11 +8,11 @@ import jtl.utils.Files;
 
 public class TraceModel2ASPT {
 
-	public static String runTransformation(final File mIn)
+	public static String runTransformation(final String mIn)
 			throws IOException, ATLCoreException {
 
 		// Model path
-		final String mInPath = mIn.getPath();
+		final String mInPath = mIn;
 
 		// Generate the target filename
 		final String targetFile = Files.addFileExtension(

@@ -1,7 +1,5 @@
 package jtl.launcher;
 
-import java.io.File;
-
 public class JTLEndogenousLauncher extends AbstractEndogenousLauncher {
 
 	/**
@@ -13,10 +11,10 @@ public class JTLEndogenousLauncher extends AbstractEndogenousLauncher {
 	 * @param transfFile file specifying the transformation
 	 */
 	public JTLEndogenousLauncher(
-			final File sourcemmFile,
-			final File sourcemFile,
-			final File targetmFolder,
-			final File transfFile) {
+			final String sourcemmFile,
+			final String sourcemFile,
+			final String targetmFolder,
+			final String transfFile) {
 		super(sourcemmFile, sourcemFile, targetmFolder, transfFile);
 	}
 }

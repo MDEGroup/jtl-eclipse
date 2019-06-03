@@ -1,7 +1,6 @@
 package jtl.eclipse;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 
 import jtl.launcher.ASPLauncher;
 
@@ -18,10 +17,10 @@ public class ASPEndogenousLauncher extends AbstractEclipseEndogenousLauncher imp
 	 * @param transfFile file specifying the transformation
 	 */
 	public ASPEndogenousLauncher(
-			final File sourcemmFile,
-			final File sourcemFile,
-			final File targetmFolder,
-			final File transfFile) {
+			final String sourcemmFile,
+			final String sourcemFile,
+			final String targetmFolder,
+			final String transfFile) {
 		super(sourcemmFile, sourcemFile, targetmFolder, transfFile);
 		launcher = new jtl.launcher.ASPEndogenousLauncher(
 				sourcemmFile, sourcemFile, targetmFolder, transfFile);
@@ -37,8 +36,8 @@ public class ASPEndogenousLauncher extends AbstractEclipseEndogenousLauncher imp
 	@Override
 	public void generateTransformation(final String targetmmName) {
 		// Temporary replace the relative file path with the absolute one
-		final File transfFileRelative = launcher.getTransfFile();
-		launcher.setTransfFile(new File(getAbsolutePath(transfFileRelative.getPath())));
+		final String transfFileRelative = launcher.getTransfFile();
+		launcher.setTransfFile(getAbsolutePath(transfFileRelative));
 
 		launcher.generateTransformation(targetmmName);
 
@@ -48,7 +47,7 @@ public class ASPEndogenousLauncher extends AbstractEclipseEndogenousLauncher imp
 
 	@Override
 	public String appendTransformation(
-			final File ASPFile,
+			final String ASPFile,
 			final String targetmmName,
 			final ByteArrayOutputStream asp) {
 		return new ASPLauncher.ASPLauncherImpl()

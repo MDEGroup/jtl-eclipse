@@ -2,7 +2,6 @@ package jtl.launcher;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 public interface ASPLauncher  {
 	public String appendTransformation(
-			File ASPFile, String targetmmName, ByteArrayOutputStream asp);
+			String ASPFile, String targetmmName, ByteArrayOutputStream asp);
 
 	class ASPLauncherImpl implements ASPLauncher {
 
@@ -27,7 +26,7 @@ public interface ASPLauncher  {
 		 */
 		@Override
 		public String appendTransformation(
-				final File ASPFile,
+				final String ASPFile,
 				final String targetmmName,
 				final ByteArrayOutputStream asp) {
 			try (BufferedReader br =
@@ -50,7 +49,7 @@ public interface ASPLauncher  {
 			} catch (IOException e) {
 				logger.error("Unable to read the file: " + ASPFile, e);
 			}
-			return ASPFile.getPath();
+			return ASPFile;
 		}
 	}
 }

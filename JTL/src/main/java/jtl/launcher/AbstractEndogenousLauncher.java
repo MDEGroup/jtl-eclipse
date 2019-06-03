@@ -1,7 +1,5 @@
 package jtl.launcher;
 
-import java.io.File;
-
 public abstract class AbstractEndogenousLauncher extends AbstractJTLLauncher {
 
 
@@ -17,10 +15,10 @@ public abstract class AbstractEndogenousLauncher extends AbstractJTLLauncher {
 	 * @param transfFile file specifying the transformation
 	 */
 	public AbstractEndogenousLauncher(
-			final File sourcemmFile,
-			final File sourcemFile,
-			final File targetmFolder,
-			final File transfFile) {
+			final String sourcemmFile,
+			final String sourcemFile,
+			final String targetmFolder,
+			final String transfFile) {
 		super(sourcemmFile, sourcemmFile, sourcemFile, targetmFolder, transfFile);
 	}
 
@@ -50,7 +48,7 @@ public abstract class AbstractEndogenousLauncher extends AbstractJTLLauncher {
 	@Override
 	public String processTargetMetamodel() {
 		// ASPmm model to text (EMFText)
-		final File targetmmASPmmFile = emftextModelToText(sourcemmASPmm,
+		final String targetmmASPmmFile = emftextModelToText(sourcemmASPmm,
 							"\n%%% TARGET METAMODEL %%%\n",
 							sourcemmName,
 							sourcemmName + "_target",
@@ -71,9 +69,9 @@ public abstract class AbstractEndogenousLauncher extends AbstractJTLLauncher {
 		// Ecore to ASPm (ATL generated from HOT)
 		final String sourcemASPm = modelEcoreToASPm(sourcemmFile, sourcemFile);
 		// Transform ASPm back to Ecore to store the generated ASP ID in the original model
-		modelASPmToEcore(sourcemmFile, new File(sourcemASPm));
+		modelASPmToEcore(sourcemmFile, sourcemASPm);
 		// ASPm model to text (EMFText)
-		final File sourcemASPmFile = emftextModelToText(sourcemASPm,
+		final String sourcemASPmFile = emftextModelToText(sourcemASPm,
 							"\n%%% SOURCE MODEL %%%\n",
 							sourcemmName,
 							sourcemmName + "_source",

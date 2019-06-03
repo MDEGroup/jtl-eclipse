@@ -1,7 +1,6 @@
 package jtl.eclipse;
 
 
-import java.io.File;
 import java.nio.file.Paths;
 
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -28,32 +27,32 @@ public class LaunchConfigurationDelegateTraceability
 		final String wsPath = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
 
 		// Left Metamodel
-		final File leftmmFile = new File(configuration
-				.getAttribute(LaunchConfigurationAttributes.LEFTMM_TEXT, ""));
+		final String leftmmFile = configuration
+				.getAttribute(LaunchConfigurationAttributes.LEFTMM_TEXT, "");
 
 		// Right metamodel
-		final File rightmmFile = new File(configuration
-				.getAttribute(LaunchConfigurationAttributes.RIGHTMM_TEXT, ""));
+		final String rightmmFile = configuration
+				.getAttribute(LaunchConfigurationAttributes.RIGHTMM_TEXT, "");
 
 		// Left model
-		final File leftmFile = new File(configuration
-				.getAttribute(LaunchConfigurationAttributes.LEFTM_TEXT, ""));
+		final String leftmFile = configuration
+				.getAttribute(LaunchConfigurationAttributes.LEFTM_TEXT, "");
 
 		// Right model
-		final File rightmFolder = new File(configuration
-				.getAttribute(LaunchConfigurationAttributes.RIGHTM_TEXT, ""));
+		final String rightmFolder = configuration
+				.getAttribute(LaunchConfigurationAttributes.RIGHTM_TEXT, "");
 
 		// Transformation
-		final File transfFile = new File(configuration
-				.getAttribute(LaunchConfigurationAttributes.TRANSF_TEXT, ""));
+		final String transfFile = configuration
+				.getAttribute(LaunchConfigurationAttributes.TRANSF_TEXT, "");
 
 		// Trace model (output)
-		final File traceFile = new File(configuration
-				.getAttribute(LaunchConfigurationAttributes.TRACE_TEXT, ""));
+		final String traceFile = configuration
+				.getAttribute(LaunchConfigurationAttributes.TRACE_TEXT, "");
 
 		// Register the metamodels
-		RegisterMetamodel.registerMetamodel(Paths.get(wsPath, leftmmFile.getPath()).toFile());
-		RegisterMetamodel.registerMetamodel(Paths.get(wsPath, rightmmFile.getPath()).toFile());
+		RegisterMetamodel.registerMetamodel(Paths.get(wsPath, leftmmFile).toFile());
+		RegisterMetamodel.registerMetamodel(Paths.get(wsPath, rightmmFile).toFile());
 
 		// Dispatch execution to specific launchers:
 		jtl.launcher.ASPExogenousTraceabilityLauncher launcher;

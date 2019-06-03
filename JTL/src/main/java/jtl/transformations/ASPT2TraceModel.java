@@ -1,6 +1,5 @@
 package jtl.transformations;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.m2m.atl.core.ATLCoreException;
@@ -10,13 +9,13 @@ import jtl.utils.Files;
 public class ASPT2TraceModel {
 
 	public static String runTransformation(
-			final File mIn,
-			final File sourceIn,
-			final File targetIn)
+			final String mIn,
+			final String sourceIn,
+			final String targetIn)
 					throws IOException, ATLCoreException {
 
 		// Model path
-		final String mInPath = mIn.getPath();
+		final String mInPath = mIn;
 
 		// Generate the target filename
 		final String targetFile = Files.addFileExtension(
@@ -31,8 +30,8 @@ public class ASPT2TraceModel {
 		// Perform the transformation (ASPT to TraceModel)
 		it.univaq.jtl.atl.aspt2tracemodel.ASPT2TraceModel.main(new String[] {
 				mInPath,
-				sourceIn.getPath(),
-				targetIn.getPath(),
+				sourceIn,
+				targetIn,
 				targetFile
 		});
 

@@ -1,6 +1,5 @@
 package jtl.launcher;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -13,20 +12,20 @@ import jtl.transformations.RegisterMetamodel;
 public class ASPExogenousTraceabilityLauncher {
 
 	public jtl.launcher.AbstractJTLLauncher launcher;
-	protected File leftmmFile;
-	protected File rightmmFile;
-	protected File leftmFile;
-	protected File rightmFile;
-	protected File transfFile;
-	protected File traceFile;
+	protected String leftmmFile;
+	protected String rightmmFile;
+	protected String leftmFile;
+	protected String rightmFile;
+	protected String transfFile;
+	protected String traceFile;
 
 	public ASPExogenousTraceabilityLauncher(
-			File leftmmFile,
-			File rightmmFile,
-			File leftmFile,
-			File rightmFile,
-			File transfFile,
-			File traceFile) {
+			String leftmmFile,
+			String rightmmFile,
+			String leftmFile,
+			String rightmFile,
+			String transfFile,
+			String traceFile) {
 		this.leftmmFile = leftmmFile;
 		this.rightmmFile = rightmmFile;
 		this.leftmFile = leftmFile;
@@ -63,7 +62,7 @@ public class ASPExogenousTraceabilityLauncher {
 		launcher.writeASPToFile();
 
 		// Run the solver
-		File traceModel = null;
+		String traceModel = null;
 		try {
 			traceModel = launcher.getSolver().runTraceability(launcher.getTransfFile(), traceFile);
 
@@ -87,15 +86,15 @@ public class ASPExogenousTraceabilityLauncher {
 		// Ecore to ASPm (ATL generated from HOT)
 		final String rightmASPm = launcher.modelEcoreToASPm(rightmmFile, rightmFile);
 		// Transform ASPm back to Ecore to store the generated ASP ID in the original model
-		launcher.modelASPmToEcore(rightmmFile, new File(rightmASPm));
+		launcher.modelASPmToEcore(rightmmFile, rightmASPm);
 		// ASPm model to text (EMFText)
-		final File rightmASPmFile =
+		final String rightmASPmFile =
 					launcher.emftextModelToText(rightmASPm, "\n%%% TARGET MODEL %%%\n");
 		// Remove the temporarily created file
 		launcher.removeFile(rightmASPmFile);
 	}
 
-	public void processTraceModel(final File traceFile) throws IOException, ATLCoreException {
+	public void processTraceModel(final String traceFile) throws IOException, ATLCoreException {
 		// Register the traceability metamodel
 		RegisterMetamodel.registerMetamodel(
 				new it.univaq.jtl.atl.aspt2tracemodel.ASPT2TraceModel()
@@ -103,7 +102,7 @@ public class ASPExogenousTraceabilityLauncher {
 
 
 		// Convert the ASP trace models (text2model)
-		final File traceFileModel = launcher.emftextTextToModel(traceFile);
+		final String traceFileModel = launcher.emftextTextToModel(traceFile);
 
 		// ASPT to Ecore
 		ASPT2TraceModel.runTransformation(traceFileModel, leftmFile, rightmFile);

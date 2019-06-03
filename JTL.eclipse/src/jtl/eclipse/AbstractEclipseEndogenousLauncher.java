@@ -1,7 +1,5 @@
 package jtl.eclipse;
 
-import java.io.File;
-
 import org.eclipse.core.resources.ResourcesPlugin;
 
 import jtl.launcher.AbstractEndogenousLauncher;
@@ -19,10 +17,10 @@ public abstract class AbstractEclipseEndogenousLauncher extends AbstractEclipseJ
 	 * @param transfFile file specifying the transformation
 	 */
 	public AbstractEclipseEndogenousLauncher(
-			final File sourcemmFile,
-			final File sourcemFile,
-			final File targetmFolder,
-			final File transfFile) {
+			final String sourcemmFile,
+			final String sourcemFile,
+			final String targetmFolder,
+			final String transfFile) {
 		super(sourcemmFile, sourcemmFile, sourcemFile, targetmFolder, transfFile);
 		launcher = new AbstractEndogenousLauncher(
 				sourcemmFile, sourcemFile, targetmFolder, transfFile) {	};

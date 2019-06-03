@@ -1,6 +1,5 @@
 package jtl.eclipse.handlers;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -49,7 +48,7 @@ public class EmftextHandler extends AbstractHandler {
 
 		// Perform the transformation
 		String targetFile = new EmftextConverter().convert(
-				new File(file.getFullPath().toString()));
+				file.getFullPath().toString());
 
 		// Refresh the Project Explorer to show the new file
 		try {

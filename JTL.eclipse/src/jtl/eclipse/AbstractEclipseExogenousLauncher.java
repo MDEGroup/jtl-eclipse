@@ -1,7 +1,5 @@
 package jtl.eclipse;
 
-import java.io.File;
-
 import org.eclipse.core.resources.ResourcesPlugin;
 
 import jtl.launcher.AbstractExogenousLauncher;
@@ -12,21 +10,21 @@ public class AbstractEclipseExogenousLauncher extends AbstractEclipseJTLLauncher
 
 	/**
 	 * Default constructor to be used by implementing classes.
-	 * @param sourcemmFile source metamodel file
-	 * @param targetmmFile target metamodel file
-	 * @param sourcemFile source model file
-	 * @param targetmFolder folder where to save generated target models
+	 * @param leftmmFile source metamodel file
+	 * @param rightmmFile target metamodel file
+	 * @param leftmFile source model file
+	 * @param rightmFile folder where to save generated target models
 	 * @param transfFile file specifying the transformation
 	 */
 	public AbstractEclipseExogenousLauncher(
-			final File sourcemmFile,
-			final File targetmmFile,
-			final File sourcemFile,
-			final File targetmFolder,
-			final File transfFile) {
-		super(sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile);
+			final String leftmmFile,
+			final String rightmmFile,
+			final String leftmFile,
+			final String rightmFile,
+			final String transfFile) {
+		super(leftmmFile, rightmmFile, leftmFile, rightmFile, transfFile);
 		launcher = new AbstractExogenousLauncher(
-				sourcemmFile, targetmmFile, sourcemFile, targetmFolder, transfFile) {	 };
+				leftmmFile, rightmmFile, leftmFile, rightmFile, transfFile) {	 };
 		this.asp = launcher.getASP();
 		launcher.setWorkingDir(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString());
 	}
