@@ -2,7 +2,7 @@
 Framework implementation for the Eclipse Platform: [jtl.di.univaq.it](https://jtl.di.univaq.it/)
 
 ### Download and installation instructions
-The JTL Eclipse Product can be downloaded from the [releases page](https://github.com/MDEGroup/jtl-eclipse/releases). [Last](https://github.com/MDEGroup/jtl-eclipse/releases/latest) as well as previous releases can be found on the same page. Release notes are attached to each release.
+The JTL Eclipse Product can be downloaded from the [releases page](https://github.com/MDEGroup/jtl-eclipse/releases). [Latest](https://github.com/MDEGroup/jtl-eclipse/releases/latest) as well as previous releases can be found on the same page. Release notes are attached to each release.
 Once downloaded, the package does not need any installation procedure. It can be extracted anywhere and launched using the `JTL` executable.
 
 Alternatively, JTL can be installed on [Eclipse Modeling Tools 2018-09 (4.9)](https://www.eclipse.org/downloads/packages/release/2018-09/r/eclipse-modeling-tools) using this [update site](https://github.com/MDEGroup/jtl-eclipse-update-site/raw/master/).
@@ -10,11 +10,21 @@ Alternatively, JTL can be installed on [Eclipse Modeling Tools 2018-09 (4.9)](ht
 ### System requirements
 JTL is available for Linux, MacOS and Windows. The only requirement is an updated Java version (at least [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)).
 
-**Only on MacOS**
-If you get the error *Library not loaded: /usr/local/lib/libltdl.7.dylib*:
+#### On MacOS
+If you get the error `Library not loaded: /usr/local/lib/libltdl.7.dylib`:
 ```
 $ brew install libtool --universal
 $ brew link libtool
+```
+
+#### On 64bit Linux
+If you get the error `dl-complex.linux.20110713.static.beta: No such file or directory`, you are probably missing 32bit support.
+
+On Debian/Ubuntu you could install the 32bit support:
+```
+sudo dpkg --add-architecture i386
+sudo apt update
+sudo apt install libc6:i386 libstdc++6:i386
 ```
 
 ### Upgrading
